@@ -13,27 +13,21 @@ export type Database = {
         Row: {
           created_at: string
           id: number
-          image: string | null
-          name: string
-          options: Json | null
+          image: string
           uuid: string
           value: string
         }
         Insert: {
           created_at?: string
           id?: number
-          image?: string | null
-          name: string
-          options?: Json | null
+          image: string
           uuid?: string
           value: string
         }
         Update: {
           created_at?: string
           id?: number
-          image?: string | null
-          name?: string
-          options?: Json | null
+          image?: string
           uuid?: string
           value?: string
         }

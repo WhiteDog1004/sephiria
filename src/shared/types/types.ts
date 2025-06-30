@@ -1,3 +1,5 @@
+import { Database } from "@/types_db";
+
 export type CostumeType = {
 	name: string;
 	unlock?: string;
@@ -8,3 +10,5 @@ export type CostumeType = {
 export type CostumeMap = {
 	[key: string]: CostumeType;
 };
+
+export type CostumeDataType = Database["public"]["Tables"]["costume"]["Row"][];

@@ -1,6 +1,6 @@
 import { CostumeMap } from "../types/types";
 
-export const costumes: CostumeMap = {
+export const getCostumeOptions: CostumeMap = {
 	pink_rabbit: {
 		name: "분홍 토끼",
 		unlock: undefined,
@@ -47,10 +47,7 @@ export const costumes: CostumeMap = {
 		name: "날개 귀 토끼",
 		unlock: undefined,
 		story: "과거 고귀한 혈통으로 떠받들어졌습니다. 지금은 그저 눈길을 끄는 존재일 뿐입니다.",
-		options: [
-			"시작 아이템: 축복 ( 버프 마법 시전 시, 주변 5칸 이내 플레이어에게도 버프 부여. 대신 버프 마법 시전 비용이 50% 증가 & 다른 플레이어를 살릴 때의 시간 30% 단축 )",
-			"무기 피해량 -10%",
-		],
+		options: ["시작 아이템: 축복", "무기 피해량 -10%"],
 	},
 	red_cat: {
 		name: "붉은 옷 고양이",
@@ -135,7 +132,7 @@ export const costumes: CostumeMap = {
 	adventurer: {
 		name: "모험가 토끼",
 		unlock: "던그리드 구매",
-		story: "모험을 꿈꿔온 당신은 여정을 완수하기 위해 만반의 준비를 합니다. (Dungreed 구매자 한정 코스튬)",
+		story: "모험을 꿈꿔온 당신은 여정을 완수하기 위해 만반의 준비를 합니다.",
 		options: ["대시 횟수 +1", "대시 회복 속도 +10%", "마법 가속 -50%"],
 	},
 };

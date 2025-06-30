@@ -9,6 +9,7 @@ const typographyVariants = cva("", {
 			body: "text-base",
 			header3: "text-lg",
 			body2: "text-sm",
+			caption: "text-xs",
 		},
 	},
 	defaultVariants: {

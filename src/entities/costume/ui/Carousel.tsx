@@ -1,4 +1,4 @@
-import { costumes } from "@/src/shared/model/constants";
+import { getCostumeOptions } from "@/src/shared/model/constants";
 import { Box } from "@/src/shared/ui/box";
 import {
 	Carousel,
@@ -33,7 +33,9 @@ export const CostumeCarousel = ({
 								alt={item.value}
 								unoptimized
 							/>
-							<Typography>{costumes[item.value].name}</Typography>
+							<Typography>
+								{getCostumeOptions[item.value].name}
+							</Typography>
 						</Box>
 					</CarouselItem>
 				))}

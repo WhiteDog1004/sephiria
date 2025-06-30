@@ -18,7 +18,7 @@ import { ModeToggle } from "./ModeToggle";
 export const Header = () => {
 	const router = useRouter();
 	return (
-		<Box className="sticky top-0 justify-between backdrop-blur-md border-b dark:border-white/10 border-black/10">
+		<Box className="sticky z-50 top-0 justify-between backdrop-blur-md border-b dark:border-white/10 border-black/10">
 			<Box
 				className="w-max p-0 cursor-pointer"
 				onClick={() => router.push(SITEMAP.HOME)}
@@ -32,8 +32,6 @@ export const Header = () => {
 			</Box>
 			<Box className="w-max p-0 gap-4">
 				<ModeToggle />
-				<DropdownMenu></DropdownMenu>
-
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Menu />
