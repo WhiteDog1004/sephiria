@@ -18,8 +18,9 @@ export const InventorySlot = ({
 	const { setNodeRef } = useDroppable({ id, data: { type: "slot" } });
 
 	const baseBg = isOver ? "bg-yellow-200" : "bg-gray-700";
-	const effectBg = effectValue > 0 ? "bg-yellow-400" : baseBg;
-	const effectTextColor = effectValue > 0 ? "text-gray-900" : "text-gray-400";
+	const effectBg =
+		effectValue > 0 ? "bg-yellow-400" : effectValue < 0 ? "bg-red-400" : baseBg;
+	const effectTextColor = effectValue > 0 ? "text-gray-900" : "text-white";
 
 	return (
 		<div
@@ -32,12 +33,18 @@ export const InventorySlot = ({
 					isDragging={false}
 					onRotate={(e) => onRotate(item.id, e)}
 				/>
+			) : effectValue > 0 ? (
+				<div
+					className={`w-full h-full flex items-center justify-center text-2xl font-bold ${effectTextColor}`}
+				>
+					+{effectValue}
+				</div>
 			) : (
-				effectValue > 0 && (
+				effectValue < 0 && (
 					<div
 						className={`w-full h-full flex items-center justify-center text-2xl font-bold ${effectTextColor}`}
 					>
-						+{effectValue}
+						{effectValue}
 					</div>
 				)
 			)}

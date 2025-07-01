@@ -18,19 +18,6 @@ export const SLOT_IDS = GRID_CONFIG.flatMap(({ rows, cols }) =>
 	Array.from({ length: cols }, (_, colIndex) => `${rows}-${colIndex}`),
 );
 
-// 석판 기준으로 효과 설정이 필요할 때 + 슬롯 한칸만 효과를 줘야할 때
-export const EFFECT_OFFSETS: Record<
-	string,
-	Record<number, { dx: number; dy: number }[]>
-> = {
-	chivalry: {
-		0: [{ dx: -1, dy: -2 }], // 기본: 왼쪽 1, 위 2
-		1: [{ dx: 2, dy: -1 }],
-		2: [{ dx: 1, dy: 2 }],
-		3: [{ dx: -2, dy: 1 }],
-	},
-};
-
 export const SlabsComponent = ({
 	item,
 	isDragging,

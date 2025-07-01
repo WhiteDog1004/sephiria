@@ -29,7 +29,6 @@ export const useSlabsEffects = () => {
 			const itemToUpdate = prevItems[itemSlotId];
 			if (!itemToUpdate) return prevItems;
 
-			// 불변성을 유지하며 특정 아이템의 rotation 값만 변경
 			const newItems = {
 				...prevItems,
 				[itemSlotId]: {
@@ -40,10 +39,10 @@ export const useSlabsEffects = () => {
 			};
 			return newItems;
 		});
-	}, []); // 의존성 배열이 비어있으므로 컴포넌트 마운트 시 한번만 생성됩니다.
+	}, []);
 
 	/**
-	 * 아이템 위치에 따른 효과를 계산하는 로직. (성능 최적화 버전)
+	 * 아이템 위치에 따른 효과를 계산하는 로직.
 	 */
 	const calculatedEffects = useMemo(() => {
 		const effects: Record<SlotId, number> = {};
@@ -65,6 +64,5 @@ export const useSlabsEffects = () => {
 		return effects;
 	}, [items]);
 
-	// 컴포넌트에서 사용할 상태와 함수들을 반환합니다.
 	return { items, setItems, handleRotate, calculatedEffects };
 };

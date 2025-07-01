@@ -8,13 +8,15 @@ import {
 	useSensors,
 } from "@dnd-kit/core";
 import { useState } from "react";
-import { InventorySlot } from "@/src/entities/simulator/item/ui/Inventory";
+import { InventorySlot } from "@/src/entities/simulator/item/ui/InventorySlot";
 import { GRID_CONFIG } from "@/src/entities/simulator/item/ui/Slabs";
 import type { SlabsOptions, SlotId } from "@/src/entities/simulator/types";
+import { ITEM_MASTER_DATA } from "@/src/features/simulator/config/SlabsLists";
 import { DeleteTrash } from "@/src/features/simulator/ui/DeleteTrash";
 import { ItemSource } from "@/src/features/simulator/ui/ItemSource";
 import { useSlabsEffects } from "@/src/shared/hooks/useSlabsEffects";
-import { ITEM_MASTER_DATA } from "@/src/features/simulator/config/SlabsLists";
+import { Box } from "@/src/shared/ui/box";
+import { Typography } from "@/src/shared/ui/typography";
 
 export default function InventoryApp() {
 	const { items, setItems, handleRotate, calculatedEffects } =
@@ -52,7 +54,10 @@ export default function InventoryApp() {
 				if (activeIsSource) {
 					const sourceItem: SlabsOptions = active.data.current.item;
 					if (!targetItem) {
-						newItems[overSlotId] = { ...sourceItem, id: `item-${Date.now()}-${sourceItem.id}` };
+						newItems[overSlotId] = {
+							...sourceItem,
+							id: `item-${Date.now()}-${sourceItem.id}`,
+						};
 					}
 				} else if (activeIsItem) {
 					const activeItem: SlabsOptions = active.data.current.item;
@@ -98,7 +103,7 @@ export default function InventoryApp() {
 		>
 			<div className="bg-gray-900 text-white min-h-screen p-8 font-sans">
 				<div className="flex flex-col lg:flex-row gap-8">
-					<div className="flex-grow">
+					<Box className="flex flex-col flex-grow">
 						<h1 className="text-3xl font-bold mb-2">인벤토리</h1>
 						<p className="text-gray-400 mb-6">
 							아이템을 드래그하여 배치하거나, 위치를 바꾸거나, 삭제하세요.
@@ -125,22 +130,40 @@ export default function InventoryApp() {
 								}),
 							)}
 						</div>
-					</div>
+					</Box>
 
-					<div className="w-full lg:w-64 flex-shrink-0">
-						<h2 className="text-2xl font-bold mb-4">사용 가능 아이템</h2>
-						<div className="bg-gray-800 p-4 rounded-lg flex justify-around">
-							{ITEM_MASTER_DATA.map((item) => (
-							<ItemSource
-								key={item.value}
-								item={{ id: item.value, label: item.ko_label, ...(item.rotate && {rotation: 0}), image: item.image } as SlabsOptions}
-							/>
-							))}
-						</div>
+					<Box className="flex flex-col gap-6 items-start w-full p-0 lg:w-64 flex-shrink-0">
+						<Box className="flex flex-col gap-2 p-0">
+							<Typography
+								variant="header3"
+								className="text-2xl font-bold w-full"
+							>
+								석판
+							</Typography>
+							<Box className="grid grid-cols-8 bg-gray-800 p-4 rounded-lg">
+								{ITEM_MASTER_DATA.map((item) => (
+									<ItemSource
+										key={item.value}
+										item={
+											{
+												id: item.value,
+												label: item.ko_label,
+												...(item.rotate && { rotation: 0 }),
+												image: item.image,
+											} as SlabsOptions
+										}
+									/>
+								))}
+							</Box>
+						</Box>
 
-						<h2 className="text-2xl font-bold mt-8 mb-4">삭제</h2>
-						<DeleteTrash isOver={overId === "trash"} />
-					</div>
+						<Box className="flex flex-col gap-2 p-0">
+							<Typography className="text-2xl font-bold w-full">
+								삭제
+							</Typography>
+							<DeleteTrash isOver={overId === "trash"} />
+						</Box>
+					</Box>
 				</div>
 			</div>
 		</DndContext>
