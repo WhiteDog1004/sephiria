@@ -1,6 +1,7 @@
 import { useDraggable } from "@dnd-kit/core";
 import Image from "next/image";
 import { ITEM_MASTER_DATA } from "@/src/features/simulator/config/SlabsLists";
+import { Box } from "@/src/shared/ui/box";
 import type { SlabsOptions } from "../../types";
 
 // 인벤토리 그리드 설정 (가변적인 형태 지원)
@@ -35,7 +36,6 @@ export const SlabsComponent = ({
 	const style = transform
 		? {
 				transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-				zIndex: 10,
 			}
 		: {};
 
@@ -44,17 +44,22 @@ export const SlabsComponent = ({
 	};
 
 	return (
-		<div
+		<Box
 			ref={setNodeRef}
 			style={style}
 			{...listeners}
 			{...attributes}
-			className={`relative w-full h-full p-1 rounded-md cursor-grab active:cursor-grabbing transition-shadow ${isDragging ? "shadow-2xl" : "shadow-md"}`}
+			className={`relative w-full h-full p-1 rounded-md cursor-grab active:cursor-grabbing transition-shadow z-10 bg-gray-600/50 ${isDragging ? "shadow-2xl" : "shadow-md"}`}
 		>
-			<div
-				className={`w-full h-full rounded flex items-center justify-center text-white font-bold `}
+			<Box
+				className={`w-full h-full p-0 rounded flex items-center justify-center text-white font-bold `}
 			>
-				<Image fill src={item.image} alt={"slabs"} style={rotationStyle} />
+				<Image
+					fill
+					src={item.image}
+					alt={"slabs"}
+					style={item.rotation ? rotationStyle : undefined}
+				/>
 				{ITEM_MASTER_DATA.find((i) => i.value === item.id.split("-").pop())
 					?.rotate && (
 					<button
@@ -67,7 +72,7 @@ export const SlabsComponent = ({
 						↻
 					</button>
 				)}
-			</div>
-		</div>
+			</Box>
+		</Box>
 	);
 };

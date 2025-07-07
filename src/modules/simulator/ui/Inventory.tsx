@@ -3,10 +3,12 @@
 import {
 	closestCenter,
 	DndContext,
+	DragOverlay,
 	PointerSensor,
 	useSensor,
 	useSensors,
 } from "@dnd-kit/core";
+import Image from "next/image";
 import { useState } from "react";
 import { InventorySlot } from "@/src/entities/simulator/item/ui/InventorySlot";
 import { GRID_CONFIG } from "@/src/entities/simulator/item/ui/Slabs";
@@ -22,12 +24,14 @@ export default function InventoryApp() {
 	const { items, setItems, handleRotate, calculatedEffects } =
 		useSlabsEffects();
 	const [activeId, setActiveId] = useState<string | null>(null);
+	const [activeItem, setActiveItem] = useState<SlabsOptions | null>(null);
 	const [overId, setOverId] = useState<string | null>(null);
 
 	const sensors = useSensors(useSensor(PointerSensor));
 
 	const handleDragStart = (event: any) => {
 		setActiveId(event.active.id);
+		setActiveItem(event.active.data.current.item);
 	};
 
 	const handleDragOver = (event: any) => {
@@ -116,13 +120,15 @@ export default function InventoryApp() {
 								Array.from({ length: cols }).map((_, colIndex) => {
 									const slotId: SlotId = `${rowIndex}-${colIndex}`;
 									const item = items[slotId];
-									const effectValue = calculatedEffects[slotId] || 0;
+									const effectValue = calculatedEffects.effects[slotId] || 0;
+									const effectFlag = calculatedEffects.flag[slotId];
 									return (
 										<InventorySlot
 											key={slotId}
 											id={slotId}
 											item={item}
 											effectValue={effectValue}
+											effectFlag={effectFlag}
 											onRotate={handleRotate}
 											isOver={overId === slotId}
 										/>
@@ -166,6 +172,19 @@ export default function InventoryApp() {
 					</Box>
 				</div>
 			</div>
+
+			<DragOverlay dropAnimation={null}>
+				{activeItem && activeId?.startsWith("source-") ? (
+					<Box className="relative w-16 h-20 p-0">
+						<Image
+							unoptimized
+							fill
+							src={activeItem.image || ""}
+							alt={"slabs"}
+						/>
+					</Box>
+				) : null}
+			</DragOverlay>
 		</DndContext>
 	);
 }

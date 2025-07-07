@@ -46,8 +46,10 @@ export const useSlabsEffects = () => {
 	 */
 	const calculatedEffects = useMemo(() => {
 		const effects: Record<SlotId, number> = {};
+		const flag: Record<SlotId, "ignore" | null> = {};
 		SLOT_IDS.forEach((id) => {
 			effects[id] = 0;
+			flag[id] = null;
 		});
 
 		Object.entries(items).forEach(([slotId, item]) => {
@@ -57,11 +59,11 @@ export const useSlabsEffects = () => {
 
 			const itemResult = item.id.split("-").pop();
 			if (itemResult) {
-				getSlabsEffectHandlers[itemResult](x, y, slotId, item, effects);
+				getSlabsEffectHandlers[itemResult](x, y, slotId, item, effects, flag);
 			}
 		});
 
-		return effects;
+		return { effects, flag };
 	}, [items]);
 
 	return { items, setItems, handleRotate, calculatedEffects };

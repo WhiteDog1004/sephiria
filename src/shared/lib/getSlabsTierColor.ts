@@ -3,7 +3,7 @@ export const getSlabsTierColor = (tier: string) => {
 		case "common":
 			return "text-white";
 		case "advanced":
-			return "text-blue-400";
+			return "text-blue-300";
 		case "rare":
 			return "text-yellow-300";
 		case "legend":

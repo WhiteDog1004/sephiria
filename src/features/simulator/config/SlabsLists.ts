@@ -125,6 +125,33 @@ export const ITEM_MASTER_DATA: SlabsData[] = [
 	},
 
 	// ADVANCED
+	{
+		value: "compete",
+		tier: "advanced",
+		ko_label: "경쟁",
+		eng_label: "compete",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//compete.png",
+		rotate: true,
+	},
+	{
+		value: "beating",
+		tier: "advanced",
+		ko_label: "고동",
+		eng_label: "beating",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//beating.png",
+		rotate: true,
+	},
+	{
+		value: "home_town",
+		tier: "advanced",
+		ko_label: "고양",
+		eng_label: "home_town",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//home-town.png",
+		rotate: true,
+	},
 
 	// RARE
 	{
