@@ -152,6 +152,170 @@ export const ITEM_MASTER_DATA: SlabsData[] = [
 			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//home-town.png",
 		rotate: true,
 	},
+	{
+		value: "past",
+		tier: "advanced",
+		ko_label: "과거",
+		eng_label: "past",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//past.png",
+		rotate: true,
+	},
+	{
+		value: "future",
+		tier: "advanced",
+		ko_label: "미래",
+		eng_label: "future",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//future.png",
+		rotate: true,
+	},
+	{
+		value: "distribution",
+		tier: "advanced",
+		ko_label: "분배",
+		eng_label: "distribution",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//distribution.png",
+	},
+	{
+		value: "triceps",
+		tier: "advanced",
+		ko_label: "삼두",
+		eng_label: "triceps",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//triceps.png",
+	},
+	{
+		value: "harvesting",
+		tier: "advanced",
+		ko_label: "수확",
+		eng_label: "harvesting",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//harvesting.png",
+		rotate: true,
+	},
+	{
+		value: "binary_star",
+		tier: "advanced",
+		ko_label: "쌍성",
+		eng_label: "binary_star",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//binary_star.png",
+		rotate: true,
+	},
+	{
+		value: "nurture",
+		tier: "advanced",
+		ko_label: "양육",
+		eng_label: "nurture",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//nurture.png",
+		rotate: true,
+	},
+	{
+		value: "yearning",
+		tier: "advanced",
+		ko_label: "열망",
+		eng_label: "yearning",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//yearning.png",
+	},
+	{
+		value: "agglutination",
+		tier: "advanced",
+		ko_label: "응집",
+		eng_label: "agglutination",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//agglutination.png",
+		rotate: true,
+	},
+	{
+		value: "entrance",
+		tier: "advanced",
+		ko_label: "입구",
+		eng_label: "entrance",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//entrance.png",
+	},
+	{
+		value: "joke",
+		tier: "advanced",
+		ko_label: "장난",
+		eng_label: "joke",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//joke.png",
+		rotate: true,
+	},
+	{
+		value: "load",
+		tier: "advanced",
+		ko_label: "적재",
+		eng_label: "load",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//load.png",
+		rotate: true,
+	},
+	{
+		value: "transition",
+		tier: "advanced",
+		ko_label: "전이",
+		eng_label: "transition",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//transition.png",
+		rotate: true,
+	},
+	{
+		value: "advance",
+		tier: "advanced",
+		ko_label: "전진",
+		eng_label: "advance",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//advance.png",
+		rotate: true,
+	},
+	{
+		value: "justice",
+		tier: "advanced",
+		ko_label: "정의",
+		eng_label: "justice",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//justice.png",
+	},
+	{
+		value: "preparation",
+		tier: "advanced",
+		ko_label: "준비",
+		eng_label: "preparation",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//preparation.png",
+		rotate: true,
+	},
+	{
+		value: "exit",
+		tier: "advanced",
+		ko_label: "출구",
+		eng_label: "exit",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//exit.png",
+	},
+	{
+		value: "tide",
+		tier: "advanced",
+		ko_label: "파도",
+		eng_label: "tide",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//tide.png",
+		rotate: true,
+	},
+	{
+		value: "dedication",
+		tier: "advanced",
+		ko_label: "헌정",
+		eng_label: "dedication",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//dedication.png",
+	},
 
 	// RARE
 	{
@@ -161,5 +325,65 @@ export const ITEM_MASTER_DATA: SlabsData[] = [
 		eng_label: "base",
 		image:
 			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//base.png",
+	},
+	{
+		value: "warrant",
+		tier: "rare",
+		ko_label: "권능",
+		eng_label: "warrant",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//warrant.png",
+		rotate: true,
+	},
+	{
+		value: "disconnection",
+		tier: "rare",
+		ko_label: "단절",
+		eng_label: "disconnection",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//disconnection.png",
+	},
+	{
+		value: "concurrency",
+		tier: "rare",
+		ko_label: "동시성",
+		eng_label: "concurrency",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//concurrency.png",
+	},
+	{
+		value: "vow",
+		tier: "rare",
+		ko_label: "맹세",
+		eng_label: "vow",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//vow.png",
+		rotate: true,
+	},
+	{
+		value: "rebellion",
+		tier: "rare",
+		ko_label: "반항",
+		eng_label: "rebellion",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//rebellion.png",
+		rotate: true,
+	},
+	{
+		value: "connection",
+		tier: "rare",
+		ko_label: "이음",
+		eng_label: "connection",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//connection.png",
+		rotate: true,
+	},
+	{
+		value: "shade",
+		tier: "rare",
+		ko_label: "차양",
+		eng_label: "shade",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//shade.png",
 	},
 ];

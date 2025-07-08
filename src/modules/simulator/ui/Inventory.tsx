@@ -13,7 +13,7 @@ import { useState } from "react";
 import { InventorySlot } from "@/src/entities/simulator/item/ui/InventorySlot";
 import { GRID_CONFIG } from "@/src/entities/simulator/item/ui/Slabs";
 import type { SlabsOptions, SlotId } from "@/src/entities/simulator/types";
-import { ITEM_MASTER_DATA } from "@/src/features/simulator/config/SlabsLists";
+import { ITEM_MASTER_DATA } from "@/src/features/simulator/config/slabsLists";
 import { DeleteTrash } from "@/src/features/simulator/ui/DeleteTrash";
 import { ItemSource } from "@/src/features/simulator/ui/ItemSource";
 import { useSlabsEffects } from "@/src/shared/hooks/useSlabsEffects";

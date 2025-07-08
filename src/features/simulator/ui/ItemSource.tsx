@@ -4,7 +4,7 @@ import type { SlabsOptions } from "@/src/entities/simulator/types";
 import { getSlabsTierColor } from "@/src/shared/lib/getSlabsTierColor";
 import { Box } from "@/src/shared/ui/box";
 import { Typography } from "@/src/shared/ui/typography";
-import { ITEM_MASTER_DATA } from "../config/SlabsLists";
+import { ITEM_MASTER_DATA } from "../config/slabsLists";
 
 export const ItemSource = ({ item }: { item: SlabsOptions }) => {
 	const { attributes, listeners, setNodeRef } = useDraggable({
