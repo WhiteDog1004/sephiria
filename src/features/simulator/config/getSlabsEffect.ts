@@ -1,4 +1,4 @@
-import { GRID_CONFIG } from "@/src/entities/simulator/item/ui/Slabs";
+import { GRID_CONFIG } from "@/src/entities/simulator/item/ui/SlotComponent";
 import {
 	calculateRotatedEffects,
 	getRotateValue,
@@ -544,5 +544,115 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 				}
 			}
 		}
+	},
+
+	// LEGEND
+	// thorn 가시
+	thorn: (x, y, __, item, effects) => {
+		const baseOffsets = [
+			{ dx: 0, dy: -1, value: 2 },
+			{ dx: 0, dy: 1, value: 2 },
+			{ dx: -1, dy: -1 },
+			{ dx: -1, dy: 0 },
+			{ dx: -1, dy: 1 },
+			{ dx: 1, dy: -1 },
+			{ dx: 1, dy: 0 },
+			{ dx: 1, dy: 1 },
+		];
+		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
+	},
+
+	// boundary 경계
+	boundary: (_, __, ___, ____, effects) => {
+		const applyEffectToRow = (rowConfig: { rows: number; cols: number }) => {
+			const rowIndex = rowConfig.rows;
+			const colsInRow = rowConfig.cols;
+
+			for (let colIdx = 0; colIdx < colsInRow; colIdx++) {
+				const targetSlotId = `${rowIndex}-${colIdx}`;
+				if (
+					effects[targetSlotId] !== undefined &&
+					typeof effects[targetSlotId] === "number"
+				) {
+					effects[targetSlotId] += 1;
+				}
+			}
+		};
+
+		const topRowConfig = GRID_CONFIG[0];
+		const bottomRowConfig = GRID_CONFIG[GRID_CONFIG.length - 1];
+
+		applyEffectToRow(topRowConfig);
+		applyEffectToRow(bottomRowConfig);
+	},
+
+	// sheen 광휘
+	sheen: (x, y, slotId, item, effects) => {
+		if (item.rotation === 1 || item.rotation === 3) {
+			const colsInRow = GRID_CONFIG[x].cols;
+			for (let i = 0; i < colsInRow; i++) {
+				const targetSlotId = `${i}-${x}`;
+				if (targetSlotId !== slotId) {
+					effects[targetSlotId] += 1;
+				}
+			}
+		} else {
+			const colsInRow = GRID_CONFIG[y].cols;
+			for (let i = 0; i < colsInRow; i++) {
+				const targetSlotId = `${y}-${i}`;
+				if (targetSlotId !== slotId) {
+					effects[targetSlotId] += 1;
+				}
+			}
+		}
+
+		const baseOffsets = [
+			{ dx: 0, dy: -1, value: 2 },
+			{ dx: 0, dy: 1, value: 2 },
+		];
+		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
+	},
+
+	// miracle 기적
+	miracle: (x, y, slotId, _, effects) => {
+		const rows = GRID_CONFIG[x].cols;
+		const cols = GRID_CONFIG[y].cols;
+		for (let i = 0; i < rows; i++) {
+			const targetSlotId = `${i}-${x}`;
+			if (targetSlotId !== slotId) {
+				effects[targetSlotId] += 1;
+			}
+		}
+		for (let i = 0; i < cols; i++) {
+			const targetSlotId = `${y}-${i}`;
+			if (targetSlotId !== slotId) {
+				effects[targetSlotId] += 1;
+			}
+		}
+	},
+
+	// daydream 백일몽
+	daydream: (x, y, _, item, effects) => {
+		const baseOffsets = [
+			{ dx: -1, dy: -1 },
+			{ dx: -1, dy: -2 },
+			{ dx: 1, dy: -1 },
+			{ dx: 1, dy: -2 },
+			{ dx: -1, dy: 1 },
+			{ dx: -1, dy: 2 },
+			{ dx: 1, dy: 1 },
+			{ dx: 1, dy: 2 },
+		];
+		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
+	},
+
+	// compression 압축
+	compression: (x, y, _, item, effects) => {
+		const baseOffsets = [
+			{ dx: 0, dy: -1, value: 3 },
+			{ dx: 0, dy: -2, value: 2 },
+			{ dx: 0, dy: -3 },
+		];
+		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
 	},
 };

@@ -8,24 +8,43 @@ import {
 	useSensor,
 	useSensors,
 } from "@dnd-kit/core";
+import clsx from "clsx";
 import Image from "next/image";
-import { useState } from "react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import { InventorySlot } from "@/src/entities/simulator/item/ui/InventorySlot";
-import { GRID_CONFIG } from "@/src/entities/simulator/item/ui/Slabs";
-import type { SlabsOptions, SlotId } from "@/src/entities/simulator/types";
-import { ITEM_MASTER_DATA } from "@/src/features/simulator/config/slabsLists";
+import { GRID_CONFIG } from "@/src/entities/simulator/item/ui/SlotComponent";
+import type {
+	ArtifactInstance,
+	SlabsOptions,
+	SlotId,
+} from "@/src/entities/simulator/types";
+import { TABS_LIST } from "@/src/features/simulator/config/constants";
+import { ITEM_SLABS_DATA } from "@/src/features/simulator/config/slabsLists";
 import { DeleteTrash } from "@/src/features/simulator/ui/DeleteTrash";
 import { ItemSource } from "@/src/features/simulator/ui/ItemSource";
+import { SearchSlabs } from "@/src/features/simulator/ui/SearchSlabs";
 import { useSlabsEffects } from "@/src/shared/hooks/useSlabsEffects";
 import { Box } from "@/src/shared/ui/box";
+import { Column } from "@/src/shared/ui/column";
+import { Row } from "@/src/shared/ui/row";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/shared/ui/tabs";
 import { Typography } from "@/src/shared/ui/typography";
 
-export default function InventoryApp() {
-	const { items, setItems, handleRotate, calculatedEffects } =
+interface InventoryProps {
+	data: ArtifactInstance["data"][];
+}
+
+const Inventory = ({ data }: InventoryProps) => {
+	const { theme } = useTheme();
+	const [mounted, setMounted] = useState(false);
+	const { slabs, setSlabs, artifacts, handleRotate, calculatedEffects } =
 		useSlabsEffects();
 	const [activeId, setActiveId] = useState<string | null>(null);
 	const [activeItem, setActiveItem] = useState<SlabsOptions | null>(null);
 	const [overId, setOverId] = useState<string | null>(null);
+	const [searchInput, setSearchInput] = useState("");
+	const [selectedTier, setSelectedTier] = useState("all");
 
 	const sensors = useSensors(useSensor(PointerSensor));
 
@@ -51,7 +70,7 @@ export default function InventoryApp() {
 		if (over.data.current?.type === "slot") {
 			const overSlotId: SlotId = over.id;
 
-			setItems((prevItems) => {
+			setSlabs((prevItems) => {
 				const newItems = { ...prevItems };
 				const targetItem = newItems[overSlotId];
 
@@ -84,7 +103,7 @@ export default function InventoryApp() {
 
 		if (over.data.current?.type === "trash" && activeIsItem) {
 			const activeItem: SlabsOptions = active.data.current.item;
-			setItems((prevItems) => {
+			setSlabs((prevItems) => {
 				const newItems = { ...prevItems };
 				const originalSlotId = Object.keys(newItems).find(
 					(key) => newItems[key]?.id === activeItem.id,
@@ -97,6 +116,28 @@ export default function InventoryApp() {
 		}
 	};
 
+	const filteredItems = ITEM_SLABS_DATA.filter((item) => {
+		const matchesSearch = item.ko_label
+			.toLowerCase()
+			.includes(searchInput.toLowerCase());
+		const matchesTier = selectedTier === "all" || item.tier === selectedTier;
+		return matchesSearch && matchesTier;
+	});
+
+	const filteredArtifacts = data.filter((item) => {
+		const matchesSearch = item.label_kor
+			.toLowerCase()
+			.includes(searchInput.toLowerCase());
+		return matchesSearch;
+	});
+
+	const TabsBoxStyles = `grid h-full max-h-[676] overflow-auto bg-[#2f1c2c] p-4 rounded-lg ${clsx(theme === "light" && "bg-[#2f1c2c80]")}`;
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	if (!mounted) return null;
 	return (
 		<DndContext
 			sensors={sensors}
@@ -105,28 +146,37 @@ export default function InventoryApp() {
 			onDragEnd={handleDragEnd}
 			onDragOver={handleDragOver}
 		>
-			<div className="bg-gray-900 text-white min-h-screen p-8 font-sans">
-				<div className="flex flex-col lg:flex-row gap-8">
-					<Box className="flex flex-col flex-grow">
-						<h1 className="text-3xl font-bold mb-2">인벤토리</h1>
-						<p className="text-gray-400 mb-6">
-							아이템을 드래그하여 배치하거나, 위치를 바꾸거나, 삭제하세요.
-						</p>
-						<div
-							className="grid grid-cols-6 gap-2"
+			<Column
+				className={`items-start lg:flex-row gap-8 w-max p-8 rounded-sm ${clsx(
+					theme === "dark" ? "bg-[#40273b]" : "bg-[#40273b80]",
+				)}`}
+			>
+				<Column className="gap-4 py-0">
+					<Column>
+						<Typography className="text-2xl font-bold mb-2">
+							인벤토리
+						</Typography>
+						<Typography
+							className={`text-gray-400 mb-6 ${clsx(theme === "light" && "text-gray-700")}`}
+						>
+							석판 및 아티팩트를 드래그하여 배치하세요.
+						</Typography>
+						<Box
+							className="grid grid-cols-6 gap-2 w-max p-0"
 							style={{ gridTemplateColumns: "repeat(6, 80px)" }}
 						>
 							{GRID_CONFIG.map(({ rows: rowIndex, cols }) =>
 								Array.from({ length: cols }).map((_, colIndex) => {
 									const slotId: SlotId = `${rowIndex}-${colIndex}`;
-									const item = items[slotId];
+									const item = slabs[slotId];
 									const effectValue = calculatedEffects.effects[slotId] || 0;
 									const effectFlag = calculatedEffects.flag[slotId];
+
 									return (
 										<InventorySlot
 											key={slotId}
 											id={slotId}
-											item={item}
+											item={item as SlabsOptions & ArtifactInstance["data"]}
 											effectValue={effectValue}
 											effectFlag={effectFlag}
 											onRotate={handleRotate}
@@ -135,43 +185,83 @@ export default function InventoryApp() {
 									);
 								}),
 							)}
-						</div>
-					</Box>
+						</Box>
+					</Column>
 
-					<Box className="flex flex-col gap-6 items-start w-full p-0 lg:w-64 flex-shrink-0">
-						<Box className="flex flex-col gap-2 p-0">
-							<Typography
-								variant="header3"
-								className="text-2xl font-bold w-full"
+					<DeleteTrash isOver={overId === "trash"} />
+				</Column>
+
+				<Column className="min-w-[640px] gap-2">
+					<Tabs defaultValue={TABS_LIST[0].value}>
+						<Row className="justify-between">
+							<TabsList>
+								{TABS_LIST.map((list) => (
+									<TabsTrigger value={list.value} key={list.value}>
+										<Typography className="w-full">{list.label}</Typography>
+									</TabsTrigger>
+								))}
+							</TabsList>
+							<SearchSlabs
+								selectedTier={selectedTier}
+								setSelectedTier={setSelectedTier}
+								searchInput={searchInput}
+								setSearchInput={setSearchInput}
+							/>
+						</Row>
+						<TabsContent value="slabs">
+							<Box
+								className={`${TabsBoxStyles} ${clsx(filteredItems.length > 0 ? "grid-cols-8" : "grid-cols-1")}`}
 							>
-								석판
-							</Typography>
-							<Box className="grid grid-cols-8 bg-gray-800 p-4 rounded-lg">
-								{ITEM_MASTER_DATA.map((item) => (
-									<ItemSource
-										key={item.value}
-										item={
-											{
+								{filteredItems.length > 0 ? (
+									filteredItems.map((item) => (
+										<ItemSource
+											key={item.value}
+											item={{
+												type: "slabs",
 												id: item.value,
 												label: item.ko_label,
 												...(item.rotate && { rotation: 0 }),
 												image: item.image,
-											} as SlabsOptions
-										}
-									/>
-								))}
+											}}
+										/>
+									))
+								) : (
+									<Box className="w-full p-0">
+										<Typography className="opacity-70">
+											검색 결과가 없습니다
+										</Typography>
+									</Box>
+								)}
 							</Box>
-						</Box>
-
-						<Box className="flex flex-col gap-2 p-0">
-							<Typography className="text-2xl font-bold w-full">
-								삭제
-							</Typography>
-							<DeleteTrash isOver={overId === "trash"} />
-						</Box>
-					</Box>
-				</div>
-			</div>
+						</TabsContent>
+						<TabsContent value="artifact">
+							<Box
+								className={`${TabsBoxStyles} ${clsx(filteredArtifacts.length > 0 ? "grid-cols-8" : "grid-cols-1")}`}
+							>
+								{filteredArtifacts.length > 0 ? (
+									filteredArtifacts.map((item) => (
+										<ItemSource
+											key={item.value}
+											item={{
+												id: item.value,
+												label: item.label_kor,
+												image: item.image,
+												type: "artifact",
+											}}
+										/>
+									))
+								) : (
+									<Box className="w-full p-0">
+										<Typography className="opacity-70">
+											검색 결과가 없습니다
+										</Typography>
+									</Box>
+								)}
+							</Box>
+						</TabsContent>
+					</Tabs>
+				</Column>
+			</Column>
 
 			<DragOverlay dropAnimation={null}>
 				{activeItem && activeId?.startsWith("source-") ? (
@@ -187,4 +277,6 @@ export default function InventoryApp() {
 			</DragOverlay>
 		</DndContext>
 	);
-}
+};
+
+export default Inventory;

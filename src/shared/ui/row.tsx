@@ -4,14 +4,14 @@ import type * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-const boxVariants = cva("flex items-center justify-center w-full p-8");
+const rowVariants = cva("inline-flex flex-row");
 
-function Box({
+function Row({
 	className,
 	asChild = false,
 	...props
 }: React.ComponentProps<"div"> &
-	VariantProps<typeof boxVariants> & {
+	VariantProps<typeof rowVariants> & {
 		asChild?: boolean;
 	}) {
 	const Comp = asChild ? Slot : "div";
@@ -19,10 +19,10 @@ function Box({
 	return (
 		<Comp
 			data-slot="div"
-			className={cn(boxVariants({ className }))}
+			className={cn(rowVariants({ className }))}
 			{...props}
 		/>
 	);
 }
 
-export { Box, boxVariants };
+export { Row, rowVariants };

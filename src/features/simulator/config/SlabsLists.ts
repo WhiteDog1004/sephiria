@@ -7,8 +7,8 @@ export type SlabsData = {
 	tier: string;
 };
 
-// 모든 아이템의 원본 데이터를 배열로 관리
-export const ITEM_MASTER_DATA: SlabsData[] = [
+// 모든 석판의 원본 데이터를 배열로 관리
+export const ITEM_SLABS_DATA: SlabsData[] = [
 	// COMMON
 	{
 		value: "chivalry",
@@ -385,5 +385,58 @@ export const ITEM_MASTER_DATA: SlabsData[] = [
 		eng_label: "shade",
 		image:
 			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//shade.png",
+	},
+
+	// LEGEND
+	{
+		value: "thorn",
+		tier: "legend",
+		ko_label: "가시",
+		eng_label: "thorn",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//thorn.png",
+	},
+	{
+		value: "boundary",
+		tier: "legend",
+		ko_label: "경계",
+		eng_label: "boundary",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//boundary.png",
+	},
+	{
+		value: "sheen",
+		tier: "legend",
+		ko_label: "광휘",
+		eng_label: "sheen",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//sheen.png",
+		rotate: true,
+	},
+	{
+		value: "miracle",
+		tier: "legend",
+		ko_label: "기적",
+		eng_label: "miracle",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//miracle.png",
+	},
+	{
+		value: "daydream",
+		tier: "legend",
+		ko_label: "백일몽",
+		eng_label: "daydream",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//daydream.png",
+		rotate: true,
+	},
+	{
+		value: "compression",
+		tier: "legend",
+		ko_label: "압축",
+		eng_label: "compression",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//compression.png",
+		rotate: true,
 	},
 ];

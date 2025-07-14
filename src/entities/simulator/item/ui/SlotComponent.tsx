@@ -1,6 +1,6 @@
 import { useDraggable } from "@dnd-kit/core";
 import Image from "next/image";
-import { ITEM_MASTER_DATA } from "@/src/features/simulator/config/SlabsLists";
+import { ITEM_SLABS_DATA } from "@/src/features/simulator/config/slabsLists";
 import { Box } from "@/src/shared/ui/box";
 import type { SlabsOptions } from "../../types";
 
@@ -19,7 +19,7 @@ export const SLOT_IDS = GRID_CONFIG.flatMap(({ rows, cols }) =>
 	Array.from({ length: cols }, (_, colIndex) => `${rows}-${colIndex}`),
 );
 
-export const SlabsComponent = ({
+export const SlotComponent = ({
 	item,
 	isDragging,
 	onRotate,
@@ -49,7 +49,7 @@ export const SlabsComponent = ({
 			style={style}
 			{...listeners}
 			{...attributes}
-			className={`relative w-full h-full p-1 rounded-md cursor-grab active:cursor-grabbing transition-shadow z-10 bg-gray-600/50 ${isDragging ? "shadow-2xl" : "shadow-md"}`}
+			className={`relative w-full h-full p-1 rounded-md cursor-grab active:cursor-grabbing transition-shadow z-10 ${isDragging ? "shadow-2xl" : "shadow-md"}`}
 		>
 			<Box
 				className={`w-full h-full p-0 rounded flex items-center justify-center text-white font-bold `}
@@ -60,7 +60,7 @@ export const SlabsComponent = ({
 					alt={"slabs"}
 					style={item.rotation ? rotationStyle : undefined}
 				/>
-				{ITEM_MASTER_DATA.find((i) => i.value === item.id.split("-").pop())
+				{ITEM_SLABS_DATA.find((i) => i.value === item.id.split("-").pop())
 					?.rotate && (
 					<button
 						type="button"

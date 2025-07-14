@@ -1,12 +1,13 @@
-import { getDetailList } from "@/src/features/costume/model/actions";
+import { getArtifactLists } from "@/src/features/simulator/model/actions";
 import Inventory from "@/src/modules/simulator/ui/Inventory";
 import { Box } from "@/src/shared/ui/box";
 
 const SimulatorPage = async () => {
-	const data = await getDetailList();
+	const data = await getArtifactLists();
+
 	return (
 		<Box className="items-center">
-			<Inventory />
+			<Inventory data={data || []} />
 		</Box>
 	);
 };

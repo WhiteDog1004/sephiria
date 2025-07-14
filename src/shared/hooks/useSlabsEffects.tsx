@@ -1,17 +1,20 @@
 import { useCallback, useMemo, useState } from "react";
-import { SLOT_IDS } from "@/src/entities/simulator/item/ui/Slabs";
+import { SLOT_IDS } from "@/src/entities/simulator/item/ui/SlotComponent";
 import type {
+	ArtifactPositionMap,
 	ItemPositionMap,
 	SlabsOptions,
 	SlotId,
 } from "@/src/entities/simulator/types";
 import { getSlabsEffectHandlers } from "@/src/features/simulator/config/getSlabsEffect";
+import { getArtifactLevelContent } from "../lib/getArtifactLevelContent";
 
 /**
  * 인벤토리 석판의 상태와 효과 계산 로직을 관리하는 커스텀 훅
  */
 export const useSlabsEffects = () => {
-	const [items, setItems] = useState<ItemPositionMap>({});
+	const [slabs, setSlabs] = useState<ItemPositionMap>({});
+	const [artifacts, setArtifacts] = useState<ArtifactPositionMap>({});
 
 	/**
 	 * 아이템을 회전시키는 함수.
@@ -19,7 +22,7 @@ export const useSlabsEffects = () => {
 	 */
 	const handleRotate = useCallback((itemId: string, e: React.MouseEvent) => {
 		e.stopPropagation();
-		setItems((prevItems) => {
+		setSlabs((prevItems) => {
 			const itemSlotId = Object.keys(prevItems).find(
 				(id) => prevItems[id]?.id === itemId,
 			);
@@ -52,19 +55,55 @@ export const useSlabsEffects = () => {
 			flag[id] = null;
 		});
 
-		Object.entries(items).forEach(([slotId, item]) => {
+		Object.entries(slabs).forEach(([slotId, item]) => {
 			if (!item) return;
-
 			const [y, x] = slotId.split("-").map(Number);
-
-			const itemResult = item.id.split("-").pop();
-			if (itemResult) {
-				getSlabsEffectHandlers[itemResult](x, y, slotId, item, effects, flag);
+			const itemType = item.id.split("-").pop();
+			if (itemType && getSlabsEffectHandlers[itemType]) {
+				getSlabsEffectHandlers[itemType](x, y, slotId, item, effects, flag);
 			}
 		});
 
 		return { effects, flag };
-	}, [items]);
+	}, [slabs]);
 
-	return { items, setItems, handleRotate, calculatedEffects };
+	// 3. [수정] 아티팩트 최종 레벨 및 설명 계산 로직 업데이트
+	const enhancedArtifacts = useMemo(() => {
+		const enhanced: Record<
+			SlotId,
+			{
+				finalLevel: number;
+				finalEffectContent: string;
+			}
+		> = {};
+
+		Object.entries(artifacts).forEach(([slotId, artifact]) => {
+			if (!artifact) return;
+
+			const slabBonus = calculatedEffects.effects[slotId] || 0;
+
+			// 최종 레벨 = 아티팩트 기본 레벨 + 석판 보너스
+			const finalLevel = artifact.data.level ?? 0 + slabBonus;
+
+			// 최종 레벨에 맞는 효과 설명을 파싱하여 생성합니다.
+			const finalEffectContent = getArtifactLevelContent(
+				artifact.data.effect?.content,
+				finalLevel,
+			);
+
+			enhanced[slotId] = { finalLevel, finalEffectContent };
+		});
+
+		return enhanced;
+	}, [artifacts, calculatedEffects]);
+
+	return {
+		slabs,
+		setSlabs,
+		artifacts,
+		setArtifacts,
+		handleRotate,
+		calculatedEffects,
+		enhancedArtifacts,
+	};
 };
