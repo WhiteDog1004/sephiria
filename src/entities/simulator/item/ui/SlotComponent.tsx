@@ -57,7 +57,7 @@ export const SlotComponent = ({
 				<Image
 					fill
 					src={item.image}
-					alt={"slabs"}
+					alt={"items"}
 					style={item.rotation ? rotationStyle : undefined}
 				/>
 				{ITEM_SLABS_DATA.find((i) => i.value === item.id.split("-").pop())

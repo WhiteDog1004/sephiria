@@ -38,7 +38,7 @@ interface InventoryProps {
 const Inventory = ({ data }: InventoryProps) => {
 	const { theme } = useTheme();
 	const [mounted, setMounted] = useState(false);
-	const { slabs, setSlabs, artifacts, handleRotate, calculatedEffects } =
+	const { slabs, setSlabs, handleRotate, calculatedEffects } =
 		useSlabsEffects();
 	const [activeId, setActiveId] = useState<string | null>(null);
 	const [activeItem, setActiveItem] = useState<SlabsOptions | null>(null);

@@ -4,6 +4,11 @@ import Image from "next/image";
 import { getSlabsTierColor } from "@/src/shared/lib/getSlabsTierColor";
 import { Box } from "@/src/shared/ui/box";
 import { Column } from "@/src/shared/ui/column";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+} from "@/src/shared/ui/tooltip";
 import { Typography } from "@/src/shared/ui/typography";
 import { ITEM_SLABS_DATA } from "../config/slabsLists";
 
@@ -24,21 +29,29 @@ export const ItemSource = ({ item }: ItemSourceProps) => {
 	});
 
 	return (
-		<Column
-			ref={setNodeRef}
-			{...listeners}
-			{...attributes}
-			className="w-19 h-24 p-1 cursor-grab"
-		>
-			<Box className="relative h-full p-0">
-				<Image unoptimized fill src={item.image || ""} alt={"items"} />
-			</Box>
-			<Typography
-				className={`whitespace-nowrap text-center ${clsx(item.type === "slabs" && getSlabsTierColor(ITEM_SLABS_DATA.find((i) => i.value === item.id)?.tier || ""), item.type === "artifact" && "")}`}
-				variant="caption"
-			>
-				{item.label}
-			</Typography>
-		</Column>
+		<Tooltip>
+			<TooltipTrigger asChild>
+				<Column
+					ref={setNodeRef}
+					{...listeners}
+					{...attributes}
+					className="w-19 h-24 p-1 cursor-grab"
+				>
+					<Box className="relative h-full p-0">
+						<Image unoptimized fill src={item.image || ""} alt={"items"} />
+					</Box>
+					<Typography
+						className={`whitespace-nowrap text-center ${clsx(item.type === "slabs" && getSlabsTierColor(ITEM_SLABS_DATA.find((i) => i.value === item.id)?.tier || ""), item.type === "artifact" && "")}`}
+						variant="caption"
+					>
+						{item.label}
+					</Typography>
+				</Column>
+			</TooltipTrigger>
+
+			<TooltipContent>
+				<Typography>{item.label}</Typography>
+			</TooltipContent>
+		</Tooltip>
 	);
 };

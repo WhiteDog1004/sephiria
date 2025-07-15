@@ -7,7 +7,7 @@ const SimulatorPage = async () => {
 
 	return (
 		<Box className="items-center">
-			<Inventory data={data || []} />
+			{data && <Inventory data={data || []} />}
 		</Box>
 	);
 };
