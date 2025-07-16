@@ -4,6 +4,7 @@ import {
 	getRotateValue,
 } from "../lib/calculateEffects";
 
+export type GridConfig = { rows: number; cols: number }[];
 type EffectHandler = (
 	x: number,
 	y: number,
@@ -11,6 +12,7 @@ type EffectHandler = (
 	item: { rotation: number },
 	effects: Record<string, number>,
 	flag?: Record<string, "ignore" | null>,
+	gridConfig?: GridConfig,
 ) => void;
 
 // 석판 효과
@@ -52,8 +54,10 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 	},
 
 	// linear 선의
-	linear: (x, y, _, __, effects) => {
-		const lastRowIndex = GRID_CONFIG[GRID_CONFIG.length - 1].rows;
+	linear: (x, y, _, __, effects, ___, gridConfig) => {
+		const currentGrid = gridConfig || GRID_CONFIG;
+
+		const lastRowIndex = currentGrid[currentGrid.length - 1].rows;
 
 		if (y === lastRowIndex) {
 			const targetSlots = [`${y}-${x - 1}`, `${y}-${x + 1}`];
@@ -528,9 +532,10 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 	},
 
 	// shade 차양
-	shade: (_, y, __, ___, effects) => {
+	shade: (_, y, __, ___, effects, _____, gridConfig) => {
 		if (y === 0) {
-			const bottomRowConfig = GRID_CONFIG[GRID_CONFIG.length - 1];
+			const bottomRowConfig =
+				GRID_CONFIG[(gridConfig?.length || GRID_CONFIG.length) - 1];
 			const bottomRowIndex = bottomRowConfig.rows;
 			const colsInBottomRow = bottomRowConfig.cols;
 

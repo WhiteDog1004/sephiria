@@ -10,6 +10,16 @@ export type SlabsOptions = {
 	type?: "slabs" | "artifact";
 };
 
+export interface ItemSourceProps {
+	item: {
+		type: "slabs" | "artifact";
+		id: string;
+		label: string;
+		rotation?: number;
+		image: string;
+	};
+}
+
 // 인벤토리 슬롯 ID 타입 (예: "0-0", "1-2")
 export type SlotId = string;
 

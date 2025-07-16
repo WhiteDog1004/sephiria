@@ -1,6 +1,11 @@
 import { useDraggable } from "@dnd-kit/core";
 import clsx from "clsx";
 import Image from "next/image";
+import { useState } from "react";
+import type {
+	ItemSourceProps,
+	SlabsOptions,
+} from "@/src/entities/simulator/types";
 import { getSlabsTierColor } from "@/src/shared/lib/getSlabsTierColor";
 import { Box } from "@/src/shared/ui/box";
 import { Column } from "@/src/shared/ui/column";
@@ -11,26 +16,22 @@ import {
 } from "@/src/shared/ui/tooltip";
 import { Typography } from "@/src/shared/ui/typography";
 import { ITEM_SLABS_DATA } from "../config/slabsLists";
-
-interface ItemSourceProps {
-	item: {
-		type: "slabs" | "artifact";
-		id: string;
-		label: string;
-		rotation?: number;
-		image: string;
-	};
-}
+import { SlabEffectTooltip } from "./SlabsTootltip";
 
 export const ItemSource = ({ item }: ItemSourceProps) => {
+	const [tooltipOpen, setTooltipOpen] = useState(false);
 	const { attributes, listeners, setNodeRef } = useDraggable({
 		id: `source-${item.id}-${item.type}`,
 		data: { type: "source-item", item },
 	});
 
 	return (
-		<Tooltip>
-			<TooltipTrigger asChild>
+		<Tooltip open={tooltipOpen}>
+			<TooltipTrigger
+				onMouseEnter={() => setTooltipOpen(true)}
+				onMouseLeave={() => setTooltipOpen(false)}
+				asChild
+			>
 				<Column
 					ref={setNodeRef}
 					{...listeners}
@@ -50,7 +51,9 @@ export const ItemSource = ({ item }: ItemSourceProps) => {
 			</TooltipTrigger>
 
 			<TooltipContent>
-				<Typography>{item.label}</Typography>
+				{item.type === "slabs" && (
+					<SlabEffectTooltip slab={item as SlabsOptions} />
+				)}
 			</TooltipContent>
 		</Tooltip>
 	);
