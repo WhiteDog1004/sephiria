@@ -45,13 +45,13 @@ const Inventory = ({ data }: InventoryProps) => {
 		setArtifacts,
 		handleRotate,
 		calculatedEffects,
-		enhancedArtifacts,
 	} = useSlabsEffects();
 	const [activeId, setActiveId] = useState<string | null>(null);
 	const [activeItem, setActiveItem] = useState<
 		(SlabsOptions & ArtifactInstance) | null
 	>(null);
 	const [overId, setOverId] = useState<string | null>(null);
+	const [tabsValue, setTabsValue] = useState<"slabs" | "artifact">("slabs");
 	const [searchInput, setSearchInput] = useState("");
 	const [selectedTier, setSelectedTier] = useState("all");
 
@@ -226,6 +226,14 @@ const Inventory = ({ data }: InventoryProps) => {
 		return matchesSearch && matchesTier;
 	});
 
+	const filteredArtifacts = data.filter((item) => {
+		const matchesSearch = item.label_kor
+			.toLowerCase()
+			.includes(searchInput.toLowerCase());
+		const matchesTier = selectedTier === "all" || item.tier === selectedTier;
+		return matchesSearch && matchesTier;
+	});
+
 	const TabsBoxStyles = `grid h-full max-h-[676] overflow-auto bg-[#2f1c2c] p-4 rounded-lg ${clsx(theme === "light" && "bg-[#2f1c2c80]")}`;
 
 	useEffect(() => {
@@ -290,7 +298,12 @@ const Inventory = ({ data }: InventoryProps) => {
 				</Column>
 
 				<Column className="min-w-[640px] gap-2">
-					<Tabs defaultValue={TABS_LIST[0].value}>
+					<Tabs
+						onValueChange={(value) =>
+							setTabsValue(value as "slabs" | "artifact")
+						}
+						defaultValue={tabsValue}
+					>
 						<Row className="justify-between">
 							<TabsList>
 								{TABS_LIST.map((list) => (
@@ -300,6 +313,7 @@ const Inventory = ({ data }: InventoryProps) => {
 								))}
 							</TabsList>
 							<SearchSlabs
+								type={tabsValue}
 								selectedTier={selectedTier}
 								setSelectedTier={setSelectedTier}
 								searchInput={searchInput}
@@ -334,10 +348,10 @@ const Inventory = ({ data }: InventoryProps) => {
 						</TabsContent>
 						<TabsContent value="artifact">
 							<Box
-								className={`${TabsBoxStyles} ${clsx(data.length > 0 ? "grid-cols-8" : "grid-cols-1")}`}
+								className={`${TabsBoxStyles} ${clsx(filteredArtifacts.length > 0 ? "grid-cols-8" : "grid-cols-1")}`}
 							>
-								{data.length > 0 ? (
-									data.map((item) => (
+								{filteredArtifacts.length > 0 ? (
+									filteredArtifacts.map((item) => (
 										<ItemSource
 											key={item.value}
 											item={{

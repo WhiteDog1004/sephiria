@@ -26,6 +26,7 @@ export type Database = {
 					label_kor: string;
 					level: number | null;
 					value: string;
+					tier: string;
 				};
 				Insert: {
 					created_at?: string;
@@ -40,6 +41,7 @@ export type Database = {
 					label_kor: string;
 					level?: number | null;
 					value: string;
+					tier?: string;
 				};
 				Update: {
 					created_at?: string;
@@ -54,6 +56,7 @@ export type Database = {
 					label_kor?: string;
 					level?: number | null;
 					value?: string;
+					tier?: string;
 				};
 				Relationships: [];
 			};

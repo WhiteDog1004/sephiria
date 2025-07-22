@@ -11,6 +11,7 @@ import {
 import { TIER_DATA } from "../config/constants";
 
 interface SearchSlabsProps {
+	type: "slabs" | "artifact";
 	searchInput: string;
 	setSearchInput: Dispatch<SetStateAction<string>>;
 	selectedTier: string;
@@ -18,6 +19,7 @@ interface SearchSlabsProps {
 }
 
 export const SearchSlabs = ({
+	type,
 	searchInput,
 	setSearchInput,
 	selectedTier,
@@ -39,7 +41,7 @@ export const SearchSlabs = ({
 			</Select>
 			<Input
 				type="text"
-				placeholder="석판 검색..."
+				placeholder={`${type === "slabs" ? "석판" : "아티팩트"} 검색...`}
 				value={searchInput}
 				onChange={(e) => setSearchInput(e.target.value)}
 				className="max-w-sm"
