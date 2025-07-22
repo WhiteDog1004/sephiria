@@ -21,7 +21,7 @@ export const InventorySlot = ({
 	isOver: boolean;
 }) => {
 	const { setNodeRef } = useDroppable({ id, data: { type: "slot" } });
-	const boxStyles = `absolute top-0 left-0 w-full h-full p-1 flex items-start justify-start`;
+	const boxStyles = `absolute top-0 left-0 w-full h-full p-1 flex items-start justify-start z-50 pointer-events-none`;
 
 	return (
 		<Box
@@ -41,7 +41,7 @@ export const InventorySlot = ({
 			)}
 			{effectValue > 0 ? (
 				<Box
-					className={`${boxStyles} gap-1 z-50 pointer-events-none ${clsx(effectValue === Number(item?.item.level) ? "text-green-400" : effectValue > Number(item?.item.level) ? "text-yellow-300" : "text-white")}`}
+					className={`${boxStyles} gap-1 ${clsx(!!item?.item && (effectValue === Number(item?.item.level) ? "text-green-400" : effectValue > Number(item?.item.level) ? "text-yellow-300" : "text-white"))}`}
 				>
 					<Typography>{effectValue}</Typography>
 					{item?.type === "artifact" && (
@@ -53,9 +53,7 @@ export const InventorySlot = ({
 				</Box>
 			) : (
 				effectValue < 0 && (
-					<Box
-						className={`${boxStyles} gap-1 z-50 pointer-events-none ${clsx(effectValue >= Number(item?.item.level) ? "text-green-400" : "text-red-600")}`}
-					>
+					<Box className={`${boxStyles} gap-1 text-red-600`}>
 						{effectValue}
 						{item?.type === "artifact" && (
 							<>
@@ -67,9 +65,14 @@ export const InventorySlot = ({
 				)
 			)}
 			{effectFlag === "ignore" && (
+				<Box className={`${boxStyles} bg-blue-300/30`} />
+			)}
+			{!!item?.item && !effectValue && (
 				<Box
-					className={`${boxStyles} bg-blue-300/30 pointer-events-none`}
-				></Box>
+					className={`${boxStyles} ${clsx(item.item.level === 0 && "text-green-400")}`}
+				>
+					<Typography>0 / {item.item.level}</Typography>
+				</Box>
 			)}
 		</Box>
 	);
