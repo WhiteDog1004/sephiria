@@ -17,10 +17,11 @@ export interface ItemSourceProps {
 		label: string;
 		rotation?: number;
 		image: string;
+		data?: ArtifactInstance["item"];
 	};
 }
 
-// 인벤토리 슬롯 ID 타입 (예: "0-0", "1-2")
+// 인벤토리 SlotId (예: "0-0", "1-2")
 export type SlotId = string;
 
 // 아이템의 위치를 나타내는 맵
@@ -29,7 +30,9 @@ export type ItemPositionMap = Record<SlotId, SlabsOptions | undefined>;
 // 인벤토리에 놓인 아티팩트의 상태를 정의
 export type ArtifactInstance = {
 	instanceId: string;
-	data: Database["public"]["Tables"]["artifacts"]["Row"];
+	type: string;
+	image: string;
+	item: Database["public"]["Tables"]["artifacts"]["Row"];
 };
 
 // 아티팩트의 위치를 관리하는 맵 타입

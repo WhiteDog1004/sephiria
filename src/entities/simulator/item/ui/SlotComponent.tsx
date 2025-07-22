@@ -2,7 +2,7 @@ import { useDraggable } from "@dnd-kit/core";
 import Image from "next/image";
 import { ITEM_SLABS_DATA } from "@/src/features/simulator/config/slabsLists";
 import { Box } from "@/src/shared/ui/box";
-import type { SlabsOptions } from "../../types";
+import type { ArtifactInstance, SlabsOptions } from "../../types";
 
 // 인벤토리 그리드 설정 (가변적인 형태 지원)
 export const GRID_CONFIG: { rows: number; cols: number }[] = [
@@ -24,12 +24,12 @@ export const SlotComponent = ({
 	isDragging,
 	onRotate,
 }: {
-	item: SlabsOptions;
+	item: SlabsOptions & ArtifactInstance;
 	isDragging: boolean;
 	onRotate: (e: React.MouseEvent) => void;
 }) => {
 	const { attributes, listeners, setNodeRef, transform } = useDraggable({
-		id: item.id,
+		id: item.type === "slabs" ? item.id : item.instanceId,
 		data: { type: "item", item },
 	});
 
@@ -60,18 +60,19 @@ export const SlotComponent = ({
 					alt={"items"}
 					style={item.rotation ? rotationStyle : undefined}
 				/>
-				{ITEM_SLABS_DATA.find((i) => i.value === item.id.split("-").pop())
-					?.rotate && (
-					<button
-						type="button"
-						onClick={onRotate}
-						onPointerDown={(e) => e.stopPropagation()}
-						className="absolute top-0 right-0 w-5 h-5 bg-black bg-opacity-50 rounded-full text-xs hover:bg-opacity-75 transition-colors flex items-center justify-center"
-						title="회전"
-					>
-						↻
-					</button>
-				)}
+				{item.type === "slabs" &&
+					ITEM_SLABS_DATA.find((i) => i.value === item.id.split("-").pop())
+						?.rotate && (
+						<button
+							type="button"
+							onClick={onRotate}
+							onPointerDown={(e) => e.stopPropagation()}
+							className="absolute top-0 right-0 w-5 h-5 bg-black bg-opacity-50 rounded-full text-xs hover:bg-opacity-75 transition-colors flex items-center justify-center"
+							title="회전"
+						>
+							↻
+						</button>
+					)}
 			</Box>
 		</Box>
 	);

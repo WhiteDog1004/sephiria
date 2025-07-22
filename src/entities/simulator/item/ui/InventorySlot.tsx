@@ -14,7 +14,7 @@ export const InventorySlot = ({
 	isOver,
 }: {
 	id: SlotId;
-	item?: SlabsOptions & ArtifactInstance["data"];
+	item?: SlabsOptions & ArtifactInstance;
 	effectValue: number;
 	effectFlag: "ignore" | null;
 	onRotate: (id: string, e: React.MouseEvent) => void;
@@ -40,16 +40,36 @@ export const InventorySlot = ({
 				/>
 			)}
 			{effectValue > 0 ? (
-				<Box className={`${boxStyles} text-green-400 z-50 pointer-events-none`}>
+				<Box
+					className={`${boxStyles} gap-1 z-50 pointer-events-none ${clsx(effectValue === Number(item?.item.level) ? "text-green-400" : effectValue > Number(item?.item.level) ? "text-yellow-300" : "text-white")}`}
+				>
 					<Typography>{effectValue}</Typography>
+					{item?.type === "artifact" && (
+						<>
+							<Typography>/</Typography>
+							<Typography>{item.item.level}</Typography>
+						</>
+					)}
 				</Box>
 			) : (
 				effectValue < 0 && (
-					<Box className={`${boxStyles} text-red-600 z-50`}>{effectValue}</Box>
+					<Box
+						className={`${boxStyles} gap-1 z-50 pointer-events-none ${clsx(effectValue >= Number(item?.item.level) ? "text-green-400" : "text-red-600")}`}
+					>
+						{effectValue}
+						{item?.type === "artifact" && (
+							<>
+								<Typography>/</Typography>
+								<Typography>{item.item.level}</Typography>
+							</>
+						)}
+					</Box>
 				)
 			)}
 			{effectFlag === "ignore" && (
-				<Box className={`${boxStyles} bg-blue-300/30`}></Box>
+				<Box
+					className={`${boxStyles} bg-blue-300/30 pointer-events-none`}
+				></Box>
 			)}
 		</Box>
 	);

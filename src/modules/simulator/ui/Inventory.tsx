@@ -32,16 +32,25 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/shared/ui/tabs";
 import { Typography } from "@/src/shared/ui/typography";
 
 interface InventoryProps {
-	data: ArtifactInstance["data"][];
+	data: ArtifactInstance["item"][];
 }
 
 const Inventory = ({ data }: InventoryProps) => {
 	const { theme } = useTheme();
 	const [mounted, setMounted] = useState(false);
-	const { slabs, setSlabs, handleRotate, calculatedEffects } =
-		useSlabsEffects();
+	const {
+		slabs,
+		setSlabs,
+		artifacts,
+		setArtifacts,
+		handleRotate,
+		calculatedEffects,
+		enhancedArtifacts,
+	} = useSlabsEffects();
 	const [activeId, setActiveId] = useState<string | null>(null);
-	const [activeItem, setActiveItem] = useState<SlabsOptions | null>(null);
+	const [activeItem, setActiveItem] = useState<
+		(SlabsOptions & ArtifactInstance) | null
+	>(null);
 	const [overId, setOverId] = useState<string | null>(null);
 	const [searchInput, setSearchInput] = useState("");
 	const [selectedTier, setSelectedTier] = useState("all");
@@ -61,58 +70,151 @@ const Inventory = ({ data }: InventoryProps) => {
 		const { active, over } = event;
 		setActiveId(null);
 		setOverId(null);
+		setActiveItem(null);
 
 		if (!over) return;
 
 		const activeIsSource = active.data.current?.type === "source-item";
 		const activeIsItem = active.data.current?.type === "item";
+		const overIsSlot = over.data.current?.type === "slot";
+		const itemType = active.data.current.item?.type;
 
-		if (over.data.current?.type === "slot") {
+		if (overIsSlot) {
 			const overSlotId: SlotId = over.id;
 
-			setSlabs((prevItems) => {
-				const newItems = { ...prevItems };
-				const targetItem = newItems[overSlotId];
+			if (itemType === "slabs") {
+				const activeSlab: SlabsOptions = active.data.current.item;
+				const targetSlab = slabs[overSlotId];
+				const targetArtifact = artifacts[overSlotId];
 
 				if (activeIsSource) {
-					const sourceItem: SlabsOptions = active.data.current.item;
-					if (!targetItem) {
-						newItems[overSlotId] = {
-							...sourceItem,
-							id: `item-${Date.now()}-${sourceItem.id}`,
-						};
+					if (!targetSlab && !targetArtifact) {
+						setSlabs((prev) => ({
+							...prev,
+							[overSlotId]: {
+								id: `slab-${Date.now()}-${activeSlab.id}`,
+								value: activeSlab.id,
+								type: "slabs",
+								label: activeSlab.label,
+								rotation: activeSlab.rotation ?? 0,
+								image: activeSlab.image,
+							},
+						}));
 					}
 				} else if (activeIsItem) {
-					const activeItem: SlabsOptions = active.data.current.item;
-					const originalSlotId = Object.keys(newItems).find(
-						(key) => newItems[key]?.id === activeItem.id,
+					const originalSlotId = Object.keys(slabs).find(
+						(key) => slabs[key]?.id === activeSlab.id,
 					);
-					if (!originalSlotId) return prevItems;
+					if (!originalSlotId) return;
 
-					if (targetItem) {
-						newItems[originalSlotId] = targetItem;
-						newItems[overSlotId] = activeItem;
+					if (targetSlab) {
+						setSlabs((prev) => ({
+							...prev,
+							[originalSlotId]: targetSlab,
+							[overSlotId]: activeSlab,
+						}));
+					} else if (targetArtifact) {
+						setSlabs((prev) => {
+							const newSlabs = { ...prev };
+							delete newSlabs[originalSlotId];
+							newSlabs[overSlotId] = activeSlab;
+							return newSlabs;
+						});
+						setArtifacts((prev) => {
+							const newArtifacts = { ...prev };
+							delete newArtifacts[overSlotId];
+							newArtifacts[originalSlotId] = targetArtifact;
+							return newArtifacts;
+						});
 					} else {
-						delete newItems[originalSlotId];
-						newItems[overSlotId] = activeItem;
+						setSlabs((prev) => {
+							const newSlabs = { ...prev };
+							delete newSlabs[originalSlotId];
+							newSlabs[overSlotId] = activeSlab;
+							return newSlabs;
+						});
 					}
 				}
-				return newItems;
-			});
+			}
+
+			if (itemType === "artifact") {
+				const activeArtifact = active.data.current.item;
+				const targetArtifact = artifacts[overSlotId];
+				const targetSlab = slabs[overSlotId];
+
+				if (activeIsSource) {
+					if (!targetArtifact && !targetSlab) {
+						setArtifacts((prev) => ({
+							...prev,
+							[overSlotId]: {
+								instanceId: `artifact-${Date.now()}`,
+								type: "artifact",
+								item: activeArtifact.data as ArtifactInstance["item"],
+								image: activeArtifact.image,
+							},
+						}));
+					}
+				} else if (activeIsItem) {
+					const originalSlotId = Object.keys(artifacts).find(
+						(key) => artifacts[key]?.instanceId === activeArtifact.instanceId,
+					);
+					if (!originalSlotId) return;
+
+					if (targetArtifact) {
+						setArtifacts((prev) => ({
+							...prev,
+							[originalSlotId]: targetArtifact,
+							[overSlotId]: activeArtifact,
+						}));
+					} else if (targetSlab) {
+						setArtifacts((prev) => {
+							const newArtifacts = { ...prev };
+							delete newArtifacts[originalSlotId];
+							newArtifacts[overSlotId] = activeArtifact;
+							return newArtifacts;
+						});
+						setSlabs((prev) => {
+							const newSlabs = { ...prev };
+							delete newSlabs[overSlotId];
+							newSlabs[originalSlotId] = targetSlab;
+							return newSlabs;
+						});
+					} else {
+						setArtifacts((prev) => {
+							const newArtifacts = { ...prev };
+							delete newArtifacts[originalSlotId];
+							newArtifacts[overSlotId] = activeArtifact;
+							return newArtifacts;
+						});
+					}
+				}
+			}
 		}
 
 		if (over.data.current?.type === "trash" && activeIsItem) {
-			const activeItem: SlabsOptions = active.data.current.item;
-			setSlabs((prevItems) => {
-				const newItems = { ...prevItems };
-				const originalSlotId = Object.keys(newItems).find(
-					(key) => newItems[key]?.id === activeItem.id,
-				);
-				if (originalSlotId) {
-					delete newItems[originalSlotId];
-				}
-				return newItems;
-			});
+			const itemType = active.data.current.item?.type;
+
+			if (itemType === "slabs") {
+				const activeItem: SlabsOptions = active.data.current.item;
+				setSlabs((prevItems) => {
+					const newItems = { ...prevItems };
+					const originalSlotId = Object.keys(newItems).find(
+						(key) => newItems[key]?.id === activeItem.id,
+					);
+					if (originalSlotId) delete newItems[originalSlotId];
+					return newItems;
+				});
+			} else if (itemType === "artifact") {
+				const activeItem: ArtifactInstance = active.data.current.item;
+				setArtifacts((prevItems) => {
+					const newItems = { ...prevItems };
+					const originalSlotId = Object.keys(newItems).find(
+						(key) => newItems[key]?.instanceId === activeItem.instanceId,
+					);
+					if (originalSlotId) delete newItems[originalSlotId];
+					return newItems;
+				});
+			}
 		}
 	};
 
@@ -122,13 +224,6 @@ const Inventory = ({ data }: InventoryProps) => {
 			.includes(searchInput.toLowerCase());
 		const matchesTier = selectedTier === "all" || item.tier === selectedTier;
 		return matchesSearch && matchesTier;
-	});
-
-	const filteredArtifacts = data.filter((item) => {
-		const matchesSearch = item.label_kor
-			.toLowerCase()
-			.includes(searchInput.toLowerCase());
-		return matchesSearch;
 	});
 
 	const TabsBoxStyles = `grid h-full max-h-[676] overflow-auto bg-[#2f1c2c] p-4 rounded-lg ${clsx(theme === "light" && "bg-[#2f1c2c80]")}`;
@@ -169,6 +264,7 @@ const Inventory = ({ data }: InventoryProps) => {
 								Array.from({ length: cols }).map((_, colIndex) => {
 									const slotId: SlotId = `${rowIndex}-${colIndex}`;
 									const item = slabs[slotId];
+									const artifact = artifacts[slotId];
 									const effectValue = calculatedEffects.effects[slotId] || 0;
 									const effectFlag = calculatedEffects.flag[slotId];
 
@@ -176,7 +272,9 @@ const Inventory = ({ data }: InventoryProps) => {
 										<InventorySlot
 											key={slotId}
 											id={slotId}
-											item={item as SlabsOptions & ArtifactInstance["data"]}
+											item={
+												(item || artifact) as SlabsOptions & ArtifactInstance
+											}
 											effectValue={effectValue}
 											effectFlag={effectFlag}
 											onRotate={handleRotate}
@@ -236,17 +334,18 @@ const Inventory = ({ data }: InventoryProps) => {
 						</TabsContent>
 						<TabsContent value="artifact">
 							<Box
-								className={`${TabsBoxStyles} ${clsx(filteredArtifacts.length > 0 ? "grid-cols-8" : "grid-cols-1")}`}
+								className={`${TabsBoxStyles} ${clsx(data.length > 0 ? "grid-cols-8" : "grid-cols-1")}`}
 							>
-								{filteredArtifacts.length > 0 ? (
-									filteredArtifacts.map((item) => (
+								{data.length > 0 ? (
+									data.map((item) => (
 										<ItemSource
 											key={item.value}
 											item={{
 												id: item.value,
 												label: item.label_kor,
-												image: item.image,
 												type: "artifact",
+												data: item,
+												image: item.image,
 											}}
 										/>
 									))
@@ -264,16 +363,18 @@ const Inventory = ({ data }: InventoryProps) => {
 			</Column>
 
 			<DragOverlay dropAnimation={null}>
-				{activeItem && activeId?.startsWith("source-") ? (
+				{activeItem && activeId?.startsWith("source-") && (
 					<Box className="relative w-16 h-20 p-0">
 						<Image
 							unoptimized
 							fill
-							src={activeItem.image || ""}
-							alt={"slabs"}
+							src={
+								activeItem.item ? activeItem.item.image : activeItem.image || ""
+							}
+							alt={"item-image"}
 						/>
 					</Box>
-				) : null}
+				)}
 			</DragOverlay>
 		</DndContext>
 	);

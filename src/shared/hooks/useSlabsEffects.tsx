@@ -67,11 +67,12 @@ export const useSlabsEffects = () => {
 		return { effects, flag };
 	}, [slabs]);
 
-	// 3. [수정] 아티팩트 최종 레벨 및 설명 계산 로직 업데이트
 	const enhancedArtifacts = useMemo(() => {
 		const enhanced: Record<
 			SlotId,
 			{
+				slabBonus: number;
+				baseLevel: number;
 				finalLevel: number;
 				finalEffectContent: string;
 			}
@@ -81,17 +82,20 @@ export const useSlabsEffects = () => {
 			if (!artifact) return;
 
 			const slabBonus = calculatedEffects.effects[slotId] || 0;
+			const baseLevel = artifact.item?.level ?? 0;
+			const finalLevel = baseLevel + slabBonus;
 
-			// 최종 레벨 = 아티팩트 기본 레벨 + 석판 보너스
-			const finalLevel = artifact.data.level ?? 0 + slabBonus;
-
-			// 최종 레벨에 맞는 효과 설명을 파싱하여 생성합니다.
 			const finalEffectContent = getArtifactLevelContent(
-				artifact.data.effect?.content,
+				artifact.item?.effect?.content,
 				finalLevel,
 			);
 
-			enhanced[slotId] = { finalLevel, finalEffectContent };
+			enhanced[slotId] = {
+				slabBonus,
+				baseLevel,
+				finalLevel,
+				finalEffectContent,
+			};
 		});
 
 		return enhanced;
