@@ -1,4 +1,4 @@
-export const getSlabsTierColor = (tier: string) => {
+export const getItemsTierColor = (tier: string) => {
 	switch (tier) {
 		case "common":
 			return "text-white";

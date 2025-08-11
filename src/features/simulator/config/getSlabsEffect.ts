@@ -568,7 +568,9 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 	},
 
 	// boundary 경계
-	boundary: (_, __, ___, ____, effects) => {
+	boundary: (_, __, ___, ____, effects, _____, gridConfig) => {
+		const currentGrid = gridConfig || GRID_CONFIG;
+
 		const applyEffectToRow = (rowConfig: { rows: number; cols: number }) => {
 			const rowIndex = rowConfig.rows;
 			const colsInRow = rowConfig.cols;
@@ -584,8 +586,8 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 			}
 		};
 
-		const topRowConfig = GRID_CONFIG[0];
-		const bottomRowConfig = GRID_CONFIG[GRID_CONFIG.length - 1];
+		const topRowConfig = currentGrid[0];
+		const bottomRowConfig = currentGrid[currentGrid.length - 1];
 
 		applyEffectToRow(topRowConfig);
 		applyEffectToRow(bottomRowConfig);

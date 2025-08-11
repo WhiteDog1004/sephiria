@@ -6,7 +6,7 @@ import type {
 	ItemSourceProps,
 	SlabsOptions,
 } from "@/src/entities/simulator/types";
-import { getSlabsTierColor } from "@/src/shared/lib/getSlabsTierColor";
+import { getItemsTierColor } from "@/src/shared/lib/getSlabsTierColor";
 import { Box } from "@/src/shared/ui/box";
 import { Column } from "@/src/shared/ui/column";
 import {
@@ -42,7 +42,7 @@ export const ItemSource = ({ item }: ItemSourceProps) => {
 						<Image unoptimized fill src={item.image || ""} alt={"items"} />
 					</Box>
 					<Typography
-						className={`whitespace-nowrap text-center ${clsx(item.type === "slabs" && getSlabsTierColor(ITEM_SLABS_DATA.find((i) => i.value === item.id)?.tier || ""), item.type === "artifact" && "")}`}
+						className={`whitespace-nowrap text-center overflow-hidden text-ellipsis ${clsx(item.type === "slabs" ? getItemsTierColor(ITEM_SLABS_DATA.find((i) => i.value === item.id)?.tier || "") : getItemsTierColor(item.data?.tier || ""))}`}
 						variant="caption"
 					>
 						{item.label}
