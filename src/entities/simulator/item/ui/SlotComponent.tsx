@@ -1,4 +1,5 @@
 import { useDraggable } from "@dnd-kit/core";
+import clsx from "clsx";
 import Image from "next/image";
 import { ITEM_SLABS_DATA } from "@/src/features/simulator/config/slabsLists";
 import { Box } from "@/src/shared/ui/box";
@@ -58,6 +59,7 @@ export const SlotComponent = ({
 					fill
 					src={item.image}
 					alt={"items"}
+					className={clsx("object-contain")}
 					style={item.rotation ? rotationStyle : undefined}
 				/>
 				{item.type === "slabs" &&
