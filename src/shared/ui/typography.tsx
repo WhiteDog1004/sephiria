@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import * as React from "react";
+import type * as React from "react";
+import { cn } from "@/lib/utils";
 
 const typographyVariants = cva("", {
 	variants: {
@@ -30,7 +30,7 @@ function Typography({
 
 	return (
 		<Comp
-			data-slot="button"
+			data-slot="div"
 			className={cn(typographyVariants({ variant, className }))}
 			{...props}
 		/>

@@ -353,7 +353,7 @@ const Inventory = ({ data }: InventoryProps) => {
 								{filteredArtifacts.length > 0 ? (
 									filteredArtifacts.map((item) => (
 										<ItemSource
-											key={item.value}
+											key={item.value + item.id}
 											item={{
 												id: item.value,
 												label: item.label_kor,

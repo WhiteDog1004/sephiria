@@ -3,10 +3,11 @@ import clsx from "clsx";
 import Image from "next/image";
 import { useState } from "react";
 import type {
+	ArtifactInstance,
 	ItemSourceProps,
 	SlabsOptions,
 } from "@/src/entities/simulator/types";
-import { getItemsTierColor } from "@/src/shared/lib/getSlabsTierColor";
+import { getItemsTierColor } from "@/src/shared/lib/getItemsTierColor";
 import { Box } from "@/src/shared/ui/box";
 import { Column } from "@/src/shared/ui/column";
 import {
@@ -16,6 +17,7 @@ import {
 } from "@/src/shared/ui/tooltip";
 import { Typography } from "@/src/shared/ui/typography";
 import { ITEM_SLABS_DATA } from "../config/slabsLists";
+import { ArtifactTooltip } from "./ArtifactTooltip";
 import { SlabEffectTooltip } from "./SlabsTootltip";
 
 export const ItemSource = ({ item }: ItemSourceProps) => {
@@ -53,6 +55,9 @@ export const ItemSource = ({ item }: ItemSourceProps) => {
 			<TooltipContent>
 				{item.type === "slabs" && (
 					<SlabEffectTooltip slab={item as SlabsOptions} />
+				)}
+				{item.type === "artifact" && (
+					<ArtifactTooltip data={item.data as ArtifactInstance["item"]} />
 				)}
 			</TooltipContent>
 		</Tooltip>
