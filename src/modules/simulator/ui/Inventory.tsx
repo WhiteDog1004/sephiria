@@ -21,10 +21,10 @@ import type {
 } from "@/src/entities/simulator/types";
 import { TABS_LIST } from "@/src/features/simulator/config/constants";
 import { ITEM_SLABS_DATA } from "@/src/features/simulator/config/slabsLists";
+import { useSlabsEffects } from "@/src/features/simulator/model/useSlabsEffects";
 import { DeleteTrash } from "@/src/features/simulator/ui/DeleteTrash";
 import { ItemSource } from "@/src/features/simulator/ui/ItemSource";
 import { SearchSlabs } from "@/src/features/simulator/ui/SearchSlabs";
-import { useSlabsEffects } from "@/src/shared/hooks/useSlabsEffects";
 import { Box } from "@/src/shared/ui/box";
 import { Column } from "@/src/shared/ui/column";
 import { Row } from "@/src/shared/ui/row";

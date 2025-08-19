@@ -1,4 +1,5 @@
-import { getCostumeOptions } from "@/src/shared/model/constants";
+import Image from "next/image";
+import { getCostumeOptions } from "@/src/features/costume/model/constants";
 import { Box } from "@/src/shared/ui/box";
 import {
 	Carousel,
@@ -8,8 +9,7 @@ import {
 	CarouselPrevious,
 } from "@/src/shared/ui/carousel";
 import { Typography } from "@/src/shared/ui/typography";
-import { Database } from "@/types_db";
-import Image from "next/image";
+import type { Database } from "@/types_db";
 
 export const CostumeCarousel = ({
 	data,
@@ -33,9 +33,7 @@ export const CostumeCarousel = ({
 								alt={item.value}
 								unoptimized
 							/>
-							<Typography>
-								{getCostumeOptions[item.value].name}
-							</Typography>
+							<Typography>{getCostumeOptions[item.value].name}</Typography>
 						</Box>
 					</CarouselItem>
 				))}

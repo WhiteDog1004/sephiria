@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
-import { getItemsTierColor } from "@/src/shared/lib/getItemsTierColor";
+import { getItemsTierColor } from "@/src/features/simulator/lib/getItemsTierColor";
 import { Box } from "@/src/shared/ui/box";
 import { Typography } from "@/src/shared/ui/typography";
 import { EFFECT_LABELS } from "../config/constants";

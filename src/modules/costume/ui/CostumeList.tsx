@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { getCostumeOptions } from "@/src/shared/model/constants";
+import { getCostumeOptions } from "@/src/features/costume/model/constants";
+import type { CostumeDataType } from "@/src/features/costume/model/types";
 import { containsRedKeyword } from "@/src/shared/model/containsWords";
-import type { CostumeDataType } from "@/src/shared/types/types";
 import { Box } from "@/src/shared/ui/box";
 import { Card } from "@/src/shared/ui/card";
 import {
@@ -43,7 +43,7 @@ export const CostumeList = ({ data }: { data: CostumeDataType }) => {
 										{getCostumeOptions[costume.value].story}
 									</Typography>
 								</TooltipTrigger>
-								<TooltipContent className="max-w-40 text-center">
+								<TooltipContent className="max-w-40 p-2 rounded-sm bg-gray-800 text-white text-center">
 									<Typography variant="caption" className="whitespace-pre-line">
 										{getCostumeOptions[costume.value].story}
 									</Typography>

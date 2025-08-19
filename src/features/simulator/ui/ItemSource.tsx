@@ -7,7 +7,7 @@ import type {
 	ItemSourceProps,
 	SlabsOptions,
 } from "@/src/entities/simulator/types";
-import { getItemsTierColor } from "@/src/shared/lib/getItemsTierColor";
+import { getItemsTierColor } from "@/src/features/simulator/lib/getItemsTierColor";
 import { Box } from "@/src/shared/ui/box";
 import { Column } from "@/src/shared/ui/column";
 import {

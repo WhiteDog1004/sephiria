@@ -1,4 +1,4 @@
-import { CostumeMap } from "../types/types";
+import type { CostumeMap } from "./types";
 
 export const getCostumeOptions: CostumeMap = {
 	pink_rabbit: {
@@ -46,7 +46,8 @@ export const getCostumeOptions: CostumeMap = {
 	wing_ear_rabbit: {
 		name: "날개 귀 토끼",
 		unlock: undefined,
-		story: "과거 고귀한 혈통으로 떠받들어졌습니다. 지금은 그저 눈길을 끄는 존재일 뿐입니다.",
+		story:
+			"과거 고귀한 혈통으로 떠받들어졌습니다. 지금은 그저 눈길을 끄는 존재일 뿐입니다.",
 		options: ["시작 아이템: 축복", "무기 피해량 -10%"],
 	},
 	red_cat: {
@@ -134,5 +135,11 @@ export const getCostumeOptions: CostumeMap = {
 		unlock: "던그리드 구매",
 		story: "모험을 꿈꿔온 당신은 여정을 완수하기 위해 만반의 준비를 합니다.",
 		options: ["대시 횟수 +1", "대시 회복 속도 +10%", "마법 가속 -50%"],
+	},
+	otter: {
+		name: "수달",
+		unlock: "치명타 피해 175%이상 달성",
+		story: "풍부한 표정을 숨길 수 없습니다. 파도같은 감정도 감출 수 없습니다.",
+		options: ["치명타 확률 +9%", "이동 속도 -8%"],
 	},
 };
