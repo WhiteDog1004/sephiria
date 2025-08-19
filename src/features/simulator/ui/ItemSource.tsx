@@ -1,6 +1,7 @@
 import { useDraggable } from "@dnd-kit/core";
 import clsx from "clsx";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import { useState } from "react";
 import type {
 	ArtifactInstance,
@@ -18,9 +19,10 @@ import {
 import { Typography } from "@/src/shared/ui/typography";
 import { ITEM_SLABS_DATA } from "../config/slabsLists";
 import { ArtifactTooltip } from "./ArtifactTooltip";
-import { SlabEffectTooltip } from "./SlabsTootltip";
+import { SlabEffectTooltip } from "./SlabsTooltip";
 
-export const ItemSource = ({ item }: ItemSourceProps) => {
+export const ItemSource = ({ item, isPreview }: ItemSourceProps) => {
+	const { theme } = useTheme();
 	const [tooltipOpen, setTooltipOpen] = useState(false);
 	const { attributes, listeners, setNodeRef } = useDraggable({
 		id: `source-${item.id}-${item.type}`,
@@ -38,13 +40,13 @@ export const ItemSource = ({ item }: ItemSourceProps) => {
 					ref={setNodeRef}
 					{...listeners}
 					{...attributes}
-					className="w-19 h-24 p-1 cursor-grab"
+					className={`w-19 h-24 p-1 ${isPreview ? "cursor-auto" : "cursor-grab"}`}
 				>
 					<Box className="relative h-full p-0">
 						<Image unoptimized fill src={item.image || ""} alt={"items"} />
 					</Box>
 					<Typography
-						className={`whitespace-nowrap text-center overflow-hidden text-ellipsis ${clsx(item.type === "slabs" ? getItemsTierColor(ITEM_SLABS_DATA.find((i) => i.value === item.id)?.tier || "") : getItemsTierColor(item.data?.tier || ""))}`}
+						className={`whitespace-nowrap text-center overflow-hidden text-ellipsis ${clsx(item.type === "slabs" ? getItemsTierColor(ITEM_SLABS_DATA.find((i) => i.value === item.id)?.tier || "", theme === "light") : getItemsTierColor(item.data?.tier || "", theme === "light"))}`}
 						variant="caption"
 					>
 						{item.label}

@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { GRID_ROWS } from "@/src/entities/simulator/item/ui/SlotComponent";
 import type { SlabsOptions, SlotId } from "@/src/entities/simulator/types";
+import { Badge } from "@/src/shared/ui/badge";
 import { Box } from "@/src/shared/ui/box";
 import { getSlabsEffectHandlers } from "../config/getSlabsEffect";
 
@@ -57,7 +58,7 @@ export const SlabEffectTooltip = ({ slab }: SlabEffectTooltipProps) => {
 	}, [slab]);
 
 	return (
-		<Box className="grid grid-cols-5 gap-1 p-2 rounded-sm bg-gray-800 border border-gray-700">
+		<Box className="relative grid grid-cols-5 gap-1 p-2 rounded-sm bg-gray-800 border border-gray-700">
 			{Array.from({ length: 5 }).map((_, rowIndex) =>
 				Array.from({ length: 5 }).map((_, colIndex) => {
 					const slotId: SlotId = `${rowIndex}-${colIndex}`;
@@ -87,6 +88,11 @@ export const SlabEffectTooltip = ({ slab }: SlabEffectTooltipProps) => {
 						</Box>
 					);
 				}),
+			)}
+			{slab.rotation !== undefined && (
+				<Badge className="absolute -bottom-2 -right-2 w-5 h-5 p-1 rounded-full bg-yellow-500">
+					↻
+				</Badge>
 			)}
 		</Box>
 	);

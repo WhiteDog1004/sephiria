@@ -11,6 +11,7 @@ export type SlabsOptions = {
 };
 
 export interface ItemSourceProps {
+	isPreview?: boolean;
 	item: {
 		type: "slabs" | "artifact";
 		id: string;

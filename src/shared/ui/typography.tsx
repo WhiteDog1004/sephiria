@@ -8,6 +8,8 @@ const typographyVariants = cva("", {
 		variant: {
 			body: "text-base",
 			header3: "text-lg",
+			header2: "text-2xl",
+			header1: "text-3xl",
 			body2: "text-sm",
 			caption: "text-xs",
 		},

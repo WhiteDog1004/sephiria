@@ -1,5 +1,8 @@
 "use client";
 
+import { Menu } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { SITEMAP } from "@/src/shared/lib/sitemap";
 import { Box } from "@/src/shared/ui/box";
 import {
@@ -9,26 +12,19 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/src/shared/ui/dropdown-menu";
-import { Menu } from "lucide-react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { MENU_LIST } from "../model/constants";
 import { ModeToggle } from "./ModeToggle";
 
 export const Header = () => {
 	const router = useRouter();
+
 	return (
 		<Box className="sticky z-50 top-0 justify-between backdrop-blur-md border-b dark:border-white/10 border-black/10">
 			<Box
 				className="w-max p-0 cursor-pointer"
 				onClick={() => router.push(SITEMAP.HOME)}
 			>
-				<Image
-					width={120}
-					height={100}
-					src={"/sephiria.webp"}
-					alt={"logo"}
-				/>
+				<Image width={120} height={100} src={"/sephiria.webp"} alt={"logo"} />
 			</Box>
 			<Box className="w-max p-0 gap-4">
 				<ModeToggle />
