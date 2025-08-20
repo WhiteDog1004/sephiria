@@ -1,5 +1,5 @@
 export const TIER_DATA = [
-	{ value: "all", label: "전체" },
+	{ value: "all", label: "등급 전체" },
 	{ value: "common", label: "일반" },
 	{ value: "advanced", label: "고급" },
 	{ value: "rare", label: "희귀" },

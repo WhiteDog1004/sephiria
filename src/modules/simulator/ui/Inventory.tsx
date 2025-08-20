@@ -25,7 +25,7 @@ import { ITEM_SLABS_DATA } from "@/src/features/simulator/config/slabsLists";
 import { useSlabsEffects } from "@/src/features/simulator/model/useSlabsEffects";
 import { DeleteTrash } from "@/src/features/simulator/ui/DeleteTrash";
 import { ItemSource } from "@/src/features/simulator/ui/ItemSource";
-import { SearchSlabs } from "@/src/features/simulator/ui/SearchSlabs";
+import { SearchItems } from "@/src/features/simulator/ui/SearchItems";
 import { Box } from "@/src/shared/ui/box";
 import { Button } from "@/src/shared/ui/button";
 import { Column } from "@/src/shared/ui/column";
@@ -348,11 +348,10 @@ const Inventory = ({ data }: InventoryProps) => {
 									</TabsTrigger>
 								))}
 							</TabsList>
-							<SearchSlabs
+							<SearchItems
 								type={tabsValue}
 								selectedTier={selectedTier}
 								setSelectedTier={setSelectedTier}
-								searchInput={searchInput}
 								setSearchInput={setSearchInput}
 							/>
 						</Row>
