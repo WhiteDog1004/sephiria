@@ -1,9 +1,10 @@
 import { useMemo } from "react";
-import { GRID_ROWS } from "@/src/entities/simulator/item/ui/SlotComponent";
+import { generateGridConfig } from "@/src/entities/simulator/item/ui/SlotComponent";
 import type { SlabsOptions, SlotId } from "@/src/entities/simulator/types";
 import { Badge } from "@/src/shared/ui/badge";
 import { Box } from "@/src/shared/ui/box";
 import { getSlabsEffectHandlers } from "../config/getSlabsEffect";
+import { useSlabsEffects } from "../model/useSlabsEffects";
 
 interface SlabEffectTooltipProps {
 	slab: SlabsOptions;
@@ -18,6 +19,7 @@ const MINI_GRID_CONFIG = [
 ];
 
 export const SlabEffectTooltip = ({ slab }: SlabEffectTooltipProps) => {
+	const { slotNum } = useSlabsEffects();
 	const calculatedEffects = useMemo(() => {
 		const SIMULATION_POSITIONS: Record<string, { x: number; y: number }> = {
 			linear: { x: 2, y: 4 },
@@ -28,8 +30,8 @@ export const SlabEffectTooltip = ({ slab }: SlabEffectTooltipProps) => {
 		const effects: Record<SlotId, number> = {};
 		const flag: Record<SlotId, "ignore" | null> = {};
 
-		for (let y = 0; y < GRID_ROWS; y++) {
-			for (let x = 0; x < GRID_ROWS; x++) {
+		for (let y = 0; y < generateGridConfig(slotNum).length; y++) {
+			for (let x = 0; x < generateGridConfig(slotNum).length; x++) {
 				effects[`${y}-${x}`] = 0;
 				flag[`${y}-${x}`] = null;
 			}
@@ -55,7 +57,7 @@ export const SlabEffectTooltip = ({ slab }: SlabEffectTooltipProps) => {
 		}
 
 		return { effects, flag, currentSlotId };
-	}, [slab]);
+	}, [slab, slotNum]);
 
 	return (
 		<Box className="relative grid grid-cols-5 gap-1 p-2 rounded-sm bg-gray-800 border border-gray-700">

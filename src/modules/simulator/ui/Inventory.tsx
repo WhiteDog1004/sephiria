@@ -9,11 +9,12 @@ import {
 	useSensors,
 } from "@dnd-kit/core";
 import clsx from "clsx";
+import { Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { InventorySlot } from "@/src/entities/simulator/item/ui/InventorySlot";
-import { GRID_CONFIG } from "@/src/entities/simulator/item/ui/SlotComponent";
+import { generateGridConfig } from "@/src/entities/simulator/item/ui/SlotComponent";
 import type {
 	ArtifactInstance,
 	SlabsOptions,
@@ -26,10 +27,12 @@ import { DeleteTrash } from "@/src/features/simulator/ui/DeleteTrash";
 import { ItemSource } from "@/src/features/simulator/ui/ItemSource";
 import { SearchSlabs } from "@/src/features/simulator/ui/SearchSlabs";
 import { Box } from "@/src/shared/ui/box";
+import { Button } from "@/src/shared/ui/button";
 import { Column } from "@/src/shared/ui/column";
 import { Row } from "@/src/shared/ui/row";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/shared/ui/tabs";
 import { Typography } from "@/src/shared/ui/typography";
+import { handleSlotNumber } from "../model/handleSlotNumber";
 
 interface InventoryProps {
 	data: ArtifactInstance["item"][];
@@ -44,6 +47,8 @@ const Inventory = ({ data }: InventoryProps) => {
 		artifacts,
 		setArtifacts,
 		handleRotate,
+		slotNum,
+		setSlotNum,
 		calculatedEffects,
 	} = useSlabsEffects();
 	const [activeId, setActiveId] = useState<string | null>(null);
@@ -234,7 +239,7 @@ const Inventory = ({ data }: InventoryProps) => {
 		return matchesSearch && matchesTier;
 	});
 
-	const TabsBoxStyles = `grid h-full max-h-[676] overflow-auto bg-[#2f1c2c] p-4 rounded-lg ${clsx(theme === "light" && "bg-[#2f1c2c80]")}`;
+	const TabsBoxStyles = `grid h-full max-h-[676] overflow-auto bg-[#2f1c2c] p-4 rounded-lg ${clsx(theme === "light" && "bg-gray-300")}`;
 
 	useEffect(() => {
 		setMounted(true);
@@ -251,24 +256,55 @@ const Inventory = ({ data }: InventoryProps) => {
 		>
 			<Column
 				className={`items-start lg:flex-row gap-8 w-max p-8 rounded-sm ${clsx(
-					theme === "dark" ? "bg-[#40273b]" : "bg-[#40273b80]",
+					theme === "dark" ? "bg-[#40273b]" : "bg-gray-100",
 				)}`}
 			>
 				<Column className="gap-4 py-0">
 					<Column>
-						<Typography className="text-2xl font-bold mb-2">
-							인벤토리
-						</Typography>
-						<Typography
-							className={`text-gray-400 mb-6 ${clsx(theme === "light" && "text-gray-700")}`}
-						>
-							석판 및 아티팩트를 드래그하여 배치하세요.
-						</Typography>
+						<Row>
+							<Column className="w-full gap-2">
+								<Typography className="text-2xl font-bold">인벤토리</Typography>
+								<Typography
+									className={`text-gray-400 mb-6 ${clsx(theme === "light" && "text-gray-700")}`}
+								>
+									석판 및 아티팩트를 드래그하여 배치하세요.
+								</Typography>
+							</Column>
+							<Column className="gap-2">
+								<Box className="gap-4 max-w-40 p-0">
+									<Button
+										disabled={slotNum <= 18}
+										size="sm"
+										onClick={() =>
+											handleSlotNumber({ slotNum, setSlotNum, type: "minus" })
+										}
+									>
+										<Minus />
+									</Button>
+									<Typography>{slotNum}</Typography>
+									<Button
+										disabled={slotNum >= 60}
+										size="sm"
+										onClick={() =>
+											handleSlotNumber({ slotNum, setSlotNum, type: "plus" })
+										}
+									>
+										<Plus />
+									</Button>
+								</Box>
+								<Typography
+									variant="caption"
+									className={`text-gray-400 ${clsx(theme === "light" && "text-gray-700")}`}
+								>
+									최대 인벤토리 슬롯 설정
+								</Typography>
+							</Column>
+						</Row>
 						<Box
 							className="grid grid-cols-6 gap-2 w-max p-0"
 							style={{ gridTemplateColumns: "repeat(6, 80px)" }}
 						>
-							{GRID_CONFIG.map(({ rows: rowIndex, cols }) =>
+							{generateGridConfig(slotNum).map(({ rows: rowIndex, cols }) =>
 								Array.from({ length: cols }).map((_, colIndex) => {
 									const slotId: SlotId = `${rowIndex}-${colIndex}`;
 									const item = slabs[slotId];

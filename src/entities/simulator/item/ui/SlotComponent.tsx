@@ -5,20 +5,33 @@ import { ITEM_SLABS_DATA } from "@/src/features/simulator/config/slabsLists";
 import { Box } from "@/src/shared/ui/box";
 import type { ArtifactInstance, SlabsOptions } from "../../types";
 
-// 인벤토리 그리드 설정 (가변적인 형태 지원)
-export const GRID_CONFIG: { rows: number; cols: number }[] = [
-	{ rows: 0, cols: 6 },
-	{ rows: 1, cols: 6 },
-	{ rows: 2, cols: 6 },
-	{ rows: 3, cols: 6 },
-	{ rows: 4, cols: 6 },
-	{ rows: 5, cols: 4 },
-];
+export const generateGridConfig = (totalSlots?: number) => {
+	if (!totalSlots) totalSlots = 34;
+	if (totalSlots <= 0 || 6 <= 0) {
+		return [];
+	}
 
-export const GRID_ROWS = GRID_CONFIG.length;
-export const SLOT_IDS = GRID_CONFIG.flatMap(({ rows, cols }) =>
-	Array.from({ length: cols }, (_, colIndex) => `${rows}-${colIndex}`),
-);
+	const config: { rows: number; cols: number }[] = [];
+
+	const fullRows = Math.floor(totalSlots / 6);
+	const lastRowCols = totalSlots % 6;
+
+	for (let i = 0; i < fullRows; i++) {
+		config.push({ rows: i, cols: 6 });
+	}
+
+	if (lastRowCols > 0) {
+		config.push({ rows: fullRows, cols: lastRowCols });
+	}
+
+	return config;
+};
+
+const DEFAULT_TOTAL_SLOTS = 34;
+
+export const createCustomGrid = (totalSlots: number = DEFAULT_TOTAL_SLOTS) => {
+	return generateGridConfig(totalSlots);
+};
 
 export const SlotComponent = ({
 	item,

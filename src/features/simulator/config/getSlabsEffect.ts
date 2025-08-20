@@ -1,4 +1,3 @@
-import { GRID_CONFIG } from "@/src/entities/simulator/item/ui/SlotComponent";
 import {
 	calculateRotatedEffects,
 	getRotateValue,
@@ -55,7 +54,8 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 
 	// linear 선의
 	linear: (x, y, _, __, effects, ___, gridConfig) => {
-		const currentGrid = gridConfig || GRID_CONFIG;
+		if (!gridConfig) return;
+		const currentGrid = gridConfig;
 
 		const lastRowIndex = currentGrid[currentGrid.length - 1].rows;
 
@@ -249,10 +249,11 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 	},
 
 	// agglutination 응집
-	agglutination: (x, y, slotId, item, effects) => {
+	agglutination: (x, y, slotId, item, effects, _, gridConfig) => {
+		if (!gridConfig) return;
 		if (item.rotation === 1 || item.rotation === 3) {
-			for (let i = 0; i < GRID_CONFIG.length; i++) {
-				if (x < GRID_CONFIG[i].cols) {
+			for (let i = 0; i < gridConfig.length; i++) {
+				if (x < gridConfig[i].cols) {
 					const targetSlotId = `${i}-${x}`;
 					if (
 						targetSlotId !== slotId &&
@@ -263,7 +264,7 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 				}
 			}
 		} else {
-			const colsInRow = GRID_CONFIG[y].cols;
+			const colsInRow = gridConfig[y].cols;
 			for (let i = 0; i < colsInRow; i++) {
 				const targetSlotId = `${y}-${i}`;
 				if (
@@ -312,7 +313,7 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 	},
 
 	// transition 전이
-	transition: (x, y, slotId, item, effects) => {
+	transition: (x, y, slotId, item, effects, _, gridConfig) => {
 		let horizontalValue: number;
 		let verticalValue: number;
 
@@ -324,7 +325,8 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 			verticalValue = -1;
 		}
 
-		const colsInRow = GRID_CONFIG[y].cols;
+		if (!gridConfig) return;
+		const colsInRow = gridConfig[y].cols;
 		for (let i = 0; i < colsInRow; i++) {
 			const targetSlotId = `${y}-${i}`;
 			if (
@@ -335,8 +337,8 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 			}
 		}
 
-		for (let i = 0; i < GRID_CONFIG.length; i++) {
-			if (x < GRID_CONFIG[i].cols) {
+		for (let i = 0; i < gridConfig.length; i++) {
+			if (x < gridConfig[i].cols) {
 				const targetSlotId = `${i}-${x}`;
 				if (
 					targetSlotId !== slotId &&
@@ -359,13 +361,14 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 	},
 
 	// justice 정의
-	justice: (x, y, slotId, __, effects) => {
-		const colsInCurrentRow = GRID_CONFIG[y].cols;
+	justice: (x, y, slotId, __, effects, ___, gridConfig) => {
+		if (!gridConfig) return;
+		const colsInCurrentRow = gridConfig[y].cols;
 		const isEdge = x === 0 || x === colsInCurrentRow - 1;
 
 		if (isEdge) {
-			for (let i = 0; i < GRID_CONFIG.length; i++) {
-				if (x < GRID_CONFIG[i].cols) {
+			for (let i = 0; i < gridConfig.length; i++) {
+				if (x < gridConfig[i].cols) {
 					const targetSlotId = `${i}-${x}`;
 					if (
 						targetSlotId !== slotId &&
@@ -420,8 +423,9 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 
 	// RARE
 	// base 기반
-	base: (_, y, slotId, __, effects) => {
-		const colsInRow = GRID_CONFIG[y].cols;
+	base: (_, y, slotId, __, effects, ___, gridConfig) => {
+		if (!gridConfig) return;
+		const colsInRow = gridConfig[y].cols;
 		for (let i = 0; i < colsInRow; i++) {
 			const targetSlotId = `${y}-${i}`;
 			if (targetSlotId !== slotId) {
@@ -448,8 +452,9 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 	},
 
 	// concurrency 동시성
-	concurrency: (x, _, slotId, __, effects) => {
-		const colsInRow = GRID_CONFIG[x].cols;
+	concurrency: (x, _, slotId, __, effects, ___, gridConfig) => {
+		if (!gridConfig) return;
+		const colsInRow = gridConfig.length;
 		for (let i = 0; i < colsInRow; i++) {
 			const targetSlotId = `${i}-${x}`;
 			if (targetSlotId !== slotId) {
@@ -533,9 +538,9 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 
 	// shade 차양
 	shade: (_, y, __, ___, effects, _____, gridConfig) => {
+		if (!gridConfig) return;
 		if (y === 0) {
-			const bottomRowConfig =
-				GRID_CONFIG[(gridConfig?.length || GRID_CONFIG.length) - 1];
+			const bottomRowConfig = gridConfig[gridConfig?.length - 1];
 			const bottomRowIndex = bottomRowConfig.rows;
 			const colsInBottomRow = bottomRowConfig.cols;
 
@@ -569,8 +574,8 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 
 	// boundary 경계
 	boundary: (_, __, ___, ____, effects, _____, gridConfig) => {
-		const currentGrid = gridConfig || GRID_CONFIG;
-
+		if (!gridConfig) return;
+		const currentGrid = gridConfig;
 		const applyEffectToRow = (rowConfig: { rows: number; cols: number }) => {
 			const rowIndex = rowConfig.rows;
 			const colsInRow = rowConfig.cols;
@@ -594,9 +599,10 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 	},
 
 	// sheen 광휘
-	sheen: (x, y, slotId, item, effects) => {
+	sheen: (x, y, slotId, item, effects, _, gridConfig) => {
+		if (!gridConfig) return;
 		if (item.rotation === 1 || item.rotation === 3) {
-			const colsInRow = GRID_CONFIG[x].cols;
+			const colsInRow = gridConfig.length;
 			for (let i = 0; i < colsInRow; i++) {
 				const targetSlotId = `${i}-${x}`;
 				if (targetSlotId !== slotId) {
@@ -604,7 +610,7 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 				}
 			}
 		} else {
-			const colsInRow = GRID_CONFIG[y].cols;
+			const colsInRow = gridConfig[y].cols;
 			for (let i = 0; i < colsInRow; i++) {
 				const targetSlotId = `${y}-${i}`;
 				if (targetSlotId !== slotId) {
@@ -621,9 +627,10 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 	},
 
 	// miracle 기적
-	miracle: (x, y, slotId, _, effects) => {
-		const rows = GRID_CONFIG[x].cols;
-		const cols = GRID_CONFIG[y].cols;
+	miracle: (x, y, slotId, _, effects, __, gridConfig) => {
+		if (!gridConfig) return;
+		const rows = gridConfig.length;
+		const cols = gridConfig[y].cols;
 		for (let i = 0; i < rows; i++) {
 			const targetSlotId = `${i}-${x}`;
 			if (targetSlotId !== slotId) {

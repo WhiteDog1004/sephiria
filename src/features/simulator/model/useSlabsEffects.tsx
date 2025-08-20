@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import { SLOT_IDS } from "@/src/entities/simulator/item/ui/SlotComponent";
+import { generateGridConfig } from "@/src/entities/simulator/item/ui/SlotComponent";
 import type {
 	ArtifactPositionMap,
 	ItemPositionMap,
@@ -15,6 +15,7 @@ import { getArtifactLevelContent } from "../lib/getArtifactLevelContent";
 export const useSlabsEffects = () => {
 	const [slabs, setSlabs] = useState<ItemPositionMap>({});
 	const [artifacts, setArtifacts] = useState<ArtifactPositionMap>({});
+	const [slotNum, setSlotNum] = useState<number>(34);
 
 	/**
 	 * 아이템을 회전시키는 함수.
@@ -50,22 +51,34 @@ export const useSlabsEffects = () => {
 	const calculatedEffects = useMemo(() => {
 		const effects: Record<SlotId, number> = {};
 		const flag: Record<SlotId, "ignore" | null> = {};
-		SLOT_IDS.forEach((id) => {
-			effects[id] = 0;
-			flag[id] = null;
-		});
+		generateGridConfig(slotNum)
+			.flatMap(({ rows, cols }) =>
+				Array.from({ length: cols }, (_, colIndex) => `${rows}-${colIndex}`),
+			)
+			.forEach((id) => {
+				effects[id] = 0;
+				flag[id] = null;
+			});
 
 		Object.entries(slabs).forEach(([slotId, item]) => {
 			if (!item) return;
 			const [y, x] = slotId.split("-").map(Number);
 			const itemType = item.id.split("-").pop();
 			if (itemType && getSlabsEffectHandlers[itemType]) {
-				getSlabsEffectHandlers[itemType](x, y, slotId, item, effects, flag);
+				getSlabsEffectHandlers[itemType](
+					x,
+					y,
+					slotId,
+					item,
+					effects,
+					flag,
+					generateGridConfig(slotNum),
+				);
 			}
 		});
 
 		return { effects, flag };
-	}, [slabs]);
+	}, [slabs, slotNum]);
 
 	const enhancedArtifacts = useMemo(() => {
 		const enhanced: Record<
@@ -106,6 +119,8 @@ export const useSlabsEffects = () => {
 		setSlabs,
 		artifacts,
 		setArtifacts,
+		slotNum,
+		setSlotNum,
 		handleRotate,
 		calculatedEffects,
 		enhancedArtifacts,
