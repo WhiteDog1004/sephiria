@@ -14,6 +14,10 @@ export const MENU_LIST = [
 		link: SITEMAP.ARTIFACT,
 	},
 	{
+		label: "기적",
+		link: SITEMAP.MIRACLE,
+	},
+	{
 		label: "시뮬레이터",
 		link: SITEMAP.SIMULATOR,
 	},

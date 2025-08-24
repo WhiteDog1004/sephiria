@@ -1,6 +1,6 @@
 import { LargeLists } from "@/src/modules/large/ui/LargeLists";
 
-const LargePage = async () => {
+const LargePage = () => {
 	return <LargeLists />;
 };
 

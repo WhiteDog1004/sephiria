@@ -3,5 +3,6 @@ export const SITEMAP = {
 	COSTUME: "/costume",
 	LARGE: "/large",
 	ARTIFACT: "/artifact",
+	MIRACLE: "/miracle",
 	SIMULATOR: "/simulator",
 };

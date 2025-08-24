@@ -50,7 +50,7 @@ export const ShortcutBox = ({
 							</Typography>
 						</Box>
 						<Box className="w-max justify-end p-0">
-							<Link href={SITEMAP.SIMULATOR}>
+							<Link href={SITEMAP.COSTUME}>
 								<Button>바로가기</Button>
 							</Link>
 						</Box>

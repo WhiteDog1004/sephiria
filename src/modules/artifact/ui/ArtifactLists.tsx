@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { ArtifactList } from "@/src/features/artifact/ui/ArtifactList";
-import { ArtifactTitle } from "@/src/features/artifact/ui/ArtifactTitle";
 import { SearchItems } from "@/src/features/simulator/ui/SearchItems";
+import { SectionHeader } from "@/src/shared/components/section-header";
 import { Box } from "@/src/shared/ui/box";
 import type { ArtifactProps } from "../model/types";
 
@@ -24,7 +24,10 @@ export const ArtifactLists = ({ data }: ArtifactProps) => {
 
 	return (
 		<Box className="flex-col">
-			<ArtifactTitle />
+			<SectionHeader
+				title={"아티팩트"}
+				description={"원하는 아티팩트에 마우스를 올리면 효과를 볼 수 있어요!"}
+			/>
 			<Box className="justify-end px-0 py-4 w-full max-w-3xl">
 				<SearchItems
 					type={"artifact"}
