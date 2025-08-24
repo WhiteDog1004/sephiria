@@ -1,3 +1,4 @@
+import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { getCostumeOptions } from "@/src/features/costume/model/constants";
 import { Box } from "@/src/shared/ui/box";
@@ -17,12 +18,22 @@ export const CostumeCarousel = ({
 	data: Database["public"]["Tables"]["costume"]["Row"][];
 }) => {
 	return (
-		<Carousel className="w-full">
+		<Carousel
+			opts={{
+				slidesToScroll: "auto",
+			}}
+			plugins={[
+				Autoplay({
+					delay: 2000,
+				}),
+			]}
+			className="w-full px-3"
+		>
 			<CarouselContent className="-ml-1">
 				{data.map((item, index) => (
 					<CarouselItem
 						key={index}
-						className="flex justify-center items-center pl-1 md:basis-1/4 lg:basis-1/6"
+						className="flex justify-center items-center pl-1 md:basis-1/3 lg:basis-1/4"
 					>
 						<Box className="flex flex-col p-0 gap-4">
 							<Image
@@ -33,7 +44,9 @@ export const CostumeCarousel = ({
 								alt={item.value}
 								unoptimized
 							/>
-							<Typography>{getCostumeOptions[item.value].name}</Typography>
+							<Typography variant="caption">
+								{getCostumeOptions[item.value].name}
+							</Typography>
 						</Box>
 					</CarouselItem>
 				))}
