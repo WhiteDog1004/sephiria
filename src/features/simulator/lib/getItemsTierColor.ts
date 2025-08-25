@@ -9,6 +9,6 @@ export const getItemsTierColor = (tier: string, isLightMode?: boolean) => {
 		case "legend":
 			return "text-pink-500";
 		default:
-			("text-white");
+			return "text-white";
 	}
 };

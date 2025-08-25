@@ -65,33 +65,39 @@ export const ShortcutBox = ({
 				<Card className="w-full py-0 row-span-1 overflow-hidden">
 					<Box className="flex-col p-0">
 						<Box className="gap-2 p-4">
-							<Box className="flex-col gap-2 w-full p-0">
-								<Image
-									width={48}
-									height={48}
-									src={"/duelist.png"}
-									alt={"miracle"}
-								/>
-								<Typography>기적</Typography>
-							</Box>
-							<Box className="flex-col gap-2 w-full p-0">
-								<Image
-									width={48}
-									height={48}
-									src={"/thorn.png"}
-									alt={"slabs"}
-								/>
-								<Typography>석판</Typography>
-							</Box>
-							<Box className="flex-col gap-2 w-full p-0">
-								<Image
-									width={48}
-									height={48}
-									src={"/ice_star.png"}
-									alt={"artifact"}
-								/>
-								<Typography>아티팩트</Typography>
-							</Box>
+							<Link href={SITEMAP.MIRACLE} className="w-full">
+								<Box className="flex-col gap-2 w-full p-0">
+									<Image
+										width={48}
+										height={48}
+										src={"/duelist.png"}
+										alt={"miracle"}
+									/>
+									<Typography>기적</Typography>
+								</Box>
+							</Link>
+							<Link href={SITEMAP.LARGE} className="w-full">
+								<Box className="flex-col gap-2 w-full p-0">
+									<Image
+										width={48}
+										height={48}
+										src={"/thorn.png"}
+										alt={"slabs"}
+									/>
+									<Typography>석판</Typography>
+								</Box>
+							</Link>
+							<Link href={SITEMAP.ARTIFACT} className="w-full">
+								<Box className="flex-col gap-2 w-full p-0">
+									<Image
+										width={48}
+										height={48}
+										src={"/ice_star.png"}
+										alt={"artifact"}
+									/>
+									<Typography>아티팩트</Typography>
+								</Box>
+							</Link>
 						</Box>
 						<Separator />
 						<Box className="py-4">
