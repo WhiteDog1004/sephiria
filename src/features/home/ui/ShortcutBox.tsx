@@ -16,16 +16,20 @@ export const ShortcutBox = ({
 }) => {
 	if (!data) return;
 	return (
-		<Box className="grid grid-cols-2 gap-4 max-w-3xl w-full p-0">
-			<Card className="w-max py-0 row-span-3 overflow-hidden">
-				<Box className="flex-col p-0">
+		<Box className="flex-col md:flex-row gap-4 max-w-lg md:max-w-3xl w-full p-0">
+			<Card
+				className="w-full py-0 row-span-3 overflow-hidden"
+				style={{ height: "-webkit-fill-available" }}
+			>
+				<Box className="flex-col h-full p-0">
 					<Image
 						width={360}
 						height={180}
 						src={"/inventory.png"}
 						alt={"simulator"}
+						className="w-full object-cover"
 					/>
-					<Box className="flex-col gap-2 p-4">
+					<Box className="flex-col h-full gap-2 p-4">
 						<Typography variant="header3">인벤토리 시뮬레이터</Typography>
 						<Typography variant="body2" className="text-gray-500">
 							웹에서 석판과 아티팩트를 시뮬레이션해볼 수 있어요!
@@ -38,25 +42,66 @@ export const ShortcutBox = ({
 					</Box>
 				</Box>
 			</Card>
-			<Card className="w-full py-0 row-span-3 overflow-hidden">
-				<Box className="flex-col px-0 py-4">
-					<CostumeCarousel data={data ?? []} />
-					<Separator className="mt-4" />
-					<Box className="gap-2 p-4">
-						<Box className="flex-col w-full p-0">
-							<Typography variant="header3">코스튬</Typography>
-							<Typography variant="body2" className="text-gray-500">
-								수많은 코스튬들을 확인해 보세요!
-							</Typography>
-						</Box>
-						<Box className="w-max justify-end p-0">
-							<Link href={SITEMAP.COSTUME}>
-								<Button>바로가기</Button>
-							</Link>
+			<Box className="flex-col gap-4 p-0">
+				<Card className="w-full py-0 overflow-hidden">
+					<Box className="flex-col p-0 pt-4">
+						<CostumeCarousel data={data ?? []} />
+						<Separator className="mt-4" />
+						<Box className="gap-2 p-4">
+							<Box className="flex-col w-full p-0">
+								<Typography variant="header3">코스튬</Typography>
+								<Typography variant="body2" className="text-gray-500">
+									수많은 코스튬들을 확인해 보세요!
+								</Typography>
+							</Box>
+							<Box className="w-max justify-end p-0">
+								<Link href={SITEMAP.COSTUME}>
+									<Button>바로가기</Button>
+								</Link>
+							</Box>
 						</Box>
 					</Box>
-				</Box>
-			</Card>
+				</Card>
+				<Card className="w-full py-0 row-span-1 overflow-hidden">
+					<Box className="flex-col p-0">
+						<Box className="gap-2 p-4">
+							<Box className="flex-col gap-2 w-full p-0">
+								<Image
+									width={48}
+									height={48}
+									src={"/duelist.png"}
+									alt={"miracle"}
+								/>
+								<Typography>기적</Typography>
+							</Box>
+							<Box className="flex-col gap-2 w-full p-0">
+								<Image
+									width={48}
+									height={48}
+									src={"/thorn.png"}
+									alt={"slabs"}
+								/>
+								<Typography>석판</Typography>
+							</Box>
+							<Box className="flex-col gap-2 w-full p-0">
+								<Image
+									width={48}
+									height={48}
+									src={"/ice_star.png"}
+									alt={"artifact"}
+								/>
+								<Typography>아티팩트</Typography>
+							</Box>
+						</Box>
+						<Separator />
+						<Box className="py-4">
+							<Typography variant="body2" className="text-gray-500">
+								해당 메뉴를 클릭하여 다양한 아이템들을 확인해 보세요!
+							</Typography>
+						</Box>
+					</Box>
+				</Card>
+			</Box>
 		</Box>
 	);
 };
