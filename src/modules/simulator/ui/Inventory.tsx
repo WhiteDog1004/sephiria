@@ -3,8 +3,12 @@
 import {
 	closestCenter,
 	DndContext,
+	type DragEndEvent,
+	type DragOverEvent,
 	DragOverlay,
+	type DragStartEvent,
 	PointerSensor,
+	type UniqueIdentifier,
 	useSensor,
 	useSensors,
 } from "@dnd-kit/core";
@@ -17,6 +21,7 @@ import { InventorySlot } from "@/src/entities/simulator/item/ui/InventorySlot";
 import { generateGridConfig } from "@/src/entities/simulator/item/ui/SlotComponent";
 import type {
 	ArtifactInstance,
+	ItemPositionMap,
 	SlabsOptions,
 	SlotId,
 } from "@/src/entities/simulator/types";
@@ -51,27 +56,29 @@ const Inventory = ({ data }: InventoryProps) => {
 		setSlotNum,
 		calculatedEffects,
 	} = useSlabsEffects();
-	const [activeId, setActiveId] = useState<string | null>(null);
+	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
 	const [activeItem, setActiveItem] = useState<
 		(SlabsOptions & ArtifactInstance) | null
 	>(null);
-	const [overId, setOverId] = useState<string | null>(null);
+	const [overId, setOverId] = useState<UniqueIdentifier | undefined | null>(
+		null,
+	);
 	const [tabsValue, setTabsValue] = useState<"slabs" | "artifact">("slabs");
 	const [searchInput, setSearchInput] = useState("");
 	const [selectedTier, setSelectedTier] = useState("all");
 
 	const sensors = useSensors(useSensor(PointerSensor));
 
-	const handleDragStart = (event: any) => {
+	const handleDragStart = (event: DragStartEvent) => {
 		setActiveId(event.active.id);
-		setActiveItem(event.active.data.current.item);
+		setActiveItem(event.active.data.current?.item);
 	};
 
-	const handleDragOver = (event: any) => {
+	const handleDragOver = (event: DragOverEvent) => {
 		setOverId(event.over?.id);
 	};
 
-	const handleDragEnd = (event: any) => {
+	const handleDragEnd = (event: DragEndEvent) => {
 		const { active, over } = event;
 		setActiveId(null);
 		setOverId(null);
@@ -82,29 +89,32 @@ const Inventory = ({ data }: InventoryProps) => {
 		const activeIsSource = active.data.current?.type === "source-item";
 		const activeIsItem = active.data.current?.type === "item";
 		const overIsSlot = over.data.current?.type === "slot";
-		const itemType = active.data.current.item?.type;
+		const itemType = active.data.current?.item?.type;
 
 		if (overIsSlot) {
 			const overSlotId: SlotId = over.id;
 
 			if (itemType === "slabs") {
-				const activeSlab: SlabsOptions = active.data.current.item;
+				const activeSlab: SlabsOptions = active.data.current?.item;
 				const targetSlab = slabs[overSlotId];
 				const targetArtifact = artifacts[overSlotId];
 
 				if (activeIsSource) {
 					if (!targetSlab && !targetArtifact) {
-						setSlabs((prev) => ({
-							...prev,
-							[overSlotId]: {
-								id: `slab-${Date.now()}-${activeSlab.id}`,
-								value: activeSlab.id,
-								type: "slabs",
-								label: activeSlab.label,
-								rotation: activeSlab.rotation ?? 0,
-								image: activeSlab.image,
-							},
-						}));
+						setSlabs(
+							(prev) =>
+								({
+									...prev,
+									[overSlotId]: {
+										id: `slab-${Date.now()}-${activeSlab.id}`,
+										value: activeSlab.id,
+										type: "slabs",
+										label: activeSlab.label,
+										rotation: activeSlab.rotation ?? 0,
+										image: activeSlab.image,
+									},
+								}) as ItemPositionMap,
+						);
 					}
 				} else if (activeIsItem) {
 					const originalSlotId = Object.keys(slabs).find(
@@ -143,7 +153,7 @@ const Inventory = ({ data }: InventoryProps) => {
 			}
 
 			if (itemType === "artifact") {
-				const activeArtifact = active.data.current.item;
+				const activeArtifact = active.data.current?.item;
 				const targetArtifact = artifacts[overSlotId];
 				const targetSlab = slabs[overSlotId];
 
@@ -197,10 +207,10 @@ const Inventory = ({ data }: InventoryProps) => {
 		}
 
 		if (over.data.current?.type === "trash" && activeIsItem) {
-			const itemType = active.data.current.item?.type;
+			const itemType = active.data.current?.item?.type;
 
 			if (itemType === "slabs") {
-				const activeItem: SlabsOptions = active.data.current.item;
+				const activeItem: SlabsOptions = active.data.current?.item;
 				setSlabs((prevItems) => {
 					const newItems = { ...prevItems };
 					const originalSlotId = Object.keys(newItems).find(
@@ -210,7 +220,7 @@ const Inventory = ({ data }: InventoryProps) => {
 					return newItems;
 				});
 			} else if (itemType === "artifact") {
-				const activeItem: ArtifactInstance = active.data.current.item;
+				const activeItem: ArtifactInstance = active.data.current?.item;
 				setArtifacts((prevItems) => {
 					const newItems = { ...prevItems };
 					const originalSlotId = Object.keys(newItems).find(
@@ -412,18 +422,22 @@ const Inventory = ({ data }: InventoryProps) => {
 			</Column>
 
 			<DragOverlay dropAnimation={null}>
-				{activeItem && activeId?.startsWith("source-") && (
-					<Box className="relative w-16 h-20 p-0">
-						<Image
-							unoptimized
-							fill
-							src={
-								activeItem.item ? activeItem.item.image : activeItem.image || ""
-							}
-							alt={"item-image"}
-						/>
-					</Box>
-				)}
+				{activeItem &&
+					typeof activeId === "string" &&
+					activeId.startsWith("source-") && (
+						<Box className="relative w-16 h-20 p-0">
+							<Image
+								unoptimized
+								fill
+								src={
+									activeItem.item
+										? activeItem.item.image
+										: activeItem.image || ""
+								}
+								alt={"item-image"}
+							/>
+						</Box>
+					)}
 			</DragOverlay>
 		</DndContext>
 	);

@@ -1,3 +1,4 @@
+import type { UniqueIdentifier } from "@dnd-kit/core";
 import type { Database } from "@/types_db";
 
 // 아이템 데이터 구조 정의
@@ -23,7 +24,7 @@ export interface ItemSourceProps {
 }
 
 // 인벤토리 SlotId (예: "0-0", "1-2")
-export type SlotId = string;
+export type SlotId = UniqueIdentifier;
 
 // 아이템의 위치를 나타내는 맵
 export type ItemPositionMap = Record<SlotId, SlabsOptions | undefined>;
