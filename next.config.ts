@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
+const path = require("path");
+
 const nextConfig: NextConfig = {
+	webpack: (config) => {
+		config.resolve.alias["@"] = path.resolve(__dirname, "."); // "." 기준, 즉 프로젝트 루트
+		return config;
+	},
 	images: {
 		remotePatterns: [
 			{
