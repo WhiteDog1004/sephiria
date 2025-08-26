@@ -32,7 +32,7 @@ export const ShortcutBox = ({
 					<Box className="flex-col h-full gap-2 p-4">
 						<Typography variant="header3">인벤토리 시뮬레이터</Typography>
 						<Typography variant="body2" className="text-gray-500">
-							웹에서 석판과 아티팩트를 시뮬레이션해볼 수 있어요!
+							웹에서 게임처럼 시뮬레이션해볼 수 있어요!
 						</Typography>
 						<Box className="w-full justify-end p-0">
 							<Link href={SITEMAP.SIMULATOR}>
@@ -51,7 +51,7 @@ export const ShortcutBox = ({
 							<Box className="flex-col w-full p-0">
 								<Typography variant="header3">코스튬</Typography>
 								<Typography variant="body2" className="text-gray-500">
-									수많은 코스튬들을 확인해 보세요!
+									코스튬들의 능력을 확인해 보세요!
 								</Typography>
 							</Box>
 							<Box className="w-max justify-end p-0">
@@ -102,7 +102,7 @@ export const ShortcutBox = ({
 						<Separator />
 						<Box className="py-4">
 							<Typography variant="body2" className="text-gray-500">
-								해당 메뉴를 클릭하여 다양한 아이템들을 확인해 보세요!
+								다양한 아이템들을 확인해 보세요!
 							</Typography>
 						</Box>
 					</Box>

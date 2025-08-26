@@ -33,7 +33,7 @@ export const CostumeCarousel = ({
 				{data.map((item, index) => (
 					<CarouselItem
 						key={index}
-						className="flex justify-center items-center pl-1 md:basis-1/3 lg:basis-1/4"
+						className="flex justify-center items-center pl-1 basis-1/2 md:basis-1/3"
 					>
 						<Box className="flex flex-col p-0 gap-4">
 							<Image

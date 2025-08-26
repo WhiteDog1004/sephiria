@@ -280,8 +280,8 @@ const Inventory = ({ data }: InventoryProps) => {
 									석판 및 아티팩트를 드래그하여 배치하세요.
 								</Typography>
 							</Column>
-							<Column className="gap-2">
-								<Box className="gap-4 max-w-40 p-0">
+							<Column className="max-w-40 w-full gap-2">
+								<Box className="gap-4 p-0">
 									<Button
 										disabled={slotNum <= 18}
 										size="sm"
@@ -304,7 +304,7 @@ const Inventory = ({ data }: InventoryProps) => {
 								</Box>
 								<Typography
 									variant="caption"
-									className={`text-gray-400 ${clsx(theme === "light" && "text-gray-700")}`}
+									className={`text-center text-gray-400 ${clsx(theme === "light" && "text-gray-700")}`}
 								>
 									최대 인벤토리 슬롯 설정
 								</Typography>

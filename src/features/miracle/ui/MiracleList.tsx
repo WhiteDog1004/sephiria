@@ -20,7 +20,7 @@ export const MiracleList = ({ data }: MiracleOptions) => {
 	if (!mounted) return;
 	return (
 		<Box
-			className={`flex-col justify-start gap-4 max-w-xl max-h-[calc(100svh-360px)] overflow-auto h-full p-4 rounded-lg ${clsx(theme === "light" ? "bg-gray-200" : "bg-[#40273b]")}`}
+			className={`flex-col justify-start gap-4 max-w-xl h-full p-4 rounded-lg ${clsx(theme === "light" ? "bg-gray-200" : "bg-[#40273b]")}`}
 		>
 			{data.length > 0 ? (
 				data.map((item) => (

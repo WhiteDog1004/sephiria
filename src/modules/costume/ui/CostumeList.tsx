@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getCostumeOptions } from "@/src/features/costume/model/constants";
 import type { CostumeDataType } from "@/src/features/costume/model/types";
+import { SectionHeader } from "@/src/shared/components/section-header";
 import { containsRedKeyword } from "@/src/shared/model/containsWords";
 import { Box } from "@/src/shared/ui/box";
 import { Card } from "@/src/shared/ui/card";
@@ -13,7 +14,12 @@ import { Typography } from "@/src/shared/ui/typography";
 
 export const CostumeList = ({ data }: { data: CostumeDataType }) => {
 	return (
-		<Box className="grid grid-cols-[repeat(auto-fit,_minmax(240px,_1fr))] gap-4 max-w-7xl w-full p-0">
+		<Box className="flex-col items-center gap-4 p-0">
+			<SectionHeader
+				title={"코스튬"}
+				description={"자신에게 맞는 코스튬을 찾아보세요!"}
+			/>
+		<Box className="grid grid-cols-[repeat(auto-fit,_minmax(240px,_1fr))] gap-4 max-w-5xl w-full p-0">
 			{data.map((costume) => (
 				<Card key={costume.id} className="w-full h-auto items-center p-4">
 					<Image
@@ -25,10 +31,10 @@ export const CostumeList = ({ data }: { data: CostumeDataType }) => {
 						unoptimized
 					/>
 
-					<Box className="flex-col justify-start aspect-square gap-2 p-0">
+					<Box className="flex-col justify-start aspect-square gap-4 p-0">
 						<Typography>{getCostumeOptions[costume.value].name}</Typography>
 						<Typography
-							variant="body2"
+							variant="caption"
 							className="whitespace-pre-line opacity-50"
 						>
 							{getCostumeOptions[costume.value].unlock ?? "기본 코스튬"}
@@ -55,7 +61,7 @@ export const CostumeList = ({ data }: { data: CostumeDataType }) => {
 							{getCostumeOptions[costume.value].options.map((item) => (
 								<Typography
 									key={costume.id + item}
-									variant="body2"
+									variant="caption"
 									className={
 										containsRedKeyword(item) ? "text-red-500" : "text-green-500"
 									}
@@ -67,6 +73,7 @@ export const CostumeList = ({ data }: { data: CostumeDataType }) => {
 					</Box>
 				</Card>
 			))}
+		</Box>
 		</Box>
 	);
 };

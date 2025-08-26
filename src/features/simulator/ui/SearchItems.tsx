@@ -10,6 +10,7 @@ import {
 	SelectValue,
 } from "@/src/shared/ui/select";
 import { EFFECT_LABELS, TIER_DATA } from "../config/constants";
+import { Box } from "@/src/shared/ui/box";
 
 interface SearchItemsProps {
 	type: "slabs" | "artifact";
@@ -46,7 +47,8 @@ export const SearchItems = ({
 	];
 
 	return (
-		<Row className="gap-4">
+		<Row className="flex-col md:flex-row w-full items-center gap-4">
+			<Box className="gap-4 p-0">
 			{selectedSets !== undefined && (
 				<Select value={selectedSets} onValueChange={setSelectedSets}>
 					<SelectTrigger className="w-[180px]">
@@ -73,6 +75,7 @@ export const SearchItems = ({
 					))}
 				</SelectContent>
 			</Select>
+			</Box>
 			<Input
 				type="text"
 				placeholder={`${type === "slabs" ? "석판" : "아티팩트"} 검색...`}
