@@ -47,34 +47,34 @@ export const SearchItems = ({
 	];
 
 	return (
-		<Row className="flex-col md:flex-row w-full items-center gap-4">
+		<Row className="flex-col md:flex-row w-max items-center gap-4">
 			<Box className="gap-4 p-0">
-			{selectedSets !== undefined && (
-				<Select value={selectedSets} onValueChange={setSelectedSets}>
+				{selectedSets !== undefined && (
+					<Select value={selectedSets} onValueChange={setSelectedSets}>
+						<SelectTrigger className="w-[180px]">
+							<SelectValue placeholder="콤보 선택" />
+						</SelectTrigger>
+						<SelectContent>
+							{EFFECT_DATA.map((sets) => (
+								<SelectItem key={sets.value} value={sets.value}>
+									{sets.label}
+								</SelectItem>
+							))}
+						</SelectContent>
+					</Select>
+				)}
+				<Select value={selectedTier} onValueChange={setSelectedTier}>
 					<SelectTrigger className="w-[180px]">
-						<SelectValue placeholder="콤보 선택" />
+						<SelectValue placeholder="등급 선택" />
 					</SelectTrigger>
 					<SelectContent>
-						{EFFECT_DATA.map((sets) => (
-							<SelectItem key={sets.value} value={sets.value}>
-								{sets.label}
+						{TIER_DATA.map((tier) => (
+							<SelectItem key={tier.value} value={tier.value}>
+								{tier.label}
 							</SelectItem>
 						))}
 					</SelectContent>
 				</Select>
-			)}
-			<Select value={selectedTier} onValueChange={setSelectedTier}>
-				<SelectTrigger className="w-[180px]">
-					<SelectValue placeholder="등급 선택" />
-				</SelectTrigger>
-				<SelectContent>
-					{TIER_DATA.map((tier) => (
-						<SelectItem key={tier.value} value={tier.value}>
-							{tier.label}
-						</SelectItem>
-					))}
-				</SelectContent>
-			</Select>
 			</Box>
 			<Input
 				type="text"

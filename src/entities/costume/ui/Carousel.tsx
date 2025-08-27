@@ -5,9 +5,7 @@ import { Box } from "@/src/shared/ui/box";
 import {
 	Carousel,
 	CarouselContent,
-	CarouselItem,
-	CarouselNext,
-	CarouselPrevious,
+	CarouselItem
 } from "@/src/shared/ui/carousel";
 import { Typography } from "@/src/shared/ui/typography";
 import type { Database } from "@/types_db";
@@ -51,8 +49,6 @@ export const CostumeCarousel = ({
 					</CarouselItem>
 				))}
 			</CarouselContent>
-			<CarouselPrevious />
-			<CarouselNext />
 		</Carousel>
 	);
 };

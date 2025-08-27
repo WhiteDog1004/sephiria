@@ -19,7 +19,7 @@ export const CostumeList = ({ data }: { data: CostumeDataType }) => {
 				title={"코스튬"}
 				description={"자신에게 맞는 코스튬을 찾아보세요!"}
 			/>
-		<Box className="grid grid-cols-[repeat(auto-fit,_minmax(240px,_1fr))] gap-4 max-w-5xl w-full p-0">
+		<Box className="grid grid-cols-[repeat(auto-fit,_minmax(160px,_1fr))]  md:grid-cols-[repeat(auto-fit,_minmax(240px,_1fr))] gap-4 max-w-5xl w-full p-0">
 			{data.map((costume) => (
 				<Card key={costume.id} className="w-full h-auto items-center p-4">
 					<Image

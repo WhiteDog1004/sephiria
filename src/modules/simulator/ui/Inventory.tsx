@@ -265,7 +265,7 @@ const Inventory = ({ data }: InventoryProps) => {
 			onDragOver={handleDragOver}
 		>
 			<Column
-				className={`items-start lg:flex-row gap-8 w-max p-8 rounded-sm ${clsx(
+				className={`flex-col items-center lg:items-start xl:items-center lg:flex-row gap-8 max-w-5xl xl:max-w-7xl w-max p-8 rounded-sm ${clsx(
 					theme === "dark" ? "bg-[#40273b]" : "bg-gray-100",
 				)}`}
 			>
@@ -311,8 +311,7 @@ const Inventory = ({ data }: InventoryProps) => {
 							</Column>
 						</Row>
 						<Box
-							className="grid grid-cols-6 gap-2 w-max p-0"
-							style={{ gridTemplateColumns: "repeat(6, 80px)" }}
+							className="grid grid-cols-6 xl:[grid-template-columns:repeat(6,80px)] gap-2 w-max p-0"
 						>
 							{generateGridConfig(slotNum).map(({ rows: rowIndex, cols }) =>
 								Array.from({ length: cols }).map((_, colIndex) => {
@@ -343,14 +342,14 @@ const Inventory = ({ data }: InventoryProps) => {
 					<DeleteTrash isOver={overId === "trash"} />
 				</Column>
 
-				<Column className="min-w-[640px] gap-2">
+				<Column className="min-w-[400px] xl:min-w-[640px] gap-2">
 					<Tabs
 						onValueChange={(value) =>
 							setTabsValue(value as "slabs" | "artifact")
 						}
 						defaultValue={tabsValue}
 					>
-						<Row className="justify-between">
+						<Row className="flex-col xl:flex-row gap-2 items-center md:items-start justify-between">
 							<TabsList>
 								{TABS_LIST.map((list) => (
 									<TabsTrigger value={list.value} key={list.value}>
@@ -367,7 +366,7 @@ const Inventory = ({ data }: InventoryProps) => {
 						</Row>
 						<TabsContent value="slabs">
 							<Box
-								className={`${TabsBoxStyles} ${clsx(filteredItems.length > 0 ? "grid-cols-8" : "grid-cols-1")}`}
+								className={`${TabsBoxStyles} ${clsx(filteredItems.length > 0 ? "grid-cols-5 xl:grid-cols-8" : "grid-cols-1")}`}
 							>
 								{filteredItems.length > 0 ? (
 									filteredItems.map((item) => (
@@ -393,7 +392,7 @@ const Inventory = ({ data }: InventoryProps) => {
 						</TabsContent>
 						<TabsContent value="artifact">
 							<Box
-								className={`${TabsBoxStyles} ${clsx(filteredArtifacts.length > 0 ? "grid-cols-8" : "grid-cols-1")}`}
+								className={`${TabsBoxStyles} ${clsx(filteredArtifacts.length > 0 ? "grid-cols-5 xl:grid-cols-8" : "grid-cols-1")}`}
 							>
 								{filteredArtifacts.length > 0 ? (
 									filteredArtifacts.map((item) => (

@@ -46,7 +46,7 @@ export const ItemSource = ({ item, isPreview }: ItemSourceProps) => {
 						<Image unoptimized fill src={item.image || ""} alt={"items"} />
 					</Box>
 					<Typography
-						className={`whitespace-nowrap text-center overflow-hidden text-ellipsis ${clsx(item.type === "slabs" ? getItemsTierColor(ITEM_SLABS_DATA.find((i) => i.value === item.id)?.tier || "", theme === "light") : getItemsTierColor(item.data?.tier || "", theme === "light"))}`}
+						className={`py-1 whitespace-nowrap text-center overflow-hidden text-ellipsis ${clsx(item.type === "slabs" ? getItemsTierColor(ITEM_SLABS_DATA.find((i) => i.value === item.id)?.tier || "", theme === "light") : getItemsTierColor(item.data?.tier || "", theme === "light"))}`}
 						variant="caption"
 					>
 						{item.label}

@@ -28,7 +28,7 @@ export const InventorySlot = ({
 	return (
 		<Box
 			ref={setNodeRef}
-			className={`relative w-20 h-20 rounded-sm p-1 border-4 border-[#222034] transition-colors bg-[#623144] ${clsx(
+			className={`relative w-16 h-16 xl:w-20 xl:h-20 rounded-sm p-1 border-4 border-[#222034] transition-colors bg-[#623144] ${clsx(
 				theme === "light" && "bg-gray-300",
 				item &&
 					(item.type === "slabs"
@@ -41,7 +41,7 @@ export const InventorySlot = ({
 				isOver && "bg-gray-600",
 			)}`}
 		>
-			<Box className="absolute w-11/12 h-11/12 border-2 border-gray-950/20 rounded-sm" />
+			<Box className="absolute w-9/12 h-9/12 xl:w-11/12 xl:h-11/12 border-2 border-gray-950/20 rounded-sm" />
 			{item && (
 				<SlotComponent
 					item={item}
