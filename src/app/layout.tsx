@@ -13,36 +13,36 @@ export const metadata: Metadata = {
 	title: "Sephiria Wiki",
 	description: "세피리아 위키",
 	keywords: [
-    '세피리아',
-    '세피리아위키',
-    '세피리아 기적',
-    '세피리아 아티팩트',
-    '세피리아 아이템',
-    '세피리아 코스튬',
-    '세피리아 무기',
-    '세피리아 석판',
-    '세피리아 시뮬레이터',
-    '세피리아 공략',
-  ],
-  creator: 'WolfDog',
-  icons: {
-    icon: '/favicon.ico',
-  },
-  openGraph: {
-    title: '세피리아 위키',
-    description: '세피리아의 모든 것',
-    url: 'https://sephiria.wiki',
-    siteName: '세피리아위키',
-    locale: 'ko_KR',
-    type: 'website',
-    images: [
-      {
-        url: 'https://sephiria.wiki/thumbnail.png',
-        width: 400,
-        height: 220,
-        alt: '세피리아 메인 이미지',
-      },
-    ],
+		"세피리아",
+		"세피리아위키",
+		"세피리아 기적",
+		"세피리아 아티팩트",
+		"세피리아 아이템",
+		"세피리아 코스튬",
+		"세피리아 무기",
+		"세피리아 석판",
+		"세피리아 시뮬레이터",
+		"세피리아 공략",
+	],
+	creator: "WolfDog",
+	icons: {
+		icon: "/favicon.ico",
+	},
+	openGraph: {
+		title: "세피리아 위키",
+		description: "세피리아의 모든 것",
+		url: "https://sephiria.wiki",
+		siteName: "세피리아위키",
+		locale: "ko_KR",
+		type: "website",
+		images: [
+			{
+				url: "https://sephiria.wiki/thumbnail.png",
+				width: 400,
+				height: 220,
+				alt: "세피리아 메인 이미지",
+			},
+		],
 	},
 };
 
@@ -54,24 +54,23 @@ export default function RootLayout({
 	return (
 		<html lang="ko" className={font.className} suppressHydrationWarning>
 			<head>
-        <link
-          rel='preconnect'
-          as='image'
-          href='https://www.sephiria.wiki/sephiria.webp'
-          crossOrigin='anonymous'
-        />
-        <script
-          type='application/ld+json'
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'WebSite',
-              name: '세피리아 위키',
-              url: 'https://sephiria.wiki',
-            }),
-          }}
-        />
-      </head>
+				<link
+					rel="preconnect"
+					as="image"
+					href="https://www.sephiria.wiki/sephiria.webp"
+					crossOrigin="anonymous"
+				/>
+				<script type="application/ld+json">
+					{`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "세피리아 위키",
+              "url": "https://sephiria.wiki"
+            }
+          `}
+				</script>
+			</head>
 			<body>
 				<ThemeProvider
 					attribute="class"

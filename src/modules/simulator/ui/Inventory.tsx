@@ -265,7 +265,7 @@ const Inventory = ({ data }: InventoryProps) => {
 		return matchesSearch && matchesTier;
 	});
 
-	const TabsBoxStyles = `grid h-full max-h-[676] overflow-auto bg-[#2f1c2c] p-4 rounded-lg ${clsx(theme === "light" && "bg-gray-300")}`;
+	const TabsBoxStyles = `grid h-full max-h-[612] overflow-auto bg-[#2f1c2c] p-4 rounded-lg ${clsx(theme === "light" && "bg-gray-300")}`;
 
 	useEffect(() => {
 		setMounted(true);
@@ -281,7 +281,7 @@ const Inventory = ({ data }: InventoryProps) => {
 			onDragOver={handleDragOver}
 		>
 			<Column
-				className={`flex-col items-center lg:items-start xl:items-center lg:flex-row gap-8 max-w-5xl xl:max-w-7xl w-max p-8 rounded-sm ${clsx(
+				className={`flex-col items-center lg:items-start lg:flex-row gap-8 max-w-5xl xl:max-w-7xl w-max p-8 rounded-sm ${clsx(
 					theme === "dark" ? "bg-[#40273b]" : "bg-gray-100",
 				)}`}
 			>
@@ -291,14 +291,11 @@ const Inventory = ({ data }: InventoryProps) => {
 							<Column className="w-full gap-2 mb-6">
 								<Typography className="text-2xl font-bold">인벤토리</Typography>
 								<Typography
+									variant="body2"
 									className={`text-gray-400 ${clsx(theme === "light" && "text-gray-700")}`}
 								>
 									석판 및 아티팩트를 드래그하여 배치하세요.
 								</Typography>
-								<Button className="w-max" onClick={handleCapture}>
-									<Camera />
-									스크린샷 저장
-								</Button>
 							</Column>
 							<Column className="max-w-40 w-full gap-2">
 								<Box className="gap-4 p-0">
@@ -332,7 +329,7 @@ const Inventory = ({ data }: InventoryProps) => {
 						</Row>
 						<Box
 							ref={ref}
-							className="grid grid-cols-6 xl:[grid-template-columns:repeat(6,80px)]  gap-2 w-max p-0"
+							className="grid grid-cols-6 xl:[grid-template-columns:repeat(6,72px)]  gap-2 w-max p-0"
 						>
 							{generateGridConfig(slotNum).map(({ rows: rowIndex, cols }) =>
 								Array.from({ length: cols }).map((_, colIndex) => {
@@ -360,7 +357,13 @@ const Inventory = ({ data }: InventoryProps) => {
 						</Box>
 					</Column>
 
-					<DeleteTrash isOver={overId === "trash"} />
+					<Row className="gap-2 p-0">
+						<DeleteTrash isOver={overId === "trash"} />
+						<Button className="w-max" onClick={handleCapture}>
+							<Camera />
+							스크린샷 저장
+						</Button>
+					</Row>
 				</Column>
 
 				<Column className="min-w-[400px] xl:min-w-[640px] gap-2">
