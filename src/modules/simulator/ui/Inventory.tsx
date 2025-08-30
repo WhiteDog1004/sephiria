@@ -13,10 +13,11 @@ import {
 	useSensors,
 } from "@dnd-kit/core";
 import clsx from "clsx";
-import { Minus, Plus } from "lucide-react";
+import { toPng } from "html-to-image";
+import { Camera, Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { InventorySlot } from "@/src/entities/simulator/item/ui/InventorySlot";
 import { generateGridConfig } from "@/src/entities/simulator/item/ui/SlotComponent";
 import type {
@@ -44,6 +45,7 @@ interface InventoryProps {
 }
 
 const Inventory = ({ data }: InventoryProps) => {
+	const ref = useRef<HTMLDivElement>(null);
 	const { theme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 	const {
@@ -68,6 +70,20 @@ const Inventory = ({ data }: InventoryProps) => {
 	const [selectedTier, setSelectedTier] = useState("all");
 
 	const sensors = useSensors(useSensor(PointerSensor));
+
+	const handleCapture = async () => {
+		if (!ref.current) return;
+
+		try {
+			const dataUrl = await toPng(ref.current);
+			const link = document.createElement("a");
+			link.href = dataUrl;
+			link.download = "sephiria-inventory.png";
+			link.click();
+		} catch (err) {
+			console.error("스크린샷 저장 실패:", err);
+		}
+	};
 
 	const handleDragStart = (event: DragStartEvent) => {
 		setActiveId(event.active.id);
@@ -272,13 +288,17 @@ const Inventory = ({ data }: InventoryProps) => {
 				<Column className="gap-4 py-0">
 					<Column>
 						<Row>
-							<Column className="w-full gap-2">
+							<Column className="w-full gap-2 mb-6">
 								<Typography className="text-2xl font-bold">인벤토리</Typography>
 								<Typography
-									className={`text-gray-400 mb-6 ${clsx(theme === "light" && "text-gray-700")}`}
+									className={`text-gray-400 ${clsx(theme === "light" && "text-gray-700")}`}
 								>
 									석판 및 아티팩트를 드래그하여 배치하세요.
 								</Typography>
+								<Button className="w-max" onClick={handleCapture}>
+									<Camera />
+									스크린샷 저장
+								</Button>
 							</Column>
 							<Column className="max-w-40 w-full gap-2">
 								<Box className="gap-4 p-0">
@@ -311,7 +331,8 @@ const Inventory = ({ data }: InventoryProps) => {
 							</Column>
 						</Row>
 						<Box
-							className="grid grid-cols-6 xl:[grid-template-columns:repeat(6,80px)] gap-2 w-max p-0"
+							ref={ref}
+							className="grid grid-cols-6 xl:[grid-template-columns:repeat(6,80px)]  gap-2 w-max p-0"
 						>
 							{generateGridConfig(slotNum).map(({ rows: rowIndex, cols }) =>
 								Array.from({ length: cols }).map((_, colIndex) => {
