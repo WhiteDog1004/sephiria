@@ -18,6 +18,10 @@ export const MENU_LIST = [
 		link: SITEMAP.MIRACLE,
 	},
 	{
+		label: "무기",
+		link: SITEMAP.WEAPON,
+	},
+	{
 		label: "시뮬레이터",
 		link: SITEMAP.SIMULATOR,
 	},

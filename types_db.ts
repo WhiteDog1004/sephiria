@@ -120,6 +120,23 @@ export type Database = {
 				};
 				Relationships: [];
 			};
+			weapons: {
+				Row: {
+					created_at: string;
+					id: number;
+					image: string | null;
+					value_kor: string;
+					value: string;
+					uuid: string;
+					effects: {
+						reward?: string[];
+						penalty?: string[];
+					};
+					parent?: string;
+					tier: number;
+				};
+				Relationships: [];
+			};
 		};
 		Views: {
 			[_ in never]: never;

@@ -4,5 +4,6 @@ export const SITEMAP = {
 	LARGE: "/large",
 	ARTIFACT: "/artifact",
 	MIRACLE: "/miracle",
+	WEAPON: "/weapon",
 	SIMULATOR: "/simulator",
 };
