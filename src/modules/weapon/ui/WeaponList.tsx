@@ -33,7 +33,7 @@ export const WeaponList = ({ data }: { data: WeaponOptions[] }) => {
 
 	if (!mounted) return null;
 	return (
-		<Column className="w-full items-center gap-8 p-8">
+		<Column className="max-w-7xl w-full items-center gap-8 p-8">
 			<SectionHeader
 				title={"무기"}
 				description={"다양한 무기를 확인해 보세요!"}

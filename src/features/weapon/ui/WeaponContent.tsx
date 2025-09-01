@@ -13,7 +13,7 @@ export const WeaponContent = ({
 		<TabsList className="w-16 h-16">
 			<TabsTrigger onClick={handler} value={list.value}>
 				<Image
-					className="object-cover"
+					className="w-12 h-12 object-contain"
 					width={48}
 					height={48}
 					src={list.image || ""}

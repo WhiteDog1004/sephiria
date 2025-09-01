@@ -5,6 +5,8 @@ export const colorMap: Record<string, string> = {
 	$l: "text-blue-300", // 번개속성 피해, 번개
 	$b: "text-orange-500", // 화염
 	$d: "text-purple-500", // 대시 공격 피해, 대시 횟수
-	$n: "text-green-500", // 일반 공격 피해
+	$n: "text-orange-500", // 일반 공격 피해
 	$m: "text-pink-500", // 마법 공격 피해
+	$p: "text-red-500", // 상처 악화
+	$a: "text-gray-400", // 방어력
 };
