@@ -1,5 +1,5 @@
 export const colorMap: Record<string, string> = {
-	$s: "text-yellow-800", // 특수, 일반, 대시, 가드
+	$s: "dark:text-zinc-400 text-gray-500", // 특수, 일반, 대시, 가드
 	$f: "text-yellow-400", // 공격 속도, 대시 공격
 	$i: "text-blue-500", // 얼음속성 피해, 얼음
 	$l: "text-blue-300", // 번개속성 피해, 번개
@@ -9,4 +9,5 @@ export const colorMap: Record<string, string> = {
 	$m: "text-pink-500", // 마법 공격 피해
 	$p: "text-red-500", // 상처 악화
 	$a: "text-gray-400", // 방어력
+	$e: "text-emerald-600", // 회피
 };
