@@ -28,7 +28,7 @@ export const InventorySlot = ({
 	return (
 		<Box
 			ref={setNodeRef}
-			className={`relative w-16 h-16 xl:w-18 xl:h-18 rounded-sm p-1 border-4 border-[#222034] transition-colors bg-[#623144] touch-none ${clsx(
+			className={`relative w-12 h-12 md:w-16 md:h-16 xl:w-18 xl:h-18 rounded-sm p-1 border-4 border-[#222034] transition-colors bg-[#623144] touch-none ${clsx(
 				theme === "light" && "bg-gray-300",
 				item &&
 					(item.type === "slabs"
@@ -41,7 +41,7 @@ export const InventorySlot = ({
 				isOver && "bg-gray-600",
 			)}`}
 		>
-			<Box className="absolute w-9/12 h-9/12 xl:w-10/12 xl:h-10/12 border-2 border-gray-950/20 rounded-sm p-6 xl:p-7" />
+			<Box className="absolute w-9/12 h-9/12 xl:w-10/12 xl:h-10/12 border-2 border-gray-950/20 rounded-sm p-4 md:p-6 xl:p-7" />
 			{item && (
 				<SlotComponent
 					item={item}
@@ -53,11 +53,15 @@ export const InventorySlot = ({
 				<Box
 					className={`${boxStyles} gap-1 ${clsx(!!item?.item && (effectValue === Number(item?.item.level) ? "text-green-400" : effectValue > Number(item?.item.level) ? "text-yellow-300" : "text-white"))}`}
 				>
-					<Typography>{effectValue}</Typography>
+					<Typography className="text-xs md:text-base">
+						{effectValue}
+					</Typography>
 					{item?.type === "artifact" && (
 						<>
-							<Typography>/</Typography>
-							<Typography>{item.item.level}</Typography>
+							<Typography className="text-xs md:text-base">/</Typography>
+							<Typography className="text-xs md:text-base">
+								{item.item.level}
+							</Typography>
 						</>
 					)}
 				</Box>
@@ -67,8 +71,10 @@ export const InventorySlot = ({
 						{effectValue}
 						{item?.type === "artifact" && (
 							<>
-								<Typography>/</Typography>
-								<Typography>{item.item.level}</Typography>
+								<Typography className="text-xs md:text-base">/</Typography>
+								<Typography className="text-xs md:text-base">
+									{item.item.level}
+								</Typography>
 							</>
 						)}
 					</Box>
@@ -81,7 +87,9 @@ export const InventorySlot = ({
 				<Box
 					className={`${boxStyles} ${clsx(item.item.level === 0 && "text-green-400")}`}
 				>
-					<Typography>0 / {item.item.level}</Typography>
+					<Typography className="text-xs md:text-base">
+						0 / {item.item.level}
+					</Typography>
 				</Box>
 			)}
 		</Box>

@@ -82,7 +82,7 @@ export const SlotComponent = ({
 							type="button"
 							onClick={onRotate}
 							onPointerDown={(e) => e.stopPropagation()}
-							className="absolute top-0 right-0 w-5 h-5 bg-black bg-opacity-50 rounded-full text-xs hover:bg-opacity-75 transition-colors flex items-center justify-center"
+							className="absolute top-0 right-0 w-3 h-3 md:w-5 md:h-5 bg-black bg-opacity-50 rounded-full text-xs hover:bg-opacity-75 transition-colors flex items-center justify-center"
 							title="회전"
 						>
 							↻

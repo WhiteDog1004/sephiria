@@ -10,7 +10,7 @@ export const DeleteTrash = ({ isOver }: { isOver: boolean }) => {
 	return (
 		<Box
 			ref={setNodeRef}
-			className={`w-full max-w-24 p-0 h-24 border-2 border-dashed rounded-lg items-center justify-center transition-colors ${clsx(
+			className={`w-full max-w-12 h-12 md:max-w-24 p-0 md:h-24 border-2 border-dashed rounded-lg items-center justify-center transition-colors ${clsx(
 				isOver
 					? "bg-red-800 border-red-500"
 					: "bg-[#2f1c2c] border-[#ffffff50]",

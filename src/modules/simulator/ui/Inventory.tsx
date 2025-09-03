@@ -14,7 +14,7 @@ import {
 } from "@dnd-kit/core";
 import clsx from "clsx";
 import { toPng } from "html-to-image";
-import { Camera, Minus, Plus } from "lucide-react";
+import { Briefcase, Camera, Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
@@ -69,6 +69,7 @@ const Inventory = ({ data }: InventoryProps) => {
 	const [searchInput, setSearchInput] = useState("");
 	const [selectedTier, setSelectedTier] = useState("all");
 	const [selectedSets, setSelectedSets] = useState("all");
+	const [isMobileOpenInventory, setIsMobileOpenInventory] = useState(false);
 
 	const sensors = useSensors(useSensor(PointerSensor));
 
@@ -268,7 +269,7 @@ const Inventory = ({ data }: InventoryProps) => {
 		return matchesSearch && matchesTier && matchesSets;
 	});
 
-	const TabsBoxStyles = `grid h-full max-h-[612] overflow-auto bg-[#2f1c2c] p-4 rounded-lg ${clsx(theme === "light" && "bg-gray-300")}`;
+	const TabsBoxStyles = `grid h-full max-h-max md:max-h-[612] overflow-auto bg-[#2f1c2c] p-2 md:p-4 rounded-lg ${clsx(theme === "light" && "bg-gray-300")}`;
 
 	useEffect(() => {
 		setMounted(true);
@@ -284,13 +285,13 @@ const Inventory = ({ data }: InventoryProps) => {
 			onDragOver={handleDragOver}
 		>
 			<Column
-				className={`flex-col items-center lg:items-start lg:flex-row gap-8 max-w-5xl xl:max-w-7xl w-max p-8 rounded-sm ${clsx(
+				className={`flex-col items-center lg:items-start lg:flex-row gap-8 max-w-5xl xl:max-w-7xl w-max p-2 md:p-8 rounded-sm ${clsx(
 					theme === "dark" ? "bg-[#40273b]" : "bg-gray-100",
 				)}`}
 			>
 				<Column className="gap-4 py-0">
-					<Column>
-						<Row>
+					<Column className="gap-4 md:gap-0">
+						<Row className="md:flex-row flex-col">
 							<Column className="w-full gap-2 mb-6">
 								<Typography className="text-2xl font-bold">인벤토리</Typography>
 								<Typography
@@ -330,33 +331,74 @@ const Inventory = ({ data }: InventoryProps) => {
 								</Typography>
 							</Column>
 						</Row>
-						<Box
-							ref={ref}
-							className="grid grid-cols-6 xl:[grid-template-columns:repeat(6,72px)]  gap-2 w-max p-0"
-						>
-							{generateGridConfig(slotNum).map(({ rows: rowIndex, cols }) =>
-								Array.from({ length: cols }).map((_, colIndex) => {
-									const slotId: SlotId = `${rowIndex}-${colIndex}`;
-									const item = slabs[slotId];
-									const artifact = artifacts[slotId];
-									const effectValue = calculatedEffects.effects[slotId] || 0;
-									const effectFlag = calculatedEffects.flag[slotId];
+						{!isMobileOpenInventory ? (
+							<Box
+								ref={ref}
+								className="grid grid-cols-6 xl:[grid-template-columns:repeat(6,72px)] gap-1 md:gap-2 w-max p-0"
+							>
+								{generateGridConfig(slotNum).map(({ rows: rowIndex, cols }) =>
+									Array.from({ length: cols }).map((_, colIndex) => {
+										const slotId: SlotId = `${rowIndex}-${colIndex}`;
+										const item = slabs[slotId];
+										const artifact = artifacts[slotId];
+										const effectValue = calculatedEffects.effects[slotId] || 0;
+										const effectFlag = calculatedEffects.flag[slotId];
 
-									return (
-										<InventorySlot
-											key={slotId}
-											id={slotId}
-											item={
-												(item || artifact) as SlabsOptions & ArtifactInstance
-											}
-											effectValue={effectValue}
-											effectFlag={effectFlag}
-											onRotate={handleRotate}
-											isOver={overId === slotId}
-										/>
-									);
-								}),
-							)}
+										return (
+											<InventorySlot
+												key={slotId}
+												id={slotId}
+												item={
+													(item || artifact) as SlabsOptions & ArtifactInstance
+												}
+												effectValue={effectValue}
+												effectFlag={effectFlag}
+												onRotate={handleRotate}
+												isOver={overId === slotId}
+											/>
+										);
+									}),
+								)}
+							</Box>
+						) : (
+							// {/* 모바일 전용 박스 */}
+							<>
+								<Box className="h-[300] p-0" />
+								<Box className="fixed sm:hidden left-1/2 -translate-x-1/2 grid grid-cols-6 gap-0 w-max p-2 z-50 bg-[#1d101b] rounded-b-lg">
+									{generateGridConfig(slotNum).map(({ rows: rowIndex, cols }) =>
+										Array.from({ length: cols }).map((_, colIndex) => {
+											const slotId: SlotId = `${rowIndex}-${colIndex}`;
+											const item = slabs[slotId];
+											const artifact = artifacts[slotId];
+											const effectValue =
+												calculatedEffects.effects[slotId] || 0;
+											const effectFlag = calculatedEffects.flag[slotId];
+
+											return (
+												<InventorySlot
+													key={slotId}
+													id={slotId}
+													item={
+														(item || artifact) as SlabsOptions &
+															ArtifactInstance
+													}
+													effectValue={effectValue}
+													effectFlag={effectFlag}
+													onRotate={handleRotate}
+													isOver={overId === slotId}
+												/>
+											);
+										}),
+									)}
+								</Box>
+							</>
+						)}
+
+						<Box
+							className="fixed sm:hidden bottom-4 right-4 w-max p-3 bg-gray-700 z-50 rounded-2xl"
+							onClick={() => setIsMobileOpenInventory((prev) => !prev)}
+						>
+							<Briefcase className="text-white" />
 						</Box>
 					</Column>
 
@@ -369,7 +411,7 @@ const Inventory = ({ data }: InventoryProps) => {
 					</Row>
 				</Column>
 
-				<Column className="min-w-[400px] xl:min-w-[640px] gap-2">
+				<Column className="min-w-max md:min-w-[400px] xl:min-w-[640px] gap-2">
 					<Tabs
 						onValueChange={(value) =>
 							setTabsValue(value as "slabs" | "artifact")
@@ -395,7 +437,7 @@ const Inventory = ({ data }: InventoryProps) => {
 						</Row>
 						<TabsContent value="slabs">
 							<Box
-								className={`${TabsBoxStyles} ${clsx(filteredItems.length > 0 ? "grid-cols-5 xl:grid-cols-8" : "grid-cols-1")}`}
+								className={`${TabsBoxStyles} ${clsx(filteredItems.length > 0 ? "w-max grid-cols-4 md:grid-cols-5 xl:grid-cols-8" : "grid-cols-1")}`}
 							>
 								{filteredItems.length > 0 ? (
 									filteredItems.map((item) => (
@@ -421,7 +463,7 @@ const Inventory = ({ data }: InventoryProps) => {
 						</TabsContent>
 						<TabsContent value="artifact">
 							<Box
-								className={`${TabsBoxStyles} ${clsx(filteredArtifacts.length > 0 ? "grid-cols-5 xl:grid-cols-8" : "grid-cols-1")}`}
+								className={`${TabsBoxStyles} ${clsx(filteredArtifacts.length > 0 ? "w-max grid-cols-4 md:grid-cols-5 xl:grid-cols-8" : "grid-cols-1")}`}
 							>
 								{filteredArtifacts.length > 0 ? (
 									filteredArtifacts.map((item) => (
