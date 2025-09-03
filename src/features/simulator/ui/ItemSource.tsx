@@ -40,7 +40,7 @@ export const ItemSource = ({ item, isPreview }: ItemSourceProps) => {
 					ref={setNodeRef}
 					{...listeners}
 					{...attributes}
-					className={`w-19 h-24 p-1 ${isPreview ? "cursor-auto" : "cursor-grab"}`}
+					className={`w-19 h-24 p-1 touch-none ${isPreview ? "cursor-auto" : "cursor-grab"}`}
 				>
 					<Box className="relative h-full p-0">
 						<Image unoptimized fill src={item.image || ""} alt={"items"} />

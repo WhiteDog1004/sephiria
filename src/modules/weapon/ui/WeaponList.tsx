@@ -87,6 +87,7 @@ export const WeaponList = ({ data }: { data: WeaponOptions[] }) => {
 								height={40}
 								src={selectData.image || ""}
 								alt={selectData.value}
+								priority
 							/>
 						)}
 					</Row>

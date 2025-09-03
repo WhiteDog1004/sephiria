@@ -10,7 +10,6 @@ import {
 	SelectValue,
 } from "@/src/shared/ui/select";
 import { EFFECT_LABELS, TIER_DATA } from "../config/constants";
-import { Box } from "@/src/shared/ui/box";
 
 interface SearchItemsProps {
 	type: "slabs" | "artifact";
@@ -47,11 +46,11 @@ export const SearchItems = ({
 	];
 
 	return (
-		<Row className="flex-col md:flex-row w-max items-center gap-4">
-			<Box className="gap-4 p-0">
-				{selectedSets !== undefined && (
+		<Row className="flex-col md:flex-row w-max items-center gap-2">
+			<Row className="w-max gap-2 p-0">
+				{type !== "slabs" && (
 					<Select value={selectedSets} onValueChange={setSelectedSets}>
-						<SelectTrigger className="w-[180px]">
+						<SelectTrigger className="w-[112px]">
 							<SelectValue placeholder="콤보 선택" />
 						</SelectTrigger>
 						<SelectContent>
@@ -64,7 +63,7 @@ export const SearchItems = ({
 					</Select>
 				)}
 				<Select value={selectedTier} onValueChange={setSelectedTier}>
-					<SelectTrigger className="w-[180px]">
+					<SelectTrigger className="w-[112px]">
 						<SelectValue placeholder="등급 선택" />
 					</SelectTrigger>
 					<SelectContent>
@@ -75,7 +74,7 @@ export const SearchItems = ({
 						))}
 					</SelectContent>
 				</Select>
-			</Box>
+			</Row>
 			<Input
 				type="text"
 				placeholder={`${type === "slabs" ? "석판" : "아티팩트"} 검색...`}

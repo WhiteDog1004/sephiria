@@ -28,7 +28,7 @@ export const InventorySlot = ({
 	return (
 		<Box
 			ref={setNodeRef}
-			className={`relative w-16 h-16 xl:w-18 xl:h-18 rounded-sm p-1 border-4 border-[#222034] transition-colors bg-[#623144] ${clsx(
+			className={`relative w-16 h-16 xl:w-18 xl:h-18 rounded-sm p-1 border-4 border-[#222034] transition-colors bg-[#623144] touch-none ${clsx(
 				theme === "light" && "bg-gray-300",
 				item &&
 					(item.type === "slabs"

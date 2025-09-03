@@ -8,6 +8,7 @@ import { Card } from "@/src/shared/ui/card";
 import { Separator } from "@/src/shared/ui/separator";
 import { Typography } from "@/src/shared/ui/typography";
 import type { Database } from "@/types_db";
+import { menuItems } from "../config/menuItems";
 
 export const ShortcutBox = ({
 	data,
@@ -65,39 +66,19 @@ export const ShortcutBox = ({
 				<Card className="w-full py-0 row-span-1 overflow-hidden">
 					<Box className="flex-col p-0">
 						<Box className="gap-2 p-4">
-							<Link href={SITEMAP.MIRACLE} className="w-full">
-								<Box className="flex-col gap-2 w-full p-0">
-									<Image
-										width={48}
-										height={48}
-										src={"/duelist.png"}
-										alt={"miracle"}
-									/>
-									<Typography>기적</Typography>
-								</Box>
-							</Link>
-							<Link href={SITEMAP.LARGE} className="w-full">
-								<Box className="flex-col gap-2 w-full p-0">
-									<Image
-										width={48}
-										height={48}
-										src={"/thorn.png"}
-										alt={"slabs"}
-									/>
-									<Typography>석판</Typography>
-								</Box>
-							</Link>
-							<Link href={SITEMAP.ARTIFACT} className="w-full">
-								<Box className="flex-col gap-2 w-full p-0">
-									<Image
-										width={48}
-										height={48}
-										src={"/ice_star.png"}
-										alt={"artifact"}
-									/>
-									<Typography>아티팩트</Typography>
-								</Box>
-							</Link>
+							{menuItems.map((item) => (
+								<Link key={item.href} href={item.href} className="w-full">
+									<Box className="flex-col gap-2 w-full p-0">
+										<Image
+											width={48}
+											height={48}
+											src={item.src}
+											alt={item.alt}
+										/>
+										<Typography>{item.label}</Typography>
+									</Box>
+								</Link>
+							))}
 						</Box>
 						<Separator />
 						<Box className="py-4">

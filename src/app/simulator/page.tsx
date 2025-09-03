@@ -6,7 +6,7 @@ const SimulatorPage = async () => {
 	const data = await getArtifactLists();
 
 	return (
-		<Box className="items-center">
+		<Box className="items-center w-max mx-auto">
 			{data && <Inventory data={data || []} />}
 		</Box>
 	);

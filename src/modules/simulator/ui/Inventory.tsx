@@ -68,6 +68,7 @@ const Inventory = ({ data }: InventoryProps) => {
 	const [tabsValue, setTabsValue] = useState<"slabs" | "artifact">("slabs");
 	const [searchInput, setSearchInput] = useState("");
 	const [selectedTier, setSelectedTier] = useState("all");
+	const [selectedSets, setSelectedSets] = useState("all");
 
 	const sensors = useSensors(useSensor(PointerSensor));
 
@@ -262,7 +263,9 @@ const Inventory = ({ data }: InventoryProps) => {
 			.toLowerCase()
 			.includes(searchInput.toLowerCase());
 		const matchesTier = selectedTier === "all" || item.tier === selectedTier;
-		return matchesSearch && matchesTier;
+		const matchesSets =
+			selectedSets === "all" || item.effect.sets?.includes(selectedSets);
+		return matchesSearch && matchesTier && matchesSets;
 	});
 
 	const TabsBoxStyles = `grid h-full max-h-[612] overflow-auto bg-[#2f1c2c] p-4 rounded-lg ${clsx(theme === "light" && "bg-gray-300")}`;
@@ -386,6 +389,8 @@ const Inventory = ({ data }: InventoryProps) => {
 								selectedTier={selectedTier}
 								setSelectedTier={setSelectedTier}
 								setSearchInput={setSearchInput}
+								selectedSets={selectedSets}
+								setSelectedSets={setSelectedSets}
 							/>
 						</Row>
 						<TabsContent value="slabs">

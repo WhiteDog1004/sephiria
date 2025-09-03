@@ -1,0 +1,18 @@
+import { SITEMAP } from "@/src/shared/lib/sitemap";
+
+export const menuItems = [
+	{ href: SITEMAP.MIRACLE, src: "/duelist.png", alt: "miracle", label: "기적" },
+	{ href: SITEMAP.LARGE, src: "/thorn.png", alt: "slabs", label: "석판" },
+	{
+		href: SITEMAP.ARTIFACT,
+		src: "/ice_star.png",
+		alt: "artifact",
+		label: "아티팩트",
+	},
+	{
+		href: SITEMAP.WEAPON,
+		src: "/hypersensitivity.png",
+		alt: "weapon",
+		label: "무기",
+	},
+];
