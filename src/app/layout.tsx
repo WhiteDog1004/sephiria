@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { Header } from "../modules/header/ui/Header";
 import "./globals.css";
 import Script from "next/script";
+import { useId } from "react";
 
 const font = localFont({
 	src: "./fonts/Galmuri9.woff2",
@@ -56,6 +57,7 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const id = useId();
 	return (
 		<html lang="ko" className={font.className} suppressHydrationWarning>
 			<head>
@@ -91,7 +93,7 @@ export default function RootLayout({
 					async
 					src="https://www.googletagmanager.com/gtag/js?id=G-4NXKD5DESM"
 				></Script>
-				<Script>
+				<Script id={id}>
 					{`
 						window.dataLayer = window.dataLayer || [];
 						function gtag(){dataLayer.push(arguments);}
