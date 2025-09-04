@@ -10,8 +10,8 @@ const font = localFont({
 });
 
 export const metadata: Metadata = {
-	title: "Sephiria Wiki",
-	description: "세피리아 위키",
+	title: "세피리아 위키",
+	description: "세피리아 정보 사이트",
 	keywords: [
 		"세피리아",
 		"세피리아위키",
