@@ -5,7 +5,7 @@ export const getCostumeOptions: CostumeMap = {
 		name: "분홍 토끼",
 		unlock: undefined,
 		story: "특출난 것은 없지만 그것이 장점이 될 수도 있습니다.",
-		options: ["없음"],
+		options: ["경험치 드롭 +3%"],
 	},
 	rabbit: {
 		name: "갑옷을 입은 토끼",
@@ -17,7 +17,7 @@ export const getCostumeOptions: CostumeMap = {
 		name: "갈색 토끼",
 		unlock: undefined,
 		story: "숲에 숨으면 동물들이 잘 못 찾지만, 매사에 성실합니다.",
-		options: ["회피 +6", "치명타 확률 -6%"],
+		options: ["회피 +12", "치명타 확률 -4%"],
 	},
 	braid: {
 		name: "땋은 머리 토끼",

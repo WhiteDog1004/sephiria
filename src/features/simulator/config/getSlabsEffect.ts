@@ -669,4 +669,10 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 		];
 		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
 	},
+
+	// assurance 확신
+	assurance: (x, y, _, item, effects) => {
+		const baseOffsets = [{ dx: 0, dy: -1, value: 5 }];
+		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
+	},
 };

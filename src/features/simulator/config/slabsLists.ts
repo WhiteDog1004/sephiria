@@ -439,4 +439,13 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//compression.png",
 		rotate: true,
 	},
+	{
+		value: "assurance",
+		tier: "legend",
+		ko_label: "확신",
+		eng_label: "assurance",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//assurance.png",
+		rotate: true,
+	},
 ];
