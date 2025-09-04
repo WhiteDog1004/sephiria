@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { ThemeProvider } from "next-themes";
 import { Header } from "../modules/header/ui/Header";
 import "./globals.css";
+import Script from "next/script";
 
 const font = localFont({
 	src: "./fonts/Galmuri9.woff2",
@@ -44,6 +45,10 @@ export const metadata: Metadata = {
 			},
 		],
 	},
+	other: {
+		"naver-site-verification": "86fdf6f8f06302154e669f26d571f603adfa70fb",
+		"google-site-verification": "fA9mrqAmKoNPLkgu1Ac1G3TlW3HnsmKlJ_qClW2MRXM",
+	},
 };
 
 export default function RootLayout({
@@ -81,6 +86,20 @@ export default function RootLayout({
 					<Header />
 					{children}
 				</ThemeProvider>
+
+				<Script
+					async
+					src="https://www.googletagmanager.com/gtag/js?id=G-4NXKD5DESM"
+				></Script>
+				<Script>
+					{`
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
+					
+						gtag('config', 'G-4NXKD5DESM');
+					`}
+				</Script>
 			</body>
 		</html>
 	);
