@@ -68,7 +68,9 @@ export const InventorySlot = ({
 			) : (
 				effectValue < 0 && (
 					<Box className={`${boxStyles} gap-1 text-red-600`}>
-						{effectValue}
+						<Typography className="text-xs md:text-base">
+							{effectValue}
+						</Typography>
 						{item?.type === "artifact" && (
 							<>
 								<Typography className="text-xs md:text-base">/</Typography>

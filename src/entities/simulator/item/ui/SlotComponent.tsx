@@ -1,5 +1,6 @@
 import { useDraggable } from "@dnd-kit/core";
 import clsx from "clsx";
+import { RotateCcw } from "lucide-react";
 import Image from "next/image";
 import { ITEM_SLABS_DATA } from "@/src/features/simulator/config/slabsLists";
 import { Box } from "@/src/shared/ui/box";
@@ -82,10 +83,10 @@ export const SlotComponent = ({
 							type="button"
 							onClick={onRotate}
 							onPointerDown={(e) => e.stopPropagation()}
-							className="absolute top-0 right-0 w-3 h-3 md:w-5 md:h-5 bg-black bg-opacity-50 rounded-full text-xs hover:bg-opacity-75 transition-colors flex items-center justify-center"
+							className="absolute top-0 right-0 w-3 h-3 md:w-5 md:h-5 bg-black bg-opacity-50 rounded-full text-xs hover:bg-opacity-75 transition-colors flex items-center justify-center p-0.5 md:p-1"
 							title="회전"
 						>
-							↻
+							<RotateCcw />
 						</button>
 					)}
 			</Box>
