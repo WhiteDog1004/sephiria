@@ -12,7 +12,7 @@ export const Footer = () => {
 				This is an unofficial fansite.
 			</Typography>
 
-			<Link href={"https://discord.com/invite/g7AaeBuyMV"}>
+			<Link target="_blank" href={"https://discord.com/invite/g7AaeBuyMV"}>
 				<Box className="p-2 bg-[#23272ac7] text-white w-max rounded-lg">
 					<Image
 						src={"/discord-icon.svg"}

@@ -538,19 +538,38 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 
 	// shade 차양
 	shade: (_, y, __, ___, effects, _____, gridConfig) => {
-		if (!gridConfig) return;
-		if (y === 0) {
-			const bottomRowConfig = gridConfig[gridConfig?.length - 1];
-			const bottomRowIndex = bottomRowConfig.rows;
-			const colsInBottomRow = bottomRowConfig.cols;
+		const currentGrid = gridConfig;
 
-			for (let colIdx = 0; colIdx < colsInBottomRow; colIdx++) {
-				const targetSlotId = `${bottomRowIndex}-${colIdx}`;
-				if (
-					effects[targetSlotId] !== undefined &&
-					typeof effects[targetSlotId] === "number"
-				) {
+		if (!currentGrid) return;
+		if (y === 0) {
+			if (currentGrid.length < 2) return;
+
+			const lastRowConfig = currentGrid[currentGrid.length - 1];
+			const secondToLastRowConfig = currentGrid[currentGrid.length - 2];
+
+			const lastRowIndex = lastRowConfig.rows;
+			const colsInLastRow = lastRowConfig.cols;
+
+			const secondToLastRowIndex = secondToLastRowConfig.rows;
+			const colsInSecondToLastRow = secondToLastRowConfig.cols;
+
+			for (let colIdx = 0; colIdx < colsInLastRow; colIdx++) {
+				const targetSlotId = `${lastRowIndex}-${colIdx}`;
+				if (typeof effects[targetSlotId] === "number") {
 					effects[targetSlotId] += 1;
+				}
+			}
+
+			if (colsInSecondToLastRow > colsInLastRow) {
+				for (
+					let colIdx = colsInLastRow;
+					colIdx < colsInSecondToLastRow;
+					colIdx++
+				) {
+					const targetSlotId = `${secondToLastRowIndex}-${colIdx}`;
+					if (typeof effects[targetSlotId] === "number") {
+						effects[targetSlotId] += 1;
+					}
 				}
 			}
 		}
@@ -574,28 +593,44 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 
 	// boundary 경계
 	boundary: (_, __, ___, ____, effects, _____, gridConfig) => {
-		if (!gridConfig) return;
 		const currentGrid = gridConfig;
+
+		if (!currentGrid) return;
+
 		const applyEffectToRow = (rowConfig: { rows: number; cols: number }) => {
 			const rowIndex = rowConfig.rows;
 			const colsInRow = rowConfig.cols;
 
 			for (let colIdx = 0; colIdx < colsInRow; colIdx++) {
 				const targetSlotId = `${rowIndex}-${colIdx}`;
-				if (
-					effects[targetSlotId] !== undefined &&
-					typeof effects[targetSlotId] === "number"
-				) {
+				if (typeof effects[targetSlotId] === "number") {
 					effects[targetSlotId] += 1;
 				}
 			}
 		};
 
 		const topRowConfig = currentGrid[0];
-		const bottomRowConfig = currentGrid[currentGrid.length - 1];
-
 		applyEffectToRow(topRowConfig);
-		applyEffectToRow(bottomRowConfig);
+
+		if (currentGrid.length > 1) {
+			const lastRowConfig = currentGrid[currentGrid.length - 1];
+			const secondToLastRowConfig = currentGrid[currentGrid.length - 2];
+
+			applyEffectToRow(lastRowConfig);
+
+			if (secondToLastRowConfig.cols > lastRowConfig.cols) {
+				for (
+					let colIdx = lastRowConfig.cols;
+					colIdx < secondToLastRowConfig.cols;
+					colIdx++
+				) {
+					const targetSlotId = `${secondToLastRowConfig.rows}-${colIdx}`;
+					if (typeof effects[targetSlotId] === "number") {
+						effects[targetSlotId] += 1;
+					}
+				}
+			}
+		}
 	},
 
 	// sheen 광휘
