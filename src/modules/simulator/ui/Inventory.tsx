@@ -28,6 +28,10 @@ import type {
 } from "@/src/entities/simulator/types";
 import { TABS_LIST } from "@/src/features/simulator/config/constants";
 import { ITEM_SLABS_DATA } from "@/src/features/simulator/config/slabsLists";
+import {
+	getRarityValue,
+	type Rarity,
+} from "@/src/features/simulator/lib/getRarityOrder";
 import { useSlabsEffects } from "@/src/features/simulator/model/useSlabsEffects";
 import { DeleteTrash } from "@/src/features/simulator/ui/DeleteTrash";
 import { ItemSource } from "@/src/features/simulator/ui/ItemSource";
@@ -251,7 +255,10 @@ const Inventory = ({ data }: InventoryProps) => {
 		}
 	};
 
-	const filteredItems = ITEM_SLABS_DATA.filter((item) => {
+	const filteredItems = ITEM_SLABS_DATA.sort(
+		(a, b) =>
+			getRarityValue(a.tier as Rarity) - getRarityValue(b.tier as Rarity),
+	).filter((item) => {
 		const matchesSearch = item.ko_label
 			.toLowerCase()
 			.includes(searchInput.toLowerCase());
@@ -259,15 +266,20 @@ const Inventory = ({ data }: InventoryProps) => {
 		return matchesSearch && matchesTier;
 	});
 
-	const filteredArtifacts = data.filter((item) => {
-		const matchesSearch = item.label_kor
-			.toLowerCase()
-			.includes(searchInput.toLowerCase());
-		const matchesTier = selectedTier === "all" || item.tier === selectedTier;
-		const matchesSets =
-			selectedSets === "all" || item.effect.sets?.includes(selectedSets);
-		return matchesSearch && matchesTier && matchesSets;
-	});
+	const filteredArtifacts = data
+		.sort(
+			(a, b) =>
+				getRarityValue(a.tier as Rarity) - getRarityValue(b.tier as Rarity),
+		)
+		.filter((item) => {
+			const matchesSearch = item.label_kor
+				.toLowerCase()
+				.includes(searchInput.toLowerCase());
+			const matchesTier = selectedTier === "all" || item.tier === selectedTier;
+			const matchesSets =
+				selectedSets === "all" || item.effect.sets?.includes(selectedSets);
+			return matchesSearch && matchesTier && matchesSets;
+		});
 
 	const TabsBoxStyles = `grid h-full max-h-max md:max-h-[612] overflow-auto bg-[#2f1c2c] p-2 md:p-4 rounded-lg ${clsx(theme === "light" && "bg-gray-300")}`;
 

@@ -4,13 +4,20 @@ import { useEffect, useState } from "react";
 import { Box } from "@/src/shared/ui/box";
 import { Typography } from "@/src/shared/ui/typography";
 import { ITEM_SLABS_DATA } from "../../simulator/config/slabsLists";
+import {
+	getRarityValue,
+	type Rarity,
+} from "../../simulator/lib/getRarityOrder";
 import { ItemSource } from "../../simulator/ui/ItemSource";
 
 export const LargeList = () => {
 	const { theme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 
-	const filteredItems = ITEM_SLABS_DATA.filter((item) => {
+	const filteredItems = ITEM_SLABS_DATA.sort(
+		(a, b) =>
+			getRarityValue(a.tier as Rarity) - getRarityValue(b.tier as Rarity),
+	).filter((item) => {
 		const matchesSearch = item.ko_label.toLowerCase();
 		return matchesSearch;
 	});

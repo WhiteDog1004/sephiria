@@ -440,12 +440,12 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		rotate: true,
 	},
 	{
-		value: "assurance",
+		value: "certitude",
 		tier: "legend",
 		ko_label: "확신",
-		eng_label: "assurance",
+		eng_label: "certitude",
 		image:
-			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//assurance.png",
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//certitude.png",
 		rotate: true,
 	},
 ];
