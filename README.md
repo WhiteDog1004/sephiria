@@ -17,7 +17,7 @@
 | **State** | ![Zustand](https://img.shields.io/badge/Zustand-black?style=for-the-badge&logo=zustand)                                                                                                                                                                            |
 | **Data** | ![TanStack Query](https://img.shields.io/badge/TanStack_Query-v5-orange?style=for-the-badge&logo=tanstack) ![Supabase](https://img.shields.io/badge/Supabase-green?style=for-the-badge&logo=supabase)                                                                      |
 | **Interaction** | ![dnd-kit](https://img.shields.io/badge/@dnd--kit-gray?style=for-the-badge) ![Shadcn](https://img.shields.io/badge/Shadcn-black?style=for-the-badge&logo=shadcn) ![Lucide React](https://img.shields.io/badge/Lucide-black?style=for-the-badge&logo=lucide)             |
-| **Tooling** | ![Biome JS](https://img.shields.io/badge/Biome_JS-blue?style=for-the-badge&logo=biome) ![ESLint](https://img.shields.io/badge/ESLint-blueviolet?style=for-the-badge&logo=eslint)                                                                                          |
+| **Tooling** | ![Biome JS](https://img.shields.io/badge/Biome_JS-blue?style=for-the-badge&logo=biome)                                                                            |
 
 - 기술 스택 향상을 목표로 라이브러리들을 최신 버전들을 활용했습니다.
 
@@ -49,6 +49,3 @@
 - **`entities`**: 핵심 비즈니스 개체 (예: `InventorySlot`)
 - **`features`**: 사용자 상호작용 및 비즈니스 로직 (예: `드래그앤드롭 핸들러`, `효과 툴팁`)
 - **`shared`**: 재사용 가능한 UI 컴포넌트 (`Box`, `Typography`), 커스텀 훅 (`useInventory`), 라이브러리 설정, 타입 등
-
-```eof
-```
