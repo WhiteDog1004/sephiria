@@ -26,6 +26,7 @@ export const ArtifactList = ({ data }: ArtifactProps) => {
 		>
 			{data.length > 0 ? (
 				data
+					.filter((item) => !item.disabled)
 					.sort(
 						(a, b) =>
 							getRarityValue(a.tier as Rarity) -

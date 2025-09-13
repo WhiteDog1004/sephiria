@@ -267,6 +267,7 @@ const Inventory = ({ data }: InventoryProps) => {
 	});
 
 	const filteredArtifacts = data
+		.filter((item) => !item.disabled)
 		.sort(
 			(a, b) =>
 				getRarityValue(a.tier as Rarity) - getRarityValue(b.tier as Rarity),

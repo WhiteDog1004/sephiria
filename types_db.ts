@@ -27,6 +27,7 @@ export type Database = {
 					level: number | null;
 					value: string;
 					tier: string;
+					disabled?: boolean;
 				};
 				Insert: {
 					created_at?: string;
@@ -42,6 +43,7 @@ export type Database = {
 					level?: number | null;
 					value: string;
 					tier?: string;
+					disabled?: boolean;
 				};
 				Update: {
 					created_at?: string;
@@ -57,6 +59,7 @@ export type Database = {
 					level?: number | null;
 					value?: string;
 					tier?: string;
+					disabled?: boolean;
 				};
 				Relationships: [];
 			};
