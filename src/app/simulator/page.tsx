@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getArtifactLists } from "@/src/features/simulator/model/actions";
 import Inventory from "@/src/modules/simulator/ui/Inventory";
-import { SITE_METADATA } from "@/src/shared/lib/sitemap";
+import { SITE_METADATA } from "@/src/shared/config/sitemap";
 import { Box } from "@/src/shared/ui/box";
 
 export const metadata: Metadata = {

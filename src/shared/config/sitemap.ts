@@ -6,6 +6,7 @@ export const SITEMAP = {
 	MIRACLE: "/miracle",
 	WEAPON: "/weapon",
 	SIMULATOR: "/simulator",
+	BUILDS: "/builds",
 };
 
 export const SITE_METADATA = {
@@ -32,5 +33,9 @@ export const SITE_METADATA = {
 	costume: {
 		title: "세피리아 - 코스튬",
 		description: "세피리아 위키: 코스튬",
+	},
+	builds: {
+		title: "세피리아 - 빌드 공유",
+		description: "세피리아 위키: 빌드 공유",
 	},
 };

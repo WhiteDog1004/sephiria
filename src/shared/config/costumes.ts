@@ -1,6 +1,19 @@
-import type { CostumeMap } from "./types";
+import type { Database } from "@/types_db";
 
-export const getCostumeOptions: CostumeMap = {
+export type CostumeType = {
+	name: string;
+	unlock?: string;
+	story: string;
+	options: string[];
+};
+
+export type CostumeMap = {
+	[key: string]: CostumeType;
+};
+
+export type CostumeDataType = Database["public"]["Tables"]["costume"]["Row"][];
+
+export const COSTUMES: CostumeMap = {
 	pink_rabbit: {
 		name: "분홍 토끼",
 		unlock: undefined,

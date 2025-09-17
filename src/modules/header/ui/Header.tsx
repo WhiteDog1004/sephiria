@@ -3,7 +3,7 @@
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { SITEMAP } from "@/src/shared/lib/sitemap";
+import { SITEMAP } from "@/src/shared/config/sitemap";
 import { Box } from "@/src/shared/ui/box";
 import {
 	DropdownMenu,

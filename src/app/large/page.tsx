@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { LargeLists } from "@/src/modules/large/ui/LargeLists";
-import { SITE_METADATA } from "@/src/shared/lib/sitemap";
+import { SITE_METADATA } from "@/src/shared/config/sitemap";
 
 export const metadata: Metadata = {
 	...SITE_METADATA.large,

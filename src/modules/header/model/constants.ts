@@ -1,4 +1,4 @@
-import { SITEMAP } from "@/src/shared/lib/sitemap";
+import { SITEMAP } from "@/src/shared/config/sitemap";
 
 export const MENU_LIST = [
 	{
@@ -24,5 +24,9 @@ export const MENU_LIST = [
 	{
 		label: "시뮬레이터",
 		link: SITEMAP.SIMULATOR,
+	},
+	{
+		label: "빌드공유",
+		link: SITEMAP.BUILDS,
 	},
 ];

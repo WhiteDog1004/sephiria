@@ -1,11 +1,11 @@
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
-import { getCostumeOptions } from "@/src/features/costume/model/constants";
+import { COSTUMES } from "@/src/shared/config/costumes";
 import { Box } from "@/src/shared/ui/box";
 import {
 	Carousel,
 	CarouselContent,
-	CarouselItem
+	CarouselItem,
 } from "@/src/shared/ui/carousel";
 import { Typography } from "@/src/shared/ui/typography";
 import type { Database } from "@/types_db";
@@ -43,7 +43,7 @@ export const CostumeCarousel = ({
 								unoptimized
 							/>
 							<Typography variant="caption">
-								{getCostumeOptions[item.value].name}
+								{COSTUMES[item.value].name}
 							</Typography>
 						</Box>
 					</CarouselItem>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CostumeCarousel } from "@/src/entities/costume/ui/Carousel";
-import { SITEMAP } from "@/src/shared/lib/sitemap";
+import { SITEMAP } from "@/src/shared/config/sitemap";
 import { Box } from "@/src/shared/ui/box";
 import { Button } from "@/src/shared/ui/button";
 import { Card } from "@/src/shared/ui/card";
