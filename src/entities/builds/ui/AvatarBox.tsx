@@ -13,12 +13,12 @@ type AvatarBoxProps = {
 
 export const AvatarBox = ({ img, nickname }: AvatarBoxProps) => {
 	return (
-		<Row className="items-center gap-2">
+		<Row className="w-full min-w-0 items-center gap-2">
 			<Avatar>
 				<AvatarImage src={img} />
 				<AvatarFallback>?</AvatarFallback>
 			</Avatar>
-			<Typography variant="body2" className="max-w-32 truncate">
+			<Typography variant="body2" className="truncate">
 				{nickname}
 			</Typography>
 		</Row>

@@ -7,7 +7,7 @@ import {
 	Typography,
 } from "@/src/shared";
 
-export const CharacterItem = ({ costume }: { costume: string }) => {
+export const CostumeItem = ({ costume }: { costume: string }) => {
 	return (
 		<Column className="justify-evenly items-center min-w-24 max-w-24 rounded-md border">
 			<Box className="w-max min-h-[72] p-2">
