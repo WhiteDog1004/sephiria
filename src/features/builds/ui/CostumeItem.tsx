@@ -3,26 +3,24 @@ import {
 	COSTUMES,
 	Column,
 	ImageWithFallback,
-	Separator,
 	Typography,
 } from "@/src/shared";
 
 export const CostumeItem = ({ costume }: { costume: string }) => {
 	return (
-		<Column className="justify-evenly items-center min-w-24 max-w-24 rounded-md border">
-			<Box className="w-max min-h-[72] p-2">
+		<Column className="overflow-hidden justify-center items-center max-w-16">
+			<Box className="w-fit p-2">
 				<ImageWithFallback
 					className="w-max p-0"
 					width={48}
 					height={48}
 					src={`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/costume/${costume}.png`}
-					alt={"scholar_lizard"}
+					alt={costume}
 					unoptimized
 				/>
 			</Box>
-			<Separator />
 			<Typography
-				className="p-2 max-w-24 text-center truncate"
+				className="p-1 lg:max-w-16 text-center truncate"
 				variant="caption"
 			>
 				{COSTUMES[costume].name}

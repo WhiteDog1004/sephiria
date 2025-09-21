@@ -47,7 +47,13 @@ export const ArtifactTooltip = ({
 						))}
 					</Box>
 				</Box>
-				<Image width={80} height={80} src={data.image} alt={data.label_eng} />
+				<Image
+					width={80}
+					height={80}
+					src={data.image}
+					alt={data.label_eng}
+					unoptimized
+				/>
 			</Box>
 			<Typography
 				className="w-full whitespace-pre-line text-gray-400"

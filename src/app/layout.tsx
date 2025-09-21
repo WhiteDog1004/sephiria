@@ -5,6 +5,7 @@ import { Header } from "../modules/header/ui/Header";
 import "./globals.css";
 import Script from "next/script";
 import { useId } from "react";
+import QueryProvider from "../shared/providers/theme/QueryProvider";
 
 const font = localFont({
 	src: "./fonts/Galmuri9.woff2",
@@ -79,15 +80,17 @@ export default function RootLayout({
 				</script>
 			</head>
 			<body>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="dark"
-					enableSystem
-					disableTransitionOnChange
-				>
-					<Header />
-					{children}
-				</ThemeProvider>
+				<QueryProvider>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="dark"
+						enableSystem
+						disableTransitionOnChange
+					>
+						<Header />
+						{children}
+					</ThemeProvider>
+				</QueryProvider>
 
 				<Script
 					async

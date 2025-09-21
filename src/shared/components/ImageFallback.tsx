@@ -30,6 +30,7 @@ const ImageWithFallback = ({ src, alt, ...props }: ImageProps) => {
 			onError={handleError}
 			onLoad={() => setIsLoading(false)}
 			className={`transition-opacity duration-300 ease-in-out ${isLoading ? "opacity-0" : "opacity-100"}`}
+			unoptimized
 			{...props}
 		/>
 	);

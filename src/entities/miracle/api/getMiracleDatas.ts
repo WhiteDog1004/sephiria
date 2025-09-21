@@ -1,4 +1,5 @@
 import type { PostgrestError } from "@supabase/supabase-js";
+import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 const handleError = (error: PostgrestError | null) => {
@@ -9,6 +10,19 @@ const handleError = (error: PostgrestError | null) => {
 
 export const getMiracleDatas = async () => {
 	const supabase = await createServerSupabaseClient();
+
+	const { data, error } = await supabase
+		.from("miracle")
+		.select("*")
+		.order("id", { ascending: true });
+
+	handleError(error);
+
+	return data;
+};
+
+export const getClientMiracleDatas = async () => {
+	const supabase = await createBrowserSupabaseClient();
 
 	const { data, error } = await supabase
 		.from("miracle")

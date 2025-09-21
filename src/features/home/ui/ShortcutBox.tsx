@@ -29,6 +29,7 @@ export const ShortcutBox = ({
 						src={"/inventory.png"}
 						alt={"simulator"}
 						className="w-full object-cover"
+						unoptimized
 					/>
 					<Box className="flex-col h-full gap-2 p-4">
 						<Typography variant="header3">인벤토리 시뮬레이터</Typography>
@@ -74,6 +75,7 @@ export const ShortcutBox = ({
 											height={48}
 											src={item.src}
 											alt={item.alt}
+											unoptimized
 										/>
 										<Typography>{item.label}</Typography>
 									</Box>

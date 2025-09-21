@@ -140,6 +140,37 @@ export type Database = {
 				};
 				Relationships: [];
 			};
+			builds: {
+				Row: {
+					created_at: string;
+					id: number;
+					postUuid: string;
+					postLike?: number;
+					title: string;
+					description: string;
+					content: {
+						label: string;
+						description?: string;
+						items: {
+							id: number;
+							img: string;
+							value: string;
+						}[];
+					}[];
+					costume: string;
+					weapon: string;
+					miracle: string;
+					youtube_link?: string;
+					version: string;
+					ability: string[];
+					updated_at: string;
+					writer: {
+						uuid: string;
+						nickname: string;
+						profileImage: string;
+					};
+				};
+			};
 		};
 		Views: {
 			[_ in never]: never;
