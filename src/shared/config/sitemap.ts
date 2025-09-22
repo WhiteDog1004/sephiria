@@ -7,6 +7,7 @@ export const SITEMAP = {
 	WEAPON: "/weapon",
 	SIMULATOR: "/simulator",
 	BUILDS: "/builds",
+	ADD_BUILD: "/builds/add",
 };
 
 export const SITE_METADATA = {

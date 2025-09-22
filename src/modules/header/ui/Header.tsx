@@ -3,6 +3,7 @@
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Avatar, AvatarImage, Row, Typography } from "@/src/shared";
 import { SITEMAP } from "@/src/shared/config/sitemap";
 import { Box } from "@/src/shared/ui/box";
 import {
@@ -13,10 +14,16 @@ import {
 	DropdownMenuTrigger,
 } from "@/src/shared/ui/dropdown-menu";
 import { MENU_LIST } from "../model/constants";
+import {
+	discordLoginHandler,
+	discordLogoutHandler,
+} from "../model/discordLoginHelper";
+import { useSession } from "../model/useUserInfo";
 import { ModeToggle } from "./ModeToggle";
 
 export const Header = () => {
 	const router = useRouter();
+	const { data } = useSession();
 
 	return (
 		<Box className="sticky z-50 top-0 backdrop-blur-md border-b dark:border-white/10 border-black/10 p-4">
@@ -43,6 +50,53 @@ export const Header = () => {
 										{list.label}
 									</DropdownMenuItem>
 								))}
+							</DropdownMenuGroup>
+						</DropdownMenuContent>
+					</DropdownMenu>
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
+							{data ? (
+								<Row className="gap-2 items-center cursor-pointer">
+									<Typography variant="body2">
+										{data.user.user_metadata.full_name}
+									</Typography>
+									<Avatar>
+										<AvatarImage src={data.user?.user_metadata.avatar_url} />
+									</Avatar>
+								</Row>
+							) : (
+								<Avatar>
+									<Box className="p-0 justify-center items-center">
+										<Typography>?</Typography>
+									</Box>
+								</Avatar>
+							)}
+						</DropdownMenuTrigger>
+						<DropdownMenuContent className="w-24" align="end">
+							<DropdownMenuGroup>
+								{data ? (
+									<DropdownMenuItem onClick={discordLogoutHandler}>
+										<Image
+											src={"/discord-icon.svg"}
+											width={20}
+											height={20}
+											alt={"discord"}
+											className="invert dark:invert-0"
+										/>
+										로그아웃
+									</DropdownMenuItem>
+								) : (
+									<DropdownMenuItem onClick={discordLoginHandler}>
+										<Image
+											src={"/discord-icon.svg"}
+											width={20}
+											height={20}
+											alt={"discord"}
+											className="invert dark:invert-0"
+										/>
+										로그인
+									</DropdownMenuItem>
+								)}
 							</DropdownMenuGroup>
 						</DropdownMenuContent>
 					</DropdownMenu>

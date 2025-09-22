@@ -1,23 +1,41 @@
 "use client";
 
-import { RotateCw } from "lucide-react";
+import { FilePlus2, RotateCw } from "lucide-react";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useGetArtifacts } from "@/src/entities/builds/model/useGetArtifacts";
 import { useGetBuilds } from "@/src/entities/builds/model/useGetBuilds";
 import { useGetMiracles } from "@/src/entities/builds/model/useGetMiracles";
 import { useGetWeapons } from "@/src/entities/builds/model/useGetWeapons";
 import { useBuildSearchStore } from "@/src/features/builds/model/buildSearchStore";
 import { BuildSearchButton } from "@/src/features/builds/ui/BuildSearchButton";
-import { Box, Button, Column, Row, Typography } from "@/src/shared";
+import {
+	Box,
+	Button,
+	Column,
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	Row,
+	SITEMAP,
+	Typography,
+} from "@/src/shared";
+import { discordLoginHandler } from "../header/model/discordLoginHelper";
+import { useSession } from "../header/model/useUserInfo";
 import { BuildsCard } from "./BuildsCard";
 
 export const BuildsClientPage = () => {
+	const router = useRouter();
 	const { searchList, setSearchList } = useBuildSearchStore();
 	const { data, refetch } = useGetBuilds({ ...searchList });
 	const { data: weapons } = useGetWeapons();
 	const { data: miracles } = useGetMiracles();
 	const { data: artifacts } = useGetArtifacts();
+	const { data: info } = useSession();
+	const [openDialog, setOpenDialog] = useState(false);
 
 	useEffect(() => {
 		if (searchList) {
@@ -28,7 +46,61 @@ export const BuildsClientPage = () => {
 	return (
 		<Box className="p-6">
 			<Row className="w-full max-w-7xl mx-auto justify-center gap-6">
-				<Column className="w-full justify-center">
+				<Column className="w-full justify-center gap-4">
+					<Row className="w-full justify-end items-center">
+						<Dialog open={openDialog} onOpenChange={setOpenDialog}>
+							<Button
+								variant="default"
+								onClick={() => {
+									if (info) {
+										router.push(SITEMAP.ADD_BUILD);
+										return;
+									}
+									if (!info) {
+										setOpenDialog(true);
+									}
+								}}
+							>
+								<FilePlus2 />
+								빌드 작성하기
+							</Button>
+							<DialogContent>
+								<DialogHeader>
+									<DialogTitle className="hidden">
+										로그인이 필요해요
+									</DialogTitle>
+									<DialogDescription asChild>
+										<Column className="justify-center items-center gap-4">
+											<Image
+												src="/white-wolf.png"
+												alt="needLogin"
+												width={80}
+												height={80}
+											/>
+											<Typography className="text-center" variant="body2">
+												앗 잠깐만요!
+												<br />
+												빌드를 공유하시려면
+												<br />
+												<b className="text-blue-600">디스코드 로그인</b>이
+												필요해요!
+											</Typography>
+											<Button onClick={discordLoginHandler}>
+												<Image
+													src={"/discord-icon.svg"}
+													width={20}
+													height={20}
+													alt={"discord"}
+													className="invert dark:invert-0"
+												/>
+												디스코드 로그인
+											</Button>
+										</Column>
+									</DialogDescription>
+								</DialogHeader>
+							</DialogContent>
+						</Dialog>
+					</Row>
 					<Row></Row>
 					{data?.length === 0 ? (
 						<Column className="gap-4 justify-center items-center w-full h-full mt-12">
