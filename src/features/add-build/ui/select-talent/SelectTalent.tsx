@@ -12,6 +12,9 @@ import {
 	FormLabel,
 	Row,
 	Separator,
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
 	Typography,
 } from "@/src/shared";
 import {
@@ -57,7 +60,7 @@ export const SelectTalent = (form: any) => {
 							</Row>
 							<Separator />
 							<Row className="w-full overflow-x-auto">
-								<Row className="min-w-max justify-evenly w-full p-3 gap-2">
+								<Row className="min-w-max justify-evenly w-full px-3 gap-2">
 									{Object.entries(TALENT_STATUS).map(([key, value], index) => {
 										const talentKey = key as TalentType;
 
@@ -129,13 +132,28 @@ export const SelectTalent = (form: any) => {
 																<Typography variant="caption">
 																	{status[0]}
 																</Typography>
-																<Image
-																	width={24}
-																	height={24}
-																	src={"/duelist.png"}
-																	alt="talent-image"
-																	className={`p-0 filter ${clsx((field.value?.[talentKey] ?? 0) >= status[0] ? "grayscale-0 opacity-100" : "grayscale opacity-30")}`}
-																/>
+																<Tooltip delayDuration={400}>
+																	<TooltipTrigger asChild>
+																		<Image
+																			width={24}
+																			height={24}
+																			src={`/talent/${talentKey}_${status[0]}.png`}
+																			alt="talent-image"
+																			className={`p-0 filter ${clsx((field.value?.[talentKey] ?? 0) >= status[0] ? "grayscale-0 opacity-100" : "grayscale-75 opacity-50")}`}
+																		/>
+																	</TooltipTrigger>
+																	<TooltipContent sideOffset={16}>
+																		<Row className="p-2 max-w-40 justify-center items-center text-center">
+																			<Typography variant="caption">
+																				{
+																					TALENT_STATUS[talentKey].stat[
+																						Number(status[0])
+																					]
+																				}
+																			</Typography>
+																		</Row>
+																	</TooltipContent>
+																</Tooltip>
 															</Column>
 														))}
 													</Row>
@@ -145,8 +163,8 @@ export const SelectTalent = (form: any) => {
 									})}
 								</Row>
 							</Row>
-							<Typography variant="caption">
-								5, 10, 20 아이콘을 눌러 활성화해 주세요!
+							<Typography variant="caption" className="text-gray-600">
+								해당 아이콘을 눌러 활성화해 주세요!
 							</Typography>
 						</Column>
 					</FormControl>
