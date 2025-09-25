@@ -19,6 +19,7 @@ import {
 	FormControl,
 	FormField,
 	FormItem,
+	FormMessage,
 	ImageWithFallback,
 	Input,
 	Row,
@@ -105,113 +106,117 @@ export const ItemsAddItems = ({
 			render={() => (
 				<FormItem>
 					<FormControl>
-						<Drawer open={isOpen} onOpenChange={setIsOpen}>
-							<Row className="grid grid-cols-[repeat(auto-fill,minmax(64px,1fr))] gap-2 items-center">
-								{fieldValue.map(
-									(list: { id: string; value: string }, index: number) => (
-										<Row key={list.id} className="relative w-max group">
-											<Button
-												onClick={() => {
-													setIsOpen(true);
-													setSelectIndex(index);
-												}}
-												type="button"
-												className={`w-16 h-16`}
-											>
-												<ImageWithFallback
-													className="min-w-12 max-w-12 max-h-12 p-0"
-													width={48}
-													height={48}
-													src={
-														filteredItems.find(
-															(item) => item.value === fieldValue[index].value,
-														)?.image || "/"
-													}
-													alt={fieldValue[index].value}
-												/>
-											</Button>
-											<Button
-												type="button"
-												className="absolute top-1 right-1 h-max !p-0 hidden group-hover:flex opacity-60"
-												variant="ghost"
-												onClick={() => {
-													remove(index);
-												}}
-											>
-												<X className="text-red-500" />
-											</Button>
-										</Row>
-									),
-								)}
-								{fieldValue.length < 20 && (
-									<Button
-										onClick={() => {
-											setIsOpen(true);
-											setSelectIndex(fieldValue.length);
-										}}
-										type="button"
-										className={`w-16 h-16 opacity-40 hover:opacity-100`}
-									>
-										<CopyPlus className="text-gray-500" />
-									</Button>
-								)}
-							</Row>
-							<DrawerContent className="w-full">
-								<DrawerHeader>
-									<DrawerTitle>
-										<Typography variant="body2">
-											아티팩트를 선택해 주세요
-										</Typography>
-									</DrawerTitle>
-								</DrawerHeader>
-
-								<Column className="w-full max-w-3xl mx-auto py-4 md:px-0 px-4 gap-2">
-									<Row className="w-full gap-2">
-										<Input
-											placeholder="아티팩트 검색"
-											value={currentValue}
-											onChange={(e) => {
-												setCurrentValue(e.target.value);
-												handleSearch(e.target.value);
+						<Column className="w-full gap-2">
+							<Drawer open={isOpen} onOpenChange={setIsOpen}>
+								<Row className="grid grid-cols-[repeat(auto-fill,minmax(64px,1fr))] gap-2 items-center">
+									{fieldValue.map(
+										(list: { id: string; value: string }, index: number) => (
+											<Row key={list.id} className="relative w-max group">
+												<Button
+													onClick={() => {
+														setIsOpen(true);
+														setSelectIndex(index);
+													}}
+													type="button"
+													className={`w-16 h-16`}
+												>
+													<ImageWithFallback
+														className="min-w-12 max-w-12 max-h-12 p-0"
+														width={48}
+														height={48}
+														src={
+															filteredItems.find(
+																(item) =>
+																	item.value === fieldValue[index].value,
+															)?.image || "/"
+														}
+														alt={fieldValue[index].value}
+													/>
+												</Button>
+												<Button
+													type="button"
+													className="absolute top-1 right-1 h-max !p-0 hidden group-hover:flex opacity-60"
+													variant="ghost"
+													onClick={() => {
+														remove(index);
+													}}
+												>
+													<X className="text-red-500" />
+												</Button>
+											</Row>
+										),
+									)}
+									{fieldValue.length < 20 && (
+										<Button
+											onClick={() => {
+												setIsOpen(true);
+												setSelectIndex(fieldValue.length);
 											}}
-										/>
-										<Select
-											value={selectedSets}
-											onValueChange={setSelectedSets}
+											type="button"
+											className={`w-16 h-16 opacity-40 hover:opacity-100`}
 										>
-											<SelectTrigger className="min-w-28 w-28">
-												<SelectValue placeholder="콤보 선택" />
-											</SelectTrigger>
-											<SelectContent>
-												{EFFECT_DATA.map((sets) => (
-													<SelectItem key={sets.value} value={sets.value}>
-														{sets.label}
-													</SelectItem>
-												))}
-											</SelectContent>
-										</Select>
-									</Row>
+											<CopyPlus className="text-gray-500" />
+										</Button>
+									)}
+								</Row>
+								<DrawerContent className="w-full">
+									<DrawerHeader>
+										<DrawerTitle>
+											<Typography variant="body2">
+												아티팩트를 선택해 주세요
+											</Typography>
+										</DrawerTitle>
+									</DrawerHeader>
 
-									<Row className="grid gap-2 grid-cols-[repeat(auto-fill,minmax(48px,1fr))] max-h-[400px] overflow-y-auto">
-										{filteredItems?.map((item) => (
-											<Button
-												className={`p-0 h-max ${clsx(getTierBorderColor(item.tier))}`}
-												key={item.value}
-												onClick={() => handleAddItem(item.value)}
+									<Column className="w-full max-w-3xl mx-auto py-4 md:px-0 px-4 gap-2">
+										<Row className="w-full gap-2">
+											<Input
+												placeholder="아티팩트 검색"
+												value={currentValue}
+												onChange={(e) => {
+													setCurrentValue(e.target.value);
+													handleSearch(e.target.value);
+												}}
+											/>
+											<Select
+												value={selectedSets}
+												onValueChange={setSelectedSets}
 											>
-												<ImageWithFallback
-													className="min-w-12 max-w-12 max-h-12 p-0"
-													width={48}
-													height={48}
-													src={item.image}
-													alt={item.value}
-												/>
-											</Button>
-										))}
-									</Row>
-								</Column>
-							</DrawerContent>
-						</Drawer>
+												<SelectTrigger className="min-w-28 w-28">
+													<SelectValue placeholder="콤보 선택" />
+												</SelectTrigger>
+												<SelectContent>
+													{EFFECT_DATA.map((sets) => (
+														<SelectItem key={sets.value} value={sets.value}>
+															{sets.label}
+														</SelectItem>
+													))}
+												</SelectContent>
+											</Select>
+										</Row>
+
+										<Row className="grid gap-2 grid-cols-[repeat(auto-fill,minmax(48px,1fr))] max-h-[400px] overflow-y-auto">
+											{filteredItems?.map((item) => (
+												<Button
+													className={`p-0 h-max ${clsx(getTierBorderColor(item.tier))}`}
+													key={item.value}
+													onClick={() => handleAddItem(item.value)}
+												>
+													<ImageWithFallback
+														className="min-w-12 max-w-12 max-h-12 p-0"
+														width={48}
+														height={48}
+														src={item.image}
+														alt={item.value}
+													/>
+												</Button>
+											))}
+										</Row>
+									</Column>
+								</DrawerContent>
+							</Drawer>
+							<FormMessage />
+						</Column>
 					</FormControl>
 				</FormItem>
 			)}

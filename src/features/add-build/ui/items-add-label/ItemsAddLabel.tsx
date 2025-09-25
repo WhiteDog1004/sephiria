@@ -84,7 +84,7 @@ export const ItemsAddLabel = ({
 									</Button>
 								</Row>
 							) : (
-								<Row className="w-full py-2 px-4 bg-secondary/20 rounded-lg">
+								<Row className="w-full py-2 bg-secondary/20 rounded-lg">
 									<Typography
 										variant="body2"
 										className={`${clsx(!field.value && "text-gray-500")} w-full cursor-pointer truncate`}
@@ -95,7 +95,7 @@ export const ItemsAddLabel = ({
 									</Typography>
 								</Row>
 							)}
-							<Box className="py-0 px-4 justify-start">
+							<Box className="p-0 justify-start">
 								<FormMessage />
 							</Box>
 						</Column>

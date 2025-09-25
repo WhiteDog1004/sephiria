@@ -37,12 +37,14 @@ export const addFormSchema = z.object({
 		),
 	lists: z.array(
 		z.object({
-			items: z.array(
-				z.object({
-					id: z.string(),
-					value: z.string(),
-				}),
-			),
+			items: z
+				.array(
+					z.object({
+						id: z.string(),
+						value: z.string(),
+					}),
+				)
+				.min(1, { message: "아티팩트를 선택해 주세요" }),
 			label: z
 				.string()
 				.min(2, { message: "최소 2글자 이상 입력해 주세요" })
