@@ -92,21 +92,21 @@ export const BuildsCard = ({
 								className="min-w-max"
 								content={
 									<Row className="w-full h-full justify-center items-center p-0 gap-1 md:gap-1">
-										{data.ability.map((ability, index) => (
-											<Column key={ability + index}>
+										{Object.entries(data.ability).map(([key, value], index) => (
+											<Column key={key}>
 												<Image
 													width={24}
 													height={24}
 													className="min-w-3 max-w-3"
 													src={`/stat/${ABILITY_STATUS_ICONS[index]}.png`}
-													alt={"status"}
+													alt={key}
 													unoptimized
 												/>
 												<Typography
 													className={ABILITY_TEXT_COLORS[index]}
 													variant="caption"
 												>
-													{ability}
+													{value}
 												</Typography>
 											</Column>
 										))}

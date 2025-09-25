@@ -2,20 +2,39 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useCreateBuild } from "@/src/entities/add-build";
+import type { PostBuildType } from "@/src/entities/add-build/model/createBuild.types";
 import {
 	AddTitle,
 	SelectCostume,
+	SelectMiracle,
 	SelectTalent,
 	SelectWeapon,
 } from "@/src/features/add-build";
 import { AddDescription } from "@/src/features/add-build/ui/add-description/AddDescription";
-import { Button, Column, Form, Row, Typography } from "@/src/shared";
+import {
+	Button,
+	Column,
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	Form,
+	Row,
+	Typography,
+} from "@/src/shared";
+import { useSession } from "../../header/model/useUserInfo";
 import { addFormSchema } from "../model/formSchema";
 import { AddItems } from "./AddItems";
 
 export const AddBuildClientPage = () => {
+	const { data: info } = useSession();
+	const { mutate } = useCreateBuild();
+	const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+
 	const form = useForm({
 		resolver: zodResolver(addFormSchema),
 		defaultValues: {
@@ -23,6 +42,7 @@ export const AddBuildClientPage = () => {
 			description: "",
 			costume: "",
 			weapon: "",
+			miracle: "",
 			talent: {
 				anger: 0,
 				rapid: 0,
@@ -36,8 +56,31 @@ export const AddBuildClientPage = () => {
 		mode: "onChange",
 	});
 
-	const onSubmit = (value: any) => {
-		console.log(value);
+	const onSubmit = (value: Omit<PostBuildType, "writer" | "postUuid">) => {
+		mutate(
+			{
+				postUuid: crypto.randomUUID(),
+				title: value.title,
+				description: value.description,
+				costume: value.costume,
+				weapon: value.weapon,
+				miracle: value.miracle,
+				content: value.lists,
+				youtube_link: value.youtube_link,
+				writer: {
+					uuid: info?.user.user_metadata.provider_id,
+					nickname: info?.user.user_metadata.full_name,
+					profileImage: info?.user.user_metadata.avatar_url,
+				},
+				ability: value.talent,
+			},
+			{
+				onSuccess: () => {
+					form.reset();
+					setIsSuccessOpen(true);
+				},
+			},
+		);
 	};
 
 	useEffect(() => {
@@ -65,7 +108,7 @@ export const AddBuildClientPage = () => {
 				<Column className="items-center py-4">
 					<Typography variant="header1">빌드 공유소</Typography>
 					<Typography className="text-secondary-foreground" variant="body2">
-						다른 용사님들께 빌드를 공유해 보세요!
+						다른 여행자분들께 빌드를 공유해 보세요!
 					</Typography>
 				</Column>
 
@@ -79,6 +122,7 @@ export const AddBuildClientPage = () => {
 						<Row className="gap-2">
 							<SelectCostume {...form} />
 							<SelectWeapon {...form} />
+							<SelectMiracle {...form} />
 						</Row>
 
 						<SelectTalent {...form} />
@@ -93,6 +137,44 @@ export const AddBuildClientPage = () => {
 					</form>
 				</Form>
 			</Column>
+
+			<Dialog
+				open={isSuccessOpen}
+				onOpenChange={(open) => {
+					setIsSuccessOpen(open);
+					if (!open) {
+						window.location.href = "/builds";
+					}
+				}}
+			>
+				<DialogContent>
+					<DialogHeader>
+						<DialogTitle className="hidden">빌드 작성 완료</DialogTitle>
+						<DialogDescription asChild>
+							<Column className="justify-center items-center gap-4">
+								<Image
+									src="/white-wolf.png"
+									alt="needLogin"
+									width={80}
+									height={80}
+								/>
+								<Typography className="text-center" variant="body2">
+									성공적으로 빌드를 작성했어요!
+									<br />이 빌드가 분명 큰 도움이 될 거예요!
+								</Typography>
+								<Button
+									onClick={() => {
+										setIsSuccessOpen(false);
+										window.location.href = "/builds";
+									}}
+								>
+									목록으로
+								</Button>
+							</Column>
+						</DialogDescription>
+					</DialogHeader>
+				</DialogContent>
+			</Dialog>
 		</Column>
 	);
 };

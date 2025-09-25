@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { Check, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
 	Box,
 	Button,
@@ -21,6 +21,7 @@ export const ItemsAddLabel = ({
 	form: any;
 	index: number;
 }) => {
+	const inputRef = useRef<HTMLInputElement | null>(null);
 	const [isEdit, setIsEdit] = useState(false);
 
 	const fieldValue = form.getValues(`lists.${index}.label`) || "";
@@ -38,6 +39,12 @@ export const ItemsAddLabel = ({
 		setTempLabel(fieldValue);
 	}, [fieldValue]);
 
+	useEffect(() => {
+		if (isEdit && inputRef.current) {
+			inputRef.current.focus();
+		}
+	}, [isEdit]);
+
 	return (
 		<FormField
 			control={form.control}
@@ -52,7 +59,10 @@ export const ItemsAddLabel = ({
 										value={tempLabel}
 										onChange={(e) => setTempLabel(e.target.value)}
 										onBlur={field.onBlur}
-										ref={field.ref}
+										ref={(el) => {
+											field.ref(el);
+											inputRef.current = el;
+										}}
 										onKeyDown={(e) => {
 											if (e.key === "Enter") {
 												e.preventDefault();

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { Check, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
 	Button,
 	FormControl,
@@ -18,6 +18,7 @@ export const ItemsAddDescription = ({
 	form: any;
 	index: number;
 }) => {
+	const inputRef = useRef<HTMLInputElement | null>(null);
 	const [isEdit, setIsEdit] = useState(false);
 
 	const fieldValue = form.getValues(`lists.${index}.description`) || "";
@@ -35,6 +36,12 @@ export const ItemsAddDescription = ({
 		setTempDescription(fieldValue);
 	}, [fieldValue]);
 
+	useEffect(() => {
+		if (isEdit && inputRef.current) {
+			inputRef.current.focus();
+		}
+	}, [isEdit]);
+
 	return (
 		<FormField
 			control={form.control}
@@ -48,7 +55,10 @@ export const ItemsAddDescription = ({
 									value={tempDescription}
 									onChange={(e) => setTempDescription(e.target.value)}
 									onBlur={field.onBlur}
-									ref={field.ref}
+									ref={(el) => {
+										field.ref(el);
+										inputRef.current = el;
+									}}
 									onKeyDown={(e) => {
 										if (e.key === "Enter") {
 											e.preventDefault();

@@ -8,10 +8,10 @@ import {
 
 export const CostumeItem = ({ costume }: { costume: string }) => {
 	return (
-		<Column className="overflow-hidden justify-center items-center max-w-16">
+		<Column className="overflow-hidden justify-center items-center max-w-max lg:max-w-16">
 			<Box className="w-fit p-2">
 				<ImageWithFallback
-					className="w-max p-0"
+					className="w-12 h-12 object-contain p-0"
 					width={48}
 					height={48}
 					src={`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/costume/${costume}.png`}
@@ -20,7 +20,7 @@ export const CostumeItem = ({ costume }: { costume: string }) => {
 				/>
 			</Box>
 			<Typography
-				className="p-1 lg:max-w-16 text-center truncate"
+				className="p-1 max-w-max lg:max-w-16 text-center truncate"
 				variant="caption"
 			>
 				{COSTUMES[costume].name}

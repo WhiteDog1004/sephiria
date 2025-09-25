@@ -139,10 +139,8 @@ export const BuildsClientPage = () => {
 									)}
 									artifact={
 										artifacts?.filter((artifact) =>
-											list.content.some((content) =>
-												content.items.some(
-													(item) => item.value === artifact.value,
-												),
+											list.content[0].items.some(
+												(item) => item.value === artifact.value,
 											),
 										) || []
 									}

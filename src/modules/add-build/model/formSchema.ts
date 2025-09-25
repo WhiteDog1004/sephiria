@@ -12,6 +12,7 @@ export const addFormSchema = z.object({
 	description: z.string().max(200, { message: "200자 내로 입력해 주세요" }),
 	costume: z.string().min(1, { message: "코스튬을 선택해 주세요" }),
 	weapon: z.string().min(1, { message: "무기를 선택해 주세요" }),
+	miracle: z.string().min(1, { message: "기적을 선택해 주세요" }),
 	talent: z
 		.object({
 			anger: z.number().min(0).max(20),

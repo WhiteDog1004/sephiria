@@ -1,3 +1,9 @@
+import type {
+	ListType,
+	TalentType,
+	WriterType,
+} from "./src/entities/add-build/model/createBuild.types";
+
 export type Json =
 	| string
 	| number
@@ -169,6 +175,21 @@ export type Database = {
 						nickname: string;
 						profileImage: string;
 					};
+				};
+				Insert: {
+					created_at?: string;
+					title: string;
+					description: string;
+					content: ListType[];
+					costume: string;
+					weapon: string;
+					miracle: string;
+					ability: TalentType;
+					writer: WriterType;
+					youtube_link?: string;
+					version?: string;
+					postLike?: number;
+					postUuid: string;
 				};
 			};
 		};
