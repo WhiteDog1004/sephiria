@@ -9,6 +9,7 @@ export * from "./ui/card";
 export * from "./ui/carousel";
 export * from "./ui/column";
 export * from "./ui/dialog";
+export * from "./ui/drawer";
 export * from "./ui/dropdown-menu";
 export * from "./ui/form";
 export * from "./ui/input";

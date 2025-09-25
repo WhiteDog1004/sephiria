@@ -11,6 +11,7 @@ import {
 } from "@/src/features/add-build";
 import { Button, Column, Form, Row, Typography } from "@/src/shared";
 import { addFormSchema } from "../model/formSchema";
+import { AddItems } from "./AddItems";
 
 export const AddBuildClientPage = () => {
 	const form = useForm({
@@ -27,6 +28,7 @@ export const AddBuildClientPage = () => {
 				wisdom: 0,
 				will: 0,
 			},
+			lists: [],
 		},
 		mode: "onChange",
 	});
@@ -52,12 +54,15 @@ export const AddBuildClientPage = () => {
 						className="flex flex-col gap-8 w-full max-w-3xl"
 					>
 						<AddTitle {...form} />
+
 						<Row className="gap-2">
 							<SelectCostume {...form} />
 							<SelectWeapon {...form} />
 						</Row>
 
 						<SelectTalent {...form} />
+
+						<AddItems {...form} />
 
 						<Button size="lg" className="w-full" type="submit">
 							작성

@@ -32,7 +32,9 @@ export const AddTitle = (form: any) => {
 								) : (
 									<Box className="p-0" />
 								)}
-								<Typography>{field.value.length}/80</Typography>
+								<Typography variant="caption">
+									{field.value.length}/80
+								</Typography>
 							</Row>
 						</Column>
 					</FormControl>

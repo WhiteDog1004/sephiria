@@ -19,4 +19,19 @@ export const addFormSchema = z.object({
 		wisdom: z.number().min(0).max(20),
 		will: z.number().min(0).max(20),
 	}),
+	lists: z.array(
+		z.object({
+			items: z.array(
+				z.object({
+					id: z.string(),
+					value: z.string(),
+				}),
+			),
+			label: z
+				.string()
+				.min(6, { message: "최소 6글자 이상 입력해 주세요." })
+				.max(50, { message: "최대 50글자까지 입력 가능합니다." }),
+			description: z.string().optional(),
+		}),
+	),
 });
