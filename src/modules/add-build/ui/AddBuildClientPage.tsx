@@ -10,6 +10,7 @@ import {
 	SelectTalent,
 	SelectWeapon,
 } from "@/src/features/add-build";
+import { AddDescription } from "@/src/features/add-build/ui/add-description/AddDescription";
 import { Button, Column, Form, Row, Typography } from "@/src/shared";
 import { addFormSchema } from "../model/formSchema";
 import { AddItems } from "./AddItems";
@@ -19,6 +20,7 @@ export const AddBuildClientPage = () => {
 		resolver: zodResolver(addFormSchema),
 		defaultValues: {
 			title: "",
+			description: "",
 			costume: "",
 			weapon: "",
 			talent: {
@@ -41,6 +43,7 @@ export const AddBuildClientPage = () => {
 	useEffect(() => {
 		form.reset({
 			title: "",
+			description: "",
 			costume: "",
 			weapon: "",
 			talent: {
@@ -82,8 +85,10 @@ export const AddBuildClientPage = () => {
 
 						<AddItems {...form} />
 
-						<Button size="lg" className="w-full" type="submit">
-							작성
+						<AddDescription {...form} />
+
+						<Button size="lg" className="w-full mt-12" type="submit">
+							빌드 작성 완료
 						</Button>
 					</form>
 				</Form>

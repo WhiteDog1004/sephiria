@@ -11,29 +11,29 @@ import {
 	Typography,
 } from "@/src/shared";
 
-export const AddTitle = (form: any) => {
+export const AddDescription = (form: any) => {
 	return (
 		<FormField
 			control={form.control}
-			name="title"
+			name="description"
 			render={({ field }) => (
-				<FormItem className="w-full">
-					<FormLabel>빌드 제목</FormLabel>
+				<FormItem className="flex flex-col w-full">
+					<FormLabel>빌드 설명</FormLabel>
 					<FormControl>
 						<Column className="items-end gap-2">
 							<Textarea
-								className="text-xs resize-none max-h-16"
-								placeholder="80자내로 입력해 주세요"
+								className="text-xs resize-none w-full max-h-40"
+								placeholder="200자내로 입력해 주세요."
 								{...field}
 							/>
 							<Row className="items-center justify-between w-full">
-								{form.formState.errors.title ? (
+								{form.formState.errors.description ? (
 									<FormMessage />
 								) : (
 									<Box className="p-0" />
 								)}
 								<Typography variant="caption">
-									{field.value.length}/80
+									{field.value.length}/200
 								</Typography>
 							</Row>
 						</Column>
