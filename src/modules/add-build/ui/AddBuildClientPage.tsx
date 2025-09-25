@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
 	AddTitle,
@@ -36,6 +37,23 @@ export const AddBuildClientPage = () => {
 	const onSubmit = (value: any) => {
 		console.log(value);
 	};
+
+	useEffect(() => {
+		form.reset({
+			title: "",
+			costume: "",
+			weapon: "",
+			talent: {
+				anger: 0,
+				rapid: 0,
+				survival: 0,
+				patience: 0,
+				wisdom: 0,
+				will: 0,
+			},
+			lists: [],
+		});
+	}, [form]);
 
 	return (
 		<Column className="w-full p-8 items-center">

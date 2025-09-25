@@ -10,6 +10,7 @@ import {
 	FormField,
 	FormItem,
 	FormLabel,
+	FormMessage,
 	Row,
 	Separator,
 	Tooltip,
@@ -163,6 +164,7 @@ export const SelectTalent = (form: any) => {
 									})}
 								</Row>
 							</Row>
+							<FormMessage />
 							<Typography variant="caption" className="text-gray-600">
 								해당 아이콘을 눌러 활성화해 주세요!
 							</Typography>
