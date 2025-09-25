@@ -9,6 +9,7 @@ import {
 	getRarityValue,
 	type Rarity,
 } from "@/src/features/simulator/lib/getRarityOrder";
+import { ArtifactTooltip } from "@/src/features/simulator/ui/ArtifactTooltip";
 import {
 	Button,
 	Column,
@@ -28,6 +29,9 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
 	Typography,
 } from "@/src/shared";
 import { getTierBorderColor } from "../../config/getTierBorderColor";
@@ -197,19 +201,27 @@ export const ItemsAddItems = ({
 
 										<Row className="grid gap-2 grid-cols-[repeat(auto-fill,minmax(48px,1fr))] max-h-[400px] overflow-y-auto">
 											{filteredItems?.map((item) => (
-												<Button
-													className={`p-0 h-max ${clsx(getTierBorderColor(item.tier))}`}
-													key={item.value}
-													onClick={() => handleAddItem(item.value)}
-												>
-													<ImageWithFallback
-														className="min-w-12 max-w-12 max-h-12 p-0"
-														width={48}
-														height={48}
-														src={item.image}
-														alt={item.value}
-													/>
-												</Button>
+												<Tooltip delayDuration={400} key={item.value}>
+													<TooltipTrigger asChild>
+														<Button
+															className={`p-0 h-max ${clsx(getTierBorderColor(item.tier))}`}
+															onClick={() => handleAddItem(item.value)}
+														>
+															<ImageWithFallback
+																className="min-w-12 max-w-12 max-h-12 p-0"
+																width={48}
+																height={48}
+																src={item.image}
+																alt={item.value}
+															/>
+														</Button>
+													</TooltipTrigger>
+													<TooltipContent sideOffset={16}>
+														<ArtifactTooltip
+															data={item as ArtifactInstance["item"]}
+														/>
+													</TooltipContent>
+												</Tooltip>
 											))}
 										</Row>
 									</Column>
