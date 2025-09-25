@@ -107,62 +107,43 @@ export const ItemsAddItems = ({
 					<FormControl>
 						<Drawer open={isOpen} onOpenChange={setIsOpen}>
 							<Row className="grid grid-cols-[repeat(auto-fill,minmax(64px,1fr))] gap-2 items-center">
-								<Button
-									onClick={() => {
-										setIsOpen(true);
-										setSelectIndex(0);
-									}}
-									className="w-16 h-16"
-									type="button"
-									key={0}
-								>
-									{fieldValue[0] ? (
-										<ImageWithFallback
-											className="min-w-12 max-w-12 max-h-12 p-0"
-											width={48}
-											height={48}
-											src={
-												filteredItems.find(
-													(item) => item.value === fieldValue[0].value,
-												)?.image || "/"
-											}
-											alt={fieldValue[0].value}
-										/>
-									) : (
+								{fieldValue.map(
+									(list: { id: string; value: string }, index: number) => (
+										<Button
+											onClick={() => {
+												setIsOpen(true);
+												setSelectIndex(index);
+											}}
+											key={list.id}
+											type="button"
+											className={`w-16 h-16`}
+										>
+											<ImageWithFallback
+												className="min-w-12 max-w-12 max-h-12 p-0"
+												width={48}
+												height={48}
+												src={
+													filteredItems.find(
+														(item) => item.value === fieldValue[index].value,
+													)?.image || "/"
+												}
+												alt={fieldValue[index].value}
+											/>
+										</Button>
+									),
+								)}
+								{fieldValue.length < 20 && (
+									<Button
+										onClick={() => {
+											setIsOpen(true);
+											setSelectIndex(fieldValue.length);
+										}}
+										type="button"
+										className={`w-16 h-16 opacity-40 hover:opacity-100`}
+									>
 										<CopyPlus className="text-gray-500" />
-									)}
-								</Button>
-								{fieldValue.length > 0 &&
-									fieldValue.map(
-										(list: { id: string; value: string }, index: number) => (
-											<Button
-												onClick={() => {
-													setIsOpen(true);
-													setSelectIndex(index + 1);
-												}}
-												key={list.id}
-												type="button"
-												className={`w-16 h-16 ${clsx(!fieldValue[index + 1] && "opacity-40 hover:opacity-100")}`}
-											>
-												{fieldValue[index + 1] ? (
-													<ImageWithFallback
-														className="min-w-12 max-w-12 max-h-12 p-0"
-														width={48}
-														height={48}
-														src={
-															filteredItems.find(
-																(item) =>
-																	item.value === fieldValue[index + 1].value,
-															)?.image || "/"
-														}
-														alt={fieldValue[index + 1].value}
-													/>
-												) : (
-													<CopyPlus className="text-gray-500" />
-												)}
-											</Button>
-										),
-									)}
+									</Button>
+								)}
 							</Row>
 							<DrawerContent className="w-full">
 								<DrawerHeader>
