@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import debounce from "lodash.debounce";
-import { CopyPlus } from "lucide-react";
+import { CopyPlus, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { type UseFormReturn, useFieldArray } from "react-hook-form";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
@@ -48,7 +48,7 @@ export const ItemsAddItems = ({
 
 	const fieldValue = form.getValues(`lists.${index}.items`) || "";
 
-	const { append, update } = useFieldArray({
+	const { append, update, remove } = useFieldArray({
 		control: form.control,
 		name: `lists.${index}.items`,
 	});
@@ -109,27 +109,38 @@ export const ItemsAddItems = ({
 							<Row className="grid grid-cols-[repeat(auto-fill,minmax(64px,1fr))] gap-2 items-center">
 								{fieldValue.map(
 									(list: { id: string; value: string }, index: number) => (
-										<Button
-											onClick={() => {
-												setIsOpen(true);
-												setSelectIndex(index);
-											}}
-											key={list.id}
-											type="button"
-											className={`w-16 h-16`}
-										>
-											<ImageWithFallback
-												className="min-w-12 max-w-12 max-h-12 p-0"
-												width={48}
-												height={48}
-												src={
-													filteredItems.find(
-														(item) => item.value === fieldValue[index].value,
-													)?.image || "/"
-												}
-												alt={fieldValue[index].value}
-											/>
-										</Button>
+										<Row key={list.id} className="relative w-max group">
+											<Button
+												onClick={() => {
+													setIsOpen(true);
+													setSelectIndex(index);
+												}}
+												type="button"
+												className={`w-16 h-16`}
+											>
+												<ImageWithFallback
+													className="min-w-12 max-w-12 max-h-12 p-0"
+													width={48}
+													height={48}
+													src={
+														filteredItems.find(
+															(item) => item.value === fieldValue[index].value,
+														)?.image || "/"
+													}
+													alt={fieldValue[index].value}
+												/>
+											</Button>
+											<Button
+												type="button"
+												className="absolute top-1 right-1 h-max !p-0 hidden group-hover:flex opacity-60"
+												variant="ghost"
+												onClick={() => {
+													remove(index);
+												}}
+											>
+												<X className="text-red-500" />
+											</Button>
+										</Row>
 									),
 								)}
 								{fieldValue.length < 20 && (
