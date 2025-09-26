@@ -3,6 +3,7 @@ export * from "./ui/add-title/AddTitle";
 export * from "./ui/items-add-description/ItemsAddDescription";
 export * from "./ui/items-add-items/ItemsAddItems";
 export * from "./ui/items-add-label/ItemsAddLabel";
+export * from "./ui/items-sets/ItemsSets";
 export * from "./ui/select-costume/SelectCostume";
 export * from "./ui/select-miracle/SelectMiracle";
 export * from "./ui/select-talent/SelectTalent";

@@ -7,6 +7,7 @@ import {
 	ItemsAddDescription,
 	ItemsAddItems,
 	ItemsAddLabel,
+	ItemsSets,
 } from "@/src/features/add-build";
 import { Button, Column, Separator, Typography } from "@/src/shared";
 
@@ -30,11 +31,11 @@ export const AddItems = (form: UseFormReturn<any>) => {
 	return (
 		<Column className="w-full items-center gap-2">
 			<Typography variant="body2">아티팩트</Typography>
-			<Column className="gap-4 p-4 w-full border rounded-lg items-center">
+			<Column className="gap-4 p-2 sm:p-4 w-full border rounded-lg items-center">
 				{fields.map((group: any, index) => (
 					<Column
 						key={group.id}
-						className="w-full gap-2 p-4 border items-end rounded-lg bg-secondary/10 dark:bg-secondary/40"
+						className="w-full gap-2 p-2 sm:p-4 border items-end rounded-lg bg-secondary/10 dark:bg-secondary/40"
 					>
 						<Column className="w-full gap-2">
 							<ItemsAddLabel form={form} index={index} />
@@ -46,6 +47,12 @@ export const AddItems = (form: UseFormReturn<any>) => {
 							/>
 							<Separator />
 							<ItemsAddDescription form={form} index={index} />
+							<Separator />
+							<ItemsSets
+								artifacts={artifacts as ArtifactInstance["item"][]}
+								form={form}
+								index={index}
+							/>
 						</Column>
 
 						<Button

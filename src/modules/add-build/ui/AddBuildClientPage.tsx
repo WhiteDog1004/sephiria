@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useCreateBuild } from "@/src/entities/add-build";
@@ -24,6 +25,7 @@ import {
 	DialogTitle,
 	Form,
 	Row,
+	SITEMAP,
 	Typography,
 } from "@/src/shared";
 import { useSession } from "../../header/model/useUserInfo";
@@ -31,6 +33,7 @@ import { addFormSchema } from "../model/formSchema";
 import { AddItems } from "./AddItems";
 
 export const AddBuildClientPage = () => {
+	const router = useRouter();
 	const { data: info } = useSession();
 	const { mutate } = useCreateBuild();
 	const [isSuccessOpen, setIsSuccessOpen] = useState(false);
@@ -102,9 +105,9 @@ export const AddBuildClientPage = () => {
 	}, [form]);
 
 	return (
-		<Column className="w-full p-8 items-center">
+		<Column className="w-full p-2 sm:p-8 items-center">
 			<Image src="/white-wolf.png" alt="white-wolf" width={120} height={120} />
-			<Column className="w-full max-w-7xl p-4 mx-auto border rounded-lg justify-center items-center gap-4">
+			<Column className="w-full max-w-7xl p-2 sm:p-4 mx-auto border rounded-lg justify-center items-center gap-4">
 				<Column className="items-center py-4">
 					<Typography variant="header1">빌드 공유소</Typography>
 					<Typography className="text-secondary-foreground" variant="body2">
@@ -143,7 +146,7 @@ export const AddBuildClientPage = () => {
 				onOpenChange={(open) => {
 					setIsSuccessOpen(open);
 					if (!open) {
-						window.location.href = "/builds";
+						router.push(SITEMAP.BUILDS);
 					}
 				}}
 			>
@@ -165,7 +168,7 @@ export const AddBuildClientPage = () => {
 								<Button
 									onClick={() => {
 										setIsSuccessOpen(false);
-										window.location.href = "/builds";
+										router.push(SITEMAP.BUILDS);
 									}}
 								>
 									목록으로

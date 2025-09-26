@@ -5,6 +5,7 @@ import { Header } from "../modules/header/ui/Header";
 import "./globals.css";
 import Script from "next/script";
 import { useId } from "react";
+import { Toaster } from "sonner";
 import QueryProvider from "../shared/providers/theme/QueryProvider";
 
 const font = localFont({
@@ -89,6 +90,7 @@ export default function RootLayout({
 					>
 						<Header />
 						{children}
+						<Toaster />
 					</ThemeProvider>
 				</QueryProvider>
 

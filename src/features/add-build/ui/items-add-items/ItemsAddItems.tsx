@@ -3,6 +3,7 @@ import debounce from "lodash.debounce";
 import { CopyPlus, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { type UseFormReturn, useFieldArray } from "react-hook-form";
+import { toast } from "sonner";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
 import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
 import {
@@ -89,6 +90,23 @@ export const ItemsAddItems = ({
 		});
 
 	const handleAddItem = (itemValue: string) => {
+		const artifact = artifacts.find((a) => a.value === itemValue);
+
+		const alreadyExists = fieldValue.some(
+			(item: ArtifactInstance["item"]) => item.value === itemValue,
+		);
+
+		if (artifact?.effect.content?.includes("고유") && alreadyExists) {
+			toast("이미 리스트에 동일한 [고유]효과의 아티팩트가 존재합니다", {
+				position: "top-center",
+				style: {
+					backgroundColor: "var(--toastify-color-dark)",
+					color: "var(--toastify-color-light)",
+				},
+			});
+			return;
+		}
+
 		if (fieldValue[selectIndex]) {
 			update(selectIndex, {
 				id: fieldValue[selectIndex].id,
@@ -129,7 +147,7 @@ export const ItemsAddItems = ({
 														width={48}
 														height={48}
 														src={
-															filteredItems.find(
+															artifacts.find(
 																(item) =>
 																	item.value === fieldValue[index].value,
 															)?.image || "/"
