@@ -100,8 +100,8 @@ export const ItemsAddItems = ({
 			toast("이미 리스트에 동일한 [고유]효과의 아티팩트가 존재합니다", {
 				position: "top-center",
 				style: {
-					backgroundColor: "var(--toastify-color-dark)",
-					color: "var(--toastify-color-light)",
+					backgroundColor: "#3e3e3e",
+					color: "#ffffff",
 				},
 			});
 			return;
@@ -217,7 +217,7 @@ export const ItemsAddItems = ({
 											</Select>
 										</Row>
 
-										<Row className="grid gap-2 grid-cols-[repeat(auto-fill,minmax(48px,1fr))] max-h-[400px] overflow-y-auto">
+										<Row className="grid gap-2 grid-cols-[repeat(auto-fill,minmax(48px,1fr))] max-h-[260px] sm:max-h-[400px] overflow-y-auto">
 											{filteredItems?.map((item) => (
 												<Tooltip delayDuration={400} key={item.value}>
 													<TooltipTrigger asChild>

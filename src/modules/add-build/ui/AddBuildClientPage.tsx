@@ -28,15 +28,17 @@ import {
 	SITEMAP,
 	Typography,
 } from "@/src/shared";
+import NotLogin from "@/src/shared/components/NotLogin";
 import { useSession } from "../../header/model/useUserInfo";
 import { addFormSchema } from "../model/formSchema";
 import { AddItems } from "./AddItems";
 
 export const AddBuildClientPage = () => {
 	const router = useRouter();
-	const { data: info } = useSession();
+	const { data: info, isSuccess } = useSession();
 	const { mutate } = useCreateBuild();
 	const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+	const [isLogin, setIsLogin] = useState(false);
 
 	const form = useForm({
 		resolver: zodResolver(addFormSchema),
@@ -104,6 +106,15 @@ export const AddBuildClientPage = () => {
 		});
 	}, [form]);
 
+	useEffect(() => {
+		if (isSuccess && !info?.user.id) {
+			return setIsLogin(false);
+		}
+		return setIsLogin(true);
+	}, [info, isSuccess]);
+
+	if (!isSuccess) return null;
+	if (!isLogin) return <NotLogin />;
 	return (
 		<Column className="w-full p-2 sm:p-8 items-center">
 			<Image src="/white-wolf.png" alt="white-wolf" width={120} height={120} />

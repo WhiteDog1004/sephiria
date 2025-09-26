@@ -20,6 +20,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 	Row,
+	Separator,
 	SITEMAP,
 	Typography,
 } from "@/src/shared";
@@ -50,7 +51,7 @@ export const BuildsClientPage = () => {
 					<Row className="w-full justify-end items-center">
 						<Dialog open={openDialog} onOpenChange={setOpenDialog}>
 							<Button
-								variant="default"
+								variant="secondary"
 								onClick={() => {
 									if (info) {
 										router.push(SITEMAP.ADD_BUILD);
@@ -101,7 +102,8 @@ export const BuildsClientPage = () => {
 							</DialogContent>
 						</Dialog>
 					</Row>
-					<Row></Row>
+					{/* <Row></Row> */}
+					<Separator />
 					{data?.length === 0 ? (
 						<Column className="gap-4 justify-center items-center w-full h-full mt-12">
 							<Column className="gap-8 items-center">

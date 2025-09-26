@@ -60,7 +60,7 @@ export const ItemsSets = ({
 					<Row className="w-full items-center" key={set + index}>
 						<Typography
 							variant="body2"
-							className={`w-24 sm:w-32 ${clsx(setsMap[set].count >= 2 && "text-green-400")}`}
+							className={`w-24 sm:w-32 ${clsx(setsMap[set].count >= 2 ? "text-green-400" : "text-gray-500")}`}
 						>
 							#{EFFECT_LABELS[set]} ({setsMap[set].count})
 						</Typography>
