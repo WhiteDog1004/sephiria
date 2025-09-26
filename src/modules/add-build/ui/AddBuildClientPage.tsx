@@ -94,6 +94,7 @@ export const AddBuildClientPage = () => {
 			description: "",
 			costume: "",
 			weapon: "",
+			miracle: "",
 			talent: {
 				anger: 0,
 				rapid: 0,

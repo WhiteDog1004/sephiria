@@ -54,28 +54,43 @@ export const ItemsSets = ({
 		<Column className="p-2 gap-2 bg-secondary border rounded-lg">
 			<Typography className="text-secondary-foreground">세트 효과</Typography>
 			<Separator />
-			{Object.keys(setsMap)
-				.sort((a, b) => setsMap[b].count - setsMap[a].count)
-				.map((set, index) => (
-					<Row className="w-full items-center" key={set + index}>
-						<Typography
-							variant="body2"
-							className={`w-24 sm:w-32 ${clsx(setsMap[set].count >= 2 ? "text-green-400" : "text-gray-500")}`}
+			<Row className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full items-center gap-2">
+				{Object.keys(setsMap)
+					.sort((a, b) => setsMap[b].count - setsMap[a].count)
+					.map((set, index) => (
+						<Column
+							className="w-full border rounded-md p-2 gap-1"
+							key={set + index}
 						>
-							#{EFFECT_LABELS[set]} ({setsMap[set].count})
-						</Typography>
-						{setsMap[set].count >= 2 && (
-							<Row className="gap-2">
-								{highlightNumbers(
-									getSetEffectText(
-										set,
-										setsMap[set].count > 6 ? 6 : setsMap[set].count,
-									),
-								)}
-							</Row>
-						)}
-					</Row>
-				))}
+							<Typography
+								variant="body2"
+								className={`w-24 sm:w-32 ${clsx(setsMap[set].count >= 2 ? "text-green-400" : "text-gray-500")}`}
+							>
+								#{EFFECT_LABELS[set]} ({setsMap[set].count})
+							</Typography>
+							{setsMap[set].count >= 2 ? (
+								<>
+									<Separator />
+									<Row className="gap-2">
+										{highlightNumbers(
+											getSetEffectText(
+												set,
+												setsMap[set].count > 6 ? 6 : setsMap[set].count,
+											),
+										)}
+									</Row>
+								</>
+							) : (
+								<>
+									<Separator />
+									<Typography variant="body2" className="text-gray-600">
+										{getSetEffectText(set, 2)}
+									</Typography>
+								</>
+							)}
+						</Column>
+					))}
+			</Row>
 		</Column>
 	);
 };

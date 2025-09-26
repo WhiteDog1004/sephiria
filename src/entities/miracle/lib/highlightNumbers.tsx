@@ -29,7 +29,7 @@ export const highlightNumbers = (text: string, isPenalty = false) => {
 
 	const parts = text.split(regex);
 
-	return parts.map((part, i) => {
+	return parts.filter(Boolean).map((part, i) => {
 		if (regex.test(part)) {
 			const isNegative = part.startsWith("-");
 			const colorClass = isNegative ? "text-red-500" : "text-green-500";
