@@ -1,6 +1,7 @@
 export * from "./components/ImageFallback";
 export * from "./config/costumes";
 export * from "./config/sitemap";
+export * from "./ui/accordion";
 export * from "./ui/avatar";
 export * from "./ui/badge";
 export * from "./ui/box";
