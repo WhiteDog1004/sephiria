@@ -3,7 +3,7 @@
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Avatar, AvatarImage, Row, Typography } from "@/src/shared";
+import { Avatar, AvatarImage, Button, Row, Typography } from "@/src/shared";
 import { SITEMAP } from "@/src/shared/config/sitemap";
 import { Box } from "@/src/shared/ui/box";
 import {
@@ -34,11 +34,13 @@ export const Header = () => {
 				>
 					<Image width={120} height={100} src={"/sephiria.webp"} alt={"logo"} />
 				</Box>
-				<Box className="w-max p-0 gap-4">
+				<Box className="w-max p-0 gap-3">
 					<ModeToggle />
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
-							<Menu />
+							<Button type="button" className="w-9">
+								<Menu />
+							</Button>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent className="w-24" align="end">
 							<DropdownMenuGroup>
@@ -65,8 +67,8 @@ export const Header = () => {
 									</Avatar>
 								</Row>
 							) : (
-								<Avatar>
-									<Box className="p-0 justify-center items-center">
+								<Avatar className="border">
+									<Box className="p-0 justify-center items-center cursor-pointer">
 										<Typography>?</Typography>
 									</Box>
 								</Avatar>

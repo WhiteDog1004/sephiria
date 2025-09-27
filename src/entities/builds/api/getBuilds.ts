@@ -26,7 +26,7 @@ export const getBuilds = async ({
 		.from("builds")
 		.select("*", { count: "exact" })
 		.range(from, to)
-		.order("id", { ascending: true });
+		.order("id", { ascending: false });
 
 	if (title) {
 		query = query.ilike("title", `%${title}%`);

@@ -178,7 +178,9 @@ export const BuildsClientPage = () => {
 				</Column>
 			</Row>
 
-			<BuildPagination page={page} setPage={setPage} totalPage={totalPage} />
+			{data?.data.length !== 0 && (
+				<BuildPagination page={page} setPage={setPage} totalPage={totalPage} />
+			)}
 
 			<BuildSearchButton setPage={setPage} />
 		</Column>
