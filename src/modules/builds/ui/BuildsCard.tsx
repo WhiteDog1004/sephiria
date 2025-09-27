@@ -17,7 +17,7 @@ import {
 import {
 	ABILITY_STATUS_ICONS,
 	ABILITY_TEXT_COLORS,
-} from "./config/abilityTextOptions";
+} from "../config/abilityTextOptions";
 
 export const BuildsCard = ({
 	data,

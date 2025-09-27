@@ -25,8 +25,8 @@ import {
 	SITEMAP,
 	Typography,
 } from "@/src/shared";
-import { discordLoginHandler } from "../header/model/discordLoginHelper";
-import { useSession } from "../header/model/useUserInfo";
+import { discordLoginHandler } from "../../header/model/discordLoginHelper";
+import { useSession } from "../../header/model/useUserInfo";
 import { BuildsCard } from "./BuildsCard";
 
 const PAGE_SIZE = 10;
