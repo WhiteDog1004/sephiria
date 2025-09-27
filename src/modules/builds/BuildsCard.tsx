@@ -127,7 +127,9 @@ export const BuildsCard = ({
 						{dayjs(data.created_at).format("YY.MM.DD")}
 					</Typography>
 				</Row>
-				<Button className="max-w-24">빌드 보기</Button>
+				<Button variant="secondary" className="max-w-24 border">
+					빌드 보기
+				</Button>
 			</Row>
 		</Column>
 	);

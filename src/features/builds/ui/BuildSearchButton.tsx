@@ -1,5 +1,5 @@
 import { RotateCw, Search } from "lucide-react";
-import { useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useGetMiracles, useGetWeapons } from "@/src/entities/builds";
 import {
@@ -30,7 +30,11 @@ import {
 } from "@/src/shared";
 import { useBuildSearchStore } from "../model/buildSearchStore";
 
-export const BuildSearchButton = () => {
+export const BuildSearchButton = ({
+	setPage,
+}: {
+	setPage: Dispatch<SetStateAction<number>>;
+}) => {
 	const { setSearchList } = useBuildSearchStore();
 	const { data: weapons } = useGetWeapons();
 	const { data: miracles } = useGetMiracles();
@@ -48,18 +52,24 @@ export const BuildSearchButton = () => {
 	const onSubmit = (value: any) => {
 		setSearchList(value);
 		setOpen(false);
+		setPage(1);
 	};
 
 	const onReset = () => {
 		form.reset();
 		setSearchList({});
 		setOpen(false);
+		setPage(1);
 	};
 
 	return (
 		<Sheet open={open} onOpenChange={setOpen}>
 			<SheetTrigger asChild>
-				<Button size="lg" className={`fixed right-4 bottom-4 rounded-full`}>
+				<Button
+					variant="secondary"
+					size="lg"
+					className={`fixed right-4 bottom-4 rounded-full border`}
+				>
 					<Search />
 					<Typography variant="caption">검색</Typography>
 				</Button>

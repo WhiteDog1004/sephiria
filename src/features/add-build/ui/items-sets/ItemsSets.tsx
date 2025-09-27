@@ -98,7 +98,10 @@ export const ItemsSets = ({
 										) : (
 											<>
 												<Separator />
-												<Typography variant="body2" className="text-gray-600">
+												<Typography
+													variant="body2"
+													className="text-gray-300 dark:text-gray-700"
+												>
 													{getSetEffectText(set, 2)}
 												</Typography>
 											</>

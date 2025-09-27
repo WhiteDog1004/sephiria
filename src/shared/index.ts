@@ -14,6 +14,7 @@ export * from "./ui/drawer";
 export * from "./ui/dropdown-menu";
 export * from "./ui/form";
 export * from "./ui/input";
+export * from "./ui/pagination";
 export * from "./ui/popover";
 export * from "./ui/row";
 export * from "./ui/select";

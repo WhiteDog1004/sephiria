@@ -1,6 +1,6 @@
 import type { PostgrestError } from "@supabase/supabase-js";
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
-import type { Database } from "@/types_db";
+import type { BuildRow, GetBuildsResponse } from "../model/builds.types";
 
 const handleError = (error: PostgrestError | null) => {
 	if (error) {
@@ -9,14 +9,23 @@ const handleError = (error: PostgrestError | null) => {
 };
 
 export const getBuilds = async ({
+	page = 1,
+	limit = 10,
 	...req
-}): Promise<Database["public"]["Tables"]["builds"]["Row"][]> => {
+}: {
+	page?: number;
+	limit?: number;
+} & Partial<BuildRow>): Promise<GetBuildsResponse> => {
 	const { title, costume, weapon, miracle } = req;
 	const supabase = await createBrowserSupabaseClient();
 
+	const from = (page - 1) * limit;
+	const to = from + limit - 1;
+
 	let query = supabase
 		.from("builds")
-		.select("*")
+		.select("*", { count: "exact" })
+		.range(from, to)
 		.order("id", { ascending: true });
 
 	if (title) {
@@ -32,8 +41,11 @@ export const getBuilds = async ({
 		query = query.eq("miracle", miracle);
 	}
 
-	const { data, error } = await query;
+	const { data, error, count } = await query;
 	handleError(error);
 
-	return data || [];
+	return {
+		data: data || [],
+		count: count ?? 0,
+	};
 };

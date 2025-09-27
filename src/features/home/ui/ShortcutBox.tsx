@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { CostumeCarousel } from "@/src/entities/costume/ui/Carousel";
+import { Column, Row } from "@/src/shared";
 import { SITEMAP } from "@/src/shared/config/sitemap";
 import { Box } from "@/src/shared/ui/box";
 import { Button } from "@/src/shared/ui/button";
@@ -17,34 +20,67 @@ export const ShortcutBox = ({
 }) => {
 	if (!data) return;
 	return (
-		<Box className="flex-col md:flex-row gap-4 max-w-lg md:max-w-3xl w-full p-0">
-			<Card
-				className="w-full py-0 row-span-3 overflow-hidden"
-				style={{ height: "-webkit-fill-available" }}
-			>
-				<Box className="flex-col h-full p-0">
-					<Image
-						width={360}
-						height={180}
-						src={"/inventory.png"}
-						alt={"simulator"}
-						className="w-full object-cover"
-						unoptimized
-					/>
-					<Box className="flex-col h-full gap-2 p-4">
-						<Typography variant="header3">인벤토리 시뮬레이터</Typography>
-						<Typography variant="body2" className="text-gray-500">
-							웹에서 게임처럼 시뮬레이션해볼 수 있어요!
-						</Typography>
-						<Box className="w-full justify-end p-0">
-							<Link href={SITEMAP.SIMULATOR}>
-								<Button>바로가기</Button>
-							</Link>
+		<Box className="flex-col gap-4 max-w-lg md:max-w-3xl w-full p-0">
+			<Row className="flex-col md:flex-row gap-4 w-full">
+				<Card
+					className="w-full py-0 row-span-3 overflow-hidden"
+					style={{ height: "-webkit-fill-available" }}
+				>
+					<Column className="h-full">
+						<Image
+							width={360}
+							height={180}
+							src={"/build.png"}
+							alt={"builds"}
+							className="w-full max-h-40 md:max-h-[240px] object-cover"
+							unoptimized
+						/>
+						<Column className="h-full gap-2 p-4">
+							<Row className="justify-center items-center gap-1">
+								<Typography variant="header3">빌드 공유</Typography>
+								<Typography variant="caption" className="text-red-600">
+									NEW
+								</Typography>
+							</Row>
+							<Typography variant="body2" className="text-gray-500 text-center">
+								빌드를 공유하거나 확인하실 수 있어요!
+							</Typography>
+							<Box className="w-full justify-end p-0">
+								<Link href={SITEMAP.BUILDS}>
+									<Button>바로가기</Button>
+								</Link>
+							</Box>
+						</Column>
+					</Column>
+				</Card>
+				<Card
+					className="w-full py-0 row-span-3 overflow-hidden"
+					style={{ height: "-webkit-fill-available" }}
+				>
+					<Column className="h-full">
+						<Image
+							width={360}
+							height={180}
+							src={"/inventory.png"}
+							alt={"simulator"}
+							className="w-full max-h-40 md:max-h-[240px] object-cover"
+							unoptimized
+						/>
+						<Box className="flex-col h-full gap-2 p-4">
+							<Typography variant="header3">인벤토리 시뮬레이터</Typography>
+							<Typography variant="body2" className="text-gray-500">
+								웹에서 게임처럼 시뮬레이션해볼 수 있어요!
+							</Typography>
+							<Box className="w-full justify-end p-0">
+								<Link href={SITEMAP.SIMULATOR}>
+									<Button>바로가기</Button>
+								</Link>
+							</Box>
 						</Box>
-					</Box>
-				</Box>
-			</Card>
-			<Box className="flex-col gap-4 p-0">
+					</Column>
+				</Card>
+			</Row>
+			<Row className="flex-col md:flex-row gap-4">
 				<Card className="w-full py-0 overflow-hidden">
 					<Box className="flex-col p-0 pt-4">
 						<CostumeCarousel data={data ?? []} />
@@ -65,8 +101,8 @@ export const ShortcutBox = ({
 					</Box>
 				</Card>
 				<Card className="w-full py-0 row-span-1 overflow-hidden">
-					<Box className="flex-col p-0">
-						<Box className="gap-2 p-4">
+					<Column className="h-full">
+						<Row className="gap-2 pt-[31px] pb-[15px] px-4">
 							{menuItems.map((item) => (
 								<Link key={item.href} href={item.href} className="w-full">
 									<Box className="flex-col gap-2 w-full p-0">
@@ -81,16 +117,16 @@ export const ShortcutBox = ({
 									</Box>
 								</Link>
 							))}
-						</Box>
-						<Separator />
-						<Box className="py-4">
+						</Row>
+						<Separator className="mt-4" />
+						<Box className="h-full py-4">
 							<Typography variant="body2" className="text-gray-500">
 								다양한 아이템들을 확인해 보세요!
 							</Typography>
 						</Box>
-					</Box>
+					</Column>
 				</Card>
-			</Box>
+			</Row>
 		</Box>
 	);
 };
