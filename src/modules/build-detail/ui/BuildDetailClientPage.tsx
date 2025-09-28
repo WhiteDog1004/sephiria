@@ -26,6 +26,7 @@ export const BuildDetailClientPage = ({ data }: { data: BuildRow }) => {
 				</Box>
 				<Separator />
 				<TalentDetail talent={data.ability} />
+				<Separator />
 			</Column>
 		</Box>
 	);

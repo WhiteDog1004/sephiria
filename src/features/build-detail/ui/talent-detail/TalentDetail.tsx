@@ -5,7 +5,10 @@ import {
 	TALENT_STATUS,
 	type TalentType,
 } from "@/src/features/add-build";
-import { ABILITY_TEXT_COLORS } from "@/src/modules/builds";
+import {
+	ABILITY_STATUS_ICONS,
+	ABILITY_TEXT_COLORS,
+} from "@/src/modules/builds";
 import { Column, Row, Typography } from "@/src/shared";
 import { TalentActiveList } from "./TalentActiveList";
 
@@ -15,7 +18,7 @@ export const TalentDetail = ({
 	talent: Record<TalentType, number>;
 }) => {
 	return (
-		<Column className="w-full max-w-max mx-auto items-start md:items-center gap-2">
+		<Column className="w-full items-start md:items-center gap-2">
 			<Typography>재능</Typography>
 			<Row className="w-full overflow-x-auto">
 				<Row className="min-w-max justify-center w-full gap-2">
@@ -25,7 +28,7 @@ export const TalentDetail = ({
 						return (
 							<Column
 								key={talentKey}
-								className="w-28 items-center gap-2 border rounded-lg p-2"
+								className="w-full min-w-28 items-center gap-2 border rounded-lg p-2"
 							>
 								<Typography>{TALENT_NAME[talentKey]}</Typography>
 								<Typography className={ABILITY_TEXT_COLORS[index]}>
@@ -35,12 +38,22 @@ export const TalentDetail = ({
 									<Typography variant="caption" className="text-green-600">
 										+{talent[talentKey] * TALENT_STATUS[talentKey].level.point}
 									</Typography>
-									<Typography variant="caption" className="text-nowrap">
-										{value.level.label}
-									</Typography>
+									<Row>
+										<Typography variant="caption" className="text-nowrap">
+											{value.level.label}
+										</Typography>
+										<Image
+											width={16}
+											height={16}
+											className="min-w-4 max-w-4 object-contain"
+											src={`/stat/${ABILITY_STATUS_ICONS[index]}.png`}
+											alt={key}
+											unoptimized
+										/>
+									</Row>
 								</Row>
 								<Column className="w-full">
-									<Row className="w-full justify-evenly gap-2">
+									<Row className="w-full justify-center gap-2">
 										{Object.entries(value.stat).map((status, index) => (
 											<Column key={index} className="items-center gap-2">
 												<Typography variant="caption">{status[0]}</Typography>

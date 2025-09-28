@@ -1,9 +1,13 @@
+import Image from "next/image";
 import {
 	TALENT_NAME,
 	TALENT_STATUS,
 	type TalentType,
 } from "@/src/features/add-build";
-import { ABILITY_TEXT_TYPES_COLORS } from "@/src/modules/builds";
+import {
+	ABILITY_STATUS_ICONS,
+	ABILITY_TEXT_TYPES_COLORS,
+} from "@/src/modules/builds";
 import {
 	Accordion,
 	AccordionContent,
@@ -38,8 +42,8 @@ export const TalentActiveList = ({
 							활성화된 재능 효과
 						</Typography>
 					</AccordionTrigger>
-					<AccordionContent className="flex justify-center gap-4 flex-wrap">
-						{TALENT_ORDER.map((key) => {
+					<AccordionContent className="flex flex-wrap justify-center gap-4">
+						{TALENT_ORDER.map((key, index) => {
 							const value = talent[key];
 							if (value <= 0) return null;
 
@@ -51,22 +55,48 @@ export const TalentActiveList = ({
 							);
 
 							return (
-								<Column key={key}>
-									<Column className="max-w-60 gap-2">
+								<Column
+									key={key}
+									className="max-w-60 gap-2 border rounded-lg p-4"
+								>
+									<Row className="gap-1 items-center">
 										<Typography
 											variant="body2"
 											className={ABILITY_TEXT_TYPES_COLORS[key]}
 										>
-											{name} ({value}pt)
+											{name}
 										</Typography>
-										<Separator />
-										<Column className="gap-2">
-											{activeStats.map(([point, text]) => (
-												<Typography variant="caption" key={point}>
+										(
+										<Typography variant="caption" className="text-green-600">
+											+{talent[key] * TALENT_STATUS[key].level.point}
+										</Typography>
+										<Row>
+											<Typography variant="caption" className="text-nowrap">
+												{status.level.label}
+											</Typography>
+											<Image
+												width={16}
+												height={16}
+												className="min-w-4 max-w-4 object-contain"
+												src={`/stat/${ABILITY_STATUS_ICONS[index]}.png`}
+												alt={key}
+												unoptimized
+											/>
+										</Row>
+										)
+									</Row>
+									<Separator className="border-2 rounded-full" />
+									<Column className="gap-2">
+										{activeStats.map(([point, text], index) => (
+											<Column key={point}>
+												<Typography variant="caption">
 													{point}: {text}
 												</Typography>
-											))}
-										</Column>
+												{activeStats.length - 1 !== index && (
+													<Separator className="mt-2" />
+												)}
+											</Column>
+										))}
 									</Column>
 								</Column>
 							);
