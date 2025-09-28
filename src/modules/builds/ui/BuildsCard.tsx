@@ -1,6 +1,9 @@
+"use client";
+
 import dayjs from "dayjs";
 import { ThumbsUp } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { AvatarBox, Title, VersionBox } from "@/src/entities/builds";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
 import { ContentItem, CostumeItem } from "@/src/features/builds";
@@ -11,6 +14,7 @@ import {
 	Column,
 	ImageWithFallback,
 	Row,
+	SITEMAP,
 	Skeleton,
 	Typography,
 } from "@/src/shared";
@@ -30,6 +34,7 @@ export const BuildsCard = ({
 	miracle?: { image: string; value_kor: string };
 	artifact?: ArtifactInstance["item"][];
 }) => {
+	const router = useRouter();
 	return (
 		<Column className="w-full bg-card p-4 gap-4 justify-center items-end rounded-md border shadow-sm">
 			<Row className="w-full justify-between items-center overflow-hidden gap-2">
@@ -127,7 +132,11 @@ export const BuildsCard = ({
 						{dayjs(data.created_at).format("YY.MM.DD")}
 					</Typography>
 				</Row>
-				<Button variant="secondary" className="max-w-24 border">
+				<Button
+					variant="secondary"
+					className="max-w-24 border"
+					onClick={() => router.push(`${SITEMAP.BUILDS}/${data.postUuid}`)}
+				>
 					빌드 보기
 				</Button>
 			</Row>

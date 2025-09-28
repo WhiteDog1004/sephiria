@@ -168,7 +168,7 @@ export type Database = {
 					miracle: string;
 					youtube_link?: string;
 					version: string;
-					ability: string[];
+					ability: Record<string, number>;
 					updated_at: string;
 					writer: {
 						uuid: string;

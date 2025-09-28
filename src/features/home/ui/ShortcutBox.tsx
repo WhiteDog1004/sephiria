@@ -32,7 +32,7 @@ export const ShortcutBox = ({
 							height={180}
 							src={"/build.png"}
 							alt={"builds"}
-							className="w-full max-h-40 md:max-h-[240px] object-cover"
+							className="w-full max-h-40 md:max-h-[180px] object-cover"
 							unoptimized
 						/>
 						<Column className="h-full gap-2 p-4">
@@ -63,7 +63,7 @@ export const ShortcutBox = ({
 							height={180}
 							src={"/inventory.png"}
 							alt={"simulator"}
-							className="w-full max-h-40 md:max-h-[240px] object-cover"
+							className="w-full max-h-40 md:max-h-[180px] object-cover"
 							unoptimized
 						/>
 						<Box className="flex-col h-full gap-2 p-4">
