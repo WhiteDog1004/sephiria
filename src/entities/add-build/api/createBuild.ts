@@ -21,6 +21,7 @@ export const createBuild = async (
 		content,
 		youtube_link,
 		writer,
+		version,
 		ability,
 	} = req;
 	const supabase = await createBrowserSupabaseClient();
@@ -35,7 +36,7 @@ export const createBuild = async (
 		weapon,
 		miracle,
 		ability,
-		version: "0.8.13",
+		version,
 		writer: {
 			uuid: writer.uuid,
 			nickname: writer.nickname,

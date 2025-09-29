@@ -81,6 +81,7 @@ export const AddBuildClientPage = ({
 					weapon: value.weapon,
 					miracle: value.miracle,
 					content: value.lists,
+					version: process.env.NEXT_PUBLIC_GAME_VERSION,
 					youtube_link: value.youtube_link,
 					writer: {
 						uuid: info?.user.id || "",
@@ -106,6 +107,7 @@ export const AddBuildClientPage = ({
 					weapon: value.weapon,
 					miracle: value.miracle,
 					content: value.lists,
+					version: process.env.NEXT_PUBLIC_GAME_VERSION,
 					youtube_link: value.youtube_link,
 					writer: {
 						uuid: info?.user.id || "",
