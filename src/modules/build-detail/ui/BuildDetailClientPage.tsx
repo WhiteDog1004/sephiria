@@ -59,7 +59,13 @@ export const BuildDetailClientPage = ({ data }: { data: BuildRow }) => {
 					<Button onClick={() => router.push(SITEMAP.BUILDS)}>목록으로</Button>
 					{user?.user.id === data.writer.uuid && (
 						<Row className="gap-2">
-							<Button>수정하기</Button>
+							<Button
+								onClick={() =>
+									router.push(`${SITEMAP.BUILDS}/modify/${data.postUuid}`)
+								}
+							>
+								수정하기
+							</Button>
 							<Dialog open={openDialog} onOpenChange={setOpenDialog}>
 								<Button
 									onClick={() => setOpenDialog(true)}

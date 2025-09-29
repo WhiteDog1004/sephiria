@@ -27,7 +27,7 @@ export const Header = () => {
 
 	return (
 		<Box className="sticky z-50 top-0 backdrop-blur-md border-b dark:border-white/10 border-black/10 p-4">
-			<Box className="justify-between max-w-5xl p-0">
+			<Box className="justify-between max-w-7xl p-0">
 				<Box
 					className="w-max p-0 cursor-pointer"
 					onClick={() => router.push(SITEMAP.HOME)}

@@ -128,7 +128,7 @@ export const BuildArtifact = ({
 								<Typography variant="caption" className="opacity-60">
 									설명
 								</Typography>
-								<Row className="rounded-lg p-4 bg-gray-800/50">
+								<Row className="rounded-lg p-4 bg-secondary">
 									<Typography variant="body2" className="whitespace-pre-line">
 										{list.description}
 									</Typography>

@@ -6,7 +6,11 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useCreateBuild } from "@/src/entities/add-build";
-import type { PostBuildType } from "@/src/entities/add-build/model/createBuild.types";
+import type {
+	CreateBuildType,
+	PostBuildType,
+} from "@/src/entities/add-build/model/createBuild.types";
+import { useUpdateBuild } from "@/src/entities/modify-build";
 import {
 	AddTitle,
 	SelectCostume,
@@ -33,10 +37,15 @@ import { useSession } from "../../header/model/useUserInfo";
 import { addFormSchema } from "../model/formSchema";
 import { AddItems } from "./AddItems";
 
-export const AddBuildClientPage = () => {
+export const AddBuildClientPage = ({
+	modify,
+}: {
+	modify?: CreateBuildType;
+}) => {
 	const router = useRouter();
 	const { data: info, isSuccess } = useSession();
 	const { mutate } = useCreateBuild();
+	const { mutate: update } = useUpdateBuild();
 	const [isSuccessOpen, setIsSuccessOpen] = useState(false);
 	const [isLogin, setIsLogin] = useState(false);
 
@@ -62,50 +71,89 @@ export const AddBuildClientPage = () => {
 	});
 
 	const onSubmit = (value: Omit<PostBuildType, "writer" | "postUuid">) => {
-		mutate(
-			{
-				postUuid: crypto.randomUUID(),
-				title: value.title,
-				description: value.description,
-				costume: value.costume,
-				weapon: value.weapon,
-				miracle: value.miracle,
-				content: value.lists,
-				youtube_link: value.youtube_link,
-				writer: {
-					uuid: info?.user.id || "",
-					nickname: info?.user.user_metadata.full_name,
-					profileImage: info?.user.user_metadata.avatar_url,
+		if (modify) {
+			update(
+				{
+					postUuid: modify.postUuid,
+					title: value.title,
+					description: value.description,
+					costume: value.costume,
+					weapon: value.weapon,
+					miracle: value.miracle,
+					content: value.lists,
+					youtube_link: value.youtube_link,
+					writer: {
+						uuid: info?.user.id || "",
+						nickname: info?.user.user_metadata.full_name,
+						profileImage: info?.user.user_metadata.avatar_url,
+					},
+					ability: value.talent,
 				},
-				ability: value.talent,
-			},
-			{
-				onSuccess: () => {
-					form.reset();
-					setIsSuccessOpen(true);
+				{
+					onSuccess: () => {
+						form.reset();
+						setIsSuccessOpen(true);
+					},
 				},
-			},
-		);
+			);
+		} else {
+			mutate(
+				{
+					postUuid: crypto.randomUUID(),
+					title: value.title,
+					description: value.description,
+					costume: value.costume,
+					weapon: value.weapon,
+					miracle: value.miracle,
+					content: value.lists,
+					youtube_link: value.youtube_link,
+					writer: {
+						uuid: info?.user.id || "",
+						nickname: info?.user.user_metadata.full_name,
+						profileImage: info?.user.user_metadata.avatar_url,
+					},
+					ability: value.talent,
+				},
+				{
+					onSuccess: () => {
+						form.reset();
+						setIsSuccessOpen(true);
+					},
+				},
+			);
+		}
 	};
 
 	useEffect(() => {
-		form.reset({
-			title: "",
-			description: "",
-			costume: "",
-			weapon: "",
-			miracle: "",
-			talent: {
-				anger: 0,
-				rapid: 0,
-				survival: 0,
-				patience: 0,
-				wisdom: 0,
-				will: 0,
-			},
-			lists: [],
-		});
-	}, [form]);
+		if (modify) {
+			form.reset({
+				title: modify.title,
+				description: modify.description,
+				costume: modify.costume,
+				weapon: modify.weapon,
+				miracle: modify.miracle,
+				talent: modify.ability,
+				lists: modify.content,
+			});
+		} else {
+			form.reset({
+				title: "",
+				description: "",
+				costume: "",
+				weapon: "",
+				miracle: "",
+				talent: {
+					anger: 0,
+					rapid: 0,
+					survival: 0,
+					patience: 0,
+					wisdom: 0,
+					will: 0,
+				},
+				lists: [],
+			});
+		}
+	}, [modify, form]);
 
 	useEffect(() => {
 		if (isSuccess && !info?.user.id) {

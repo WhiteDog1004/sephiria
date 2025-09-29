@@ -25,7 +25,7 @@ const ImageWithFallback = ({ src, alt, ...props }: ImageProps) => {
 
 	return (
 		<Image
-			src={imgSrc}
+			src={imgSrc || "/"}
 			alt={alt}
 			onError={handleError}
 			onLoad={() => setIsLoading(false)}

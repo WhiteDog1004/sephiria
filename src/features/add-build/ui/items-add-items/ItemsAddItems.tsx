@@ -147,7 +147,7 @@ export const ItemsAddItems = ({
 														width={48}
 														height={48}
 														src={
-															artifacts.find(
+															artifacts?.find(
 																(item) =>
 																	item.value === fieldValue[index].value,
 															)?.image || "/"

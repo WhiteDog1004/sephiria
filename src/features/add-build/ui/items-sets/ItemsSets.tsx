@@ -33,7 +33,7 @@ export const ItemsSets = ({
 		> = {};
 
 		selectedValues.forEach((v: ArtifactInstance["item"]) => {
-			const artifact = artifacts.find((a) => a.value === v.value);
+			const artifact = artifacts?.find((a) => a.value === v.value);
 			if (!artifact) return;
 
 			artifact.effect.sets?.forEach((set) => {

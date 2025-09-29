@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { RotateCw } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ABILITY_TEXT_COLORS } from "@/src/modules/builds";
 import {
 	Button,
@@ -27,6 +27,15 @@ import {
 export const SelectTalent = (form: any) => {
 	const [count, setCount] = useState(40);
 
+	useEffect(() => {
+		const talentValues = form.getValues("talent");
+		const total = Object.values(talentValues).reduce(
+			(sum: number, val) => sum + Number(val),
+			0,
+		);
+		setCount(40 - total);
+	}, [form]);
+
 	return (
 		<FormField
 			control={form.control}
@@ -51,7 +60,17 @@ export const SelectTalent = (form: any) => {
 									type="button"
 									size="sm"
 									onClick={() => {
-										form.resetField("talent");
+										form.reset({
+											...form.getValues(),
+											talent: {
+												anger: 0,
+												rapid: 0,
+												survival: 0,
+												patience: 0,
+												wisdom: 0,
+												will: 0,
+											},
+										});
 										setCount(40);
 									}}
 								>

@@ -21,7 +21,6 @@ import {
 
 export const SelectWeapon = (form: any) => {
 	const [openPopover, setOpenPopover] = useState(false);
-	const [korValue, setKorValue] = useState("");
 	const { data: weapons } = useGetWeapons();
 
 	return (
@@ -55,7 +54,11 @@ export const SelectWeapon = (form: any) => {
 													variant="body2"
 													className="w-full min-w-0 max-w-full text-center truncate"
 												>
-													{korValue}
+													{
+														weapons?.find(
+															(weapon) => weapon.value === field.value,
+														).value_kor
+													}
 												</Typography>
 											</>
 										) : (
@@ -114,7 +117,6 @@ export const SelectWeapon = (form: any) => {
 																key={tier3.value}
 																onClick={() => {
 																	field.onChange(tier3.value);
-																	setKorValue(tier3.value_kor);
 																	setOpenPopover(false);
 																}}
 															>
