@@ -5,6 +5,8 @@ import { Box } from "@/src/shared/ui/box";
 
 const Main = async () => {
 	const data = await getDetailList();
+
+	if (typeof window !== "undefined") return;
 	return (
 		<Box className="flex-col gap-8 p-0">
 			<ShortcutBox data={data || []} />

@@ -73,7 +73,7 @@ export const AddBuildClientPage = () => {
 				content: value.lists,
 				youtube_link: value.youtube_link,
 				writer: {
-					uuid: info?.user.user_metadata.provider_id,
+					uuid: info?.user.id || "",
 					nickname: info?.user.user_metadata.full_name,
 					profileImage: info?.user.user_metadata.avatar_url,
 				},
