@@ -64,7 +64,7 @@ export const BuildDetailClientPage = ({ data }: { data: BuildRow }) => {
 					setInitialLike={setInitialLike}
 					initialLike={initialLike}
 				/>
-				<Separator />
+				{user?.user.id && <Separator />}
 				<Row className="justify-between gap-2 mb-12">
 					<Button onClick={() => router.push(SITEMAP.BUILDS)}>목록으로</Button>
 					{user?.user.id === data.writer.uuid && (
