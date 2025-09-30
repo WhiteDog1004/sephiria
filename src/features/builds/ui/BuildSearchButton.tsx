@@ -46,6 +46,7 @@ export const BuildSearchButton = ({
 			costume: "",
 			weapon: "",
 			miracle: "",
+			like: "",
 		},
 	});
 
@@ -222,6 +223,25 @@ export const BuildSearchButton = ({
 									</FormItem>
 								)}
 							/>
+							<FormField
+								control={form.control}
+								name="like"
+								render={({ field }) => (
+									<FormItem className="w-full">
+										<FormLabel>좋아요 순</FormLabel>
+										<Select onValueChange={field.onChange} value={field.value}>
+											<SelectTrigger className="w-full">
+												<SelectValue placeholder="좋아요 순" />
+											</SelectTrigger>
+											<SelectContent>
+												<SelectItem value={"desc"}>좋아요 높은순</SelectItem>
+												<SelectItem value={"asc"}>좋아요 낮은순</SelectItem>
+											</SelectContent>
+										</Select>
+									</FormItem>
+								)}
+							/>
+
 							<Button type="reset" onClick={onReset}>
 								<RotateCw />
 								<Typography variant="caption">초기화</Typography>

@@ -6,6 +6,7 @@ interface BuildSearchState {
 		costume?: string;
 		weapon?: string;
 		miracle?: string;
+		like?: string;
 	};
 	setSearchList: (q: BuildSearchState["searchList"]) => void;
 }

@@ -25,6 +25,7 @@ import {
 	SITEMAP,
 	Typography,
 } from "@/src/shared";
+import { SectionHeader } from "@/src/shared/components/section-header";
 import { discordLoginHandler } from "../../header/model/discordLoginHelper";
 import { useSession } from "../../header/model/useUserInfo";
 import { BuildsCard } from "./BuildsCard";
@@ -55,6 +56,10 @@ export const BuildsClientPage = () => {
 
 	return (
 		<Column className="w-full p-6 gap-8">
+			<SectionHeader
+				title={"빌드 공유"}
+				description={"빌드를 공유하거나 다양한 빌드를 확인해 보세요!"}
+			/>
 			<Row className="w-full max-w-7xl mx-auto justify-center gap-6">
 				<Column className="w-full justify-center gap-4">
 					<Row className="w-full justify-end items-center gap-2">

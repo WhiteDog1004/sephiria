@@ -15,8 +15,9 @@ export const getBuilds = async ({
 }: {
 	page?: number;
 	limit?: number;
+	like?: "asc" | "desc";
 } & Partial<BuildRow>): Promise<GetBuildsResponse> => {
-	const { title, costume, weapon, miracle } = req;
+	const { title, costume, weapon, miracle, like } = req;
 	const supabase = await createBrowserSupabaseClient();
 
 	const from = (page - 1) * limit;
@@ -26,6 +27,10 @@ export const getBuilds = async ({
 		.from("builds")
 		.select("*", { count: "exact" })
 		.range(from, to)
+		.order("postLike", {
+			ascending: like && like === "asc",
+			nullsFirst: like && like === "asc",
+		})
 		.order("id", { ascending: false });
 
 	if (title) {
