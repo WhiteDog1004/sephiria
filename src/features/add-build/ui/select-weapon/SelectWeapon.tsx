@@ -16,8 +16,12 @@ import {
 	PopoverTrigger,
 	Row,
 	Separator,
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
 	Typography,
 } from "@/src/shared";
+import { parseColoredString } from "@/src/shared/utils/parseColoredString";
 
 export const SelectWeapon = (form: any) => {
 	const [openPopover, setOpenPopover] = useState(false);
@@ -120,19 +124,39 @@ export const SelectWeapon = (form: any) => {
 																	setOpenPopover(false);
 																}}
 															>
-																<ImageWithFallback
-																	className="min-w-10 max-w-10 min-h-10 max-h-10 object-contain p-0"
-																	width={40}
-																	height={40}
-																	src={`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier3.value}.png`}
-																	alt={tier3.value}
-																/>
-																<Typography
-																	variant="caption"
-																	className="text-[10px] w-full text-center truncate"
-																>
-																	{tier3.value_kor}
-																</Typography>
+																<Tooltip delayDuration={400}>
+																	<TooltipTrigger asChild>
+																		<ImageWithFallback
+																			className="min-w-10 max-w-10 min-h-10 max-h-10 object-contain p-0"
+																			width={40}
+																			height={40}
+																			src={`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier3.value}.png`}
+																			alt={tier3.value}
+																		/>
+																	</TooltipTrigger>
+																	<Typography
+																		variant="caption"
+																		className="text-[10px] w-full text-center truncate"
+																	>
+																		{tier3.value_kor}
+																	</Typography>
+
+																	<TooltipContent sideOffset={16}>
+																		<Column className="p-2 justify-center items-center text-center border-2 bg-secondary dark:bg-secondary/80">
+																			{tier3.effects.reward?.map(
+																				(reward: string) => (
+																					<Typography
+																						key={reward}
+																						variant="body2"
+																						className="max-w-64 text-gray-900 dark:text-gray-300 text-center whitespace-pre-line mt-2"
+																					>
+																						{parseColoredString(reward)}
+																					</Typography>
+																				),
+																			)}
+																		</Column>
+																	</TooltipContent>
+																</Tooltip>
 															</Button>
 														))}
 												</Fragment>

@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useState } from "react";
 import { useGetMiracles } from "@/src/entities/builds";
+import { highlightNumbers } from "@/src/entities/miracle";
 import {
 	Box,
 	Button,
@@ -15,6 +16,9 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 	Row,
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
 	Typography,
 } from "@/src/shared";
 
@@ -86,19 +90,35 @@ export const SelectMiracle = (form: any) => {
 													setOpenPopover(false);
 												}}
 											>
-												<ImageWithFallback
-													className="min-w-10 max-w-10 min-h-10 max-h-10 object-contain p-0"
-													width={40}
-													height={40}
-													src={miracle.image}
-													alt={miracle.value}
-												/>
-												<Typography
-													variant="caption"
-													className="text-[10px] w-full text-center truncate"
-												>
-													{miracle.value_kor}
-												</Typography>
+												<Tooltip key={miracle.value} delayDuration={400}>
+													<TooltipTrigger asChild>
+														<ImageWithFallback
+															className="min-w-10 max-w-10 min-h-10 max-h-10 object-contain p-0"
+															width={40}
+															height={40}
+															src={miracle.image}
+															alt={miracle.value}
+														/>
+													</TooltipTrigger>
+													<Typography
+														variant="caption"
+														className="text-[10px] w-full text-center truncate"
+													>
+														{miracle.value_kor}
+													</Typography>
+													<TooltipContent sideOffset={16}>
+														<Column className="p-2 justify-center items-center text-center border-2 bg-secondary dark:bg-secondary/80">
+															{miracle.effects.reward?.map((reward: string) => (
+																<Row
+																	key={reward}
+																	className="gap-1 text-xs text-gray-900 dark:text-gray-300"
+																>
+																	{highlightNumbers(reward, false)}
+																</Row>
+															))}
+														</Column>
+													</TooltipContent>
+												</Tooltip>
 											</Button>
 										))}
 									</Row>
