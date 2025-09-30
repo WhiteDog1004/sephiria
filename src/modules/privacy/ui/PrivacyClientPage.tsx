@@ -22,7 +22,7 @@ export const PrivacyClientPage = () => {
 				- Discord 사용자 ID
 				<br />- Discord 사용자명
 				<br />- 프로필 이미지 (URL 형태)
-				<br />- 이메일 주소 (Discord에서 제공되는 경우)
+				<br />- 이메일 주소
 			</Typography>
 
 			<Separator />
