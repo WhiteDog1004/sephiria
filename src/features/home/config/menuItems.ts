@@ -1,4 +1,4 @@
-import { SITEMAP } from "@/src/shared/lib/sitemap";
+import { SITEMAP } from "@/src/shared/config/sitemap";
 
 export const menuItems = [
 	{ href: SITEMAP.MIRACLE, src: "/duelist.png", alt: "miracle", label: "기적" },

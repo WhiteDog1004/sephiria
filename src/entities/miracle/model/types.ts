@@ -1,3 +1,5 @@
+import type { Database } from "@/types_db";
+
 export interface MiracleOptions {
 	data: {
 		created_at: string;
@@ -12,3 +14,9 @@ export interface MiracleOptions {
 		};
 	}[];
 }
+
+export type MiracleReq = {
+	miracle: string;
+};
+
+export type MiracleRow = Database["public"]["Tables"]["miracle"]["Row"];

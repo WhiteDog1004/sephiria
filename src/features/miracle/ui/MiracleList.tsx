@@ -34,6 +34,7 @@ export const MiracleList = ({ data }: MiracleOptions) => {
 								height={60}
 								src={item.image || ""}
 								alt={item.value}
+								unoptimized
 							/>
 							<Separator />
 							<Typography>{item.value_kor}</Typography>

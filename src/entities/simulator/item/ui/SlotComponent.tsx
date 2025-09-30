@@ -75,6 +75,7 @@ export const SlotComponent = ({
 					alt={"items"}
 					className={clsx("object-contain")}
 					style={item.rotation ? rotationStyle : undefined}
+					unoptimized
 				/>
 				{item.type === "slabs" &&
 					ITEM_SLABS_DATA.find((i) => i.value === item.id.split("-").pop())

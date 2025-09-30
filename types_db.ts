@@ -1,3 +1,9 @@
+import type {
+	ListType,
+	TalentType,
+	WriterType,
+} from "./src/entities/add-build/model/createBuild.types";
+
 export type Json =
 	| string
 	| number
@@ -139,6 +145,52 @@ export type Database = {
 					tier: number;
 				};
 				Relationships: [];
+			};
+			builds: {
+				Row: {
+					created_at: string;
+					id: number;
+					postUuid: string;
+					postLike?: number;
+					title: string;
+					description: string;
+					content: {
+						label: string;
+						description?: string;
+						items: {
+							id: number;
+							img: string;
+							value: string;
+						}[];
+					}[];
+					costume: string;
+					weapon: string;
+					miracle: string;
+					youtube_link?: string;
+					version: string;
+					ability: Record<string, number>;
+					updated_at: string;
+					writer: {
+						uuid: string;
+						nickname: string;
+						profileImage: string;
+					};
+				};
+				Insert: {
+					created_at?: string;
+					title: string;
+					description: string;
+					content: ListType[];
+					costume: string;
+					weapon: string;
+					miracle: string;
+					ability: TalentType;
+					writer: WriterType;
+					youtube_link?: string;
+					version?: string;
+					postLike?: number;
+					postUuid: string;
+				};
 			};
 		};
 		Views: {

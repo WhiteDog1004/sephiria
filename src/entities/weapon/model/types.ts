@@ -1,3 +1,5 @@
+import type { Database } from "@/types_db";
+
 export interface WeaponOptions {
 	created_at: string;
 	id: number;
@@ -17,3 +19,9 @@ export type WeaponSelectType = {
 	tier: number;
 	parent: string | null;
 };
+
+export type WeaponReq = {
+	weapon: string;
+};
+
+export type WeaponRow = Database["public"]["Tables"]["weapons"]["Row"];
