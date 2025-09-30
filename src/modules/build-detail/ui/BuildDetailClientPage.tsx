@@ -8,6 +8,7 @@ import { useDeleteBuild } from "@/src/entities/builds/model/useDeleteBuild";
 import {
 	BuildArtifact,
 	BuildDescription,
+	BuildLike,
 	SectionCostume,
 	SectionMiracle,
 	SectionWeapon,
@@ -35,11 +36,12 @@ export const BuildDetailClientPage = ({ data }: { data: BuildRow }) => {
 	const { mutate } = useDeleteBuild();
 	const { data: user } = useSession();
 	const [openDialog, setOpenDialog] = useState(false);
+	const [initialLike, setInitialLike] = useState(data.postLike);
 
 	return (
 		<Box className="w-full py-12 px-4">
 			<Column className="w-full max-w-5xl gap-4">
-				<TitleDetail {...data} />
+				<TitleDetail initialLike={initialLike || 0} {...data} />
 				<Separator />
 				<Box className="md:flex-row flex-col items-start gap-4 md:gap-2 mt-4 p-0">
 					<Row className="w-full gap-2">
@@ -54,6 +56,14 @@ export const BuildDetailClientPage = ({ data }: { data: BuildRow }) => {
 				<BuildArtifact artifacts={data.content} />
 				<Separator />
 				<BuildDescription description={data.description} />
+				<Separator />
+				<BuildLike
+					postUuid={data.postUuid}
+					userId={user?.user.id}
+					postLike={data.postLike}
+					setInitialLike={setInitialLike}
+					initialLike={initialLike}
+				/>
 				<Separator />
 				<Row className="justify-between gap-2 mb-12">
 					<Button onClick={() => router.push(SITEMAP.BUILDS)}>목록으로</Button>

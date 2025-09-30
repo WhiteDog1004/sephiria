@@ -104,7 +104,7 @@ export const BuildArtifact = ({
 														}}
 													>
 														<ImageWithFallback
-															className="w-16 h-16 object-contain p-0"
+															className="w-12 h-12 object-contain p-0"
 															width={64}
 															height={64}
 															src={findItem.image || "/"}
@@ -124,16 +124,18 @@ export const BuildArtifact = ({
 									})}
 								</Row>
 							</Column>
-							<Column className="gap-1">
-								<Typography variant="caption" className="opacity-60">
-									설명
-								</Typography>
-								<Row className="rounded-lg p-4 bg-secondary">
-									<Typography variant="body2" className="whitespace-pre-line">
-										{list.description}
+							{list.description && (
+								<Column className="gap-1">
+									<Typography variant="caption" className="opacity-60">
+										설명
 									</Typography>
-								</Row>
-							</Column>
+									<Row className="rounded-lg p-4 bg-secondary">
+										<Typography variant="body2" className="whitespace-pre-line">
+											{list.description}
+										</Typography>
+									</Row>
+								</Column>
+							)}
 						</CardContent>
 					</Card>
 				))}

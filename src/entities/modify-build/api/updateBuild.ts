@@ -39,6 +39,7 @@ export const updateBuild = async (
 			miracle,
 			ability,
 			version,
+			updated_at: new Date().toISOString(),
 			writer: {
 				uuid: writer.uuid,
 				nickname: writer.nickname,

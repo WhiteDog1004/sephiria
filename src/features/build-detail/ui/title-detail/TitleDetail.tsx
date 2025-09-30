@@ -10,8 +10,11 @@ import {
 	Typography,
 } from "@/src/shared";
 
-export const TitleDetail = ({ ...data }: BuildRow) => {
-	const { title, writer, created_at, updated_at, postLike, version } = data;
+export const TitleDetail = ({
+	initialLike,
+	...data
+}: BuildRow & { initialLike: number }) => {
+	const { title, writer, created_at, updated_at, version } = data;
 
 	return (
 		<Column className="w-full gap-2">
@@ -21,7 +24,7 @@ export const TitleDetail = ({ ...data }: BuildRow) => {
 				</Typography>
 				<Row className="items-center gap-2">
 					<ThumbsUp className="w-5 h-5" />
-					<Typography variant="body2">{postLike || 0}</Typography>
+					<Typography variant="body2">{initialLike || 0}</Typography>
 				</Row>
 			</Row>
 			<Row className="h-8 justify-between items-center gap-2">
@@ -44,7 +47,7 @@ export const TitleDetail = ({ ...data }: BuildRow) => {
 						variant="body2"
 						className="text-gray-500 whitespace-nowrap"
 					>
-						작성일: {dayjs(updated_at ?? created_at).format("YY.MM.DD")}{" "}
+						작성일: {dayjs(created_at).format("YY.MM.DD")}{" "}
 						{updated_at && "(수정됨)"}
 					</Typography>
 				</Row>
