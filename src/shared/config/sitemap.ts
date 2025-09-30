@@ -8,6 +8,7 @@ export const SITEMAP = {
 	SIMULATOR: "/simulator",
 	BUILDS: "/builds",
 	ADD_BUILD: "/builds/add",
+	PRIVACY: "/privacy",
 };
 
 export const SITE_METADATA = {
@@ -38,5 +39,9 @@ export const SITE_METADATA = {
 	builds: {
 		title: "세피리아 - 빌드 공유",
 		description: "세피리아 위키: 빌드 공유",
+	},
+	privacy: {
+		title: "세피리아 - 개인정보처리방침",
+		description: "세피리아 위키: 개인정보처리방침",
 	},
 };

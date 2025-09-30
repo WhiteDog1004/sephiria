@@ -228,14 +228,14 @@ export const BuildSearchButton = ({
 								name="like"
 								render={({ field }) => (
 									<FormItem className="w-full">
-										<FormLabel>좋아요 순</FormLabel>
+										<FormLabel>보기 순서</FormLabel>
 										<Select onValueChange={field.onChange} value={field.value}>
 											<SelectTrigger className="w-full">
-												<SelectValue placeholder="좋아요 순" />
+												<SelectValue placeholder="보기 순서" />
 											</SelectTrigger>
 											<SelectContent>
-												<SelectItem value={"desc"}>좋아요 높은순</SelectItem>
-												<SelectItem value={"asc"}>좋아요 낮은순</SelectItem>
+												<SelectItem value={"desc"}>좋아요 높은 순</SelectItem>
+												<SelectItem value={"asc"}>최신 순</SelectItem>
 											</SelectContent>
 										</Select>
 									</FormItem>

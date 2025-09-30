@@ -3,7 +3,14 @@
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Avatar, AvatarImage, Button, Row, Typography } from "@/src/shared";
+import {
+	Avatar,
+	AvatarImage,
+	Button,
+	Row,
+	Separator,
+	Typography,
+} from "@/src/shared";
 import { SITEMAP } from "@/src/shared/config/sitemap";
 import { Box } from "@/src/shared/ui/box";
 import {
@@ -74,7 +81,7 @@ export const Header = () => {
 								</Avatar>
 							)}
 						</DropdownMenuTrigger>
-						<DropdownMenuContent className="w-24" align="end">
+						<DropdownMenuContent className="w-max py-2" align="end">
 							<DropdownMenuGroup>
 								{data ? (
 									<DropdownMenuItem onClick={discordLogoutHandler}>
@@ -100,6 +107,13 @@ export const Header = () => {
 									</DropdownMenuItem>
 								)}
 							</DropdownMenuGroup>
+							<Separator className="my-2" />
+							<DropdownMenuItem
+								onClick={() => router.push(SITEMAP.PRIVACY)}
+								className="whitespace-nowrap"
+							>
+								개인정보처리방침
+							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
 				</Box>

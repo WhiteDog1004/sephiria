@@ -26,12 +26,16 @@ export const getBuilds = async ({
 	let query = supabase
 		.from("builds")
 		.select("*", { count: "exact" })
-		.range(from, to)
-		.order("postLike", {
-			ascending: like && like === "asc",
-			nullsFirst: like && like === "asc",
-		})
-		.order("id", { ascending: false });
+		.range(from, to);
+
+	if (like && like === "desc") {
+		query = query.order("postLike", {
+			ascending: like && false,
+			nullsFirst: like && false,
+		});
+	}
+
+	query = query.order("id", { ascending: false });
 
 	if (title) {
 		query = query.ilike("title", `%${title}%`);
