@@ -52,7 +52,7 @@ export const ItemsAddDescription = ({
 					<FormControl>
 						<Column className="w-full items-end gap-2">
 							{isEdit ? (
-								<Row className="items-center gap-2">
+								<Row className="w-full items-center gap-2">
 									<Input
 										value={tempDescription}
 										onChange={(e) => setTempDescription(e.target.value)}
@@ -104,7 +104,7 @@ export const ItemsAddDescription = ({
 								</Row>
 							)}
 							<Typography variant="caption">
-								{field.value.length}/300
+								{isEdit ? tempDescription.length : field.value.length}/300
 							</Typography>
 						</Column>
 					</FormControl>
