@@ -33,7 +33,7 @@ export const AddDescription = (form: any) => {
 									<Box className="p-0" />
 								)}
 								<Typography variant="caption">
-									{field.value.length}/200
+									{field.value.length}/500
 								</Typography>
 							</Row>
 						</Column>

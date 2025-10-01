@@ -3,6 +3,7 @@ import { Check, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import {
 	Button,
+	Column,
 	FormControl,
 	FormField,
 	FormItem,
@@ -49,59 +50,63 @@ export const ItemsAddDescription = ({
 			render={({ field }) => (
 				<FormItem>
 					<FormControl>
-						{isEdit ? (
-							<Row className="items-center gap-2">
-								<Input
-									value={tempDescription}
-									onChange={(e) => setTempDescription(e.target.value)}
-									onBlur={field.onBlur}
-									ref={(el) => {
-										field.ref(el);
-										inputRef.current = el;
-									}}
-									onKeyDown={(e) => {
-										if (e.key === "Enter") {
-											e.preventDefault();
-											submitInput();
-										}
-									}}
-									placeholder="아티팩트 그룹 설명"
-								/>
-								<Button
-									type="button"
-									size="icon"
-									variant="default"
-									className="bg-green-400"
-									onClick={submitInput}
-								>
-									<Check />
-								</Button>
-								<Button
-									type="button"
-									size="icon"
-									variant="default"
-									className="bg-red-400"
-									onClick={() => {
-										setTempDescription(field.value || "");
-										setIsEdit(false);
-									}}
-								>
-									<X />
-								</Button>
-							</Row>
-						) : (
-							<Row className="w-full py-2 px-4 bg-secondary/60 rounded-lg">
-								<Typography
-									variant="body2"
-									className={`${clsx(!field.value && "text-gray-500")} w-full cursor-pointer`}
-									onClick={() => setIsEdit(true)}
-								>
-									{field.value ||
-										"해당 아티팩트들에 대한 간단한 설명을 입력해 주세요"}
-								</Typography>
-							</Row>
-						)}
-						<Typography variant="caption">{field.value.length}/500</Typography>
+						<Column className="w-full items-end gap-2">
+							{isEdit ? (
+								<Row className="items-center gap-2">
+									<Input
+										value={tempDescription}
+										onChange={(e) => setTempDescription(e.target.value)}
+										onBlur={field.onBlur}
+										ref={(el) => {
+											field.ref(el);
+											inputRef.current = el;
+										}}
+										onKeyDown={(e) => {
+											if (e.key === "Enter") {
+												e.preventDefault();
+												submitInput();
+											}
+										}}
+										placeholder="아티팩트 그룹 설명"
+									/>
+									<Button
+										type="button"
+										size="icon"
+										variant="default"
+										className="bg-green-400"
+										onClick={submitInput}
+									>
+										<Check />
+									</Button>
+									<Button
+										type="button"
+										size="icon"
+										variant="default"
+										className="bg-red-400"
+										onClick={() => {
+											setTempDescription(field.value || "");
+											setIsEdit(false);
+										}}
+									>
+										<X />
+									</Button>
+								</Row>
+							) : (
+								<Row className="w-full py-2 px-4 bg-secondary/60 rounded-lg">
+									<Typography
+										variant="body2"
+										className={`${clsx(!field.value && "text-gray-500")} w-full cursor-pointer`}
+										onClick={() => setIsEdit(true)}
+									>
+										{field.value ||
+											"해당 아티팩트들에 대한 간단한 설명을 입력해 주세요"}
+									</Typography>
+								</Row>
+							)}
+							<Typography variant="caption">
+								{field.value.length}/200
+							</Typography>
+						</Column>
 					</FormControl>
 				</FormItem>
 			)}
