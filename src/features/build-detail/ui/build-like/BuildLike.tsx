@@ -25,10 +25,8 @@ export const BuildLike = (req: BuildLikeProps) => {
 					mutate(
 						{ postUuid, userId: userId },
 						{
-							onSuccess: (data) => {
-								if (data) {
-									setInitialLike((initialLike || 0) + 1);
-								}
+							onSuccess: () => {
+								setInitialLike((initialLike || 0) + 1);
 							},
 						},
 					);

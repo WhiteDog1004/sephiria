@@ -28,6 +28,7 @@ export const createBuildLike = async ({
 					color: "#ffffff",
 				},
 			});
+			throw new Error("ALREADY_LIKED");
 		} else {
 			handleError(error);
 		}
