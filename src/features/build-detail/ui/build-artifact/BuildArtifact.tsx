@@ -61,7 +61,9 @@ export const BuildArtifact = ({
 	const effects = Object.entries(counts)
 		.map(([set, count]) => {
 			const effect =
-				count >= 2 ? getSetEffectText(set, count) : getSetEffectText(set, 2);
+				count >= 2
+					? getSetEffectText(set, count > 6 ? 6 : count)
+					: getSetEffectText(set, 2);
 			return effect ? { set, count, effect } : null;
 		})
 		.filter(Boolean);

@@ -101,6 +101,7 @@ export const ItemsAddDescription = ({
 								</Typography>
 							</Row>
 						)}
+						<Typography variant="caption">{field.value.length}/500</Typography>
 					</FormControl>
 				</FormItem>
 			)}

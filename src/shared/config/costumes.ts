@@ -54,7 +54,7 @@ export const COSTUMES: CostumeMap = {
 		name: "흰색 토끼",
 		unlock: undefined,
 		story: "시력이 조금 나쁘지만 매력적입니다.",
-		options: ["협상력 +10", "회피 -5"],
+		options: ["일반 공격 피해 +8%", "특수 공격 피해 -5%"],
 	},
 	wing_ear_rabbit: {
 		name: "날개 귀 토끼",

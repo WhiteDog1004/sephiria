@@ -53,7 +53,7 @@ export const addFormSchema = z.object({
 				.max(50, { message: "최대 50글자까지 입력 가능합니다" }),
 			description: z
 				.string()
-				.max(50, { message: "최대 50글자까지 입력 가능합니다" })
+				.max(200, { message: "최대 200글자까지 입력 가능합니다" })
 				.optional(),
 		}),
 	),
