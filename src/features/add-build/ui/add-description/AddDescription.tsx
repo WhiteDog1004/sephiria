@@ -23,7 +23,7 @@ export const AddDescription = (form: any) => {
 						<Column className="items-end gap-2">
 							<Textarea
 								className="text-xs resize-none w-full max-h-40"
-								placeholder="500자내로 입력해 주세요."
+								placeholder="2000자내로 입력해 주세요."
 								{...field}
 							/>
 							<Row className="items-center justify-between w-full">
@@ -33,7 +33,7 @@ export const AddDescription = (form: any) => {
 									<Box className="p-0" />
 								)}
 								<Typography variant="caption">
-									{field.value.length}/500
+									{field.value.length}/2000
 								</Typography>
 							</Row>
 						</Column>
