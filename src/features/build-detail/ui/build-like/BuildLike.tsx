@@ -1,5 +1,5 @@
 import { ThumbsUp } from "lucide-react";
-import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { useCreateBuildLike } from "@/src/entities/build-detail";
 import type { BuildRow } from "@/src/entities/builds/model/builds.types";
 import { Button, Row, Typography } from "@/src/shared";
@@ -15,11 +15,6 @@ type BuildLikeProps = {
 export const BuildLike = (req: BuildLikeProps) => {
 	const { userId, postUuid, initialLike, setInitialLike } = req;
 	const { mutate } = useCreateBuildLike();
-	const [isLiked, setIsLiked] = useState(false);
-
-	useEffect(() => {
-		setIsLiked(false);
-	}, []);
 
 	if (!userId) return;
 	return (
@@ -30,9 +25,8 @@ export const BuildLike = (req: BuildLikeProps) => {
 					mutate(
 						{ postUuid, userId: userId },
 						{
-							onSuccess: () => {
-								if (!isLiked) {
-									setIsLiked(true);
+							onSuccess: (data) => {
+								if (data) {
 									setInitialLike((initialLike || 0) + 1);
 								}
 							},
