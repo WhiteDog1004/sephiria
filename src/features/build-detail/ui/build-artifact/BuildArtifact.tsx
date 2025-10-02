@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Image from "next/image";
 import { useState } from "react";
 import { useGetArtifacts } from "@/src/entities/builds";
 import type { BuildRow } from "@/src/entities/builds/model/builds.types";
@@ -158,9 +159,18 @@ export const BuildArtifact = ({
 									key={set?.set || "" + index}
 									className={`border rounded-lg p-3 ${clsx(set?.count < 2 && "text-gray-500 opacity-40")}`}
 								>
-									<Typography>
-										{EFFECT_LABELS[set?.set]} ({set?.count}){" "}
-									</Typography>
+									<Row className="items-center">
+										<Image
+											width={20}
+											height={20}
+											unoptimized
+											src={`/combo/${set.set}.png`}
+											alt={set.set}
+										/>
+										<Typography>
+											{EFFECT_LABELS[set?.set]} ({set?.count}){" "}
+										</Typography>
+									</Row>
 									<Row className="gap-1">
 										{set?.count >= 2 ? (
 											highlightNumbers(set?.effect)

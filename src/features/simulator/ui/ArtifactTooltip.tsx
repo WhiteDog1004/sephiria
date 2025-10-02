@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
 import { getItemsTierColor } from "@/src/features/simulator/lib/getItemsTierColor";
+import { Row } from "@/src/shared";
 import { Box } from "@/src/shared/ui/box";
 import { Typography } from "@/src/shared/ui/typography";
 import { EFFECT_LABELS } from "../config/constants";
@@ -37,13 +38,22 @@ export const ArtifactTooltip = ({
 					</Typography>
 					<Box className="p-0 gap-1">
 						{data.effect.sets?.map((set) => (
-							<Typography
-								className={`text-green-300`}
-								variant="caption"
-								key={set}
-							>
-								#{EFFECT_LABELS[set]}
-							</Typography>
+							<Row key={set} className="items-center">
+								<Image
+									width={20}
+									height={20}
+									unoptimized
+									src={`/combo/${set}.png`}
+									alt={set}
+								/>
+								<Typography
+									className={`text-green-300`}
+									variant="caption"
+									key={set}
+								>
+									{EFFECT_LABELS[set]}
+								</Typography>
+							</Row>
 						))}
 					</Box>
 				</Box>

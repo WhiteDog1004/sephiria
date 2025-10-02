@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Image from "next/image";
 import { useMemo } from "react";
 import { highlightNumbers } from "@/src/entities/miracle/lib/highlightNumbers";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
@@ -77,12 +78,21 @@ export const ItemsSets = ({
 										className="w-full border rounded-md p-2 gap-1"
 										key={set + index}
 									>
-										<Typography
-											variant="body2"
-											className={`w-24 sm:w-32 ${clsx(setsMap[set].count >= 2 ? "text-green-400" : "text-gray-500")}`}
-										>
-											#{EFFECT_LABELS[set]} ({setsMap[set].count})
-										</Typography>
+										<Row className="items-center">
+											<Image
+												width={20}
+												height={20}
+												unoptimized
+												src={`/combo/${set}.png`}
+												alt={set}
+											/>
+											<Typography
+												variant="body2"
+												className={`w-24 sm:w-32 ${clsx(setsMap[set].count >= 2 ? "text-green-400" : "text-gray-500")}`}
+											>
+												{EFFECT_LABELS[set]} ({setsMap[set].count})
+											</Typography>
+										</Row>
 										{setsMap[set].count >= 2 ? (
 											<>
 												<Separator />
