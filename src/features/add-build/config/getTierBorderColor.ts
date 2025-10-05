@@ -8,6 +8,8 @@ export const getTierBorderColor = (tier: string, isLightMode?: boolean) => {
 			return isLightMode ? "!border-yellow-600" : "!border-yellow-300";
 		case "legend":
 			return "!border-pink-500";
+		case "solid":
+			return "!border-green-500";
 		default:
 			return "!border-white";
 	}

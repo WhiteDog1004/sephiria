@@ -15,10 +15,7 @@ import {
 	Typography,
 } from "@/src/shared";
 import { SETS_EFFECT_COUNT_LABEL } from "../../config/getSetsEffect";
-import {
-	getAllActiveSetEffectTexts,
-	getSetEffectTiers,
-} from "../../lib/getSetEffectTiers";
+import { getSetEffectTiers } from "../../lib/getSetEffectTiers";
 
 export const ItemsSets = ({
 	form,
@@ -82,11 +79,19 @@ export const ItemsSets = ({
 									const currentCount = setsMap[set].count;
 									const isActivated = currentCount >= min;
 
+									const setEffectLabels = SETS_EFFECT_COUNT_LABEL[set] || {};
+									const levels = Object.keys(setEffectLabels)
+										.map(Number)
+										.sort((a, b) => a - b);
+
 									const effectTexts = isActivated
-										? getAllActiveSetEffectTexts(set, currentCount)
-										: [SETS_EFFECT_COUNT_LABEL[set]?.[min]].filter(
-												(text): text is string => !!text,
-											);
+										? levels
+												.filter((level) => level <= currentCount)
+												.map((level) => ({
+													level,
+													text: setEffectLabels[level],
+												}))
+										: [{ level: min, text: setEffectLabels[min] }];
 
 									if (effectTexts.length === 0) return null;
 
@@ -111,18 +116,27 @@ export const ItemsSets = ({
 												</Typography>
 											</Row>
 
-											{effectTexts.map((text, textIndex) => (
+											{effectTexts.map((effect, textIndex) => (
 												<Fragment key={textIndex}>
 													<Separator />
-													<Row className="gap-2">
+													<Row className="items-center gap-1">
+														<Typography
+															variant="caption"
+															className={clsx(
+																currentCount < effect.level &&
+																	"text-gray-300 dark:text-gray-700",
+															)}
+														>
+															{effect.level}:
+														</Typography>
 														{isActivated ? (
-															highlightNumbers(text)
+															highlightNumbers(effect.text)
 														) : (
 															<Typography
 																variant="body2"
 																className="text-gray-300 dark:text-gray-700"
 															>
-																{text}
+																{effect.text}
 															</Typography>
 														)}
 													</Row>

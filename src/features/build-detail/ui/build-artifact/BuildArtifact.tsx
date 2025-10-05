@@ -6,10 +6,7 @@ import type { BuildRow } from "@/src/entities/builds/model/builds.types";
 import { highlightNumbers } from "@/src/entities/miracle";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
 import { SETS_EFFECT_COUNT_LABEL } from "@/src/features/add-build/config/getSetsEffect";
-import {
-	getAllActiveSetEffectTexts,
-	getSetEffectTiers,
-} from "@/src/features/add-build/lib/getSetEffectTiers";
+import { getSetEffectTiers } from "@/src/features/add-build/lib/getSetEffectTiers";
 import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
 import { ArtifactTooltip } from "@/src/features/simulator/ui/ArtifactTooltip";
 import {
@@ -69,17 +66,25 @@ export const BuildArtifact = ({
 			if (!min) return null;
 
 			const isActivated = count >= min;
+			const setEffects = SETS_EFFECT_COUNT_LABEL[set];
+			if (!setEffects) return null;
+
+			const levels = Object.keys(setEffects)
+				.map(Number)
+				.sort((a, b) => a - b);
 
 			const effectTexts = isActivated
-				? getAllActiveSetEffectTexts(set, count)
-				: [SETS_EFFECT_COUNT_LABEL[set]?.[min]].filter(
-						(text): text is string => !!text,
-					);
+				? levels
+						.filter((level) => level <= count)
+						.map((level) => ({ level, text: setEffects[level] }))
+				: [{ level: min, text: setEffects[min] }];
 
 			if (effectTexts.length === 0) return null;
+
 			return { set, count, effectTexts, isActivated };
 		})
 		.filter(Boolean);
+
 	return (
 		<Column className="md:flex-row gap-2">
 			<Column className="gap-4 flex-2/3">
@@ -185,14 +190,17 @@ export const BuildArtifact = ({
 										</Typography>
 									</Row>
 
-									{setInfo.effectTexts.map((text, textIndex) => (
+									{setInfo.effectTexts.map((effect, textIndex) => (
 										<Fragment key={textIndex}>
 											<Separator />
-											<Row className="gap-1">
+											<Row className="items-center gap-1">
+												<Typography variant="caption">
+													{effect.level}:
+												</Typography>
 												{setInfo.isActivated ? (
-													highlightNumbers(text)
+													highlightNumbers(effect.text)
 												) : (
-													<Typography variant="body2">{text}</Typography>
+													<Typography variant="body2">{effect.text}</Typography>
 												)}
 											</Row>
 										</Fragment>
