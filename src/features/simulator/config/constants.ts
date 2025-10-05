@@ -31,4 +31,7 @@ export const EFFECT_LABELS: Record<string, string> = {
 	precision: "정밀",
 	extrium: "먹구름",
 	firmness: "견고",
+	lake: "호수",
+	sun_sword: "태양검",
+	academy: "아카데미",
 };

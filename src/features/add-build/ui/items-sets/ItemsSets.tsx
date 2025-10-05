@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Image from "next/image";
-import { useMemo } from "react";
+import { Fragment, useMemo } from "react";
 import { highlightNumbers } from "@/src/entities/miracle/lib/highlightNumbers";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
 import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
@@ -14,7 +14,11 @@ import {
 	Separator,
 	Typography,
 } from "@/src/shared";
-import { getSetEffectText } from "../../config/getSetsEffect";
+import { SETS_EFFECT_COUNT_LABEL } from "../../config/getSetsEffect";
+import {
+	getAllActiveSetEffectTexts,
+	getSetEffectTiers,
+} from "../../lib/getSetEffectTiers";
 
 export const ItemsSets = ({
 	form,
@@ -70,54 +74,63 @@ export const ItemsSets = ({
 						</Typography>
 					</AccordionTrigger>
 					<AccordionContent>
-						<Row className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full items-center gap-2">
+						<Row className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full items-start gap-2">
 							{Object.keys(setsMap)
 								.sort((a, b) => setsMap[b].count - setsMap[a].count)
-								.map((set, index) => (
-									<Column
-										className="w-full border rounded-md p-2 gap-1"
-										key={set + index}
-									>
-										<Row className="items-center">
-											<Image
-												width={20}
-												height={20}
-												unoptimized
-												src={`/combo/${set}.png`}
-												alt={set}
-											/>
-											<Typography
-												variant="body2"
-												className={`w-24 sm:w-32 ${clsx(setsMap[set].count >= 2 ? "text-green-400" : "text-gray-500")}`}
-											>
-												{EFFECT_LABELS[set]} ({setsMap[set].count})
-											</Typography>
-										</Row>
-										{setsMap[set].count >= 2 ? (
-											<>
-												<Separator />
-												<Row className="gap-2">
-													{highlightNumbers(
-														getSetEffectText(
-															set,
-															setsMap[set].count > 6 ? 6 : setsMap[set].count,
-														),
-													)}
-												</Row>
-											</>
-										) : (
-											<>
-												<Separator />
+								.map((set, index) => {
+									const { min } = getSetEffectTiers(set);
+									const currentCount = setsMap[set].count;
+									const isActivated = currentCount >= min;
+
+									const effectTexts = isActivated
+										? getAllActiveSetEffectTexts(set, currentCount)
+										: [SETS_EFFECT_COUNT_LABEL[set]?.[min]].filter(
+												(text): text is string => !!text,
+											);
+
+									if (effectTexts.length === 0) return null;
+
+									return (
+										<Column
+											className="w-full border rounded-md p-2 gap-1"
+											key={set + index}
+										>
+											<Row className="items-center">
+												<Image
+													width={20}
+													height={20}
+													unoptimized
+													src={`/combo/${set}.png`}
+													alt={set}
+												/>
 												<Typography
 													variant="body2"
-													className="text-gray-300 dark:text-gray-700"
+													className={`w-24 sm:w-32 ${clsx(isActivated ? "text-green-400" : "text-gray-500")}`}
 												>
-													{getSetEffectText(set, 2)}
+													{EFFECT_LABELS[set]} ({currentCount})
 												</Typography>
-											</>
-										)}
-									</Column>
-								))}
+											</Row>
+
+											{effectTexts.map((text, textIndex) => (
+												<Fragment key={textIndex}>
+													<Separator />
+													<Row className="gap-2">
+														{isActivated ? (
+															highlightNumbers(text)
+														) : (
+															<Typography
+																variant="body2"
+																className="text-gray-300 dark:text-gray-700"
+															>
+																{text}
+															</Typography>
+														)}
+													</Row>
+												</Fragment>
+											))}
+										</Column>
+									);
+								})}
 						</Row>
 					</AccordionContent>
 				</AccordionItem>

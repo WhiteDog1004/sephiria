@@ -1,11 +1,15 @@
 import clsx from "clsx";
 import Image from "next/image";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useGetArtifacts } from "@/src/entities/builds";
 import type { BuildRow } from "@/src/entities/builds/model/builds.types";
 import { highlightNumbers } from "@/src/entities/miracle";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
-import { getSetEffectText } from "@/src/features/add-build/config/getSetsEffect";
+import { SETS_EFFECT_COUNT_LABEL } from "@/src/features/add-build/config/getSetsEffect";
+import {
+	getAllActiveSetEffectTexts,
+	getSetEffectTiers,
+} from "@/src/features/add-build/lib/getSetEffectTiers";
 import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
 import { ArtifactTooltip } from "@/src/features/simulator/ui/ArtifactTooltip";
 import {
@@ -61,11 +65,19 @@ export const BuildArtifact = ({
 
 	const effects = Object.entries(counts)
 		.map(([set, count]) => {
-			const effect =
-				count >= 2
-					? getSetEffectText(set, count > 6 ? 6 : count)
-					: getSetEffectText(set, 2);
-			return effect ? { set, count, effect } : null;
+			const { min } = getSetEffectTiers(set);
+			if (!min) return null;
+
+			const isActivated = count >= min;
+
+			const effectTexts = isActivated
+				? getAllActiveSetEffectTexts(set, count)
+				: [SETS_EFFECT_COUNT_LABEL[set]?.[min]].filter(
+						(text): text is string => !!text,
+					);
+
+			if (effectTexts.length === 0) return null;
+			return { set, count, effectTexts, isActivated };
 		})
 		.filter(Boolean);
 	return (
@@ -152,32 +164,39 @@ export const BuildArtifact = ({
 				<Row className="md:flex-col gap-2 flex-wrap">
 					{effects
 						.sort((a, b) => (b?.count || 0) - (a?.count || 0))
-						.map((set, index) => {
-							if (!set) return;
+						.map((setInfo, index) => {
+							if (!setInfo) return null;
+
 							return (
 								<Column
-									key={set?.set || "" + index}
-									className={`border rounded-lg p-3 ${clsx(set?.count < 2 && "text-gray-500 opacity-40")}`}
+									key={setInfo.set + index}
+									className={`border rounded-lg p-3 gap-1 ${clsx(!setInfo.isActivated && "text-gray-500 opacity-40")}`}
 								>
 									<Row className="items-center">
 										<Image
 											width={20}
 											height={20}
 											unoptimized
-											src={`/combo/${set.set}.png`}
-											alt={set.set}
+											src={`/combo/${setInfo.set}.png`}
+											alt={setInfo.set}
 										/>
 										<Typography>
-											{EFFECT_LABELS[set?.set]} ({set?.count}){" "}
+											{EFFECT_LABELS[setInfo.set]} ({setInfo.count})
 										</Typography>
 									</Row>
-									<Row className="gap-1">
-										{set?.count >= 2 ? (
-											highlightNumbers(set?.effect)
-										) : (
-											<Typography variant="body2">{set?.effect}</Typography>
-										)}
-									</Row>
+
+									{setInfo.effectTexts.map((text, textIndex) => (
+										<Fragment key={textIndex}>
+											<Separator />
+											<Row className="gap-1">
+												{setInfo.isActivated ? (
+													highlightNumbers(text)
+												) : (
+													<Typography variant="body2">{text}</Typography>
+												)}
+											</Row>
+										</Fragment>
+									))}
 								</Column>
 							);
 						})}
