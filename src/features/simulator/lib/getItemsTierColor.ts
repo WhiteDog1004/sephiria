@@ -8,6 +8,8 @@ export const getItemsTierColor = (tier: string, isLightMode?: boolean) => {
 			return isLightMode ? "text-yellow-600" : "text-yellow-300";
 		case "legend":
 			return "text-pink-500";
+		case "solid":
+			return "bg-gradient-to-b from-yellow-400 via-lime-400 to-green-500 bg-clip-text text-transparent";
 		default:
 			return "text-white";
 	}

@@ -426,9 +426,10 @@ const Inventory = ({ data }: InventoryProps) => {
 
 				<Column className="min-w-max md:min-w-[400px] xl:min-w-[640px] gap-2">
 					<Tabs
-						onValueChange={(value) =>
-							setTabsValue(value as "slabs" | "artifact")
-						}
+						onValueChange={(value) => {
+							setTabsValue(value as "slabs" | "artifact");
+							setSelectedTier("all");
+						}}
 						defaultValue={tabsValue}
 					>
 						<Row className="flex-col xl:flex-row gap-2 items-center md:items-start justify-between">

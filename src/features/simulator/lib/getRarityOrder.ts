@@ -1,10 +1,11 @@
-export type Rarity = "common" | "advanced" | "rare" | "legend";
+export type Rarity = "common" | "advanced" | "rare" | "legend" | "solid";
 
 export const rarityOrder: Record<Rarity, number> = {
 	common: 0,
 	advanced: 1,
 	rare: 2,
 	legend: 3,
+	solid: 4,
 };
 
 export const getRarityValue = (rarity: Rarity) => {

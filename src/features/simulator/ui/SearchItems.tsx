@@ -67,7 +67,9 @@ export const SearchItems = ({
 						<SelectValue placeholder="등급 선택" />
 					</SelectTrigger>
 					<SelectContent>
-						{TIER_DATA.map((tier) => (
+						{TIER_DATA.filter((item) =>
+							type === "slabs" ? item.value !== "solid" : item,
+						).map((tier) => (
 							<SelectItem key={tier.value} value={tier.value}>
 								{tier.label}
 							</SelectItem>
