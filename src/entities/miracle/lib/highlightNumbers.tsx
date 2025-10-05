@@ -40,7 +40,7 @@ export const highlightNumbers = (text: string, isPenalty = false) => {
 			);
 		}
 		return (
-			<Typography key={i} variant="body2">
+			<Typography key={i} variant="body2" className="truncate">
 				{part}
 			</Typography>
 		);
