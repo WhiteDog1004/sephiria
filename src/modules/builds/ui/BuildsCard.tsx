@@ -19,6 +19,7 @@ import {
 	Typography,
 } from "@/src/shared";
 import {
+	ABILITY_ORDER,
 	ABILITY_STATUS_ICONS,
 	ABILITY_TEXT_COLORS,
 } from "../config/abilityTextOptions";
@@ -97,24 +98,29 @@ export const BuildsCard = ({
 								className="min-w-max"
 								content={
 									<Row className="w-full h-full justify-center items-center p-0 gap-1 md:gap-1">
-										{Object.entries(data.ability).map(([key, value], index) => (
-											<Column key={key}>
-												<Image
-													width={24}
-													height={24}
-													className="min-w-3 max-w-3"
-													src={`/stat/${ABILITY_STATUS_ICONS[index]}.png`}
-													alt={key}
-													unoptimized
-												/>
-												<Typography
-													className={ABILITY_TEXT_COLORS[index]}
-													variant="caption"
-												>
-													{value}
-												</Typography>
-											</Column>
-										))}
+										{ABILITY_ORDER.map((key, index) => {
+											const value = data.ability[key];
+											if (value === undefined) return null;
+
+											return (
+												<Column key={key}>
+													<Image
+														width={24}
+														height={24}
+														className="min-w-3 max-w-3"
+														src={`/stat/${ABILITY_STATUS_ICONS[index]}.png`}
+														alt={key}
+														unoptimized
+													/>
+													<Typography
+														className={ABILITY_TEXT_COLORS[index]}
+														variant="caption"
+													>
+														{value}
+													</Typography>
+												</Column>
+											);
+										})}
 									</Row>
 								}
 							/>

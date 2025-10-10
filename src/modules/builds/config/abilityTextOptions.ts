@@ -23,3 +23,12 @@ export const ABILITY_TEXT_TYPES_COLORS = {
 	wisdom: "text-blue-600",
 	will: "text-green-300",
 };
+
+export const ABILITY_ORDER = [
+	"anger",
+	"rapid",
+	"survival",
+	"patience",
+	"wisdom",
+	"will",
+];
