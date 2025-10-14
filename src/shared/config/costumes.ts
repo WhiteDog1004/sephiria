@@ -48,7 +48,7 @@ export const COSTUMES: CostumeMap = {
 		name: "빨간망토 토끼",
 		unlock: undefined,
 		story: "늑대와의 운명적인 만남을 기다리고 있습니다.",
-		options: ["MP 재생 +8", "최대 MP -20"],
+		options: ["MP 회복량 2배", "최대 MP -20"],
 	},
 	white_rabbit: {
 		name: "흰색 토끼",
@@ -141,7 +141,7 @@ export const COSTUMES: CostumeMap = {
 		name: "날개 잃은 박쥐",
 		unlock: "헌혈 이벤트 5회 완료",
 		story: "햇빛을 얻는 대신 동굴을 잃었습니다. 동족들을 찾고 있습니다.",
-		options: ["HP 흡수 +4", "대시 횟수가 1회로 고정됨"],
+		options: ["HP 흡수 +5", "대시 횟수가 1회로 고정됨"],
 	},
 	adventurer: {
 		name: "모험가 토끼",
