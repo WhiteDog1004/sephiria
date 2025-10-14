@@ -39,7 +39,17 @@ export const Header = () => {
 					className="w-max p-0 cursor-pointer"
 					onClick={() => router.push(SITEMAP.HOME)}
 				>
-					<Image width={120} height={100} src={"/sephiria.webp"} alt={"logo"} />
+					<Row className="items-end gap-2">
+						<Image
+							width={120}
+							height={100}
+							src={"/sephiria.webp"}
+							alt={"logo"}
+						/>
+						<Typography className="text-gray-600/80" variant="caption">
+							v{process.env.NEXT_PUBLIC_GAME_VERSION}
+						</Typography>
+					</Row>
 				</Box>
 				<Box className="w-max p-0 gap-3">
 					<ModeToggle />
