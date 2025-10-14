@@ -11,7 +11,10 @@ export const SectionHeader = ({ title, description }: SectionHeaderProps) => {
 		<Box className="flex-col gap-2 p-4">
 			<Typography variant="header1">{title}</Typography>
 			{description && (
-				<Typography variant="body2" className="text-gray-500">
+				<Typography
+					variant="body2"
+					className="text-gray-500 whitespace-pre-line text-center"
+				>
 					{description}
 				</Typography>
 			)}

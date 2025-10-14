@@ -23,7 +23,7 @@ export const ArtifactList = ({ data }: ArtifactProps) => {
 	if (!mounted) return;
 	return (
 		<Box
-			className={`grid max-w-3xl max-h-[calc(100svh-360px)] overflow-auto h-full p-4 rounded-lg ${clsx(resultData.length > 0 ? "grid-cols-[repeat(auto-fill,minmax(80px,1fr))]" : "grid-cols-1", theme === "light" ? "bg-gray-200" : "bg-[#40273b]")}`}
+			className={`grid max-w-3xl h-full p-4 rounded-lg ${clsx(resultData.length > 0 ? "grid-cols-[repeat(auto-fill,minmax(80px,1fr))]" : "grid-cols-1", theme === "light" ? "bg-gray-200" : "bg-[#40273b]")}`}
 		>
 			{resultData.length > 0 ? (
 				resultData
