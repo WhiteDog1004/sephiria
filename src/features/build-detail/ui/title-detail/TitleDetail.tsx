@@ -4,7 +4,9 @@ import type { BuildRow } from "@/src/entities/builds/model/builds.types";
 import {
 	Avatar,
 	AvatarImage,
+	Button,
 	Column,
+	copyToClipboard,
 	Row,
 	Separator,
 	Typography,
@@ -51,6 +53,17 @@ export const TitleDetail = ({
 						{updated_at && "(수정됨)"}
 					</Typography>
 				</Row>
+			</Row>
+			<Row className="w-full justify-end">
+				<Button
+					onClick={() => {
+						const url = window.location.href;
+						copyToClipboard(url);
+					}}
+					size="sm"
+				>
+					주소복사
+				</Button>
 			</Row>
 		</Column>
 	);
