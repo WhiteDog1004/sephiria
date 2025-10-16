@@ -46,7 +46,7 @@ ${urls
 
 	return new NextResponse(sitemap, {
 		headers: {
-			"Content-Type": "application/xml",
+			"Content-Type": "application/xml; charset=UTF-8",
 			"Cache-Control": "s-maxage=3600, stale-while-revalidate",
 		},
 	});
