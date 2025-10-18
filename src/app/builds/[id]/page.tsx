@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getBuildDetail } from "@/src/entities/build-detail";
 import { BuildDetailClientPage } from "@/src/modules/build-detail";
+import { COSTUMES } from "@/src/shared";
 
 export async function generateMetadata({
 	params,
@@ -12,10 +13,10 @@ export async function generateMetadata({
 
 	return {
 		title: `${data.title} - 세피리아 위키`,
-		description: `${data.costume} & ${data.miracle} & ${data.weapon} & v${data.version} - 세피리아 위키`,
+		description: `${COSTUMES[data.costume].name} 코스튬 빌드 & v${data.version} - 세피리아 위키`,
 		openGraph: {
 			title: `${data.title} - 세피리아 위키`,
-			description: `${data.costume} & ${data.miracle} & ${data.weapon} & v${data.version} - 세피리아 위키`,
+			description: `${COSTUMES[data.costume].name} 코스튬 빌드 & v${data.version} - 세피리아 위키`,
 			images: [
 				{
 					url: "https://sephiria.wiki/thumbnail.png",
