@@ -12,10 +12,10 @@ export async function generateMetadata({
 
 	return {
 		title: `${data.title} - 세피리아 위키`,
-		description: `${data.title} - 세피리아 위키`,
+		description: `${data.costume} & ${data.miracle} & ${data.weapon} & v${data.version} - 세피리아 위키`,
 		openGraph: {
 			title: `${data.title} - 세피리아 위키`,
-			description: `${data.title} - 세피리아 위키`,
+			description: `${data.costume} & ${data.miracle} & ${data.weapon} & v${data.version} - 세피리아 위키`,
 			images: [
 				{
 					url: "https://sephiria.wiki/thumbnail.png",
