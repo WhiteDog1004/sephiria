@@ -35,16 +35,15 @@ export const Header = () => {
 	return (
 		<Box className="sticky z-50 top-0 backdrop-blur-md border-b dark:border-white/10 border-black/10 p-4">
 			<Box className="justify-between max-w-7xl p-0">
-				<Box
-					className="w-max p-0 cursor-pointer"
-					onClick={() => router.push(SITEMAP.HOME)}
-				>
+				<Box className="w-max p-0">
 					<Row className="items-end gap-2">
 						<Image
+							onClick={() => router.push(SITEMAP.HOME)}
 							width={120}
 							height={100}
 							src={"/sephiria.webp"}
 							alt={"logo"}
+							className="cursor-pointer"
 						/>
 						<Typography className="text-gray-600/80" variant="caption">
 							v{process.env.NEXT_PUBLIC_GAME_VERSION}
@@ -76,7 +75,7 @@ export const Header = () => {
 						<DropdownMenuTrigger asChild>
 							{data ? (
 								<Row className="gap-2 items-center cursor-pointer">
-									<Typography variant="body2">
+									<Typography variant="body2" className="hidden sm:flex">
 										{data.user.user_metadata.full_name}
 									</Typography>
 									<Avatar>

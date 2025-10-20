@@ -11,11 +11,13 @@ const handleError = (error: PostgrestError | null) => {
 export const getBuilds = async ({
 	page = 1,
 	limit = 10,
+	isLatestVersion = false,
 	...req
 }: {
 	page?: number;
 	limit?: number;
 	like?: "asc" | "desc";
+	isLatestVersion?: boolean;
 } & Partial<BuildRow>): Promise<GetBuildsResponse> => {
 	const { title, costume, weapon, miracle, like } = req;
 	const supabase = await createBrowserSupabaseClient();
@@ -27,6 +29,10 @@ export const getBuilds = async ({
 		.from("builds")
 		.select("*", { count: "exact" })
 		.range(from, to);
+
+	if (isLatestVersion) {
+		query = query.eq("version", process.env.NEXT_PUBLIC_GAME_VERSION);
+	}
 
 	if (like && like === "desc") {
 		query = query.order("postLike", {
