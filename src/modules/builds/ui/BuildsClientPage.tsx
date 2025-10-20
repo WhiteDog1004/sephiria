@@ -3,7 +3,7 @@
 import { FilePlus2, RotateCw } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGetArtifacts } from "@/src/entities/builds/model/useGetArtifacts";
 import { useGetBuilds } from "@/src/entities/builds/model/useGetBuilds";
 import { useGetMiracles } from "@/src/entities/builds/model/useGetMiracles";
@@ -51,12 +51,21 @@ export const BuildsClientPage = () => {
 	const { data: info } = useSession();
 	const [openDialog, setOpenDialog] = useState(false);
 	const totalPage = data?.count ? Math.ceil(data.count / PAGE_SIZE) : 0;
+	const prevLatestRef = useRef(isLatestVersion);
 
 	useEffect(() => {
-		if (searchList || page || isLatestVersion) {
+		if (prevLatestRef.current !== isLatestVersion) {
+			setPage(1);
+			refetch();
+			prevLatestRef.current = isLatestVersion;
+		}
+	}, [isLatestVersion, refetch]);
+
+	useEffect(() => {
+		if (searchList || page) {
 			refetch();
 		}
-	}, [searchList, refetch, page, isLatestVersion]);
+	}, [searchList, refetch, page]);
 
 	return (
 		<Column className="w-full p-6 gap-8">
