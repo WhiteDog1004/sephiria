@@ -75,88 +75,86 @@ export const BuildsClientPage = () => {
 			/>
 			<Row className="w-full max-w-7xl mx-auto justify-center gap-6">
 				<Column className="w-full justify-center gap-4">
-					<Row className="w-full justify-between items-center gap-2">
-						<Label className="h-10 hover:bg-accent/50 flex items-center gap-3 rounded-lg border p-3 has-[[aria-checked=true]]:border-blue-600 has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 dark:has-[[aria-checked=true]]:bg-blue-950">
-							<Checkbox
-								checked={isLatestVersion}
-								onCheckedChange={(checked: boolean) =>
-									setIsLatestVersion(checked)
-								}
-								className="size-5 data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
-							/>
-							<Typography variant="caption">최신버전만 보기</Typography>
-						</Label>
-						<Row className="items-center gap-2">
-							{Object.keys(searchList).length !== 0 && (
-								<Button
-									variant="secondary"
-									type="reset"
-									className="border"
-									onClick={() => {
-										setSearchList({});
-										setPage(1);
-									}}
-								>
-									<RotateCw />
-									<Typography variant="caption">검색 초기화</Typography>
-								</Button>
-							)}
-							<Dialog open={openDialog} onOpenChange={setOpenDialog}>
-								<Button
-									variant="secondary"
-									className="border"
-									onClick={() => {
-										if (info) {
-											router.push(SITEMAP.ADD_BUILD);
-											return;
-										}
-										if (!info) {
-											setOpenDialog(true);
-										}
-									}}
-								>
-									<FilePlus2 />
-									빌드 작성하기
-								</Button>
-								<DialogContent>
-									<DialogHeader>
-										<DialogTitle className="hidden">
-											로그인이 필요해요
-										</DialogTitle>
-										<DialogDescription asChild>
-											<Column className="justify-center items-center gap-4">
+					<Row className="w-full justify-end items-center gap-2">
+						{Object.keys(searchList).length !== 0 && (
+							<Button
+								variant="secondary"
+								type="reset"
+								className="border"
+								onClick={() => {
+									setSearchList({});
+									setPage(1);
+								}}
+							>
+								<RotateCw />
+								<Typography variant="caption">검색 초기화</Typography>
+							</Button>
+						)}
+						<Dialog open={openDialog} onOpenChange={setOpenDialog}>
+							<Button
+								variant="secondary"
+								className="border"
+								onClick={() => {
+									if (info) {
+										router.push(SITEMAP.ADD_BUILD);
+										return;
+									}
+									if (!info) {
+										setOpenDialog(true);
+									}
+								}}
+							>
+								<FilePlus2 />
+								빌드 작성하기
+							</Button>
+							<DialogContent>
+								<DialogHeader>
+									<DialogTitle className="hidden">
+										로그인이 필요해요
+									</DialogTitle>
+									<DialogDescription asChild>
+										<Column className="justify-center items-center gap-4">
+											<Image
+												src="/white-wolf.png"
+												alt="needLogin"
+												width={80}
+												height={80}
+											/>
+											<Typography className="text-center" variant="body2">
+												앗 잠깐만요!
+												<br />
+												빌드를 공유하시려면
+												<br />
+												<b className="text-blue-600">디스코드 로그인</b>이
+												필요해요!
+											</Typography>
+											<Button onClick={discordLoginHandler}>
 												<Image
-													src="/white-wolf.png"
-													alt="needLogin"
-													width={80}
-													height={80}
+													src={"/discord-icon.svg"}
+													width={20}
+													height={20}
+													alt={"discord"}
+													className="invert dark:invert-0"
 												/>
-												<Typography className="text-center" variant="body2">
-													앗 잠깐만요!
-													<br />
-													빌드를 공유하시려면
-													<br />
-													<b className="text-blue-600">디스코드 로그인</b>이
-													필요해요!
-												</Typography>
-												<Button onClick={discordLoginHandler}>
-													<Image
-														src={"/discord-icon.svg"}
-														width={20}
-														height={20}
-														alt={"discord"}
-														className="invert dark:invert-0"
-													/>
-													디스코드 로그인
-												</Button>
-											</Column>
-										</DialogDescription>
-									</DialogHeader>
-								</DialogContent>
-							</Dialog>
-						</Row>
+												디스코드 로그인
+											</Button>
+										</Column>
+									</DialogDescription>
+								</DialogHeader>
+							</DialogContent>
+						</Dialog>
 					</Row>
 					<Separator />
+					<Label className="w-max h-10 p-3 hover:bg-accent/50 flex items-center gap-3 rounded-lg">
+						<Checkbox
+							checked={isLatestVersion}
+							onCheckedChange={(checked: boolean) =>
+								setIsLatestVersion(checked)
+							}
+							className="size-5 data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
+						/>
+						<Typography variant="body2">최신버전만 보기</Typography>
+					</Label>
 					{data?.data.length === 0 ? (
 						<Column className="gap-4 justify-center items-center w-full h-full mt-12">
 							<Column className="gap-8 items-center">
