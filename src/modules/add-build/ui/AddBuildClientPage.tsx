@@ -85,7 +85,9 @@ export const AddBuildClientPage = ({
 					youtube_link: value.youtube_link,
 					writer: {
 						uuid: info?.user.id || "",
-						nickname: info?.user.user_metadata.full_name,
+						nickname:
+							info?.user.user_metadata.custom_claims.global_name ||
+							info?.user.user_metadata.full_name,
 						profileImage: info?.user.user_metadata.avatar_url,
 					},
 					ability: value.talent,
@@ -111,7 +113,9 @@ export const AddBuildClientPage = ({
 					youtube_link: value.youtube_link,
 					writer: {
 						uuid: info?.user.id || "",
-						nickname: info?.user.user_metadata.full_name,
+						nickname:
+							info?.user.user_metadata.custom_claims.global_name ||
+							info?.user.user_metadata.full_name,
 						profileImage: info?.user.user_metadata.avatar_url,
 					},
 					ability: value.talent,
