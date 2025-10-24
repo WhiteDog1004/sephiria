@@ -4,9 +4,9 @@ export const discordLoginHandler = async () => {
 	const supabase = await createBrowserSupabaseClient();
 	const { error } = await supabase.auth.signInWithOAuth({
 		provider: "discord",
-		options: {
-			redirectTo: "http://localhost:3000/auth/v1/callback",
-		},
+		// options: {
+		// 	redirectTo: "http://localhost:3000/auth/v1/callback",
+		// },
 	});
 
 	if (error) {
