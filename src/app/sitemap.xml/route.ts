@@ -1,4 +1,4 @@
-// app/sitemap/route.ts
+// app/sitemap.xml/route.ts
 
 import { NextResponse } from "next/server";
 import { createServerSupabaseClient } from "@/lib/supabase/server";

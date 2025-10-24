@@ -48,7 +48,7 @@ export const COSTUMES: CostumeMap = {
 		name: "빨간망토 토끼",
 		unlock: undefined,
 		story: "늑대와의 운명적인 만남을 기다리고 있습니다.",
-		options: ["MP 회복량 2배", "최대 MP -20"],
+		options: ["MP 회복 시 2배 회복", "최대 MP -20"],
 	},
 	white_rabbit: {
 		name: "흰색 토끼",
