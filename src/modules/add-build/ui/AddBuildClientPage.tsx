@@ -64,6 +64,7 @@ export const AddBuildClientPage = ({
 				patience: 0,
 				wisdom: 0,
 				will: 0,
+				base: 0,
 			},
 			lists: [],
 		},
@@ -155,6 +156,7 @@ export const AddBuildClientPage = ({
 					patience: 0,
 					wisdom: 0,
 					will: 0,
+					base: 0,
 				},
 				lists: [],
 			});

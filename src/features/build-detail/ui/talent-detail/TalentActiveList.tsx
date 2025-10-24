@@ -26,6 +26,7 @@ const TALENT_ORDER: (keyof typeof TALENT_NAME)[] = [
 	"patience",
 	"wisdom",
 	"will",
+	"base",
 ];
 
 export const TalentActiveList = ({
@@ -44,7 +45,7 @@ export const TalentActiveList = ({
 					</AccordionTrigger>
 					<AccordionContent className="flex flex-wrap justify-center gap-4">
 						{TALENT_ORDER.map((key, index) => {
-							const value = talent[key];
+							const value = talent[key] ?? 0;
 							if (value <= 0) return null;
 
 							const status = TALENT_STATUS[key];
@@ -59,33 +60,51 @@ export const TalentActiveList = ({
 									key={key}
 									className="max-w-60 gap-2 border rounded-lg p-4"
 								>
-									<Row className="gap-1 items-center">
+									<Row className="gap-1 items-center flex-wrap">
 										<Typography
 											variant="body2"
 											className={ABILITY_TEXT_TYPES_COLORS[key]}
 										>
 											{name}
 										</Typography>
-										(
-										<Typography variant="caption" className="text-green-600">
-											+{talent[key] * TALENT_STATUS[key].level.point}
-										</Typography>
-										<Row>
-											<Typography variant="caption" className="text-nowrap">
-												{status.level.label}
-											</Typography>
-											<Image
-												width={16}
-												height={16}
-												className="min-w-4 max-w-4 object-contain"
-												src={`/stat/${ABILITY_STATUS_ICONS[index]}.png`}
-												alt={key}
-												unoptimized
-											/>
-										</Row>
-										)
+
+										<Typography variant="caption">(</Typography>
+										<Column className="h-[34px] justify-center gap-0.5">
+											{status.level.label.map((label, i) => {
+												const point = status.level.point[i];
+												const total = value * point;
+
+												return (
+													<Row key={i} className="gap-1 items-center">
+														<Typography
+															variant="caption"
+															className="text-green-600"
+														>
+															+{total}
+														</Typography>
+														<Typography
+															variant="caption"
+															className="text-nowrap"
+														>
+															{label}
+														</Typography>
+														<Image
+															width={16}
+															height={16}
+															className="min-w-4 max-w-4 object-contain"
+															src={`/stat/${key === "base" ? (i === 0 ? "hp" : "evasion") : ABILITY_STATUS_ICONS[index]}.png`}
+															alt={key}
+															unoptimized
+														/>
+													</Row>
+												);
+											})}
+										</Column>
+										<Typography variant="caption">)</Typography>
 									</Row>
+
 									<Separator className="border-2 rounded-full" />
+
 									<Column className="gap-2">
 										{activeStats.map(([point, text], index) => (
 											<Column key={point}>

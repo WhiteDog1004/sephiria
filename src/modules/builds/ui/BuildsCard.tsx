@@ -99,7 +99,7 @@ export const BuildsCard = ({
 								content={
 									<Row className="w-full h-full justify-center items-center p-0 gap-1 md:gap-1">
 										{ABILITY_ORDER.map((key, index) => {
-											const value = data.ability[key];
+											const value = data.ability[key] ?? 0;
 											if (value === undefined) return null;
 
 											return (

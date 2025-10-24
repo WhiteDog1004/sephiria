@@ -5,6 +5,7 @@ export const ABILITY_TEXT_COLORS = [
 	"",
 	"text-blue-600",
 	"text-green-300",
+	"text-orange-500",
 ];
 export const ABILITY_STATUS_ICONS = [
 	"critical",
@@ -13,6 +14,7 @@ export const ABILITY_STATUS_ICONS = [
 	"amor",
 	"mp",
 	"luck",
+	"evasion",
 ];
 
 export const ABILITY_TEXT_TYPES_COLORS = {
@@ -22,6 +24,7 @@ export const ABILITY_TEXT_TYPES_COLORS = {
 	patience: "",
 	wisdom: "text-blue-600",
 	will: "text-green-300",
+	base: "text-orange-500",
 };
 
 export const ABILITY_ORDER = [
@@ -31,4 +34,5 @@ export const ABILITY_ORDER = [
 	"patience",
 	"wisdom",
 	"will",
+	"base",
 ];

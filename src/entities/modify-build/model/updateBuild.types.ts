@@ -6,6 +6,7 @@ export type TalentType = {
 	patience: number;
 	wisdom: number;
 	will: number;
+	base: number;
 };
 
 // 리스트 아이템 타입

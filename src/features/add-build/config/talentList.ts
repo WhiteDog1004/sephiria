@@ -4,11 +4,12 @@ export type TalentType =
 	| "survival"
 	| "patience"
 	| "wisdom"
-	| "will";
+	| "will"
+	| "base";
 
 export type TalentLevel = {
-	label: string;
-	point: number;
+	label: string[];
+	point: number[];
 };
 
 export type TalentStat = Record<number, string>;
@@ -23,8 +24,8 @@ export type TalentStatusMap = Record<TalentType, TalentStatus>;
 export const TALENT_STATUS: TalentStatusMap = {
 	anger: {
 		level: {
-			label: "치명타 확률",
-			point: 1,
+			label: ["치명타 확률"],
+			point: [1],
 		},
 		stat: {
 			5: "치명타 피해가 20% 증가합니다.",
@@ -34,8 +35,8 @@ export const TALENT_STATUS: TalentStatusMap = {
 	},
 	rapid: {
 		level: {
-			label: "공격 속도",
-			point: 1,
+			label: ["공격 속도"],
+			point: [1],
 		},
 		stat: {
 			5: "회피가 +8 증가합니다. 대시 횟수가 +1 증가합니다.",
@@ -45,8 +46,8 @@ export const TALENT_STATUS: TalentStatusMap = {
 	},
 	survival: {
 		level: {
-			label: "최대 HP",
-			point: 2,
+			label: ["최대 HP"],
+			point: [2],
 		},
 		stat: {
 			5: "포션을 먹을 때마다 랜덤한 능력치가 1 증가합니다.",
@@ -56,8 +57,8 @@ export const TALENT_STATUS: TalentStatusMap = {
 	},
 	patience: {
 		level: {
-			label: "방어력",
-			point: 1,
+			label: ["방어력"],
+			point: [1],
 		},
 		stat: {
 			5: "석판 기반을 획득합니다.",
@@ -67,8 +68,8 @@ export const TALENT_STATUS: TalentStatusMap = {
 	},
 	wisdom: {
 		level: {
-			label: "MP 재생",
-			point: 1,
+			label: ["MP 재생"],
+			point: [1],
 		},
 		stat: {
 			5: "적 처치 시 MP를 3 회복합니다.",
@@ -78,13 +79,24 @@ export const TALENT_STATUS: TalentStatusMap = {
 	},
 	will: {
 		level: {
-			label: "행운",
-			point: 1,
+			label: ["행운"],
+			point: [1],
 		},
 		stat: {
 			5: "시작 주사위 3개를 획득합니다.",
 			10: "최대 HP가 +20, 최대 MP가 +30 증가합니다.",
 			20: "소원 분수 용량 +6",
+		},
+	},
+	base: {
+		level: {
+			label: ["최대 HP", "회피"],
+			point: [1, 0.5],
+		},
+		stat: {
+			5: "추가 인벤토리 슬롯을 2칸 획득합니다.",
+			10: "무기, 아이템, 기적의 선택지가 1개 추가됩니다.",
+			20: "활성화된 콤보 1종류당 모든 피해 증폭 능력치가 4% 증가합니다.",
 		},
 	},
 };
@@ -96,4 +108,5 @@ export const TALENT_NAME: Record<TalentType, string> = {
 	patience: "인내",
 	wisdom: "지혜",
 	will: "의지",
+	base: "기지",
 };

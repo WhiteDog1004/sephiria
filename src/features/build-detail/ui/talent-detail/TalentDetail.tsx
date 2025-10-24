@@ -24,45 +24,68 @@ export const TalentDetail = ({
 				<Row className="min-w-max justify-center w-full gap-2">
 					{Object.entries(TALENT_STATUS).map(([key, value], index) => {
 						const talentKey = key as TalentType;
+						const currentValue = talent[talentKey] ?? 0;
 
 						return (
 							<Column
 								key={talentKey}
-								className="w-full min-w-28 items-center gap-2 border rounded-lg p-2"
+								className="w-full min-w-28 justify-between items-center gap-2 border rounded-lg p-2"
 							>
-								<Typography>{TALENT_NAME[talentKey]}</Typography>
-								<Typography className={ABILITY_TEXT_COLORS[index]}>
-									{talent[talentKey] ?? 0}
-								</Typography>
-								<Row className="gap-1">
-									<Typography variant="caption" className="text-green-600">
-										+{talent[talentKey] * TALENT_STATUS[talentKey].level.point}
+								<Column className="items-center gap-2">
+									<Typography>{TALENT_NAME[talentKey]}</Typography>
+
+									<Typography className={ABILITY_TEXT_COLORS[index]}>
+										{currentValue}
 									</Typography>
-									<Row>
-										<Typography variant="caption" className="text-nowrap">
-											{value.level.label}
-										</Typography>
-										<Image
-											width={16}
-											height={16}
-											className="min-w-4 max-w-4 object-contain"
-											src={`/stat/${ABILITY_STATUS_ICONS[index]}.png`}
-											alt={key}
-											unoptimized
-										/>
-									</Row>
-								</Row>
+
+									<Column className="gap-0.5">
+										{value.level.label.map((label, i) => {
+											const point = value.level.point[i];
+											const total = currentValue * point;
+
+											return (
+												<Row
+													key={i}
+													className="gap-1 items-center justify-center"
+												>
+													<Typography
+														variant="caption"
+														className="text-green-600"
+													>
+														+{total}
+													</Typography>
+													<Typography variant="caption" className="text-nowrap">
+														{label}
+													</Typography>
+													<Image
+														width={16}
+														height={16}
+														className="min-w-4 max-w-4 object-contain"
+														src={`/stat/${talentKey === "base" ? (i === 0 ? "hp" : "evasion") : ABILITY_STATUS_ICONS[index]}.png`}
+														alt={key}
+														unoptimized
+													/>
+												</Row>
+											);
+										})}
+									</Column>
+								</Column>
+
 								<Column className="w-full">
 									<Row className="w-full justify-center gap-2">
-										{Object.entries(value.stat).map((status, index) => (
-											<Column key={index} className="items-center gap-2">
-												<Typography variant="caption">{status[0]}</Typography>
+										{Object.entries(value.stat).map(([point], i) => (
+											<Column key={i} className="items-center gap-2">
+												<Typography variant="caption">{point}</Typography>
 												<Image
 													width={24}
 													height={24}
-													src={`/talent/${talentKey}_${status[0]}.png`}
+													src={`/talent/${talentKey}_${point}.png`}
 													alt="talent-image"
-													className={`p-0 filter ${clsx((talent[talentKey] ?? 0) >= Number(status[0]) ? "grayscale-0 opacity-100" : "grayscale-75 opacity-50")}`}
+													className={`p-0 filter ${clsx(
+														currentValue >= Number(point)
+															? "grayscale-0 opacity-100"
+															: "grayscale-75 opacity-50",
+													)}`}
 												/>
 											</Column>
 										))}

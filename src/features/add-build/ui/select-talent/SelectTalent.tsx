@@ -69,6 +69,7 @@ export const SelectTalent = (form: any) => {
 												patience: 0,
 												wisdom: 0,
 												will: 0,
+												base: 0,
 											},
 										});
 										setCount(40);
@@ -87,25 +88,44 @@ export const SelectTalent = (form: any) => {
 										return (
 											<Column
 												key={talentKey}
-												className="w-28 items-center gap-2 border rounded-lg p-2"
+												className="w-28 justify-between items-center gap-2 border rounded-lg p-2"
 											>
-												<Typography>{TALENT_NAME[talentKey]}</Typography>
-												<Typography className={ABILITY_TEXT_COLORS[index]}>
-													{field.value?.[talentKey] ?? 0}
-												</Typography>
-												<Row className="gap-1">
-													<Typography
-														variant="caption"
-														className="text-green-600"
-													>
-														+
-														{field.value?.[talentKey] *
-															TALENT_STATUS[talentKey].level.point}
+												<Column className="items-center gap-2">
+													<Typography>{TALENT_NAME[talentKey]}</Typography>
+													<Typography className={ABILITY_TEXT_COLORS[index]}>
+														{field.value?.[talentKey] ?? 0}
 													</Typography>
-													<Typography variant="caption" className="text-nowrap">
-														{value.level.label}
-													</Typography>
-												</Row>
+													<Column className="gap-1">
+														{TALENT_STATUS[talentKey].level.label.map(
+															(label, i) => {
+																const point =
+																	TALENT_STATUS[talentKey].level.point[i];
+																const value = field.value?.[talentKey] ?? 0;
+																const total = value * point;
+
+																return (
+																	<Row
+																		key={i}
+																		className="gap-1 justify-center items-center"
+																	>
+																		<Typography
+																			variant="caption"
+																			className="text-green-600"
+																		>
+																			+{total}
+																		</Typography>
+																		<Typography
+																			variant="caption"
+																			className="text-nowrap"
+																		>
+																			{label}
+																		</Typography>
+																	</Row>
+																);
+															},
+														)}
+													</Column>
+												</Column>
 												<Column className="w-full">
 													<Row className="w-full justify-evenly gap-2">
 														{Object.entries(value.stat).map((status, index) => (

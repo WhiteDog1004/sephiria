@@ -21,6 +21,7 @@ export const addFormSchema = z.object({
 			patience: z.number().min(0).max(20),
 			wisdom: z.number().min(0).max(20),
 			will: z.number().min(0).max(20),
+			base: z.number().min(0).max(20),
 		})
 		.refine(
 			(talent) => {
@@ -30,7 +31,8 @@ export const addFormSchema = z.object({
 					talent.survival +
 					talent.patience +
 					talent.wisdom +
-					talent.will;
+					talent.will +
+					talent.base;
 				return total === 40;
 			},
 			{
