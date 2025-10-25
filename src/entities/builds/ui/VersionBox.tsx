@@ -6,18 +6,10 @@ export const VersionBox = ({ version }: { version: string }) => {
 		<Row className="items-center w-max gap-1">
 			<Typography
 				variant="caption"
-				className={`w-max whitespace-nowrap ${clsx(process.env.NEXT_PUBLIC_GAME_VERSION === version ? "text-yellow-700 dark:text-yellow-500" : "text-gray-400 dark:text-gray-600")}`}
+				className={`w-max whitespace-nowrap ${clsx(process.env.NEXT_PUBLIC_GAME_VERSION === version ? "text-yellow-600/70 dark:text-yellow-500/70" : "text-gray-400 dark:text-gray-600")}`}
 			>
-				{process.env.NEXT_PUBLIC_GAME_VERSION === version && "버전:"} {version}
+				버전: {version}
 			</Typography>
-			{process.env.NEXT_PUBLIC_GAME_VERSION !== version && (
-				<Typography
-					variant="caption"
-					className="w-max text-gray-400 dark:text-gray-600"
-				>
-					(이전버전)
-				</Typography>
-			)}
 		</Row>
 	);
 };
