@@ -53,6 +53,12 @@ export const BuildsClientPage = () => {
 	const totalPage = data?.count ? Math.ceil(data.count / PAGE_SIZE) : 0;
 	const prevLatestRef = useRef(isLatestVersion);
 
+	const handleReset = () => {
+		setSearchList({});
+		setIsLatestVersion(false);
+		setPage(1);
+	};
+
 	useEffect(() => {
 		if (prevLatestRef.current !== isLatestVersion) {
 			setPage(1);
@@ -81,10 +87,7 @@ export const BuildsClientPage = () => {
 								variant="secondary"
 								type="reset"
 								className="border"
-								onClick={() => {
-									setSearchList({});
-									setPage(1);
-								}}
+								onClick={handleReset}
 							>
 								<RotateCw />
 								<Typography variant="caption">검색 초기화</Typography>
@@ -171,10 +174,7 @@ export const BuildsClientPage = () => {
 									데이터가 없습니다.
 								</Typography>
 							</Column>
-							<Button
-								onClick={() => setSearchList({})}
-								className="flex items-center gap-2"
-							>
+							<Button onClick={handleReset} className="flex items-center gap-2">
 								<RotateCw />
 								<Typography>검색 초기화</Typography>
 							</Button>
