@@ -20,7 +20,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/src/shared/ui/dropdown-menu";
-import { MENU_LIST } from "../model/constants";
+import { MENU_LIST } from "../config/constants";
 import {
 	discordLoginHandler,
 	discordLogoutHandler,

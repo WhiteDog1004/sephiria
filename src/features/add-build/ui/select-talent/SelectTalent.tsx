@@ -2,8 +2,8 @@ import clsx from "clsx";
 import { RotateCw } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { ABILITY_TEXT_COLORS } from "@/src/modules/builds";
 import {
+	ABILITY_TEXT_COLORS,
 	Button,
 	Column,
 	FormControl,

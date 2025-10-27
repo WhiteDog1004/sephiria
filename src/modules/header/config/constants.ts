@@ -10,6 +10,10 @@ export const MENU_LIST = [
 		link: SITEMAP.LARGE,
 	},
 	{
+		label: "재능",
+		link: SITEMAP.TALENT,
+	},
+	{
 		label: "아티팩트",
 		link: SITEMAP.ARTIFACT,
 	},

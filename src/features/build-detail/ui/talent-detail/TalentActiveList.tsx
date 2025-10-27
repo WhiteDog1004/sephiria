@@ -7,8 +7,6 @@ import {
 import {
 	ABILITY_STATUS_ICONS,
 	ABILITY_TEXT_TYPES_COLORS,
-} from "@/src/modules/builds";
-import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,

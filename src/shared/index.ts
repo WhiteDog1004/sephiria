@@ -1,6 +1,7 @@
 export * from "./components/ImageFallback";
 export * from "./config/costumes";
 export * from "./config/sitemap";
+export * from "./config/talentTextOptions";
 export * from "./model/clipboardHandler";
 export * from "./ui/accordion";
 export * from "./ui/avatar";

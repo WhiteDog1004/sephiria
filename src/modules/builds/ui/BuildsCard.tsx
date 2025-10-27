@@ -22,7 +22,7 @@ import {
 	ABILITY_ORDER,
 	ABILITY_STATUS_ICONS,
 	ABILITY_TEXT_COLORS,
-} from "../config/abilityTextOptions";
+} from "../../../shared/config/talentTextOptions";
 
 export const BuildsCard = ({
 	data,

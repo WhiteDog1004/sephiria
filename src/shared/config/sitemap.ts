@@ -1,6 +1,7 @@
 export const SITEMAP = {
 	HOME: "/",
 	COSTUME: "/costume",
+	TALENT: "/talent",
 	LARGE: "/large",
 	ARTIFACT: "/artifact",
 	MIRACLE: "/miracle",
@@ -19,6 +20,10 @@ export const SITE_METADATA = {
 	simulator: {
 		title: "세피리아 - 시뮬레이터",
 		description: "세피리아 위키: 시뮬레이터",
+	},
+	talent: {
+		title: "세피리아 - 재능",
+		description: "세피리아 위키: 재능",
 	},
 	miracle: {
 		title: "세피리아 - 기적",

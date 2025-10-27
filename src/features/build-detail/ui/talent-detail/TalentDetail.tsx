@@ -8,8 +8,10 @@ import {
 import {
 	ABILITY_STATUS_ICONS,
 	ABILITY_TEXT_COLORS,
-} from "@/src/modules/builds";
-import { Column, Row, Typography } from "@/src/shared";
+	Column,
+	Row,
+	Typography,
+} from "@/src/shared";
 import { TalentActiveList } from "./TalentActiveList";
 
 export const TalentDetail = ({
