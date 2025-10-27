@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { CostumeCarousel } from "@/src/entities/costume/ui/Carousel";
@@ -102,19 +103,22 @@ export const ShortcutBox = ({
 				</Card>
 				<Card className="w-full py-0 row-span-1 overflow-hidden">
 					<Column className="h-full">
-						<Row className="gap-2 pt-[31px] pb-[15px] px-4">
+						<Row className="gap-2 pt-[31px] pb-[15px] px-2 md:px-3">
 							{menuItems.map((item) => (
 								<Link key={item.href} href={item.href} className="w-full">
-									<Box className="flex-col gap-2 w-full p-0">
+									<Column className="gap-2 w-full h-full items-center justify-between">
 										<Image
 											width={48}
 											height={48}
 											src={item.src}
 											alt={item.alt}
 											unoptimized
+											className={clsx(item.label === "재능" && "p-1.5")}
 										/>
-										<Typography>{item.label}</Typography>
-									</Box>
+										<Typography className="text-center" variant="body2">
+											{item.label}
+										</Typography>
+									</Column>
 								</Link>
 							))}
 						</Row>

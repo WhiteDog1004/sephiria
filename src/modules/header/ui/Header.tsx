@@ -43,7 +43,7 @@ export const Header = () => {
 							height={100}
 							src={"/sephiria.webp"}
 							alt={"logo"}
-							className="cursor-pointer"
+							className="cursor-pointer max-w-24 sm:max-w-[120px]"
 						/>
 						<Typography className="text-gray-600/80" variant="caption">
 							v{process.env.NEXT_PUBLIC_GAME_VERSION}
