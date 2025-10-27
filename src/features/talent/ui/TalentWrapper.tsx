@@ -83,7 +83,7 @@ export const TalentWrapper = () => {
 												/>
 												<Typography
 													variant="caption"
-													className="min-w-6 text-nowrap"
+													className="min-w-6 text-nowrap text-gray-600 dark:text-gray-400"
 												>
 													{point} :
 												</Typography>
