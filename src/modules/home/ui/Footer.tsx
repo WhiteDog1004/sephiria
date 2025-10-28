@@ -29,7 +29,7 @@ export const Footer = () => {
 					href={"https://discord.com/users/313963147432034306"}
 					className="w-full"
 				>
-					<Button className="h-10">
+					<Button className="w-full h-10">
 						<Row className="items-center gap-2">
 							<Avatar className="w-6 h-6">
 								<AvatarImage src="https://cdn.discordapp.com/avatars/313963147432034306/a_6aa450a5db03c7b0d19c0e76ed0f76bf.gif" />
