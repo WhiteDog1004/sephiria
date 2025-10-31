@@ -31,7 +31,10 @@ export const getBuilds = async ({
 		.range(from, to);
 
 	if (isLatestVersion) {
-		query = query.eq("version", process.env.NEXT_PUBLIC_GAME_VERSION);
+		const currentVersion = process.env.NEXT_PUBLIC_GAME_VERSION ?? "0.0.0";
+		const currentMajorMinor = currentVersion.split(".").slice(0, 2).join(".");
+
+		query = query.ilike("version", `${currentMajorMinor}.%`);
 	}
 
 	if (like && like === "desc") {
