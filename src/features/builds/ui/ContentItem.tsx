@@ -25,9 +25,9 @@ export const ContentItem = ({
 }: ContentItemProps) => {
 	return (
 		<Column
-			className={`w-full overflow-hidden items-center border rounded-md ${clsx(className)}`}
+			className={`w-full flex-1 overflow-hidden items-center border rounded-md ${clsx(className)}`}
 		>
-			<Typography className="p-2" variant="caption">
+			<Typography className="p-2 truncate w-full" variant="caption">
 				{title}
 			</Typography>
 			<Separator />

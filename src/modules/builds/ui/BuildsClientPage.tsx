@@ -1,6 +1,6 @@
 "use client";
 
-import { CircleHelpIcon, FilePlus2, RotateCw } from "lucide-react";
+import { CircleHelpIcon, FilePlus2, RotateCw, Search } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -53,6 +53,7 @@ export const BuildsClientPage = () => {
 	const { data: artifacts } = useGetArtifacts();
 	const { data: info } = useSession();
 	const [openDialog, setOpenDialog] = useState(false);
+	const [openSearch, setOpenSearch] = useState(false);
 	const totalPage = data?.count ? Math.ceil(data.count / PAGE_SIZE) : 0;
 	const prevLatestRef = useRef(isLatestVersion);
 
@@ -151,33 +152,46 @@ export const BuildsClientPage = () => {
 						</Dialog>
 					</Row>
 					<Separator />
-					<Row className="items-center">
-						<Label className="w-max h-10 p-2 hover:bg-accent/50 flex items-center gap-3 rounded-lg">
-							<Checkbox
-								checked={isLatestVersion}
-								onCheckedChange={(checked: boolean) =>
-									setIsLatestVersion(checked)
-								}
-								className="size-5 data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
-							/>
-							<Typography variant="body2">최근버전 보기</Typography>
-						</Label>
-						<Tooltip>
-							<TooltipTrigger asChild>
-								<CircleHelpIcon className="w-5 h-5" />
-							</TooltipTrigger>
-							<TooltipContent sideOffset={16}>
-								<Row className="gap-1 bg-accent border-2 dark:text-white text-black p-2 justify-center items-center text-center">
-									<Typography variant="caption" className="text-blue-500">
-										{process.env.NEXT_PUBLIC_GAME_VERSION?.split(".")
-											.slice(0, 2)
-											.join(".")}
-										.*
-									</Typography>
-									<Typography variant="caption">버전만 검색</Typography>
-								</Row>
-							</TooltipContent>
-						</Tooltip>
+					<Row className="w-full justify-between items-center">
+						<Row className="items-center">
+							<Label className="w-max h-10 p-2 hover:bg-accent/50 flex items-center gap-3 rounded-lg">
+								<Checkbox
+									checked={isLatestVersion}
+									onCheckedChange={(checked: boolean) =>
+										setIsLatestVersion(checked)
+									}
+									className="size-5 data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
+								/>
+								<Typography variant="body2">최근버전 보기</Typography>
+							</Label>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<CircleHelpIcon className="w-5 h-5" />
+								</TooltipTrigger>
+								<TooltipContent sideOffset={16}>
+									<Row className="gap-1 bg-accent border-2 dark:text-white text-black p-2 justify-center items-center text-center">
+										<Typography variant="caption" className="text-blue-500">
+											{process.env.NEXT_PUBLIC_GAME_VERSION?.split(".")
+												.slice(0, 2)
+												.join(".")}
+											.*
+										</Typography>
+										<Typography variant="caption">버전만 검색</Typography>
+									</Row>
+								</TooltipContent>
+							</Tooltip>
+						</Row>
+						<Row>
+							<Button
+								variant="outline"
+								onClick={() => {
+									setOpenSearch(true);
+								}}
+							>
+								<Search />
+								빌드 검색
+							</Button>
+						</Row>
 					</Row>
 					{data?.data.length === 0 ? (
 						<Column className="gap-4 justify-center items-center w-full h-full mt-12">
@@ -230,7 +244,11 @@ export const BuildsClientPage = () => {
 				<BuildPagination page={page} setPage={setPage} totalPage={totalPage} />
 			)}
 
-			<BuildSearchButton setPage={setPage} />
+			<BuildSearchButton
+				open={openSearch}
+				setOpen={setOpenSearch}
+				setPage={setPage}
+			/>
 		</Column>
 	);
 };

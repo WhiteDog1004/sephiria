@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from "react";
+import { type Dispatch, type SetStateAction, useMemo } from "react";
 import {
 	Pagination,
 	PaginationContent,
@@ -17,6 +17,19 @@ export const BuildPagination = ({
 	setPage: Dispatch<SetStateAction<number>>;
 	totalPage: number;
 }) => {
+	const maxVisible = 5;
+	const visiblePages = useMemo(() => {
+		if (totalPage <= 0) return [];
+
+		const half = Math.floor(maxVisible / 2);
+
+		const initialStart = Math.max(1, page - half);
+		const end = Math.min(totalPage, initialStart + maxVisible - 1);
+		const start = Math.max(1, end - maxVisible + 1);
+
+		return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+	}, [page, totalPage]);
+
 	return (
 		<Pagination>
 			<PaginationContent>
@@ -31,17 +44,17 @@ export const BuildPagination = ({
 					/>
 				</PaginationItem>
 
-				{Array.from({ length: totalPage }).map((_, i) => (
-					<PaginationItem key={i}>
+				{visiblePages.map((num) => (
+					<PaginationItem key={num}>
 						<PaginationLink
 							href="#"
-							isActive={page === i + 1}
+							isActive={page === num}
 							onClick={(e) => {
 								e.preventDefault();
-								setPage(i + 1);
+								setPage(num);
 							}}
 						>
-							{i + 1}
+							{num}
 						</PaginationLink>
 					</PaginationItem>
 				))}

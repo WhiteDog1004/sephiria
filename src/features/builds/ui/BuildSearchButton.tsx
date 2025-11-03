@@ -1,5 +1,5 @@
 import { RotateCw, Search } from "lucide-react";
-import { type Dispatch, type SetStateAction, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import { useGetMiracles, useGetWeapons } from "@/src/entities/builds";
 import {
@@ -32,13 +32,16 @@ import { useBuildSearchStore } from "../model/buildSearchStore";
 
 export const BuildSearchButton = ({
 	setPage,
+	open,
+	setOpen,
 }: {
 	setPage: Dispatch<SetStateAction<number>>;
+	open: boolean;
+	setOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
 	const { setSearchList } = useBuildSearchStore();
 	const { data: weapons } = useGetWeapons();
 	const { data: miracles } = useGetMiracles();
-	const [open, setOpen] = useState(false);
 
 	const form = useForm({
 		defaultValues: {

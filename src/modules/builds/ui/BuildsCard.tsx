@@ -51,7 +51,7 @@ export const BuildsCard = ({
 				<Column className="w-full gap-2 text-center overflow-hidden">
 					<Title title={data.title} />
 					<Row className="w-full lg:flex-nowrap flex-wrap gap-2">
-						<Row className="w-full min-w-0 lg:max-w-60 gap-2">
+						<Row className="w-full min-w-max lg:max-w-60 gap-2">
 							{weapon ? (
 								<ContentItem
 									title="무기"
@@ -73,10 +73,9 @@ export const BuildsCard = ({
 							)}
 						</Row>
 
-						<Row className="w-full gap-2">
+						<Row className="min-w-0 w-full gap-2">
 							<ContentItem
-								title={"핵심"}
-								className="min-w-max"
+								title={data.content[0].label}
 								content={
 									<Box className="items-center h-full p-0">
 										{artifact?.slice(0, 2).map((item) => (
