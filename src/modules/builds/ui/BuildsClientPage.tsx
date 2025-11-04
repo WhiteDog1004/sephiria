@@ -63,6 +63,13 @@ export const BuildsClientPage = () => {
 		setPage(1);
 	};
 
+	const handleLike = (asc?: boolean) => {
+		if (asc) {
+			return setSearchList({ ...searchList, like: "asc" });
+		}
+		return setSearchList({ ...searchList, like: "desc" });
+	};
+
 	useEffect(() => {
 		if (prevLatestRef.current !== isLatestVersion) {
 			setPage(1);
@@ -85,72 +92,86 @@ export const BuildsClientPage = () => {
 			/>
 			<Row className="w-full max-w-7xl mx-auto justify-center gap-6">
 				<Column className="w-full justify-center gap-4">
-					<Row className="w-full justify-end items-center gap-2">
-						{Object.keys(searchList).length !== 0 && (
+					<Column className="gap-4">
+						<Row className="w-full justify-end items-center gap-2">
 							<Button
-								variant="secondary"
-								type="reset"
-								className="border"
-								onClick={handleReset}
-							>
-								<RotateCw />
-								<Typography variant="caption">검색 초기화</Typography>
-							</Button>
-						)}
-						<Dialog open={openDialog} onOpenChange={setOpenDialog}>
-							<Button
-								variant="secondary"
-								className="border"
+								variant="outline"
 								onClick={() => {
-									if (info) {
-										router.push(SITEMAP.ADD_BUILD);
-										return;
-									}
-									if (!info) {
-										setOpenDialog(true);
-									}
+									setOpenSearch(true);
 								}}
 							>
-								<FilePlus2 />
-								빌드 작성하기
+								<Search />
+								빌드 상세검색
 							</Button>
-							<DialogContent>
-								<DialogHeader>
-									<DialogTitle className="hidden">
-										로그인이 필요해요
-									</DialogTitle>
-									<DialogDescription asChild>
-										<Column className="justify-center items-center gap-4">
-											<Image
-												src="/white-wolf.png"
-												alt="needLogin"
-												width={80}
-												height={80}
-											/>
-											<Typography className="text-center" variant="body2">
-												앗 잠깐만요!
-												<br />
-												빌드를 공유하시려면
-												<br />
-												<b className="text-blue-600">디스코드 로그인</b>이
-												필요해요!
-											</Typography>
-											<Button onClick={discordLoginHandler}>
+							<Dialog open={openDialog} onOpenChange={setOpenDialog}>
+								<Button
+									variant="secondary"
+									className="border"
+									onClick={() => {
+										if (info) {
+											router.push(SITEMAP.ADD_BUILD);
+											return;
+										}
+										if (!info) {
+											setOpenDialog(true);
+										}
+									}}
+								>
+									<FilePlus2 />
+									빌드 작성하기
+								</Button>
+								<DialogContent>
+									<DialogHeader>
+										<DialogTitle className="hidden">
+											로그인이 필요해요
+										</DialogTitle>
+										<DialogDescription asChild>
+											<Column className="justify-center items-center gap-4">
 												<Image
-													src={"/discord-icon.svg"}
-													width={20}
-													height={20}
-													alt={"discord"}
-													className="invert dark:invert-0"
+													src="/white-wolf.png"
+													alt="needLogin"
+													width={80}
+													height={80}
 												/>
-												디스코드 로그인
-											</Button>
-										</Column>
-									</DialogDescription>
-								</DialogHeader>
-							</DialogContent>
-						</Dialog>
-					</Row>
+												<Typography className="text-center" variant="body2">
+													앗 잠깐만요!
+													<br />
+													빌드를 공유하시려면
+													<br />
+													<b className="text-blue-600">디스코드 로그인</b>이
+													필요해요!
+												</Typography>
+												<Button onClick={discordLoginHandler}>
+													<Image
+														src={"/discord-icon.svg"}
+														width={20}
+														height={20}
+														alt={"discord"}
+														className="invert dark:invert-0"
+													/>
+													디스코드 로그인
+												</Button>
+											</Column>
+										</DialogDescription>
+									</DialogHeader>
+								</DialogContent>
+							</Dialog>
+						</Row>
+						<Row className="w-full justify-end">
+							{Object.keys(searchList).length !== 0 && (
+								<Button
+									className="w-max"
+									variant="warning"
+									size="sm"
+									type="reset"
+									onClick={handleReset}
+								>
+									<RotateCw />
+									<Typography variant="caption">검색 초기화</Typography>
+								</Button>
+							)}
+						</Row>
+					</Column>
 					<Separator />
 					<Row className="w-full justify-between items-center">
 						<Row className="items-center">
@@ -181,15 +202,30 @@ export const BuildsClientPage = () => {
 								</TooltipContent>
 							</Tooltip>
 						</Row>
-						<Row>
+						<Row className="h-full items-center">
+							<Button size="sm" variant="ghost" onClick={() => handleLike()}>
+								<Typography
+									className={searchList.like === "desc" ? "text-blue-500" : ""}
+									variant={searchList.like === "desc" ? "body2" : "caption"}
+								>
+									인기 순
+								</Typography>
+							</Button>
+							<Separator
+								className="max-h-1/3 bg-gray-700"
+								orientation="vertical"
+							/>
 							<Button
-								variant="outline"
-								onClick={() => {
-									setOpenSearch(true);
-								}}
+								size="sm"
+								variant="ghost"
+								onClick={() => handleLike(true)}
 							>
-								<Search />
-								빌드 검색
+								<Typography
+									className={searchList.like === "asc" ? "text-blue-500" : ""}
+									variant={searchList.like === "asc" ? "body2" : "caption"}
+								>
+									최신 순
+								</Typography>
 							</Button>
 						</Row>
 					</Row>
