@@ -3,6 +3,7 @@ import type { Database } from "@/types_db";
 export type GetBuildsParams = {
 	page?: number;
 	limit?: number;
+	like: "asc" | "desc";
 	isLatestVersion?: boolean;
 } & Partial<Pick<BuildRow, "title" | "costume" | "weapon" | "miracle">>;
 

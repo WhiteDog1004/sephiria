@@ -12,6 +12,7 @@ export const getBuilds = async ({
 	page = 1,
 	limit = 10,
 	isLatestVersion = false,
+	like = "desc",
 	...req
 }: {
 	page?: number;
@@ -19,7 +20,7 @@ export const getBuilds = async ({
 	like?: "asc" | "desc";
 	isLatestVersion?: boolean;
 } & Partial<BuildRow>): Promise<GetBuildsResponse> => {
-	const { title, costume, weapon, miracle, like } = req;
+	const { title, costume, weapon, miracle } = req;
 	const supabase = await createBrowserSupabaseClient();
 
 	const from = (page - 1) * limit;
@@ -37,7 +38,7 @@ export const getBuilds = async ({
 		query = query.ilike("version", `${currentMajorMinor}.%`);
 	}
 
-	if (like && like === "desc") {
+	if (like && like === "asc") {
 		query = query.order("postLike", {
 			ascending: like && false,
 			nullsFirst: like && false,

@@ -41,11 +41,13 @@ export const BuildsClientPage = () => {
 	const router = useRouter();
 	const [page, setPage] = useState(1);
 	const [isLatestVersion, setIsLatestVersion] = useState(false);
-	const { searchList, setSearchList } = useBuildSearchStore();
+	const { searchList, setSearchList, setIsAscending, isAscending } =
+		useBuildSearchStore();
 	const { data, refetch } = useGetBuilds({
 		page,
 		limit: PAGE_SIZE,
 		isLatestVersion,
+		like: isAscending ? "asc" : "desc",
 		...searchList,
 	});
 	const { data: weapons } = useGetWeapons();
@@ -65,9 +67,9 @@ export const BuildsClientPage = () => {
 
 	const handleLike = (asc?: boolean) => {
 		if (asc) {
-			return setSearchList({ ...searchList, like: "asc" });
+			return setIsAscending(true);
 		}
-		return setSearchList({ ...searchList, like: "desc" });
+		return setIsAscending(false);
 	};
 
 	useEffect(() => {
@@ -83,6 +85,11 @@ export const BuildsClientPage = () => {
 			refetch();
 		}
 	}, [searchList, refetch, page]);
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: isAscending intentionally triggers refetch
+	useEffect(() => {
+		refetch();
+	}, [isAscending, refetch]);
 
 	return (
 		<Column className="w-full p-6 gap-8">
@@ -157,8 +164,8 @@ export const BuildsClientPage = () => {
 								</DialogContent>
 							</Dialog>
 						</Row>
-						<Row className="w-full justify-end">
-							{Object.keys(searchList).length !== 0 && (
+						{Object.keys(searchList).length !== 0 && (
+							<Row className="w-full justify-end">
 								<Button
 									className="w-max"
 									variant="warning"
@@ -169,8 +176,8 @@ export const BuildsClientPage = () => {
 									<RotateCw />
 									<Typography variant="caption">검색 초기화</Typography>
 								</Button>
-							)}
-						</Row>
+							</Row>
+						)}
 					</Column>
 					<Separator />
 					<Row className="w-full justify-between items-center">
@@ -203,10 +210,14 @@ export const BuildsClientPage = () => {
 							</Tooltip>
 						</Row>
 						<Row className="h-full items-center">
-							<Button size="sm" variant="ghost" onClick={() => handleLike()}>
+							<Button
+								size="sm"
+								variant="ghost"
+								onClick={() => handleLike(true)}
+							>
 								<Typography
-									className={searchList.like === "desc" ? "text-blue-500" : ""}
-									variant={searchList.like === "desc" ? "body2" : "caption"}
+									className={isAscending ? "text-blue-500" : ""}
+									variant={isAscending ? "body2" : "caption"}
 								>
 									인기 순
 								</Typography>
@@ -218,11 +229,11 @@ export const BuildsClientPage = () => {
 							<Button
 								size="sm"
 								variant="ghost"
-								onClick={() => handleLike(true)}
+								onClick={() => handleLike(false)}
 							>
 								<Typography
-									className={searchList.like === "asc" ? "text-blue-500" : ""}
-									variant={searchList.like === "asc" ? "body2" : "caption"}
+									className={!isAscending ? "text-blue-500" : ""}
+									variant={!isAscending ? "body2" : "caption"}
 								>
 									최신 순
 								</Typography>
