@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { BuildsClientPage } from "@/src/modules/builds";
 import { SITE_METADATA } from "@/src/shared/config/sitemap";
 
@@ -7,7 +8,11 @@ export const metadata: Metadata = {
 };
 
 const BuildsPage = async () => {
-	return <BuildsClientPage />;
+	return (
+		<Suspense fallback={<></>}>
+			<BuildsClientPage />
+		</Suspense>
+	);
 };
 
 export default BuildsPage;
