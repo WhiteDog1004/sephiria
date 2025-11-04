@@ -2,8 +2,8 @@
 
 import { CircleHelpIcon, FilePlus2, RotateCw, Search } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useRef, useState } from "react";
 import { useGetArtifacts } from "@/src/entities/builds/model/useGetArtifacts";
 import { useGetBuilds } from "@/src/entities/builds/model/useGetBuilds";
 import { useGetMiracles } from "@/src/entities/builds/model/useGetMiracles";
@@ -33,16 +33,29 @@ import {
 import { SectionHeader } from "@/src/shared/components/section-header";
 import { discordLoginHandler } from "../../header/model/discordLoginHelper";
 import { useSession } from "../../header/model/useUserInfo";
+import { useSyncBuildQueryState } from "../model/useSyncBuildQueryState";
 import { BuildsCard } from "./BuildsCard";
 
 const PAGE_SIZE = 10;
 
 export const BuildsClientPage = () => {
+	const resetRef = useRef(false);
 	const router = useRouter();
-	const [page, setPage] = useState(1);
-	const [isLatestVersion, setIsLatestVersion] = useState(false);
-	const { searchList, setSearchList, setIsAscending, isAscending } =
-		useBuildSearchStore();
+	const pathname = usePathname();
+	const [openDialog, setOpenDialog] = useState(false);
+	const [openSearch, setOpenSearch] = useState(false);
+
+	const {
+		page,
+		setPage,
+		isLatestVersion,
+		setIsLatestVersion,
+		isAscending,
+		setIsAscending,
+		searchList,
+		setSearchList,
+	} = useBuildSearchStore();
+
 	const { data, refetch } = useGetBuilds({
 		page,
 		limit: PAGE_SIZE,
@@ -54,42 +67,41 @@ export const BuildsClientPage = () => {
 	const { data: miracles } = useGetMiracles();
 	const { data: artifacts } = useGetArtifacts();
 	const { data: info } = useSession();
-	const [openDialog, setOpenDialog] = useState(false);
-	const [openSearch, setOpenSearch] = useState(false);
+
 	const totalPage = data?.count ? Math.ceil(data.count / PAGE_SIZE) : 0;
-	const prevLatestRef = useRef(isLatestVersion);
 
 	const handleReset = () => {
+		resetRef.current = true;
+
 		setSearchList({});
-		setIsLatestVersion(false);
 		setPage(1);
+
+		const params = new URLSearchParams();
+		params.set("page", String(page));
+		params.set("like", isAscending ? "asc" : "desc");
+		params.set("latest", String(isLatestVersion));
+
+		router.replace(`${pathname}?${params.toString()}`);
+
+		setTimeout(() => {
+			resetRef.current = false;
+		});
 	};
 
-	const handleLike = (asc?: boolean) => {
-		if (asc) {
-			return setIsAscending(true);
-		}
-		return setIsAscending(false);
-	};
+	const handleLike = (asc?: boolean) => setIsAscending(!!asc);
 
-	useEffect(() => {
-		if (prevLatestRef.current !== isLatestVersion) {
-			setPage(1);
-			refetch();
-			prevLatestRef.current = isLatestVersion;
-		}
-	}, [isLatestVersion, refetch]);
-
-	useEffect(() => {
-		if (searchList || page) {
-			refetch();
-		}
-	}, [searchList, refetch, page]);
-
-	// biome-ignore lint/correctness/useExhaustiveDependencies: isAscending intentionally triggers refetch
-	useEffect(() => {
-		refetch();
-	}, [isAscending, refetch]);
+	useSyncBuildQueryState({
+		resetRef,
+		page,
+		setPage,
+		isAscending,
+		setIsAscending,
+		isLatestVersion,
+		setIsLatestVersion,
+		searchList,
+		setSearchList,
+		refetch,
+	});
 
 	return (
 		<Column className="w-full p-6 gap-8">
@@ -288,13 +300,17 @@ export const BuildsClientPage = () => {
 			</Row>
 
 			{data?.data.length !== 0 && (
-				<BuildPagination page={page} setPage={setPage} totalPage={totalPage} />
+				<BuildPagination
+					page={page}
+					setPage={(v) => setPage(v as number)}
+					totalPage={totalPage}
+				/>
 			)}
 
 			<BuildSearchButton
 				open={openSearch}
 				setOpen={setOpenSearch}
-				setPage={setPage}
+				setPage={(v) => setPage(v as number)}
 			/>
 		</Column>
 	);

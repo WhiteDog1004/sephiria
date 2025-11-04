@@ -38,7 +38,7 @@ export const BuildPagination = ({
 						href="#"
 						onClick={(e) => {
 							e.preventDefault();
-							if (page > 1) setPage((p) => p - 1);
+							if (page > 1) setPage(page - 1);
 						}}
 						aria-disabled={page === 1}
 					/>
@@ -64,7 +64,7 @@ export const BuildPagination = ({
 						href="#"
 						onClick={(e) => {
 							e.preventDefault();
-							if (page < totalPage) setPage((p) => p + 1);
+							if (page < totalPage) setPage(page + 1);
 						}}
 						aria-disabled={page === totalPage}
 					/>

@@ -12,7 +12,7 @@ export const getBuilds = async ({
 	page = 1,
 	limit = 10,
 	isLatestVersion = false,
-	like = "desc",
+	like,
 	...req
 }: {
 	page?: number;
