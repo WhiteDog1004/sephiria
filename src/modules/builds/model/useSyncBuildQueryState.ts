@@ -54,19 +54,37 @@ export const useSyncBuildQueryState = ({
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: intentionally run once on mount
 	useEffect(() => {
-		if (resetRef.current) return;
+		if (resetRef?.current) return;
+
+		const params = new URLSearchParams();
+		params.set("page", searchParams.get("page") || "1");
+		params.set("like", isAscending ? "asc" : "desc");
+		params.set("latest", isLatestVersion ? "true" : "false");
+
+		Object.entries(searchList).forEach(([key, value]) => {
+			if (value) params.set(key, value);
+		});
+
+		router.replace(`${pathname}?${params.toString()}`);
+		if (params.get("latest") !== searchParams.get("latest")) {
+			setPage(1);
+		}
+	}, [isAscending, isLatestVersion, searchList]);
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: intentionally run once on mount
+	useEffect(() => {
+		if (resetRef?.current) return;
 
 		const params = new URLSearchParams(searchParams.toString());
 		params.set("page", String(page));
 		params.set("like", isAscending ? "asc" : "desc");
-		params.set("latest", String(isLatestVersion));
+		params.set("latest", isLatestVersion ? "true" : "false");
 
 		Object.entries(searchList).forEach(([key, value]) => {
 			if (value) params.set(key, value);
-			else params.delete(key);
 		});
 
 		router.replace(`${pathname}?${params.toString()}`);
 		refetch();
-	}, [page, isAscending, isLatestVersion, searchList]);
+	}, [page]);
 };
