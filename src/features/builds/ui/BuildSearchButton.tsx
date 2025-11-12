@@ -152,9 +152,9 @@ export const BuildSearchButton = ({
 													?.filter((weapon) => weapon.tier === 1)
 													.map((tier1) => (
 														<SelectGroup key={tier1.value}>
-															<SelectLabel className="flex items-center gap-1">
+															<SelectLabel className="flex items-center bg-gray-300/50 dark:bg-gray-950/50 gap-1">
 																<ImageWithFallback
-																	className="min-w-4 max-w-4 p-0"
+																	className="min-w-6 max-w-6 min-h-6 max-h-6 object-contain p-0"
 																	width={24}
 																	height={24}
 																	src={`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier1.value}.png`}
@@ -180,7 +180,7 @@ export const BuildSearchButton = ({
 																		value={tier3.value}
 																	>
 																		<ImageWithFallback
-																			className="min-w-4 max-w-4 p-0"
+																			className="min-w-6 max-w-6 min-h-6 max-h-6 object-contain p-0"
 																			width={24}
 																			height={24}
 																			src={`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier3.value}.png`}
