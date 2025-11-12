@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { type RefObject, useEffect } from "react";
+import { type RefObject, useEffect, useRef } from "react";
 
 interface UseSyncBuildQueryStateProps {
 	page: number;
@@ -28,6 +28,7 @@ export const useSyncBuildQueryState = ({
 	setSearchList,
 	refetch,
 }: UseSyncBuildQueryStateProps) => {
+	const isMounted = useRef(false);
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
@@ -54,7 +55,7 @@ export const useSyncBuildQueryState = ({
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: intentionally run once on mount
 	useEffect(() => {
-		if (resetRef?.current) return;
+		if (resetRef?.current || searchParams.size === 0) return;
 
 		const params = new URLSearchParams();
 		params.set("page", searchParams.get("page") || "1");
@@ -73,6 +74,14 @@ export const useSyncBuildQueryState = ({
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: intentionally run once on mount
 	useEffect(() => {
+		if (resetRef?.current) return;
+
+		if (!isMounted.current) {
+			isMounted.current = true;
+			return;
+		}
+
+		if (Number(searchParams.get("page")) === 1 && page === 1) return;
 		if (resetRef?.current) return;
 
 		const params = new URLSearchParams(searchParams.toString());

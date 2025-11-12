@@ -10,7 +10,16 @@ export const useGetBuilds = ({
 	...req
 }: GetBuildsParams): UseQueryResult<GetBuildsResponse> => {
 	return useQuery({
-		queryKey: ["builds", "list", page, like, isLatestVersion, req],
+		queryKey: [
+			"builds",
+			"list",
+			page,
+			like,
+			isLatestVersion,
+			JSON.stringify(req),
+		],
 		queryFn: () => getBuilds({ page, limit, isLatestVersion, like, ...req }),
+		staleTime: 1000 * 60 * 60,
+		gcTime: 1000 * 60 * 60,
 	});
 };
