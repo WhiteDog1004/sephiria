@@ -10,4 +10,5 @@ export const colorMap: Record<string, string> = {
 	$p: "text-red-500", // 상처 악화
 	$a: "text-gray-400", // 방어력
 	$e: "text-emerald-600", // 회피
+	$c: "text-purple-600", // 혼돈
 };

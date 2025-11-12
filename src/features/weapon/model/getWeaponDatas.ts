@@ -14,6 +14,7 @@ export const getWeaponLists = async () => {
 	const { data, error } = await supabase
 		.from("weapons")
 		.select("*")
+		.or("disabled.is.null,disabled.eq.false")
 		.order("id", { ascending: true });
 
 	handleError(error);
@@ -27,6 +28,7 @@ export const getClientWeaponLists = async () => {
 	const { data, error } = await supabase
 		.from("weapons")
 		.select("*")
+		.or("disabled.is.null,disabled.eq.false")
 		.order("id", { ascending: true });
 
 	handleError(error);

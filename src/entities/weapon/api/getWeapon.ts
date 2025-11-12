@@ -15,6 +15,7 @@ export const getWeapon = async ({ weapon }: WeaponReq) => {
 		.from("weapons")
 		.select("*")
 		.eq("value", weapon)
+		.or("disabled.is.null,disabled.eq.false")
 		.single();
 
 	handleError(error);
