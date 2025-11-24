@@ -106,6 +106,7 @@ export const BuildsClientPage = () => {
 	return (
 		<Column className="w-full p-6 gap-8">
 			<SectionHeader
+				imageName="build"
 				title={"빌드 공유"}
 				description={"빌드를 공유하거나 다양한 빌드를 확인해 보세요!"}
 			/>
