@@ -24,10 +24,10 @@ export const ShortcutBox = ({
 		<Box className="flex-col gap-4 max-w-lg md:max-w-3xl w-full p-0">
 			<Row className="flex-col md:flex-row gap-4 w-full">
 				<Card
-					className="w-full py-0 row-span-3 overflow-hidden"
+					className="w-full max-h-max py-0 row-span-3 overflow-hidden"
 					style={{ height: "-webkit-fill-available" }}
 				>
-					<Column className="h-full">
+					<Column className="h-full max-h-max">
 						<Image
 							width={360}
 							height={180}
@@ -55,7 +55,7 @@ export const ShortcutBox = ({
 					</Column>
 				</Card>
 				<Card
-					className="w-full py-0 row-span-3 overflow-hidden"
+					className="w-full max-h-max py-0 row-span-3 overflow-hidden"
 					style={{ height: "-webkit-fill-available" }}
 				>
 					<Column className="h-full">

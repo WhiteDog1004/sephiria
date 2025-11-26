@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 import { Box } from "../ui/box";
 import { Typography } from "../ui/typography";
 
@@ -6,15 +7,17 @@ interface SectionHeaderProps {
 	title: string;
 	description: string;
 	imageName?: string;
+	className?: string;
 }
 
 export const SectionHeader = ({
 	title,
 	description,
 	imageName,
+	className,
 }: SectionHeaderProps) => {
 	return (
-		<Box className="relative flex-col gap-2 p-4">
+		<Box className={cn("relative flex-col gap-2 p-4", className)}>
 			{imageName && (
 				<Image
 					width={360}

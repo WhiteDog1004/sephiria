@@ -1,6 +1,6 @@
 import { getDetailList } from "@/src/features/costume/model/actions";
-import { ShortcutBox } from "@/src/features/home/ui/ShortcutBox";
 import { Footer } from "@/src/modules/home/ui/Footer";
+import { ShortcutBox } from "@/src/modules/home/ui/ShortcutBox";
 import { Box } from "@/src/shared/ui/box";
 
 const Main = async () => {
