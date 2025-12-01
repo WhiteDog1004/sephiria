@@ -61,6 +61,7 @@ export const BuildsClientPage = () => {
 		limit: PAGE_SIZE,
 		isLatestVersion,
 		like: isAscending ? "asc" : "desc",
+		isWriter: searchList.isWriter,
 		...searchList,
 	});
 	const { data: weapons } = useGetWeapons();

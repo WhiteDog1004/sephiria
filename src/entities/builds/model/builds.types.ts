@@ -5,6 +5,7 @@ export type GetBuildsParams = {
 	limit?: number;
 	like: "asc" | "desc";
 	isLatestVersion?: boolean;
+	isWriter?: boolean;
 } & Partial<Pick<BuildRow, "title" | "costume" | "weapon" | "miracle">>;
 
 export type BuildRow = Database["public"]["Tables"]["builds"]["Row"];

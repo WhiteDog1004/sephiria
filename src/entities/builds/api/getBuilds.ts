@@ -13,12 +13,14 @@ export const getBuilds = async ({
 	limit = 10,
 	isLatestVersion = false,
 	like,
+	isWriter,
 	...req
 }: {
 	page?: number;
 	limit?: number;
 	like?: "asc" | "desc";
 	isLatestVersion?: boolean;
+	isWriter?: boolean;
 } & Partial<BuildRow>): Promise<GetBuildsResponse> => {
 	const { title, costume, weapon, miracle } = req;
 	const supabase = await createBrowserSupabaseClient();
@@ -48,7 +50,11 @@ export const getBuilds = async ({
 	query = query.order("id", { ascending: false });
 
 	if (title) {
-		query = query.ilike("title", `%${title}%`);
+		if (isWriter) {
+			query = query.ilike("writer->>nickname", `%${title}%`);
+		} else {
+			query = query.ilike("title", `%${title}%`);
+		}
 	}
 	if (costume) {
 		query = query.eq("costume", costume);

@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 export interface BuildSearchState {
 	searchList: {
+		isWriter?: boolean;
 		title?: string;
 		costume?: string;
 		weapon?: string;

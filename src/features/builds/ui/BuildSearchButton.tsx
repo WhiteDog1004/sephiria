@@ -1,5 +1,5 @@
 import { RotateCw, Search } from "lucide-react";
-import type { Dispatch, SetStateAction } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useGetMiracles, useGetWeapons } from "@/src/entities/builds";
 import {
@@ -13,6 +13,7 @@ import {
 	FormLabel,
 	ImageWithFallback,
 	Input,
+	Row,
 	Select,
 	SelectContent,
 	SelectGroup,
@@ -42,6 +43,7 @@ export const BuildSearchButton = ({
 	const { setSearchList } = useBuildSearchStore();
 	const { data: weapons } = useGetWeapons();
 	const { data: miracles } = useGetMiracles();
+	const [isTitle, setIsTitle] = useState(false);
 
 	const form = useForm({
 		defaultValues: {
@@ -53,7 +55,7 @@ export const BuildSearchButton = ({
 	});
 
 	const onSubmit = (value: any) => {
-		setSearchList(value);
+		setSearchList({ ...value, isWriter: !isTitle });
 		setOpen(false);
 		setPage(1);
 	};
@@ -96,14 +98,33 @@ export const BuildSearchButton = ({
 								name="title"
 								render={({ field }) => (
 									<FormItem className="w-full">
-										<FormLabel>제목</FormLabel>
-										<FormControl>
-											<Input
-												className="text-xs"
-												placeholder="제목 검색"
-												{...field}
-											/>
-										</FormControl>
+										<FormLabel>{isTitle ? "제목" : "작성자"}</FormLabel>
+										<Row className="gap-2">
+											<Select
+												onValueChange={(value) =>
+													value === "title"
+														? setIsTitle(true)
+														: setIsTitle(false)
+												}
+											>
+												<SelectTrigger className="min-w-28 w-28">
+													<SelectValue
+														placeholder={isTitle ? "제목" : "작성자"}
+													/>
+												</SelectTrigger>
+												<SelectContent>
+													<SelectItem value="writer">작성자</SelectItem>
+													<SelectItem value="title">제목</SelectItem>
+												</SelectContent>
+											</Select>
+											<FormControl>
+												<Input
+													className="text-xs"
+													placeholder={`${isTitle ? "제목" : "작성자"} 검색`}
+													{...field}
+												/>
+											</FormControl>
+										</Row>
 									</FormItem>
 								)}
 							/>
