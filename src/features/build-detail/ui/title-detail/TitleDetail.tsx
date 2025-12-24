@@ -21,7 +21,7 @@ export const TitleDetail = ({
 	return (
 		<Column className="w-full gap-2">
 			<Row className="w-full justify-between">
-				<Typography variant="header1" className="truncate">
+				<Typography variant="body" className="truncate md:text-2xl text-base">
 					{title}
 				</Typography>
 				<Row className="items-center gap-2">

@@ -205,7 +205,7 @@ export const BuildsClientPage = () => {
 									}
 									className="size-5 data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
 								/>
-								<Typography variant="body2">최근버전 보기</Typography>
+								<Typography variant="body2">최신버전 보기</Typography>
 							</Label>
 							<Tooltip>
 								<TooltipTrigger asChild>
