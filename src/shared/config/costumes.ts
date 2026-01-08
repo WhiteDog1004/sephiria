@@ -48,7 +48,7 @@ export const COSTUMES: CostumeMap = {
 		name: "빨간망토 토끼",
 		unlock: undefined,
 		story: "늑대와의 운명적인 만남을 기다리고 있습니다.",
-		options: ["MP 회복 시 2배 회복", "최대 MP -20"],
+		options: ["+50% MP 회복 시의 효율", "최대 MP -10"],
 	},
 	white_rabbit: {
 		name: "흰색 토끼",
@@ -127,7 +127,7 @@ export const COSTUMES: CostumeMap = {
 		story: "병약한 몸이지만 커다란 잠재력이 있습니다.",
 		options: [
 			"시작 아이템 : 세렌의 휘갈긴 편지",
-			"무한 MP",
+			"마력 환류: 최대 MP가 80으로 고정되고, 줄어들지 않음",
 			"최대 HP가 20으로 고정됨",
 		],
 	},
