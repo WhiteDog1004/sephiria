@@ -158,7 +158,7 @@ export const COSTUMES: CostumeMap = {
 	eagle: {
 		name: "독수리",
 		unlock: "",
-		story: "풍부한 표정을 숨길 수 없습니다. 파도같은 감정도 감출 수 없습니다.",
+		story: "재빠르며 뒤를 돌아보지 않습니다.",
 		options: ["대시 횟수 +2", "대시 회복 속도 -20%"],
 	},
 	crocodile: {
