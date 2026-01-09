@@ -421,6 +421,15 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
 	},
 
+	// honor 명예
+	honor: (x, y, _, item, effects) => {
+		const baseOffsets = [
+			{ dx: 0, dy: -1, value: 2 },
+			{ dx: -1, dy: -2 },
+		];
+		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
+	},
+
 	// RARE
 	// base 기반
 	base: (_, y, slotId, __, effects, ___, gridConfig) => {
@@ -708,6 +717,38 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 	// certitude 확신
 	certitude: (x, y, _, item, effects) => {
 		const baseOffsets = [{ dx: 0, dy: -1, value: 5 }];
+		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
+	},
+
+	// hospitality 환대
+	hospitality: (x, y, _, item, effects) => {
+		const baseOffsets = [
+			{ dx: 0, dy: -1, value: 1, flag: "ignore" },
+			{ dx: -1, dy: 0, value: 2, flag: "ignore" },
+		];
+		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
+	},
+
+	// peace 평화
+	peace: (x, y, _, item, effects) => {
+		const baseOffsets = [
+			{ dx: -1, dy: 0, value: 3 },
+			{ dx: 1, dy: 0, value: 3 },
+		];
+		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
+	},
+
+	// courage 용기
+	courage: (x, y, _, item, effects) => {
+		const baseOffsets = [
+			{ dx: -3, dy: -3 },
+			{ dx: -2, dy: -2 },
+			{ dx: -1, dy: -1 },
+			{ dx: 1, dy: 1 },
+			{ dx: 2, dy: 2 },
+			{ dx: 1, dy: -1, value: 2 },
+			{ dx: -1, dy: 1, value: 2 },
+		];
 		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
 	},
 };

@@ -316,6 +316,15 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		image:
 			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//dedication.png",
 	},
+	{
+		value: "honor",
+		tier: "advanced",
+		ko_label: "명예",
+		eng_label: "honor",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs/honor.png",
+		rotate: true,
+	},
 
 	// RARE
 	{
@@ -446,6 +455,32 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		eng_label: "certitude",
 		image:
 			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs//certitude.png",
+		rotate: true,
+	},
+	{
+		value: "hospitality",
+		tier: "legend",
+		ko_label: "환대",
+		eng_label: "hospitality",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs/hospitality.png",
+	},
+	{
+		value: "courage",
+		tier: "legend",
+		ko_label: "용기",
+		eng_label: "courage",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs/courage.png",
+		rotate: true,
+	},
+	{
+		value: "peace",
+		tier: "legend",
+		ko_label: "평화",
+		eng_label: "peace",
+		image:
+			"https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/slabs/peace.png",
 		rotate: true,
 	},
 ];
