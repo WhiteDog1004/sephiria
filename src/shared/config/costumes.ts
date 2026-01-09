@@ -157,13 +157,13 @@ export const COSTUMES: CostumeMap = {
 	},
 	eagle: {
 		name: "독수리",
-		unlock: "",
+		unlock: "대시 횟수를 8까지 올리세요.",
 		story: "재빠르며 뒤를 돌아보지 않습니다.",
 		options: ["대시 횟수 +2", "대시 회복 속도 -20%"],
 	},
 	crocodile: {
 		name: "악어",
-		unlock: "",
+		unlock: "수호 콤보를 10 달성한 상태로 게임을 클리어하세요.",
 		story: "이루고자 하는 일을 위해 침묵할 수 있습니다.",
 		options: [
 			"방어력에 따른 피해 감소가 적용되지 않지만, 증가된 피해 감소율 만큼 주는 피해 증가",
@@ -171,19 +171,20 @@ export const COSTUMES: CostumeMap = {
 	},
 	deer: {
 		name: "사슴",
-		unlock: "",
+		unlock:
+			"소원 분수를 사용하지 않고 게임을 클리어 하세요. (소원 분수가 잠금 해제되어 있어야 함)",
 		story: "뿔에 신성력이 있다고 믿어져 왔습니다. 옛날 이야기지만요.",
 		options: ["소원 분수 용량 +3", "치명타 확률 -90%"],
 	},
 	lucky_fairy: {
 		name: "행운의 요정",
-		unlock: "",
+		unlock: "챕터4: 파편(을)를 완료하세요.",
 		story: "아무도 요정의 정체에 대해 의심하지 않습니다. 본인조차도.",
 		options: ["행운 +7", "인벤토리 슬롯 -3"],
 	},
 	squirrel: {
 		name: "농부 다람쥐",
-		unlock: "",
+		unlock: "과일 꼬치를 사용하지 않고 게임을 클리어 하세요.",
 		story: "밭일보다 과수원 일을 좋아합니다.",
 		options: ["과일 꼬치 상한 +2", "무기 피해량 -14%"],
 	},
