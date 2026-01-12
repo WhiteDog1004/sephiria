@@ -12,6 +12,21 @@ const nextConfig: NextConfig = {
 		],
 		minimumCacheTTL: 60 * 60 * 24 * 365,
 	},
+
+	async headers() {
+		return [
+			{
+				source: "/:all*(svg|jpg|png)",
+				locale: false,
+				headers: [
+					{
+						key: "Cache-Control",
+						value: "public, max-age=31536000, immutable",
+					},
+				],
+			},
+		];
+	},
 };
 
 export default nextConfig;
