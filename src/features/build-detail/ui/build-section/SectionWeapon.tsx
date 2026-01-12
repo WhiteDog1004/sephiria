@@ -15,6 +15,7 @@ import {
 	Separator,
 	Typography,
 } from "@/src/shared";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 import { parseColoredString } from "@/src/shared/utils/parseColoredString";
 
 export const SectionWeapon = ({ weapon }: WeaponReq) => {
@@ -46,7 +47,7 @@ export const SectionWeapon = ({ weapon }: WeaponReq) => {
 							className="w-16 h-16 object-contain p-0"
 							width={64}
 							height={64}
-							src={data.image || "/"}
+							src={getCloudflareUrl(data.image || "/")}
 							alt={data.value}
 							unoptimized
 						/>

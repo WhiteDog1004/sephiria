@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { WeaponOptions } from "@/src/entities/weapon/model/types";
 import { TabsList, TabsTrigger } from "@/src/shared";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 
 export const WeaponContent = ({
 	list,
@@ -16,7 +17,7 @@ export const WeaponContent = ({
 					className="w-12 h-12 object-contain"
 					width={48}
 					height={48}
-					src={list.image || ""}
+					src={getCloudflareUrl(list.image || "")}
 					alt={list.value}
 					loading="eager"
 				/>

@@ -7,6 +7,7 @@ import {
 	Separator,
 	Typography,
 } from "@/src/shared";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 
 type ContentItemProps = {
 	title: string;
@@ -38,7 +39,7 @@ export const ContentItem = ({
 							className="p-1 w-12 h-12 object-contain"
 							width={32}
 							height={32}
-							src={img}
+							src={getCloudflareUrl(img)}
 							alt={"dry_wind"}
 							unoptimized
 						/>

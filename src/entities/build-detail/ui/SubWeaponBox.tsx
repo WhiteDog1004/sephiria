@@ -11,6 +11,7 @@ import {
 	TooltipTrigger,
 	Typography,
 } from "@/src/shared";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 import type { WeaponRow } from "../../weapon";
 
 export const SubWeaponBox = ({ weapon }: { weapon: WeaponRow }) => {
@@ -34,7 +35,7 @@ export const SubWeaponBox = ({ weapon }: { weapon: WeaponRow }) => {
 				className="w-8 h-8 object-contain p-0"
 				width={32}
 				height={32}
-				src={weapon.image || ""}
+				src={getCloudflareUrl(weapon.image || "") || ""}
 				alt={weapon.value}
 				unoptimized
 			/>

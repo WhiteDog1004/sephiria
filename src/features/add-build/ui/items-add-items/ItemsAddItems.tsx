@@ -35,6 +35,7 @@ import {
 	TooltipTrigger,
 	Typography,
 } from "@/src/shared";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 import { getTierBorderColor } from "../../config/getTierBorderColor";
 
 export const ItemsAddItems = ({
@@ -146,12 +147,12 @@ export const ItemsAddItems = ({
 														className="min-w-12 max-w-12 max-h-12 p-0"
 														width={48}
 														height={48}
-														src={
+														src={getCloudflareUrl(
 															artifacts?.find(
 																(item) =>
 																	item.value === fieldValue[index].value,
-															)?.image || "/"
-														}
+															)?.image || "/",
+														)}
 														alt={fieldValue[index].value}
 													/>
 												</Button>
@@ -229,7 +230,7 @@ export const ItemsAddItems = ({
 																className="min-w-12 max-w-12 max-h-12 p-0"
 																width={48}
 																height={48}
-																src={item.image}
+																src={getCloudflareUrl(item.image)}
 																alt={item.value}
 															/>
 														</Button>

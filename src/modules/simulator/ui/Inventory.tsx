@@ -42,6 +42,7 @@ import { Column } from "@/src/shared/ui/column";
 import { Row } from "@/src/shared/ui/row";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/shared/ui/tabs";
 import { Typography } from "@/src/shared/ui/typography";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 import { handleSlotNumber } from "../model/handleSlotNumber";
 
 interface InventoryProps {
@@ -513,11 +514,11 @@ const Inventory = ({ data }: InventoryProps) => {
 							<Image
 								unoptimized
 								fill
-								src={
+								src={getCloudflareUrl(
 									activeItem.item
 										? activeItem.item.image
-										: activeItem.image || ""
-								}
+										: activeItem.image || "",
+								)}
 								alt={"item-image"}
 							/>
 						</Box>

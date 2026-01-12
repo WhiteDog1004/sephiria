@@ -7,6 +7,7 @@ import type { MiracleOptions } from "@/src/entities/miracle/model/types";
 import { Box } from "@/src/shared/ui/box";
 import { Separator } from "@/src/shared/ui/separator";
 import { Typography } from "@/src/shared/ui/typography";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 
 export const MiracleList = ({ data }: MiracleOptions) => {
 	const { theme } = useTheme();
@@ -32,7 +33,7 @@ export const MiracleList = ({ data }: MiracleOptions) => {
 							<Image
 								width={60}
 								height={60}
-								src={item.image || ""}
+								src={getCloudflareUrl(item.image || "")}
 								alt={item.value}
 								unoptimized
 							/>

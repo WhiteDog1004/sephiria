@@ -22,6 +22,7 @@ import {
 	TooltipTrigger,
 	Typography,
 } from "@/src/shared";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 
 export const BuildArtifact = ({
 	artifacts,
@@ -127,7 +128,7 @@ export const BuildArtifact = ({
 															className="w-12 h-12 object-contain p-0"
 															width={64}
 															height={64}
-															src={findItem.image || "/"}
+															src={getCloudflareUrl(findItem.image || "/")}
 															alt={findItem.value}
 															unoptimized
 														/>

@@ -29,6 +29,7 @@ import {
 	SheetTrigger,
 	Typography,
 } from "@/src/shared";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 import { useBuildSearchStore } from "../model/buildSearchStore";
 
 export const BuildSearchButton = ({
@@ -146,7 +147,9 @@ export const BuildSearchButton = ({
 															className="min-w-4 max-w-4 p-0"
 															width={24}
 															height={24}
-															src={`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/costume/${costume}.png`}
+															src={getCloudflareUrl(
+																`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/costume/${costume}.png`,
+															)}
 															alt={costume}
 														/>
 														{COSTUMES[costume].name}
@@ -178,7 +181,9 @@ export const BuildSearchButton = ({
 																	className="min-w-6 max-w-6 min-h-6 max-h-6 object-contain p-0"
 																	width={24}
 																	height={24}
-																	src={`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier1.value}.png`}
+																	src={getCloudflareUrl(
+																		`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier1.value}.png`,
+																	)}
 																	alt={tier1.value}
 																/>
 																{tier1.value_kor}
@@ -204,7 +209,9 @@ export const BuildSearchButton = ({
 																			className="min-w-6 max-w-6 min-h-6 max-h-6 object-contain p-0"
 																			width={24}
 																			height={24}
-																			src={`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier3.value}.png`}
+																			src={getCloudflareUrl(
+																				`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier3.value}.png`,
+																			)}
 																			alt={tier3.value}
 																		/>
 																		{tier3.value_kor}
@@ -235,7 +242,7 @@ export const BuildSearchButton = ({
 															className="min-w-4 max-w-4 p-0"
 															width={24}
 															height={24}
-															src={miracle.image}
+															src={getCloudflareUrl(miracle.image)}
 															alt={miracle.value}
 														/>
 														{miracle.value_kor}

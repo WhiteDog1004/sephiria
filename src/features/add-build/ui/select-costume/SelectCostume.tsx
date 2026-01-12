@@ -17,6 +17,7 @@ import {
 	Row,
 	Typography,
 } from "@/src/shared";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 
 export const SelectCostume = (form: any) => {
 	const [openPopover, setOpenPopover] = useState(false);
@@ -43,7 +44,9 @@ export const SelectCostume = (form: any) => {
 															className="min-w-10 max-w-10 min-h-10 max-h-10 object-contain p-0"
 															width={40}
 															height={40}
-															src={`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/costume/${field.value}.png`}
+															src={getCloudflareUrl(
+																`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/costume/${field.value}.png`,
+															)}
 															alt={field.value}
 														/>
 													}
@@ -81,7 +84,9 @@ export const SelectCostume = (form: any) => {
 													className="min-w-10 max-w-10 min-h-10 max-h-10 object-contain p-0"
 													width={40}
 													height={40}
-													src={`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/costume/${costume}.png`}
+													src={getCloudflareUrl(
+														`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/costume/${costume}.png`,
+													)}
 													alt={costume}
 												/>
 												<Typography

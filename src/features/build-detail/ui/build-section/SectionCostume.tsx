@@ -14,6 +14,7 @@ import {
 	Typography,
 } from "@/src/shared";
 import { containsRedKeyword } from "@/src/shared/model/containsWords";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 
 export const SectionCostume = ({ costume }: CostumeReq) => {
 	const { theme } = useTheme();
@@ -31,7 +32,7 @@ export const SectionCostume = ({ costume }: CostumeReq) => {
 						className="w-16 h-16 object-contain p-0"
 						width={64}
 						height={64}
-						src={data.image}
+						src={getCloudflareUrl(data.image)}
 						alt={data.value}
 						unoptimized
 					/>

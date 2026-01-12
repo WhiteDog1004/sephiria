@@ -5,6 +5,7 @@ import {
 	ImageWithFallback,
 	Typography,
 } from "@/src/shared";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 
 export const CostumeItem = ({ costume }: { costume: string }) => {
 	return (
@@ -14,7 +15,9 @@ export const CostumeItem = ({ costume }: { costume: string }) => {
 					className="w-12 h-12 object-contain p-0"
 					width={48}
 					height={48}
-					src={`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/costume/${costume}.png`}
+					src={getCloudflareUrl(
+						`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/costume/${costume}.png`,
+					)}
 					alt={costume}
 					unoptimized
 				/>

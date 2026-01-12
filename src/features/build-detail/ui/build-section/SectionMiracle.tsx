@@ -16,6 +16,7 @@ import {
 	Separator,
 	Typography,
 } from "@/src/shared";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 
 export const SectionMiracle = ({ miracle }: MiracleReq) => {
 	const { theme } = useTheme();
@@ -33,7 +34,7 @@ export const SectionMiracle = ({ miracle }: MiracleReq) => {
 						className="w-16 h-16 object-contain p-0"
 						width={64}
 						height={64}
-						src={data.image || "/"}
+						src={getCloudflareUrl(data.image || "/")}
 						alt={data.value}
 						unoptimized
 					/>

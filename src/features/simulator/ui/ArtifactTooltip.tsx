@@ -6,6 +6,7 @@ import { getItemsTierColor } from "@/src/features/simulator/lib/getItemsTierColo
 import { Row } from "@/src/shared";
 import { Box } from "@/src/shared/ui/box";
 import { Typography } from "@/src/shared/ui/typography";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 import { EFFECT_LABELS } from "../config/constants";
 import FormattedEffectContent from "../lib/formattedEffectContent";
 import { renderStar } from "../lib/renderStar";
@@ -60,7 +61,7 @@ export const ArtifactTooltip = ({
 				<Image
 					width={80}
 					height={80}
-					src={data.image}
+					src={getCloudflareUrl(data.image)}
 					alt={data.label_eng}
 					unoptimized
 				/>

@@ -9,6 +9,7 @@ import { WeaponContent } from "@/src/features/weapon/ui/WeaponContent";
 import { WeaponTierList } from "@/src/features/weapon/ui/WeaponTierTabs";
 import { Column, Row, Separator, Tabs, Typography } from "@/src/shared";
 import { SectionHeader } from "@/src/shared/components/section-header";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 import { parseColoredString } from "../../../shared/utils/parseColoredString";
 
 export const WeaponList = ({ data }: { data: WeaponOptions[] }) => {
@@ -85,7 +86,7 @@ export const WeaponList = ({ data }: { data: WeaponOptions[] }) => {
 								className="object-contain w-10 h-10"
 								width={40}
 								height={40}
-								src={selectData.image || ""}
+								src={getCloudflareUrl(selectData.image || "")}
 								alt={selectData.value}
 								priority
 							/>

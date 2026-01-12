@@ -4,6 +4,7 @@ import { RotateCcw } from "lucide-react";
 import Image from "next/image";
 import { ITEM_SLABS_DATA } from "@/src/features/simulator/config/slabsLists";
 import { Box } from "@/src/shared/ui/box";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 import type { ArtifactInstance, SlabsOptions } from "../../types";
 
 export const generateGridConfig = (totalSlots?: number) => {
@@ -71,7 +72,7 @@ export const SlotComponent = ({
 			>
 				<Image
 					fill
-					src={item.image}
+					src={getCloudflareUrl(item.image)}
 					alt={"items"}
 					className={clsx("object-contain")}
 					style={item.rotation ? rotationStyle : undefined}

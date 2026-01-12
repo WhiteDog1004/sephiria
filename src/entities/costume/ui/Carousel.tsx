@@ -8,6 +8,7 @@ import {
 	CarouselItem,
 } from "@/src/shared/ui/carousel";
 import { Typography } from "@/src/shared/ui/typography";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 import type { Database } from "@/types_db";
 
 export const CostumeCarousel = ({
@@ -38,7 +39,7 @@ export const CostumeCarousel = ({
 								className="w-max min-h-full p-0 h-[78]"
 								width={48}
 								height={72}
-								src={item.image || ""}
+								src={getCloudflareUrl(item.image) || ""}
 								alt={item.value}
 								unoptimized
 							/>

@@ -17,6 +17,7 @@ import {
 	TooltipTrigger,
 } from "@/src/shared/ui/tooltip";
 import { Typography } from "@/src/shared/ui/typography";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 import { ITEM_SLABS_DATA } from "../config/slabsLists";
 import { ArtifactTooltip } from "./ArtifactTooltip";
 import { SlabEffectTooltip } from "./SlabsTooltip";
@@ -43,7 +44,12 @@ export const ItemSource = ({ item, isPreview }: ItemSourceProps) => {
 					className={`w-19 h-24 p-1 touch-none ${isPreview ? "cursor-auto" : "cursor-grab"}`}
 				>
 					<Box className="relative h-full p-0">
-						<Image unoptimized fill src={item.image || ""} alt={"items"} />
+						<Image
+							unoptimized
+							fill
+							src={getCloudflareUrl(item.image || "")}
+							alt={"items"}
+						/>
 					</Box>
 					<Typography
 						className={`py-1 whitespace-nowrap text-center overflow-hidden text-ellipsis ${clsx(item.type === "slabs" ? getItemsTierColor(ITEM_SLABS_DATA.find((i) => i.value === item.id)?.tier || "", theme === "light") : getItemsTierColor(item.data?.tier || "", theme === "light"))}`}

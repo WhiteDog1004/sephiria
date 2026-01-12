@@ -18,6 +18,7 @@ import {
 	Skeleton,
 	Typography,
 } from "@/src/shared";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 import {
 	ABILITY_ORDER,
 	ABILITY_STATUS_ICONS,
@@ -84,7 +85,7 @@ export const BuildsCard = ({
 												className="p-0"
 												width={40}
 												height={40}
-												src={item.image}
+												src={getCloudflareUrl(item.image)}
 												alt={item.value}
 												unoptimized
 											/>

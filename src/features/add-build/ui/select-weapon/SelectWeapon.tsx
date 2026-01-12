@@ -21,6 +21,7 @@ import {
 	TooltipTrigger,
 	Typography,
 } from "@/src/shared";
+import { getCloudflareUrl } from "@/src/shared/utils/image";
 import { parseColoredString } from "@/src/shared/utils/parseColoredString";
 
 export const SelectWeapon = (form: any) => {
@@ -49,7 +50,9 @@ export const SelectWeapon = (form: any) => {
 															className="min-w-10 max-w-10 min-h-10 max-h-10 object-contain p-0"
 															width={40}
 															height={40}
-															src={`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${field.value}.png`}
+															src={getCloudflareUrl(
+																`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${field.value}.png`,
+															)}
 															alt={field.value}
 														/>
 													}
@@ -91,7 +94,9 @@ export const SelectWeapon = (form: any) => {
 															className="min-w-6 max-w-6 p-0"
 															width={32}
 															height={32}
-															src={`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier1.value}.png`}
+															src={getCloudflareUrl(
+																`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier1.value}.png`,
+															)}
 															alt={tier1.value}
 														/>
 
@@ -130,7 +135,9 @@ export const SelectWeapon = (form: any) => {
 																			className="min-w-10 w-10 max-w-10 min-h-10 h-10 max-h-10 object-contain p-0"
 																			width={40}
 																			height={40}
-																			src={`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier3.value}.png`}
+																			src={getCloudflareUrl(
+																				`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier3.value}.png`,
+																			)}
 																			alt={tier3.value}
 																		/>
 																	</TooltipTrigger>
