@@ -14,6 +14,7 @@ export const getArtifactLists = async () => {
 	const { data, error } = await supabase
 		.from("artifacts")
 		.select("*")
+		.or("disabled.is.null,disabled.eq.false")
 		.order("id", { ascending: true });
 
 	handleError(error);
@@ -27,6 +28,7 @@ export const getClientArtifactLists = async () => {
 	const { data, error } = await supabase
 		.from("artifacts")
 		.select("*")
+		.or("disabled.is.null,disabled.eq.false")
 		.order("id", { ascending: true });
 
 	handleError(error);
