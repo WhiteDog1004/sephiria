@@ -7,6 +7,8 @@ export const metadata: Metadata = {
 	...SITE_METADATA.builds,
 };
 
+export const revalidate = 3600;
+
 const BuildsPage = async () => {
 	return (
 		<Suspense fallback={<></>}>

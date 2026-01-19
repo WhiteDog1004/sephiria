@@ -29,6 +29,8 @@ export async function generateMetadata({
 	};
 }
 
+export const revalidate = 3600;
+
 const BuildsDetailPage = async ({
 	params,
 }: {

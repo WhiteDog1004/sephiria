@@ -1,5 +1,8 @@
+"use server";
+
 import type { PostgrestError } from "@supabase/supabase-js";
-import { createBrowserSupabaseClient } from "@/lib/supabase/client";
+import { revalidatePath } from "next/cache";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { UpdateBuildType } from "../model/updateBuild.types";
 
 const handleError = (error: PostgrestError | null) => {
@@ -24,7 +27,7 @@ export const updateBuild = async (
 		ability,
 		version,
 	} = req;
-	const supabase = await createBrowserSupabaseClient();
+	const supabase = await createServerSupabaseClient();
 
 	const { data, error } = await supabase
 		.from("builds")
@@ -50,6 +53,8 @@ export const updateBuild = async (
 		.select();
 
 	handleError(error);
+
+	revalidatePath(`/builds/${postUuid}`);
 
 	return data as any;
 };
