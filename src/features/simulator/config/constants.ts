@@ -37,4 +37,5 @@ export const EFFECT_LABELS: Record<string, string> = {
 	academy: "아카데미",
 	curse: "저주",
 	bargaining: "교섭",
+	element: "원소",
 };

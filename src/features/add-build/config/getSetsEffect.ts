@@ -136,4 +136,10 @@ export const SETS_EFFECT_COUNT_LABEL: Record<string, Record<number, string>> = {
 		2: "+10 협상력, +15% 잎 드롭",
 		4: "+15 협상력, 황금손: 소지한 잎 200개당 적에게 주는 피해 +1% (최대 20%)",
 	},
+	// 원소
+	element: {
+		2: "+5 가장 높은 속성 피해",
+		4: "+6 가장 높은 속성 피해",
+		6: "모든 속성 피해 +10% 증폭",
+	},
 };
