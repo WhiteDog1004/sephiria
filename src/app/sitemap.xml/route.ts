@@ -7,7 +7,7 @@ export const GET = async () => {
 	const supabase = await createServerSupabaseClient();
 	const { data: posts, error } = await supabase
 		.from("builds")
-		.select("postUuid, created_at");
+		.select("postUuid, created_at, updated_at");
 
 	if (error || !posts) {
 		console.error("Supabase Error:", error);
@@ -27,7 +27,7 @@ export const GET = async () => {
 		{ loc: `${baseUrl}/builds`, lastmod: new Date() },
 		...posts.map((post: any) => ({
 			loc: `${baseUrl}/builds/${post.postUuid}`,
-			lastmod: post.created_at || new Date(),
+			lastmod: post.updated_at || post.created_at || new Date(),
 		})),
 	];
 
@@ -47,7 +47,7 @@ ${urls
 	return new NextResponse(sitemap, {
 		headers: {
 			"Content-Type": "application/xml; charset=UTF-8",
-			"Cache-Control": "s-maxage=3600, stale-while-revalidate",
+			"Cache-Control": "no-store",
 		},
 	});
 };

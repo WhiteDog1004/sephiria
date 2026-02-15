@@ -7,7 +7,7 @@ User-agent: *
 Allow: /
 Disallow: /fonts/
 
-Sitemap: https://www.sephiria.wiki/sitemap.xml
+Sitemap: https://sephiria.wiki/sitemap.xml
   `.trim(),
 		{
 			headers: {

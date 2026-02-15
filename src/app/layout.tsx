@@ -14,6 +14,7 @@ const font = localFont({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://sephiria.wiki"),
 	title: "세피리아 위키",
 	description: "세피리아 정보 사이트",
 	keywords: [
@@ -48,6 +49,9 @@ export const metadata: Metadata = {
 			},
 		],
 	},
+	alternates: {
+		canonical: "/",
+	},
 	other: {
 		"google-adsense-account": "ca-pub-3851224465271826",
 		"naver-site-verification": "86fdf6f8f06302154e669f26d571f603adfa70fb",
@@ -67,7 +71,7 @@ export default function RootLayout({
 				<link
 					rel="preconnect"
 					as="image"
-					href="https://www.sephiria.wiki/sephiria.webp"
+					href="https://sephiria.wiki/sephiria.webp"
 					crossOrigin="anonymous"
 				/>
 				<script type="application/ld+json">

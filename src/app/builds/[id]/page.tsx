@@ -14,6 +14,13 @@ export async function generateMetadata({
 	return {
 		title: `${data.title} - 세피리아 위키`,
 		description: `${COSTUMES[data.costume].name} 코스튬 빌드 & v${data.version} - 세피리아 위키`,
+		alternates: {
+			canonical: `/builds/${id}`,
+		},
+		robots: {
+			index: true,
+			follow: true,
+		},
 		openGraph: {
 			title: `${data.title} - 세피리아 위키`,
 			description: `${COSTUMES[data.costume].name} 코스튬 빌드 & v${data.version} - 세피리아 위키`,
