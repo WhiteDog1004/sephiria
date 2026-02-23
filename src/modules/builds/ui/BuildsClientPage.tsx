@@ -56,7 +56,7 @@ export const BuildsClientPage = () => {
 		setSearchList,
 	} = useBuildSearchStore();
 
-	const { data, refetch } = useGetBuilds({
+	const { data } = useGetBuilds({
 		page,
 		limit: PAGE_SIZE,
 		isLatestVersion,
@@ -101,7 +101,6 @@ export const BuildsClientPage = () => {
 		setIsLatestVersion,
 		searchList,
 		setSearchList,
-		refetch,
 	});
 
 	return (

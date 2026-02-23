@@ -17,7 +17,9 @@ export const getBuildDetail = async ({ id }: BuildDetailProps) => {
 
 	const { data, error } = await supabase
 		.from("builds")
-		.select("*")
+		.select(
+			"id,postUuid,title,costume,weapon,miracle,version,content,ability,description,postLike,created_at,updated_at,writer",
+		)
 		.eq("postUuid", id)
 		.single();
 

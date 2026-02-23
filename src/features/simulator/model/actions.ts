@@ -13,7 +13,9 @@ export const getArtifactLists = async () => {
 
 	const { data, error } = await supabase
 		.from("artifacts")
-		.select("*")
+		.select(
+			"id,value,label_kor,label_eng,tier,effect,image,description,level,created_at,disabled",
+		)
 		.or("disabled.is.null,disabled.eq.false")
 		.order("id", { ascending: true });
 
@@ -27,7 +29,9 @@ export const getClientArtifactLists = async () => {
 
 	const { data, error } = await supabase
 		.from("artifacts")
-		.select("*")
+		.select(
+			"id,value,label_kor,label_eng,tier,effect,image,description,level,created_at,disabled",
+		)
 		.or("disabled.is.null,disabled.eq.false")
 		.order("id", { ascending: true });
 

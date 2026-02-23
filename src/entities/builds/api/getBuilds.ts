@@ -30,7 +30,10 @@ export const getBuilds = async ({
 
 	let query = supabase
 		.from("builds")
-		.select("*", { count: "exact" })
+		.select(
+			"id,postUuid,title,description,costume,weapon,miracle,version,content,ability,postLike,created_at,updated_at,writer",
+			{ count: "exact" },
+		)
 		.range(from, to);
 
 	if (isLatestVersion) {

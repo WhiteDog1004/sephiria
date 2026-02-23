@@ -12,7 +12,6 @@ interface UseSyncBuildQueryStateProps {
 	setIsLatestVersion: (v: boolean) => void;
 	searchList: Record<string, any>;
 	setSearchList: (v: Record<string, any>) => void;
-	refetch: () => void;
 	resetRef: RefObject<boolean>;
 }
 
@@ -26,7 +25,6 @@ export const useSyncBuildQueryState = ({
 	setIsLatestVersion,
 	searchList,
 	setSearchList,
-	refetch,
 }: UseSyncBuildQueryStateProps) => {
 	const isMounted = useRef(false);
 	const router = useRouter();
@@ -49,8 +47,6 @@ export const useSyncBuildQueryState = ({
 		setIsAscending(urlAsc);
 		setIsLatestVersion(urlLatest);
 		setSearchList(urlSearchList);
-
-		refetch();
 	}, []);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: intentionally run once on mount
@@ -94,6 +90,5 @@ export const useSyncBuildQueryState = ({
 		});
 
 		router.replace(`${pathname}?${params.toString()}`);
-		refetch();
 	}, [page]);
 };

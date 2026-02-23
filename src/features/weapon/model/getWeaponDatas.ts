@@ -13,7 +13,7 @@ export const getWeaponLists = async () => {
 
 	const { data, error } = await supabase
 		.from("weapons")
-		.select("*")
+		.select("created_at,uuid,id,value,value_kor,tier,parent,image,effects,disabled")
 		.or("disabled.is.null,disabled.eq.false")
 		.order("id", { ascending: true });
 
@@ -27,7 +27,7 @@ export const getClientWeaponLists = async () => {
 
 	const { data, error } = await supabase
 		.from("weapons")
-		.select("*")
+		.select("created_at,uuid,id,value,value_kor,tier,parent,image,effects,disabled")
 		.or("disabled.is.null,disabled.eq.false")
 		.order("id", { ascending: true });
 

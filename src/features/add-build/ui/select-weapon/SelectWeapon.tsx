@@ -32,7 +32,12 @@ export const SelectWeapon = (form: any) => {
 		<FormField
 			control={form.control}
 			name="weapon"
-			render={({ field }) => (
+			render={({ field }) => {
+				const selectedWeapon = weapons?.find(
+					(weapon) => weapon.value === field.value,
+				);
+
+				return (
 				<FormItem className="w-full">
 					<FormLabel className="justify-center">무기</FormLabel>
 					<FormControl>
@@ -61,11 +66,7 @@ export const SelectWeapon = (form: any) => {
 													variant="body2"
 													className="w-full min-w-0 max-w-full text-center truncate"
 												>
-													{
-														weapons?.find(
-															(weapon) => weapon.value === field.value,
-														).value_kor
-													}
+													{selectedWeapon?.value_kor}
 												</Typography>
 											</>
 										) : (
@@ -175,7 +176,8 @@ export const SelectWeapon = (form: any) => {
 						</Column>
 					</FormControl>
 				</FormItem>
-			)}
+				);
+			}}
 		/>
 	);
 };

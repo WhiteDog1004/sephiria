@@ -28,7 +28,7 @@ export const SectionWeapon = ({ weapon }: WeaponReq) => {
 		?.filter((item) => item.tier === 1)
 		.find((item) => item.value === tier2Weapon?.parent);
 
-	if (!data || !filteredWeapon) return;
+	if (!data || !filteredWeapon || !tier2Weapon) return;
 	return (
 		<Column className="w-full items-start md:items-center gap-2">
 			<Typography>무기</Typography>

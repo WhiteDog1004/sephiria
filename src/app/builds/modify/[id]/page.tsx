@@ -18,6 +18,7 @@ const BuildModifyPage = async ({
 	const { data } = await getBuildDetail({ id });
 	const info = await getServerLoginInfo();
 
+	if (!data) return <NotFound />;
 	if (data.writer.uuid !== info?.user.id) return <NotFound />;
 	return <AddBuildClientPage modify={data} />;
 };
