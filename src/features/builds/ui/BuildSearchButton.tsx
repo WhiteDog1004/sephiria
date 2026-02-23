@@ -1,5 +1,10 @@
 import { RotateCw, Search } from "lucide-react";
-import { type Dispatch, type SetStateAction, useState } from "react";
+import {
+	type Dispatch,
+	type SetStateAction,
+	useEffect,
+	useState,
+} from "react";
 import { useForm } from "react-hook-form";
 import { useGetMiracles, useGetWeapons } from "@/src/entities/builds";
 import {
@@ -45,6 +50,7 @@ export const BuildSearchButton = ({
 	const { data: weapons } = useGetWeapons();
 	const { data: miracles } = useGetMiracles();
 	const [isTitle, setIsTitle] = useState(false);
+	const [hideFloatingButton, setHideFloatingButton] = useState(false);
 
 	const form = useForm({
 		defaultValues: {
@@ -68,13 +74,41 @@ export const BuildSearchButton = ({
 		setPage(1);
 	};
 
+	useEffect(() => {
+		const updateButtonVisibility = () => {
+			const isMobile = window.innerWidth <= 768;
+			if (!isMobile) {
+				setHideFloatingButton(false);
+				return;
+			}
+
+			const scrollTop = window.scrollY;
+			const viewportHeight = window.innerHeight;
+			const pageHeight = document.documentElement.scrollHeight;
+			const isBottom = scrollTop + viewportHeight >= pageHeight - 8;
+
+			setHideFloatingButton(isBottom);
+		};
+
+		updateButtonVisibility();
+		window.addEventListener("scroll", updateButtonVisibility, { passive: true });
+		window.addEventListener("resize", updateButtonVisibility);
+
+		return () => {
+			window.removeEventListener("scroll", updateButtonVisibility);
+			window.removeEventListener("resize", updateButtonVisibility);
+		};
+	}, []);
+
 	return (
 		<Sheet open={open} onOpenChange={setOpen}>
 			<SheetTrigger asChild>
 				<Button
 					variant="secondary"
 					size="lg"
-					className={`fixed right-4 bottom-4 rounded-full border`}
+					className={`fixed right-4 bottom-4 rounded-full border transition-opacity ${
+						hideFloatingButton ? "opacity-0 pointer-events-none" : "opacity-100"
+					}`}
 				>
 					<Search />
 					<Typography variant="caption">검색</Typography>

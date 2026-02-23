@@ -105,7 +105,7 @@ export const BuildsClientPage = () => {
 	});
 
 	return (
-		<Column className="w-full items-center p-6 gap-8">
+		<Column className="w-full items-center p-3 md:p-6 gap-8">
 			<SectionHeader
 				imageName="build"
 				title={"빌드 공유"}

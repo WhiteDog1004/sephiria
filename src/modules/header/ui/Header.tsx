@@ -2,7 +2,9 @@
 
 import { Menu } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 import {
 	Avatar,
 	AvatarImage,
@@ -30,7 +32,10 @@ import { ModeToggle } from "./ModeToggle";
 
 export const Header = () => {
 	const router = useRouter();
+	const pathname = usePathname();
 	const { data } = useSession();
+	const isActive = (path: string) =>
+		pathname === path || pathname.startsWith(`${path}/`);
 
 	return (
 		<Box className="sticky z-50 top-0 backdrop-blur-md border-b dark:border-white/10 border-black/10 p-4">
@@ -51,10 +56,30 @@ export const Header = () => {
 					</Row>
 				</Box>
 				<Box className="w-max p-0 gap-3">
+					<nav
+						aria-label="메인 메뉴"
+						className="hidden lg:flex items-center gap-2"
+					>
+						{MENU_LIST.map((list) => (
+							<Link
+								key={list.label}
+								href={list.link}
+								aria-current={isActive(list.link) ? "page" : undefined}
+								className={cn(
+									"text-sm rounded-md px-2 py-1 transition-colors",
+									isActive(list.link)
+										? "text-blue-500 hover:text-blue-500 underline"
+										: "text-foreground/80 hover:text-foreground hover:bg-accent/50",
+								)}
+							>
+								{list.label}
+							</Link>
+						))}
+					</nav>
 					<ModeToggle />
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
-							<Button type="button" className="w-9">
+							<Button type="button" className="flex lg:hidden w-9">
 								<Menu />
 							</Button>
 						</DropdownMenuTrigger>

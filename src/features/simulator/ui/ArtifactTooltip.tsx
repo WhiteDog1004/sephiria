@@ -21,7 +21,7 @@ export const ArtifactTooltip = ({
 	return (
 		<Box
 			key={data.value}
-			className={`relative flex flex-col gap-3 max-w-3xs p-4 text-center rounded-md bg-gray-800 border border-gray-700 text-white`}
+			className={`relative flex flex-col gap-2 max-w-3xs p-4 text-center rounded-md bg-gray-800 border border-gray-700 text-white`}
 		>
 			<Typography
 				className={`absolute -top-3 left-1/2 -translate-x-1/2 px-2 rounded-md ${clsx(theme === "dark" ? "bg-gray-700 text-yellow-300" : "bg-gray-500 text-yellow-300")}`}
@@ -59,8 +59,8 @@ export const ArtifactTooltip = ({
 					</Box>
 				</Box>
 				<Image
-					width={80}
-					height={80}
+					width={60}
+					height={60}
 					src={getCloudflareUrl(data.image)}
 					alt={data.label_eng}
 					unoptimized
