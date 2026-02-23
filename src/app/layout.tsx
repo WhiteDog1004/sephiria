@@ -16,7 +16,8 @@ const font = localFont({
 export const metadata: Metadata = {
 	metadataBase: new URL("https://sephiria.wiki"),
 	title: "세피리아 위키",
-	description: "세피리아 정보 사이트",
+	description:
+		"액션 로그라이트 '세피리아(Sephiria)'의 모든 것! 코스튬, 무기, 아티팩트 등 상세한 게임 정보를 제공합니다. 나만의 강력한 빌드를 공유하고 다양한 유저들의 빌드도 확인해 보세요.",
 	keywords: [
 		"세피리아",
 		"세피리아위키",
@@ -35,7 +36,8 @@ export const metadata: Metadata = {
 	},
 	openGraph: {
 		title: "세피리아 위키",
-		description: "세피리아의 모든 것",
+		description:
+			"액션 로그라이트 '세피리아(Sephiria)'의 모든 것! 코스튬, 무기, 아티팩트 등 상세한 게임 정보를 제공합니다. 나만의 강력한 빌드를 공유하고 다양한 유저들의 빌드도 확인해 보세요.",
 		url: "https://sephiria.wiki",
 		siteName: "세피리아위키",
 		locale: "ko_KR",
