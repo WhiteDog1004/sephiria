@@ -81,7 +81,7 @@ export const ShortcutBox = ({
 					</Column>
 				</Card>
 			</Row>
-			<Row className="flex-col md:flex-row gap-4">
+			<Row className="flex-col md:flex-row w-full gap-4">
 				<Card className="w-full py-0 overflow-hidden">
 					<Box className="flex-col p-0 pt-4">
 						<CostumeCarousel data={data ?? []} />
@@ -90,7 +90,7 @@ export const ShortcutBox = ({
 							<Box className="flex-col w-full p-0">
 								<Typography variant="header3">코스튬</Typography>
 								<Typography variant="body2" className="text-gray-500">
-									코스튬들의 능력을 확인해 보세요!
+									코스튬의 능력을 확인해 보세요!
 								</Typography>
 							</Box>
 							<Box className="w-max justify-end p-0">
