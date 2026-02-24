@@ -5,6 +5,7 @@ export * from "./ui/items-add-items/ItemsAddItems";
 export * from "./ui/items-add-label/ItemsAddLabel";
 export * from "./ui/items-sets/ItemsSets";
 export * from "./ui/select-costume/SelectCostume";
+export * from "./ui/select-combo/SelectCombo";
 export * from "./ui/select-miracle/SelectMiracle";
 export * from "./ui/select-talent/SelectTalent";
 export * from "./ui/select-weapon/SelectWeapon";

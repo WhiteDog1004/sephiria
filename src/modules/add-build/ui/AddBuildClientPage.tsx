@@ -13,6 +13,7 @@ import type {
 import { useUpdateBuild } from "@/src/entities/modify-build";
 import {
 	AddTitle,
+	SelectCombo,
 	SelectCostume,
 	SelectMiracle,
 	SelectTalent,
@@ -57,6 +58,7 @@ export const AddBuildClientPage = ({
 			costume: "",
 			weapon: "",
 			miracle: "",
+			combo: [],
 			talent: {
 				anger: 0,
 				rapid: 0,
@@ -81,6 +83,7 @@ export const AddBuildClientPage = ({
 					costume: value.costume,
 					weapon: value.weapon,
 					miracle: value.miracle,
+					combo: value.combo,
 					content: value.lists,
 					version: process.env.NEXT_PUBLIC_GAME_VERSION,
 					youtube_link: value.youtube_link,
@@ -109,6 +112,7 @@ export const AddBuildClientPage = ({
 					costume: value.costume,
 					weapon: value.weapon,
 					miracle: value.miracle,
+					combo: value.combo,
 					content: value.lists,
 					version: process.env.NEXT_PUBLIC_GAME_VERSION,
 					youtube_link: value.youtube_link,
@@ -139,6 +143,7 @@ export const AddBuildClientPage = ({
 				costume: modify.costume,
 				weapon: modify.weapon,
 				miracle: modify.miracle,
+				combo: modify.combo || [],
 				talent: modify.ability,
 				lists: modify.content,
 			});
@@ -149,6 +154,7 @@ export const AddBuildClientPage = ({
 				costume: "",
 				weapon: "",
 				miracle: "",
+				combo: [],
 				talent: {
 					anger: 0,
 					rapid: 0,
@@ -198,6 +204,7 @@ export const AddBuildClientPage = ({
 
 						<SelectTalent {...form} />
 
+						<SelectCombo {...form} />
 						<AddItems {...form} />
 
 						<AddDescription {...form} />

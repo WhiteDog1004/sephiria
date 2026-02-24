@@ -18,6 +18,7 @@ export const createBuild = async (
 		costume,
 		weapon,
 		miracle,
+		combo,
 		content,
 		youtube_link,
 		writer,
@@ -35,6 +36,7 @@ export const createBuild = async (
 		costume,
 		weapon,
 		miracle,
+		combo,
 		ability,
 		version,
 		writer: {

@@ -50,7 +50,7 @@ export const BuildsCard = ({
 				<CostumeItem costume={data.costume} />
 
 				<Column className="w-full gap-2 text-center overflow-hidden">
-					<Title title={data.title} />
+					<Title title={data.title} combo={data.combo} />
 					<Row className="w-full lg:flex-nowrap flex-wrap gap-2">
 						<Row className="w-full min-w-max lg:max-w-60 gap-2">
 							{weapon ? (

@@ -1,6 +1,6 @@
 import type { PostgrestError } from "@supabase/supabase-js";
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
-import type { BuildRow, GetBuildsResponse } from "../model/builds.types";
+import type { GetBuildsParams, GetBuildsResponse } from "../model/builds.types";
 
 const handleError = (error: PostgrestError | null) => {
 	if (error) {
@@ -15,14 +15,8 @@ export const getBuilds = async ({
 	like,
 	isWriter,
 	...req
-}: {
-	page?: number;
-	limit?: number;
-	like?: "asc" | "desc";
-	isLatestVersion?: boolean;
-	isWriter?: boolean;
-} & Partial<BuildRow>): Promise<GetBuildsResponse> => {
-	const { title, costume, weapon, miracle } = req;
+}: GetBuildsParams): Promise<GetBuildsResponse> => {
+	const { title, costume, weapon, miracle, combo } = req;
 	const supabase = await createBrowserSupabaseClient();
 
 	const from = (page - 1) * limit;
@@ -31,7 +25,7 @@ export const getBuilds = async ({
 	let query = supabase
 		.from("builds")
 		.select(
-			"id,postUuid,title,description,costume,weapon,miracle,version,content,ability,postLike,created_at,updated_at,writer",
+			"id,postUuid,title,description,costume,weapon,miracle,combo,version,content,ability,postLike,created_at,updated_at,writer",
 			{ count: "exact" },
 		)
 		.range(from, to);
@@ -67,6 +61,9 @@ export const getBuilds = async ({
 	}
 	if (miracle) {
 		query = query.eq("miracle", miracle);
+	}
+	if (combo) {
+		query = query.contains("combo", [combo]);
 	}
 
 	const { data, error, count } = await query;

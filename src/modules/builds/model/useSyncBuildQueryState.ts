@@ -38,7 +38,7 @@ export const useSyncBuildQueryState = ({
 		const urlLatest = searchParams.get("latest") === "true";
 
 		const urlSearchList: Record<string, string> = {};
-		["title", "costume", "weapon", "miracle"].forEach((key) => {
+		["title", "costume", "weapon", "miracle", "combo"].forEach((key) => {
 			const val = searchParams.get(key);
 			if (val) urlSearchList[key] = val;
 		});

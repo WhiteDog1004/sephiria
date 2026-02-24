@@ -35,6 +35,7 @@ export type CreateBuildType = {
 	costume: string;
 	weapon: string;
 	miracle: string;
+	combo: string[];
 	ability: TalentType;
 	writer: WriterType;
 	youtube_link?: string;
@@ -50,6 +51,7 @@ export type PostBuildType = {
 	costume: string;
 	weapon: string;
 	miracle: string;
+	combo: string[];
 	talent: TalentType;
 	writer: WriterType;
 	youtube_link?: string;

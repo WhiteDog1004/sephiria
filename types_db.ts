@@ -166,6 +166,7 @@ export type Database = {
 					costume: string;
 					weapon: string;
 					miracle: string;
+					combo: string[];
 					youtube_link?: string;
 					version: string;
 					ability: Record<string, number>;
@@ -184,6 +185,7 @@ export type Database = {
 					costume: string;
 					weapon: string;
 					miracle: string;
+					combo?: string[];
 					ability: TalentType;
 					writer: WriterType;
 					youtube_link?: string;

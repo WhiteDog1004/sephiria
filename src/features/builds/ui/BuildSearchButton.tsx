@@ -7,6 +7,7 @@ import {
 } from "react";
 import { useForm } from "react-hook-form";
 import { useGetMiracles, useGetWeapons } from "@/src/entities/builds";
+import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
 import {
 	Button,
 	COSTUMES,
@@ -58,6 +59,7 @@ export const BuildSearchButton = ({
 			costume: "",
 			weapon: "",
 			miracle: "",
+			combo: "",
 		},
 	});
 
@@ -235,10 +237,7 @@ export const BuildSearchButton = ({
 																		),
 																)
 																.map((tier3) => (
-																	<SelectItem
-																		key={tier3.value}
-																		value={tier3.value}
-																	>
+																	<SelectItem key={tier3.value} value={tier3.value}>
 																		<ImageWithFallback
 																			className="min-w-6 max-w-6 min-h-6 max-h-6 object-contain p-0"
 																			width={24}
@@ -280,6 +279,35 @@ export const BuildSearchButton = ({
 															alt={miracle.value}
 														/>
 														{miracle.value_kor}
+													</SelectItem>
+												))}
+											</SelectContent>
+										</Select>
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="combo"
+								render={({ field }) => (
+									<FormItem className="w-full">
+										<FormLabel>핵심 콤보</FormLabel>
+										<Select onValueChange={field.onChange} value={field.value}>
+											<SelectTrigger className="w-full">
+												<SelectValue placeholder="핵심 콤보 선택" />
+											</SelectTrigger>
+											<SelectContent>
+												{Object.entries(EFFECT_LABELS).map(([value, label]) => (
+													<SelectItem key={value} value={value}>
+														<ImageWithFallback
+															className="min-w-4 max-w-4 p-0"
+															width={24}
+															height={24}
+															src={`/combo/${value}.png`}
+															alt={value}
+															unoptimized
+														/>
+														{label}
 													</SelectItem>
 												))}
 											</SelectContent>

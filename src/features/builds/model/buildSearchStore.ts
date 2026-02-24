@@ -7,6 +7,7 @@ export interface BuildSearchState {
 		costume?: string;
 		weapon?: string;
 		miracle?: string;
+		combo?: string;
 	};
 	isAscending: boolean;
 	isLatestVersion: boolean;

@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -39,7 +40,9 @@ export const BuildDetailClientPage = ({ data }: { data: BuildRow }) => {
 	const [initialLike, setInitialLike] = useState(data.postLike);
 
 	return (
-		<Box className="w-full py-12 px-4">
+		<Box
+			className={`${clsx(data.combo.length > 0 ? "pt-8 pb-12" : "py-12")} w-full px-4`}
+		>
 			<Column className="w-full max-w-5xl gap-4">
 				<TitleDetail
 					initialLike={initialLike || 0}
