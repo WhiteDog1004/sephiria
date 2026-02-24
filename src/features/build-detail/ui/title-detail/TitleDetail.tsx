@@ -1,5 +1,8 @@
 import dayjs from "dayjs";
 import { ThumbsUp } from "lucide-react";
+import type { Dispatch, SetStateAction } from "react";
+import { useState } from "react";
+import { useCreateBuildLike } from "@/src/entities/build-detail";
 import type { BuildRow } from "@/src/entities/builds/model/builds.types";
 import {
 	Avatar,
@@ -7,6 +10,7 @@ import {
 	Button,
 	Column,
 	copyToClipboard,
+	RequireLoginDialog,
 	Row,
 	Separator,
 	Typography,
@@ -14,9 +18,17 @@ import {
 
 export const TitleDetail = ({
 	initialLike,
+	userId,
+	setInitialLike,
 	...data
-}: BuildRow & { initialLike: number }) => {
-	const { title, writer, created_at, updated_at, version } = data;
+}: BuildRow & {
+	initialLike: number;
+	userId?: string;
+	setInitialLike: Dispatch<SetStateAction<number | undefined>>;
+}) => {
+	const { title, writer, created_at, updated_at, version, postUuid } = data;
+	const { mutate } = useCreateBuildLike();
+	const [openDialog, setOpenDialog] = useState(false);
 
 	return (
 		<Column className="w-full gap-2">
@@ -24,10 +36,36 @@ export const TitleDetail = ({
 				<Typography variant="body" className="truncate md:text-2xl text-base">
 					{title}
 				</Typography>
-				<Row className="items-center gap-2">
-					<ThumbsUp className="w-5 h-5" />
-					<Typography variant="body2">{initialLike || 0}</Typography>
-				</Row>
+				<Button
+					variant="ghost"
+					size="sm"
+					className="h-auto p-0"
+					onClick={() => {
+						if (!userId) {
+							setOpenDialog(true);
+							return;
+						}
+
+						mutate(
+							{ postUuid, userId },
+							{
+								onSuccess: () => {
+									setInitialLike((initialLike || 0) + 1);
+								},
+							},
+						);
+					}}
+				>
+					<Row className="items-center gap-2">
+						<ThumbsUp className="w-5 h-5" />
+						<Typography variant="body2">{initialLike || 0}</Typography>
+					</Row>
+				</Button>
+				<RequireLoginDialog
+					open={openDialog}
+					onOpenChange={setOpenDialog}
+					actionText="좋아요를 누르시려면"
+				/>
 			</Row>
 			<Row className="h-8 justify-between items-center gap-2">
 				<Row className="min-w-0 items-center gap-2">

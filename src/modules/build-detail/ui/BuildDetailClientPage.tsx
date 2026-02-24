@@ -41,7 +41,12 @@ export const BuildDetailClientPage = ({ data }: { data: BuildRow }) => {
 	return (
 		<Box className="w-full py-12 px-4">
 			<Column className="w-full max-w-5xl gap-4">
-				<TitleDetail initialLike={initialLike || 0} {...data} />
+				<TitleDetail
+					initialLike={initialLike || 0}
+					userId={user?.user.id}
+					setInitialLike={setInitialLike}
+					{...data}
+				/>
 				<Separator />
 				<Box className="md:flex-row flex-col items-start gap-4 md:gap-2 mt-4 p-0">
 					<Row className="w-full gap-2">
