@@ -51,9 +51,6 @@ export const metadata: Metadata = {
 			},
 		],
 	},
-	alternates: {
-		canonical: "/",
-	},
 	other: {
 		"google-adsense-account": "ca-pub-3851224465271826",
 		"naver-site-verification": "86fdf6f8f06302154e669f26d571f603adfa70fb",

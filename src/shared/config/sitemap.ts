@@ -16,37 +16,46 @@ export const SITE_METADATA = {
 	weapon: {
 		title: "세피리아 - 무기",
 		description: "세피리아 위키: 무기",
+		alternates: { canonical: SITEMAP.WEAPON },
 	},
 	simulator: {
 		title: "세피리아 - 시뮬레이터",
 		description: "세피리아 위키: 시뮬레이터",
+		alternates: { canonical: SITEMAP.SIMULATOR },
 	},
 	talent: {
 		title: "세피리아 - 재능",
 		description: "세피리아 위키: 재능",
+		alternates: { canonical: SITEMAP.TALENT },
 	},
 	miracle: {
 		title: "세피리아 - 기적",
 		description: "세피리아 위키: 기적",
+		alternates: { canonical: SITEMAP.MIRACLE },
 	},
 	large: {
 		title: "세피리아 - 석판",
 		description: "세피리아 위키: 석판",
+		alternates: { canonical: SITEMAP.LARGE },
 	},
 	artifact: {
 		title: "세피리아 - 아티팩트",
 		description: "세피리아 위키: 아티팩트",
+		alternates: { canonical: SITEMAP.ARTIFACT },
 	},
 	costume: {
 		title: "세피리아 - 코스튬",
 		description: "세피리아 위키: 코스튬",
+		alternates: { canonical: SITEMAP.COSTUME },
 	},
 	builds: {
 		title: "세피리아 - 빌드 공유",
 		description: "세피리아 위키: 빌드 공유",
+		alternates: { canonical: SITEMAP.BUILDS },
 	},
 	privacy: {
 		title: "세피리아 - 개인정보처리방침",
 		description: "세피리아 위키: 개인정보처리방침",
+		alternates: { canonical: SITEMAP.PRIVACY },
 	},
 };

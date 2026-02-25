@@ -4,6 +4,13 @@ import { SITE_METADATA } from "@/src/shared";
 
 export const metadata: Metadata = {
 	...SITE_METADATA.builds,
+	alternates: {
+		canonical: "/builds/add",
+	},
+	robots: {
+		index: false,
+		follow: false,
+	},
 };
 
 const BuildsAddPage = async () => {

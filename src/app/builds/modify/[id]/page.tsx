@@ -7,6 +7,10 @@ import { getServerLoginInfo } from "@/src/shared/api";
 
 export const metadata: Metadata = {
 	...SITE_METADATA.builds,
+	robots: {
+		index: false,
+		follow: false,
+	},
 };
 
 const BuildModifyPage = async ({
