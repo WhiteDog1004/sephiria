@@ -37,7 +37,7 @@ export const BuildsCard = ({
 	miracle?: { image: string; value_kor: string };
 	artifact?: ArtifactInstance["item"][];
 }) => {
-	const { setSearchList, setPage } = useBuildSearchStore();
+	const { isAscending, isLatestVersion } = useBuildSearchStore();
 
 	return (
 		<Column className="w-full bg-card p-4 gap-4 justify-center items-end rounded-md border shadow-sm">
@@ -46,8 +46,14 @@ export const BuildsCard = ({
 					img={data.writer.profileImage}
 					nickname={data.writer.nickname}
 					onViewWriterPosts={(nickname) => {
-						setSearchList({ title: nickname, isWriter: true });
-						setPage(1);
+						const params = new URLSearchParams();
+						params.set("page", "1");
+						params.set("like", isAscending ? "asc" : "desc");
+						params.set("latest", isLatestVersion ? "true" : "false");
+						params.set("title", nickname);
+						params.set("isWriter", "true");
+
+						window.location.href = `${SITEMAP.BUILDS}?${params.toString()}`;
 					}}
 				/>
 				<VersionBox version={data.version} />
