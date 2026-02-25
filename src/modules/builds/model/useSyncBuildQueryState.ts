@@ -37,11 +37,15 @@ export const useSyncBuildQueryState = ({
 		const urlAsc = searchParams.get("like") === "asc";
 		const urlLatest = searchParams.get("latest") === "true";
 
-		const urlSearchList: Record<string, string> = {};
+		const urlSearchList: Record<string, string | boolean> = {};
 		["title", "costume", "weapon", "miracle", "combo"].forEach((key) => {
 			const val = searchParams.get(key);
 			if (val) urlSearchList[key] = val;
 		});
+
+		if (searchParams.get("isWriter") === "true") {
+			urlSearchList.isWriter = true;
+		}
 
 		setPage(urlPage);
 		setIsAscending(urlAsc);

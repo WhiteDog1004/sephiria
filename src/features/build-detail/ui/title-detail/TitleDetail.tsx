@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { ThumbsUp } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import type { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 import { useCreateBuildLike } from "@/src/entities/build-detail";
@@ -12,6 +13,11 @@ import {
 	Button,
 	Column,
 	copyToClipboard,
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+	getWriterBuildSearchHref,
 	RequireLoginDialog,
 	Row,
 	Separator,
@@ -95,12 +101,25 @@ export const TitleDetail = ({
 			</Column>
 			<Row className="h-8 justify-between items-center gap-2">
 				<Row className="min-w-0 items-center gap-2">
-					<Avatar>
-						<AvatarImage src={writer.profileImage} />
-					</Avatar>
-					<Typography variant="body2" className="truncate">
-						{writer.nickname}
-					</Typography>
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
+							<Button variant="ghost" className="h-auto p-0">
+								<Avatar>
+									<AvatarImage src={writer.profileImage} />
+								</Avatar>
+								<Typography variant="body2" className="truncate">
+									{writer.nickname}
+								</Typography>
+							</Button>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent align="start">
+							<DropdownMenuItem asChild>
+								<Link href={getWriterBuildSearchHref(writer.nickname)}>
+									작성글 보기
+								</Link>
+							</DropdownMenuItem>
+						</DropdownMenuContent>
+					</DropdownMenu>
 				</Row>
 				<Row className="h-full items-center gap-2">
 					{version && (

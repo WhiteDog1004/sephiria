@@ -8,6 +8,7 @@ import { AvatarBox, Title, VersionBox } from "@/src/entities/builds";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
 import { ContentItem, CostumeItem } from "@/src/features/builds";
 import type { BuildsOptions } from "@/src/features/builds/model/builds.types";
+import { useBuildSearchStore } from "@/src/features/builds/model/buildSearchStore";
 import {
 	Box,
 	Button,
@@ -36,12 +37,18 @@ export const BuildsCard = ({
 	miracle?: { image: string; value_kor: string };
 	artifact?: ArtifactInstance["item"][];
 }) => {
+	const { setSearchList, setPage } = useBuildSearchStore();
+
 	return (
 		<Column className="w-full bg-card p-4 gap-4 justify-center items-end rounded-md border shadow-sm">
 			<Row className="w-full justify-between items-center overflow-hidden gap-2">
 				<AvatarBox
 					img={data.writer.profileImage}
 					nickname={data.writer.nickname}
+					onViewWriterPosts={(nickname) => {
+						setSearchList({ title: nickname, isWriter: true });
+						setPage(1);
+					}}
 				/>
 				<VersionBox version={data.version} />
 			</Row>
