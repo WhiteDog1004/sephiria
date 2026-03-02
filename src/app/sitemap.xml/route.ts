@@ -3,6 +3,8 @@
 import { NextResponse } from "next/server";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
+export const revalidate = 3600;
+
 export const GET = async () => {
 	const supabase = await createServerSupabaseClient();
 	const { data: posts, error } = await supabase
@@ -25,7 +27,7 @@ export const GET = async () => {
 		{ loc: `${baseUrl}/miracle`, lastmod: new Date() },
 		{ loc: `${baseUrl}/costume`, lastmod: new Date() },
 		{ loc: `${baseUrl}/builds`, lastmod: new Date() },
-		...posts.map((post: any) => ({
+		...posts.map((post: { postUuid: string; created_at: string; updated_at: string | null }) => ({
 			loc: `${baseUrl}/builds/${post.postUuid}`,
 			lastmod: post.updated_at || post.created_at || new Date(),
 		})),
@@ -47,7 +49,7 @@ ${urls
 	return new NextResponse(sitemap, {
 		headers: {
 			"Content-Type": "application/xml; charset=UTF-8",
-			"Cache-Control": "no-store",
+			"Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
 		},
 	});
 };
