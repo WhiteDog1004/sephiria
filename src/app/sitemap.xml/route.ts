@@ -5,11 +5,23 @@ import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export const revalidate = 3600;
 
+const DEFAULT_BUILD_SITEMAP_LIMIT = 200;
+
+const getBuildSitemapLimit = () => {
+	const rawLimit = Number(process.env.SITEMAP_BUILD_LIMIT ?? DEFAULT_BUILD_SITEMAP_LIMIT);
+	if (!Number.isFinite(rawLimit) || rawLimit <= 0) return DEFAULT_BUILD_SITEMAP_LIMIT;
+	return Math.floor(rawLimit);
+};
+
 export const GET = async () => {
+	const buildSitemapLimit = getBuildSitemapLimit();
 	const supabase = await createServerSupabaseClient();
 	const { data: posts, error } = await supabase
 		.from("builds")
-		.select("postUuid, created_at, updated_at");
+		.select("postUuid, created_at, updated_at")
+		.order("updated_at", { ascending: false, nullsFirst: false })
+		.order("created_at", { ascending: false })
+		.limit(buildSitemapLimit);
 
 	if (error || !posts) {
 		console.error("Supabase Error:", error);
