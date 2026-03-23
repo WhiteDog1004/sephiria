@@ -45,7 +45,7 @@ export const SelectCostume = (form: any) => {
 															width={40}
 															height={40}
 															src={getCloudflareUrl(
-																`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/costume/${field.value}.png`,
+																`/costume/${field.value}.png`,
 															)}
 															alt={field.value}
 														/>
@@ -85,7 +85,7 @@ export const SelectCostume = (form: any) => {
 													width={40}
 													height={40}
 													src={getCloudflareUrl(
-														`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/costume/${costume}.png`,
+														`/costume/${costume}.png`,
 													)}
 													alt={costume}
 												/>

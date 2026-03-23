@@ -16,7 +16,7 @@ export const CostumeItem = ({ costume }: { costume: string }) => {
 					width={48}
 					height={48}
 					src={getCloudflareUrl(
-						`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/costume/${costume}.png`,
+						`/costume/${costume}.png`,
 					)}
 					alt={costume}
 					unoptimized

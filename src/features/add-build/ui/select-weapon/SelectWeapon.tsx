@@ -56,7 +56,7 @@ export const SelectWeapon = (form: any) => {
 															width={40}
 															height={40}
 															src={getCloudflareUrl(
-																`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${field.value}.png`,
+																`/weapons/${field.value}.png`,
 															)}
 															alt={field.value}
 														/>
@@ -96,7 +96,7 @@ export const SelectWeapon = (form: any) => {
 															width={32}
 															height={32}
 															src={getCloudflareUrl(
-																`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier1.value}.png`,
+																`/weapons/${tier1.value}.png`,
 															)}
 															alt={tier1.value}
 														/>
@@ -137,7 +137,7 @@ export const SelectWeapon = (form: any) => {
 																			width={40}
 																			height={40}
 																			src={getCloudflareUrl(
-																				`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier3.value}.png`,
+																				`/weapons/${tier3.value}.png`,
 																			)}
 																			alt={tier3.value}
 																		/>

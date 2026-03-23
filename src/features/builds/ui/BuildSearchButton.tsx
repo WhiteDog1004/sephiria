@@ -184,7 +184,7 @@ export const BuildSearchButton = ({
 															width={24}
 															height={24}
 															src={getCloudflareUrl(
-																`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/costume/${costume}.png`,
+																`/costume/${costume}.png`,
 															)}
 															alt={costume}
 														/>
@@ -218,7 +218,7 @@ export const BuildSearchButton = ({
 																	width={24}
 																	height={24}
 																	src={getCloudflareUrl(
-																		`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier1.value}.png`,
+																		`/weapons/${tier1.value}.png`,
 																	)}
 																	alt={tier1.value}
 																/>
@@ -238,15 +238,15 @@ export const BuildSearchButton = ({
 																)
 																.map((tier3) => (
 																	<SelectItem key={tier3.value} value={tier3.value}>
-																		<ImageWithFallback
-																			className="min-w-6 max-w-6 min-h-6 max-h-6 object-contain p-0"
-																			width={24}
-																			height={24}
-																			src={getCloudflareUrl(
-																				`https://utrndoiwtfajgzlsmsxj.supabase.co/storage/v1/object/public/weapons/${tier3.value}.png`,
-																			)}
-																			alt={tier3.value}
-																		/>
+																			<ImageWithFallback
+																				className="min-w-6 max-w-6 min-h-6 max-h-6 object-contain p-0"
+																				width={24}
+																				height={24}
+																				src={getCloudflareUrl(
+																					`/weapons/${tier3.value}.png`,
+																				)}
+																				alt={tier3.value}
+																			/>
 																		{tier3.value_kor}
 																	</SelectItem>
 																))}
