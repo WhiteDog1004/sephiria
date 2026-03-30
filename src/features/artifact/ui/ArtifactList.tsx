@@ -8,7 +8,7 @@ import {
 	getRarityValue,
 	type Rarity,
 } from "../../simulator/lib/getRarityOrder";
-import { ItemSource } from "../../simulator/ui/ItemSource";
+import { ArtifactDetailDialog } from "./ArtifactDetailDialog";
 
 export const ArtifactList = ({ data }: ArtifactProps) => {
 	const { theme } = useTheme();
@@ -32,19 +32,7 @@ export const ArtifactList = ({ data }: ArtifactProps) => {
 							getRarityValue(a.tier as Rarity) -
 							getRarityValue(b.tier as Rarity),
 					)
-					.map((item) => (
-						<ItemSource
-							key={item.value}
-							isPreview
-							item={{
-								id: item.value,
-								label: item.label_kor,
-								type: "artifact",
-								data: item,
-								image: item.image,
-							}}
-						/>
-					))
+					.map((item) => <ArtifactDetailDialog key={item.value} item={item} />)
 			) : (
 				<Box className="w-full p-0">
 					<Typography className="opacity-70">검색 결과가 없습니다</Typography>
