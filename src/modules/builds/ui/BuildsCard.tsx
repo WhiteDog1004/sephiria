@@ -150,7 +150,7 @@ export const BuildsCard = ({
 						{dayjs(data.created_at).format("YY.MM.DD")}
 					</Typography>
 				</Row>
-				<Link href={`${SITEMAP.BUILDS}/${data.postUuid}`}>
+				<Link href={`${SITEMAP.BUILDS}/${data.postUuid}`} prefetch={false}>
 					<Button variant="secondary" className="max-w-24 border">
 						빌드 보기
 					</Button>
