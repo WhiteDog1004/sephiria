@@ -1,0 +1,192 @@
+[
+	{
+		"id": 1,
+		"uuid": "21430cb3-b253-4a75-952b-6c20128488d2",
+		"created_at": "2025-08-22T09:09:59.956752+00:00",
+		"value": "duelist",
+		"value_kor": "결투가",
+		"image": "https://img.sephiria.wiki/miracle/duelist.png",
+		"effects": { "reward": ["+24% 공격 속도"] }
+	},
+	{
+		"id": 2,
+		"uuid": "1def8f33-411b-4581-93b0-2971b9097e5b",
+		"created_at": "2025-08-22T09:13:02.531935+00:00",
+		"value": "guard",
+		"value_kor": "경비병",
+		"image": "https://img.sephiria.wiki/miracle/guard.png",
+		"effects": { "reward": ["+35% 최종 HP"] }
+	},
+	{
+		"id": 4,
+		"uuid": "42d7d7f0-6247-4a2a-a414-57f777d9f62b",
+		"created_at": "2025-08-22T09:14:09.331726+00:00",
+		"value": "berserker",
+		"value_kor": "광전사",
+		"image": "https://img.sephiria.wiki/miracle/berserker.png",
+		"effects": {
+			"reward": ["+20% 모든 피해 증폭"],
+			"penalty": ["-15 방어력"]
+		}
+	},
+	{
+		"id": 5,
+		"uuid": "b2d9f683-83d8-4702-81fd-6f4a286515b7",
+		"created_at": "2025-08-22T09:19:20.291465+00:00",
+		"value": "meteorologist",
+		"value_kor": "기상학자",
+		"image": "https://img.sephiria.wiki/miracle/meteorologist.png",
+		"effects": {
+			"reward": [
+				"+25% 먹구름의 추가 피해량",
+				"+10 먹구름 용량",
+				"+4 번개속성 피해"
+			]
+		}
+	},
+	{
+		"id": 6,
+		"uuid": "49749732-cf1c-47b5-b4a8-517113105f62",
+		"created_at": "2025-08-22T09:20:29.113686+00:00",
+		"value": "gambler",
+		"value_kor": "도박사",
+		"image": "https://img.sephiria.wiki/miracle/gambler.png",
+		"effects": {
+			"reward": ["+7 행운", "주사위 10개 획득"],
+			"penalty": ["획득 아이템 없음"]
+		}
+	},
+	{
+		"id": 7,
+		"uuid": "1352b51d-0b3f-4eb3-aa61-928c05bf403d",
+		"created_at": "2025-08-22T09:21:32.768602+00:00",
+		"value": "log",
+		"value_kor": "로그",
+		"image": "https://img.sephiria.wiki/miracle/log.png",
+		"effects": { "reward": ["+10% 치명타 확률", "+10 회피"] }
+	},
+	{
+		"id": 8,
+		"uuid": "9316b4dd-ef4e-4a5d-a802-e2fe1c7045b2",
+		"created_at": "2025-08-22T09:22:06.762712+00:00",
+		"value": "hunter",
+		"value_kor": "사냥꾼",
+		"image": "https://img.sephiria.wiki/miracle/hunter.png",
+		"effects": { "reward": ["+40% 치명타 피해"] }
+	},
+	{
+		"id": 9,
+		"uuid": "d9b5761a-7cc0-4888-8333-9bec8e922229",
+		"created_at": "2025-08-22T09:22:47.279806+00:00",
+		"value": "snowfaller",
+		"value_kor": "설원 경비병",
+		"image": "https://img.sephiria.wiki/miracle/snowfaller.png",
+		"effects": { "reward": ["+9 얼음 속성 피해", "+10% 이동 속도"] }
+	},
+	{
+		"id": 10,
+		"uuid": "89bca036-7ce3-42fd-a5ef-3a60c847d541",
+		"created_at": "2025-08-22T09:24:13.149626+00:00",
+		"value": "valet",
+		"value_kor": "시종",
+		"image": "https://img.sephiria.wiki/miracle/valet.png",
+		"effects": { "reward": ["+15 방어력"] }
+	},
+	{
+		"id": 11,
+		"uuid": "80280319-4223-4d4e-948b-538abf321882",
+		"created_at": "2025-08-22T09:24:46.401966+00:00",
+		"value": "assassin",
+		"value_kor": "어쌔신",
+		"image": "https://img.sephiria.wiki/miracle/assassin.png",
+		"effects": { "reward": ["+6 물리 피해", "+5% 치명타 확률"] }
+	},
+	{
+		"id": 12,
+		"uuid": "a0bbb042-2a51-45cc-bc21-54a1a87973b9",
+		"created_at": "2025-08-22T09:25:29.851591+00:00",
+		"value": "iceBlacksmith",
+		"value_kor": "얼음 대장장이",
+		"image": "https://img.sephiria.wiki/miracle/ice_blacksmith.png",
+		"effects": {
+			"reward": [
+				"+15% 얼음무구 아티팩트 충전 속도",
+				"+10% 얼음무구의 피해량"
+			]
+		}
+	},
+	{
+		"id": 13,
+		"uuid": "d4a5b746-13c6-4ac4-bc3e-112996179772",
+		"created_at": "2025-08-22T09:26:04.04521+00:00",
+		"value": "chef",
+		"value_kor": "요리사",
+		"image": "https://img.sephiria.wiki/miracle/chef.png",
+		"effects": {
+			"reward": ["+5 화염 속성 피해", "+25% 화상 디버프 추가 피해량"]
+		}
+	},
+	{
+		"id": 14,
+		"uuid": "85430980-90c8-4d65-8f0e-f2a6b1dcbd69",
+		"created_at": "2025-08-22T09:26:43.410422+00:00",
+		"value": "elementalist",
+		"value_kor": "원소술사",
+		"image": "https://img.sephiria.wiki/miracle/elementalist.png",
+		"effects": {
+			"reward": [
+				"+7 화염 속성 피해",
+				"+7 얼음 속성 피해",
+				"+7 번개 속성 피해"
+			]
+		}
+	},
+	{
+		"id": 15,
+		"uuid": "cf9806c5-ccc0-41fb-af79-a3aab665e024",
+		"created_at": "2025-08-22T09:27:21.986159+00:00",
+		"value": "general",
+		"value_kor": "장군",
+		"image": "https://img.sephiria.wiki/miracle/general.png",
+		"effects": { "reward": ["+35% 동료가 입히는 피해량"] }
+	},
+	{
+		"id": 16,
+		"uuid": "63977a83-f9db-42dc-8b47-a308139c168a",
+		"created_at": "2025-08-22T09:27:51.820135+00:00",
+		"value": "informant",
+		"value_kor": "정보원",
+		"image": "https://img.sephiria.wiki/miracle/informant.png",
+		"effects": { "reward": ["+2 대시 횟수", "+15% 대시 회복 속도"] }
+	},
+	{
+		"id": 17,
+		"uuid": "74877a35-55af-408b-a4eb-2cabc45f52e2",
+		"created_at": "2025-08-22T09:30:31.598101+00:00",
+		"value": "astronomer",
+		"value_kor": "천문학자",
+		"image": "https://img.sephiria.wiki/miracle/astronomer.png",
+		"effects": { "reward": ["+25% 행성 피해량", "+5% 공격 속도"] }
+	},
+	{
+		"id": 18,
+		"uuid": "d2bf65cd-ef3b-406a-83a5-0c4e9b3e5a91",
+		"created_at": "2025-08-22T09:31:06.295893+00:00",
+		"value": "explorer",
+		"value_kor": "탐험가",
+		"image": "https://img.sephiria.wiki/miracle/explorer.png",
+		"effects": {
+			"reward": ["+6 인벤토리 슬롯"],
+			"penalty": ["획득 아이템 없음"]
+		}
+	},
+	{
+		"id": 19,
+		"uuid": "61d5c2b1-a43e-4b4b-969b-efcff1f55890",
+		"created_at": "2025-08-22T09:31:33.453792+00:00",
+		"value": "scholar",
+		"value_kor": "학자",
+		"image": "https://img.sephiria.wiki/miracle/scholar.png",
+		"effects": { "reward": ["+15 MP 재생"] }
+	}
+]

@@ -33,8 +33,8 @@ export const BuildsCard = ({
 	artifact,
 }: {
 	data: BuildsOptions;
-	weapon?: { image: string; value_kor: string };
-	miracle?: { image: string; value_kor: string };
+	weapon?: { image: string | null; value_kor: string };
+	miracle?: { image: string | null; value_kor: string };
 	artifact?: ArtifactInstance["item"][];
 }) => {
 	const { isAscending, isLatestVersion } = useBuildSearchStore();
@@ -68,7 +68,7 @@ export const BuildsCard = ({
 							{weapon ? (
 								<ContentItem
 									title="무기"
-									img={weapon.image}
+									img={weapon.image || undefined}
 									name={weapon.value_kor}
 								/>
 							) : (
@@ -78,7 +78,7 @@ export const BuildsCard = ({
 							{miracle ? (
 								<ContentItem
 									title="기적"
-									img={miracle.image}
+									img={miracle.image || undefined}
 									name={miracle.value_kor}
 								/>
 							) : (

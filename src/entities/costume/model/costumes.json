@@ -1,0 +1,177 @@
+[
+	{
+		"created_at": "2025-06-17T11:15:21.569429+00:00",
+		"id": 2,
+		"image": "https://img.sephiria.wiki/costume/pink_rabbit.png",
+		"uuid": "3f672bb3-1c17-43aa-80db-9f6822d43f9c",
+		"value": "pink_rabbit"
+	},
+	{
+		"created_at": "2025-06-17T11:16:20.659741+00:00",
+		"id": 3,
+		"image": "https://img.sephiria.wiki/costume/rabbit.png",
+		"uuid": "51f703dd-bbe7-4d38-9039-7979bc100598",
+		"value": "rabbit"
+	},
+	{
+		"created_at": "2025-06-17T11:16:45.318923+00:00",
+		"id": 4,
+		"image": "https://img.sephiria.wiki/costume/brown_rabbit.png",
+		"uuid": "a99be5fd-3bca-4175-ba54-80fde5a3717d",
+		"value": "brown_rabbit"
+	},
+	{
+		"created_at": "2025-06-17T11:17:03.350541+00:00",
+		"id": 5,
+		"image": "https://img.sephiria.wiki/costume/braid.png",
+		"uuid": "efe88987-d987-4996-9511-dd5c914b920c",
+		"value": "braid"
+	},
+	{
+		"created_at": "2025-06-17T11:47:54.467863+00:00",
+		"id": 6,
+		"image": "https://img.sephiria.wiki/costume/orange_rabbit.png",
+		"uuid": "c0524f01-27c6-4d6f-baf4-392ddd170fd0",
+		"value": "orange_rabbit"
+	},
+	{
+		"created_at": "2025-06-17T11:48:54.285735+00:00",
+		"id": 7,
+		"image": "https://img.sephiria.wiki/costume/red_rabbit.png",
+		"uuid": "319c66a5-ef39-4629-af67-078282077648",
+		"value": "red_rabbit"
+	},
+	{
+		"created_at": "2025-06-17T11:49:11.681253+00:00",
+		"id": 8,
+		"image": "https://img.sephiria.wiki/costume/white_rabbit.png",
+		"uuid": "21db3443-5b04-47e3-a64d-5c8b04931539",
+		"value": "white_rabbit"
+	},
+	{
+		"created_at": "2025-06-17T11:49:46.078035+00:00",
+		"id": 9,
+		"image": "https://img.sephiria.wiki/costume/wing_ear_rabbit.png",
+		"uuid": "33ea26b9-8b48-4486-b05c-89b08d2dc7ed",
+		"value": "wing_ear_rabbit"
+	},
+	{
+		"created_at": "2025-06-17T11:50:15.851278+00:00",
+		"id": 10,
+		"image": "https://img.sephiria.wiki/costume/red_cat.png",
+		"uuid": "f3a9d517-a9f5-4d14-8569-156d2b3edaf3",
+		"value": "red_cat"
+	},
+	{
+		"created_at": "2025-06-17T11:50:30.764755+00:00",
+		"id": 11,
+		"image": "https://img.sephiria.wiki/costume/red_fox.png",
+		"uuid": "b5754cf0-ef11-48cb-a076-9ba0e6968679",
+		"value": "red_fox"
+	},
+	{
+		"created_at": "2025-06-17T11:50:45.70292+00:00",
+		"id": 12,
+		"image": "https://img.sephiria.wiki/costume/frog.png",
+		"uuid": "8ba71374-67dd-431b-b796-f2422167e019",
+		"value": "frog"
+	},
+	{
+		"created_at": "2025-06-17T11:50:58.194545+00:00",
+		"id": 13,
+		"image": "https://img.sephiria.wiki/costume/mole.png",
+		"uuid": "73e3502a-ce7d-4464-8595-99e3296c6931",
+		"value": "mole"
+	},
+	{
+		"created_at": "2025-06-17T11:51:12.487437+00:00",
+		"id": 14,
+		"image": "https://img.sephiria.wiki/costume/white_wolf.png",
+		"uuid": "d2b71cc7-922f-48ba-88b1-e36f52b62a35",
+		"value": "white_wolf"
+	},
+	{
+		"created_at": "2025-06-17T11:51:35.412867+00:00",
+		"id": 15,
+		"image": "https://img.sephiria.wiki/costume/wizard_rabbit.png",
+		"uuid": "4ef6da09-a6e1-43df-b3c5-71049c05aa75",
+		"value": "wizard_rabbit"
+	},
+	{
+		"created_at": "2025-06-17T11:51:57.312859+00:00",
+		"id": 16,
+		"image": "https://img.sephiria.wiki/costume/skeleton.png",
+		"uuid": "fa5f9bf7-cf95-4451-9364-743cc081ac03",
+		"value": "skeleton"
+	},
+	{
+		"created_at": "2025-06-17T11:52:32.659966+00:00",
+		"id": 17,
+		"image": "https://img.sephiria.wiki/costume/wings_lost_bat.png",
+		"uuid": "5cbfa8cc-a068-4c30-8070-74c7cd5a0b15",
+		"value": "wings_lost_bat"
+	},
+	{
+		"created_at": "2025-06-17T11:52:57.63428+00:00",
+		"id": 18,
+		"image": "https://img.sephiria.wiki/costume/adventurer.png",
+		"uuid": "d1c928a2-54b9-4d71-90a9-f604ed0f29fb",
+		"value": "adventurer"
+	},
+	{
+		"created_at": "2025-06-23T10:17:36.43382+00:00",
+		"id": 20,
+		"image": "https://img.sephiria.wiki/costume/scholar_lizard.png",
+		"uuid": "1a6b1d59-aae6-4d5b-835d-097fbe245905",
+		"value": "scholar_lizard"
+	},
+	{
+		"created_at": "2025-06-23T10:25:21.306503+00:00",
+		"id": 21,
+		"image": "https://img.sephiria.wiki/costume/ghost.png",
+		"uuid": "8d487795-8c40-4545-b808-37545d991544",
+		"value": "ghost"
+	},
+	{
+		"created_at": "2025-08-19T09:41:12.063043+00:00",
+		"id": 22,
+		"image": "https://img.sephiria.wiki/costume/otter.png",
+		"uuid": "e86a8075-dd9b-41e6-9cc0-68b4bbfc8059",
+		"value": "otter"
+	},
+	{
+		"created_at": "2026-01-09T02:52:11.918127+00:00",
+		"id": 23,
+		"image": "https://img.sephiria.wiki/costume/eagle.png",
+		"uuid": "d807da53-491c-4fea-b7ae-fabb1837bb7b",
+		"value": "eagle"
+	},
+	{
+		"created_at": "2026-01-09T02:52:36.89744+00:00",
+		"id": 24,
+		"image": "https://img.sephiria.wiki/costume/crocodile.png",
+		"uuid": "be6bf7ff-3371-45e5-94ea-cda0ced29e93",
+		"value": "crocodile"
+	},
+	{
+		"created_at": "2026-01-09T02:53:03.501375+00:00",
+		"id": 25,
+		"image": "https://img.sephiria.wiki/costume/deer.png",
+		"uuid": "44775c54-2bb9-4099-afb0-9b5cec4af44d",
+		"value": "deer"
+	},
+	{
+		"created_at": "2026-01-09T02:53:28.400051+00:00",
+		"id": 26,
+		"image": "https://img.sephiria.wiki/costume/lucky_fairy.png",
+		"uuid": "a7ca78bc-1224-490d-a510-47a143d369d0",
+		"value": "lucky_fairy"
+	},
+	{
+		"created_at": "2026-01-09T02:53:46.343293+00:00",
+		"id": 27,
+		"image": "https://img.sephiria.wiki/costume/squirrel.png",
+		"uuid": "48479ddb-e16f-449b-ad0c-f6febf446011",
+		"value": "squirrel"
+	}
+]

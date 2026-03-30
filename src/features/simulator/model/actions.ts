@@ -1,41 +1,24 @@
-import type { PostgrestError } from "@supabase/supabase-js";
-import { createBrowserSupabaseClient } from "@/lib/supabase/client";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import type { Database } from "@/types_db";
+import artifactsJson from "@/src/entities/artifact/model/artifacts.json";
 
-const handleError = (error: PostgrestError | null) => {
-	if (error) {
-		throw error;
-	}
+type ArtifactRow = Database["public"]["Tables"]["artifacts"]["Row"];
+type ArtifactStaticRow = Omit<ArtifactRow, "disabled"> & {
+	disabled?: boolean | null;
+};
+
+const getArtifactRows = () => {
+	return (artifactsJson as ArtifactStaticRow[]).map((artifact) => ({
+		...artifact,
+		disabled: artifact.disabled ?? undefined,
+	}));
 };
 
 export const getArtifactLists = async () => {
-	const supabase = await createServerSupabaseClient();
-
-	const { data, error } = await supabase
-		.from("artifacts")
-		.select(
-			"id,value,label_kor,label_eng,tier,effect,image,description,level,created_at,disabled",
-		)
-		.or("disabled.is.null,disabled.eq.false")
-		.order("id", { ascending: true });
-
-	handleError(error);
-
-	return data;
+	return getArtifactRows()
+		.filter((artifact) => artifact.disabled !== true)
+		.sort((a, b) => a.id - b.id);
 };
 
 export const getClientArtifactLists = async () => {
-	const supabase = await createBrowserSupabaseClient();
-
-	const { data, error } = await supabase
-		.from("artifacts")
-		.select(
-			"id,value,label_kor,label_eng,tier,effect,image,description,level,created_at,disabled",
-		)
-		.or("disabled.is.null,disabled.eq.false")
-		.order("id", { ascending: true });
-
-	handleError(error);
-
-	return data;
+	return getArtifactLists();
 };

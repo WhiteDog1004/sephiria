@@ -275,7 +275,7 @@ export const BuildSearchButton = ({
 															className="min-w-4 max-w-4 p-0"
 															width={24}
 															height={24}
-															src={getCloudflareUrl(miracle.image)}
+																src={getCloudflareUrl(miracle.image || "")}
 															alt={miracle.value}
 														/>
 														{miracle.value_kor}

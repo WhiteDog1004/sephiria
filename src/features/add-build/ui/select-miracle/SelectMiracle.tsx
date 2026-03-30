@@ -94,7 +94,7 @@ export const SelectMiracle = (form: any) => {
 																className="min-w-10 max-w-10 min-h-10 max-h-10 object-contain p-0"
 																width={40}
 																height={40}
-																src={getCloudflareUrl(miracle.image)}
+																	src={getCloudflareUrl(miracle.image || "")}
 																alt={miracle.value}
 															/>
 														</TooltipTrigger>

@@ -1,0 +1,2330 @@
+[
+	{
+		"created_at": "2025-08-27T11:00:08.724713+00:00",
+		"uuid": "e90e628a-fb4d-4a16-9c57-be2fc1748d84",
+		"id": 1,
+		"value": "shield_sword",
+		"value_kor": "표준 검과 방패",
+		"tier": 1,
+		"parent": null,
+		"image": "https://img.sephiria.wiki/weapons/shield_sword.png",
+		"effects": { "reward": [""] },
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:04:48.898713+00:00",
+		"uuid": "aba145e5-7e6a-45bd-8784-b2613ecb66d4",
+		"id": 2,
+		"value": "great_sword",
+		"value_kor": "강철 대검",
+		"tier": 1,
+		"parent": null,
+		"image": "https://img.sephiria.wiki/weapons/great_sword.png",
+		"effects": { "reward": [""] },
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:05:12.423501+00:00",
+		"uuid": "f4952a11-37d5-4bf9-98dc-536938c6cb49",
+		"id": 3,
+		"value": "dagger",
+		"value_kor": "단검",
+		"tier": 1,
+		"parent": null,
+		"image": "https://img.sephiria.wiki/weapons/dagger.png",
+		"effects": { "reward": [""] },
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:05:41.904851+00:00",
+		"uuid": "f73c0e11-311b-432c-b874-19a83c7df160",
+		"id": 4,
+		"value": "crossbow",
+		"value_kor": "대형 석궁",
+		"tier": 1,
+		"parent": null,
+		"image": "https://img.sephiria.wiki/weapons/crossbow.png",
+		"effects": { "reward": [""] },
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:12:57.185275+00:00",
+		"uuid": "4aa4c431-d0ec-4204-a55c-04754ae56119",
+		"id": 5,
+		"value": "fraudulent",
+		"value_kor": "서릿빛 조각",
+		"tier": 2,
+		"parent": "shield_sword",
+		"image": "https://img.sephiria.wiki/weapons/fraudulent.png",
+		"effects": { "reward": ["$i얼음속성 피해$가 5 증가합니다."] },
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:13:37.206807+00:00",
+		"uuid": "acc087e8-fcaf-41b9-a8af-da29c5bedbda",
+		"id": 6,
+		"value": "magic_wand",
+		"value_kor": "매직 완드",
+		"tier": 2,
+		"parent": "shield_sword",
+		"image": "https://img.sephiria.wiki/weapons/magic_wand.png",
+		"effects": { "reward": ["공격이 '매직 미사일'로 변경됩니다."] },
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:14:36.331107+00:00",
+		"uuid": "38c6ef09-0f66-437a-b652-d93bb0b21a74",
+		"id": 7,
+		"value": "one_workshop",
+		"value_kor": "공방일체",
+		"tier": 2,
+		"parent": "shield_sword",
+		"image": "https://img.sephiria.wiki/weapons/one_workshop.png",
+		"effects": {
+			"reward": [
+				"$f공격 속도$가 15% 증가하고, $s일반 공격$ 시 전방을 자동 가드 합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:15:11.972009+00:00",
+		"uuid": "3ccb1fbf-1e3c-4166-836d-3719b62262fa",
+		"id": 8,
+		"value": "protection",
+		"value_kor": "솜털의 보호",
+		"tier": 2,
+		"parent": "shield_sword",
+		"image": "https://img.sephiria.wiki/weapons/protection.png",
+		"effects": {
+			"reward": [
+				"$s가드$ 성공 시 $s가드$에 소모되는 MP가 50% 감소합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:16:10.551291+00:00",
+		"uuid": "bac700aa-ac48-498b-abcd-ab68220744b0",
+		"id": 9,
+		"value": "rapier",
+		"value_kor": "레이피어",
+		"tier": 2,
+		"parent": "shield_sword",
+		"image": "https://img.sephiria.wiki/weapons/rapier.webp",
+		"effects": {
+			"reward": [
+				"$s일반 공격$이 $s대시 공격$ 판정으로 변경됩니다.\n($s대시 공격$은 비활성화됩니다) $f공격 속도$가 10% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:17:36.122256+00:00",
+		"uuid": "2b1e91cd-5876-4ff5-ae6d-9ddfd19bebb0",
+		"id": 10,
+		"value": "small_destruction",
+		"value_kor": "작은 파괴",
+		"tier": 2,
+		"parent": "shield_sword",
+		"image": "https://img.sephiria.wiki/weapons/small_destruction.png",
+		"effects": { "reward": ["$s특수 공격 피해$가 40% 증가합니다."] },
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:22:40.591757+00:00",
+		"uuid": "594886eb-e5c4-4c15-8bf4-1d4380185de4",
+		"id": 11,
+		"value": "conductor",
+		"value_kor": "전도체",
+		"tier": 2,
+		"parent": "shield_sword",
+		"image": "https://img.sephiria.wiki/weapons/conductor.png",
+		"effects": { "reward": ["$l번개속성 피해$가 5 증가합니다."] },
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:33:58.210023+00:00",
+		"uuid": "55b6d7f3-d43a-4680-a8ec-f6f893e348f9",
+		"id": 12,
+		"value": "carrot_sword",
+		"value_kor": "당근 검",
+		"tier": 2,
+		"parent": "shield_sword",
+		"image": "https://img.sephiria.wiki/weapons/carrot_sword.png",
+		"effects": { "reward": ["모든 속성 피해가 3씩 증가합니다."] },
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:38:30.051282+00:00",
+		"uuid": "73fc5380-6912-41e5-a5a3-bfbcba0998be",
+		"id": 13,
+		"value": "wandering",
+		"value_kor": "재의 휘날림",
+		"tier": 3,
+		"parent": "one_workshop",
+		"image": "https://img.sephiria.wiki/weapons/wandering.png",
+		"effects": {
+			"reward": [
+				"$f공격 속도$가 15% 증가하고, $s일반 공격$ 시 전방을 자동 가드 합니다.",
+				"$d대시 공격 피해$가 60% 증가합니다. 대시 경로의 적에게 대시 공격의 50% 피해를 입힙니다. ($d대시 횟수$ 소모 시 2배 피해)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:40:44.607627+00:00",
+		"uuid": "8d9a7156-6f93-4990-a40c-fba753b67b3a",
+		"id": 14,
+		"value": "amnesty",
+		"value_kor": "무고원",
+		"tier": 3,
+		"parent": "one_workshop",
+		"image": "https://img.sephiria.wiki/weapons/amnesty.png",
+		"effects": {
+			"reward": [
+				"$f공격 속도$가 15% 증가하고, $s일반 공격$ 시 전방을 자동 가드 합니다.",
+				"$n일반 공격 피해$가 33% 증가하지만, 더 이상 $s특수 공격: 휩쓸기$를 사용할 수 없습니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:44:21.721873+00:00",
+		"uuid": "91668b5a-05af-40f6-b180-35efda8c090a",
+		"id": 15,
+		"value": "carrot_caliber",
+		"value_kor": "당근칼리버",
+		"tier": 3,
+		"parent": "carrot_sword",
+		"image": "https://img.sephiria.wiki/weapons/carrot_caliber.png",
+		"effects": {
+			"reward": [
+				"모든 속성 피해가 3씩 증가합니다.",
+				"$s일반 공격$이 $s당근 검법$으로 변경되고, 추가 공격 속도의 효율이 20% 상승합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:47:20.876216+00:00",
+		"uuid": "a9b33992-1e8c-4f97-81c5-6ab9f681f40a",
+		"id": 17,
+		"value": "green_onion_root_sword",
+		"value_kor": "파 뿌리 검",
+		"tier": 3,
+		"parent": "carrot_sword",
+		"image": "https://img.sephiria.wiki/weapons/green_onion_root_sword.png",
+		"effects": {
+			"reward": [
+				"모든 속성 피해가 3씩 증가합니다.",
+				"모든 속성 피해가 2씩 증가하고, $m마법 피해량$이 15% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:49:58.710753+00:00",
+		"uuid": "fd92160c-edb8-4dd8-ae12-52a10b17b28d",
+		"id": 18,
+		"value": "flash",
+		"value_kor": "섬광의 레이피어",
+		"tier": 3,
+		"parent": "rapier",
+		"image": "https://img.sephiria.wiki/weapons/flash.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$이 $s대시 공격$ 판정으로 변경됩니다.\n($s대시 공격$은 비활성화됩니다) $f공격 속도$가 10% 증가합니다.",
+				"찌르기 범위가 더 길어집니다. $f공격 속도$가 20% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:52:39.449345+00:00",
+		"uuid": "4bb83f3c-2a27-4d30-b927-62e750f6fc12",
+		"id": 19,
+		"value": "flame",
+		"value_kor": "화염의 시선",
+		"tier": 3,
+		"parent": "magic_wand",
+		"image": "https://img.sephiria.wiki/weapons/flame.png",
+		"effects": {
+			"reward": [
+				"공격이 '매직 미사일'로 변경됩니다.",
+				"공격이 $b화염$ 속성 기반으로 변경됩니다.\n$s일반 공격$의 피해량이 20% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:54:36.969941+00:00",
+		"uuid": "769854c4-9548-48f9-9d3c-bd328aac7e47",
+		"id": 20,
+		"value": "breath_of_ice",
+		"value_kor": "얼음의 숨결",
+		"tier": 3,
+		"parent": "magic_wand",
+		"image": "https://img.sephiria.wiki/weapons/breath_of_ice.png",
+		"effects": {
+			"reward": [
+				"공격이 '매직 미사일'로 변경됩니다.",
+				"공격이 $i얼음$ 속성 기반으로 변경됩니다.\n$s대시 공격$의 피해량이 40% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:56:33.795305+00:00",
+		"uuid": "bdd3cf56-323e-45df-ac0a-bcb92f9eb897",
+		"id": 21,
+		"value": "lightning_wings",
+		"value_kor": "번개의 날개짓",
+		"tier": 3,
+		"parent": "magic_wand",
+		"image": "https://img.sephiria.wiki/weapons/lightning_wings.png",
+		"effects": {
+			"reward": [
+				"공격이 '매직 미사일'로 변경됩니다.",
+				"공격이 $l번개$ 속성 기반으로 변경됩니다.\n$s특수 공격$의 피해량이 20% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T09:01:23.599311+00:00",
+		"uuid": "2fbbc49b-9946-41e6-9169-2bea42e3fb48",
+		"id": 22,
+		"value": "glacial_blade",
+		"value_kor": "빙하의 칼날",
+		"tier": 3,
+		"parent": "fraudulent",
+		"image": "https://img.sephiria.wiki/weapons/glacial_blade.png",
+		"effects": {
+			"reward": [
+				"$i얼음속성 피해$가 5 증가합니다.",
+				"축사의 검집이 50% 빨리 충전됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T09:03:17.128564+00:00",
+		"uuid": "94dbb53d-16bd-4986-b2a5-c90ff2723b14",
+		"id": 24,
+		"value": "snowstorm",
+		"value_kor": "눈보라의 전야",
+		"tier": 3,
+		"parent": "fraudulent",
+		"image": "https://img.sephiria.wiki/weapons/snowstorm.png",
+		"effects": {
+			"reward": [
+				"$i얼음속성 피해$가 5 증가합니다.",
+				"$d대시 횟수$를 소모할 시 아티팩트 눈보라 망치를 70%의 대미지로 즉시 발동합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T09:05:04.299681+00:00",
+		"uuid": "b83727e0-9c2c-4556-a3b0-aec1628ec625",
+		"id": 25,
+		"value": "twinkle_of_stars",
+		"value_kor": "별의 반짝임",
+		"tier": 3,
+		"parent": "protection",
+		"image": "https://img.sephiria.wiki/weapons/twinkle_of_stars.png",
+		"effects": {
+			"reward": [
+				"$s가드$ 성공 시 $s가드$에 소모되는 MP가 50% 감소합니다.",
+				"$s가드$를 성공하면 공격자의 피해량의 300%를 반사합니다. ($s퍼펙트 가드$ 시 400%)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T09:06:48.28718+00:00",
+		"uuid": "97077054-e946-4290-adaf-f551f9676f9d",
+		"id": 26,
+		"value": "cold_anger",
+		"value_kor": "차가운 분노",
+		"tier": 3,
+		"parent": "protection",
+		"image": "https://img.sephiria.wiki/weapons/cold_anger.webp",
+		"effects": {
+			"reward": [
+				"$s가드$ 성공 시 $s가드$에 소모되는 MP가 50% 감소합니다.",
+				"$s퍼펙트 가드$ 시 14초간 모든 피해량이 20% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T09:09:13.432839+00:00",
+		"uuid": "db5caecc-44ff-4386-baa0-4889361bf5f5",
+		"id": 27,
+		"value": "tightening_fear",
+		"value_kor": "조여오는 공포",
+		"tier": 3,
+		"parent": "small_destruction",
+		"image": "https://img.sephiria.wiki/weapons/tightening_fear.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격 피해$가 40% 증가합니다.",
+				"3초마다 $s공포 고조$ 1스택 획득합니다. (최대 10스택)\n$f공격 속도$에 비례하여 스택 획득 속도가 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T09:12:32.639147+00:00",
+		"uuid": "50e4f4ec-f41a-4b2d-8185-ef72f8eb6a0c",
+		"id": 28,
+		"value": "balista_sword",
+		"value_kor": "발리스타 소드",
+		"tier": 3,
+		"parent": "conductor",
+		"image": "https://img.sephiria.wiki/weapons/balista_sword.png",
+		"effects": {
+			"reward": [
+				"$l번개속성 피해$가 5 증가합니다.",
+				"아티팩트 미니 발리스타의 화살이 벽을 관통하고 적을 향해 유도됩니다. $s가드$ 성공 시 즉시 화살을 발사합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T09:13:48.718382+00:00",
+		"uuid": "92629347-f34b-4a39-9c05-f98251950e32",
+		"id": 29,
+		"value": "super_conductor",
+		"value_kor": "초전도체",
+		"tier": 3,
+		"parent": "conductor",
+		"image": "https://img.sephiria.wiki/weapons/super_conductor.png",
+		"effects": {
+			"reward": [
+				"$l번개속성 피해$가 5 증가합니다.",
+				"$s특수 공격$이 $s번개 창$으로 변경됩니다. $l먹구름$을 4 소모하여 전방으로 $l번개속성 피해$ 165% 피해량의 창을 발사합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-01T12:21:10.553058+00:00",
+		"uuid": "59622d84-2cc4-429c-9bb5-85ba07e39a07",
+		"id": 30,
+		"value": "wooden_bat",
+		"value_kor": "나무 방망이",
+		"tier": 2,
+		"parent": "great_sword",
+		"image": "https://img.sephiria.wiki/weapons/wooden_bat.webp",
+		"effects": {
+			"reward": [
+				"$n일반 공격 피해$가 20% 증가합니다.\n$d대시 공격 피해$가 40% 감소합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-01T12:23:12.769297+00:00",
+		"uuid": "3e01d2a7-0fbb-4f7c-9412-e5d395ab54f3",
+		"id": 31,
+		"value": "chilled_sword",
+		"value_kor": "한기가 서린 대검",
+		"tier": 2,
+		"parent": "great_sword",
+		"image": "https://img.sephiria.wiki/weapons/chilled_sword.png",
+		"effects": {
+			"reward": [
+				"$s직접 공격$ 시 대상에게 $i얼음속성 피해$의 30% 피해만큼 추가 피해를 가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-01T12:28:57.02511+00:00",
+		"uuid": "b253e285-ca33-40e3-952f-5c86b72e6701",
+		"id": 33,
+		"value": "lightning_sword_E2G",
+		"value_kor": "전격 대검 \"E2G\"",
+		"tier": 2,
+		"parent": "great_sword",
+		"image": "https://img.sephiria.wiki/weapons/lightning_sword_E2G.png",
+		"effects": {
+			"reward": [
+				"$s직접 공격$ 시 대상에게 $l번개속성 피해$의 30% 피해만큼 추가 피해를 가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-01T12:30:10.498768+00:00",
+		"uuid": "dc3cbff6-b227-43af-ab6e-562f8739168e",
+		"id": 34,
+		"value": "shim_hongs_thorns",
+		"value_kor": "심홍의 가시",
+		"tier": 2,
+		"parent": "great_sword",
+		"image": "https://img.sephiria.wiki/weapons/shim_hongs_thorns.png",
+		"effects": {
+			"reward": ["대상을 공격하여 $p상처 악화$ 디버프를 부여합니다."]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-01T12:52:53.038981+00:00",
+		"uuid": "79862208-93bd-4f6f-8d8a-f1a675e1354c",
+		"id": 35,
+		"value": "bone",
+		"value_kor": "뼈 장치검",
+		"tier": 2,
+		"parent": "great_sword",
+		"image": "https://img.sephiria.wiki/weapons/bone.webp",
+		"effects": {
+			"reward": [
+				"$s특수 공격$이 '재조립'으로 변경됩니다. (소모 $iMP$ 25) 재조립 사용 시 8초동안 검신이 길어지며 일반 공격을 끊임 없이 휘두를 수 있고, 공격 시 추가 피해를 가합니다. (추가 피해 : 15 + $a방어력$ 50%"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-01T12:58:31.67997+00:00",
+		"uuid": "66947848-5830-4a27-836d-343865f2b6c8",
+		"id": 36,
+		"value": "uncomfortable_joy",
+		"value_kor": "불편한 기쁨",
+		"tier": 2,
+		"parent": "great_sword",
+		"image": "https://img.sephiria.wiki/weapons/uncomfortable_joy.png",
+		"effects": { "reward": ["공격이 '레이저'로 변경됩니다."] },
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-01T12:59:35.831038+00:00",
+		"uuid": "039b8af6-7363-41d5-a28b-9f6e8145d560",
+		"id": 37,
+		"value": "shadow",
+		"value_kor": "모이는 그림자",
+		"tier": 2,
+		"parent": "great_sword",
+		"image": "https://img.sephiria.wiki/weapons/shadow.webp",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 소용돌이$ 충전 시간이 두배 늘어나지만, $s일반 공격$ 피해가 20% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-01T13:17:13.995093+00:00",
+		"uuid": "61f0ac5a-1f42-426d-90ee-0b8dc47fb441",
+		"id": 38,
+		"value": "hypersensitivity",
+		"value_kor": "과민성",
+		"tier": 2,
+		"parent": "great_sword",
+		"image": "https://img.sephiria.wiki/weapons/hypersensitivity.webp",
+		"effects": {
+			"reward": [
+				"$n특수 공격 피해$가 20% 증가합니다.\n$s특수 공격: 소용돌이$의 충전 속도가 50% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T10:28:37.214771+00:00",
+		"uuid": "da9e134c-8c57-461e-a671-cd4e2da82cf8",
+		"id": 39,
+		"value": "love_gaze",
+		"value_kor": "사랑의 시선",
+		"tier": 3,
+		"parent": "hypersensitivity",
+		"image": "https://img.sephiria.wiki/weapons/love_gaze.png",
+		"effects": {
+			"reward": [
+				"$n특수 공격 피해$가 20% 증가합니다.\n$s특수 공격: 소용돌이$의 충전 속도가 50% 증가합니다.",
+				"$s특수 공격: 소용돌이$의 $f치명타 확률$이 50% 증가하고, 시전 속도가 50% 빨라집니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T10:30:32.97715+00:00",
+		"uuid": "4ac0bc4a-6ddb-4292-b5be-3d9c100599c6",
+		"id": 40,
+		"value": "ignoring",
+		"value_kor": "묵살",
+		"tier": 3,
+		"parent": "hypersensitivity",
+		"image": "https://img.sephiria.wiki/weapons/ignoring.png",
+		"effects": {
+			"reward": [
+				"$n특수 공격 피해$가 20% 증가합니다.\n$s특수 공격: 소용돌이$의 충전 속도가 50% 증가합니다.",
+				"$n특수 공격 피해$가 15% 증가합니다.\n$s특수 공격: 소용돌이$가 즉시 충전되고, $f특수 공격 속도$가 15% 감소합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T10:32:23.580082+00:00",
+		"uuid": "ac9963f7-f090-44b4-989e-36d6de9aff5a",
+		"id": 41,
+		"value": "thorn_bat",
+		"value_kor": "가시 방망이",
+		"tier": 3,
+		"parent": "wooden_bat",
+		"image": "https://img.sephiria.wiki/weapons/thorn_bat.png",
+		"effects": {
+			"reward": [
+				"$n일반 공격 피해$가 20% 증가합니다. $d대시 공격 피해$가 40% 감소합니다.",
+				"$s직접 공격$으로 $f치명타 피해$적중 시 관통 가시를 3개 발사합니다. 공격의 추가 치명타 피해량 20%당 가시가 하나 추가됩니다. (피해량: 물리 피해의 26%)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T10:34:43.122569+00:00",
+		"uuid": "16a46127-1bf0-4587-9077-662f29cdbd2d",
+		"id": 42,
+		"value": "bunting",
+		"value_kor": "짖궂은 장난",
+		"tier": 3,
+		"parent": "wooden_bat",
+		"image": "https://img.sephiria.wiki/weapons/bunting.png",
+		"effects": {
+			"reward": [
+				"$n일반 공격 피해$가 20% 증가합니다. $d대시 공격 피해$가 40% 감소합니다.",
+				"$s직접 공격$ 시 $f치명타 확률$이 20% 감소하지만, $n무기 피해량$이 25% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T10:39:08.192914+00:00",
+		"uuid": "82ccc6c2-576b-4a39-9cd6-4a97b3bb66ed",
+		"id": 43,
+		"value": "short_self_book",
+		"value_kor": "짧은 자책",
+		"tier": 3,
+		"parent": "shadow",
+		"image": "https://img.sephiria.wiki/weapons/short_self_book.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 소용돌이$ 충전 시간이 두 배 늘어나지만, $s일반 공격$ 피해가 20% 증가합니다.",
+				"$s일반 공격$의 마지막 공격을 2회 추가로 휘두를 수 있습니다. $s일반 공격$ 피해량이 10% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T10:40:20.537039+00:00",
+		"uuid": "06f72159-7736-4aa5-9263-060eedf209ed",
+		"id": 44,
+		"value": "first_form",
+		"value_kor": "태초의 형태",
+		"tier": 3,
+		"parent": "uncomfortable_joy",
+		"image": "https://img.sephiria.wiki/weapons/first_form.png",
+		"effects": {
+			"reward": [
+				"공격이 '레이저'로 변경됩니다.",
+				"$s일반 공격$, $s대시 공격$의 레이저가 더 커지고 피해량이 25% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T10:42:16.911815+00:00",
+		"uuid": "2c1e1e11-ea3e-47b8-a34c-676831b42203",
+		"id": 45,
+		"value": "legacy",
+		"value_kor": "환영술사의 유산",
+		"tier": 3,
+		"parent": "uncomfortable_joy",
+		"image": "https://img.sephiria.wiki/weapons/legacy.png",
+		"effects": {
+			"reward": [
+				"공격이 '레이저'로 변경됩니다.",
+				"$f마법 가속$이 50% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T10:45:30.821097+00:00",
+		"uuid": "b2a0214a-9142-45e2-b1c6-2fc1c4c008a6",
+		"id": 46,
+		"value": "rajaron",
+		"value_kor": "라자리온",
+		"tier": 3,
+		"parent": "uncomfortable_joy",
+		"image": "https://img.sephiria.wiki/weapons/rajaron.png",
+		"effects": {
+			"reward": [
+				"공격이 '레이저'로 변경됩니다.",
+				"$s특수 공격$이 '자수정 소환'으로 변경됩니다. (소모 $iMP$ 24) 공허 피해를 가하는 '자수정' 동료를 소환합니다. 자수정은 공격 시마다 HP를 5 소모합니다. (HP: 80, 대미지: 모든 속성 평균치 120%)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T10:51:04.751711+00:00",
+		"uuid": "bc38891e-8c3f-491d-827c-6ba8b32250df",
+		"id": 47,
+		"value": "squeezer",
+		"value_kor": "삐걱이는 척추",
+		"tier": 3,
+		"parent": "bone",
+		"image": "https://img.sephiria.wiki/weapons/squeezer.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격$이 '재조립'으로 변경됩니다. (소모 $iMP$ 25) 재조립 사용 시 8초동안 검신이 길어지며 일반 공격을 끊임 없이 휘두를 수 있고, 공격 시 추가 피해를 가합니다. (추가 피해 : 15 + $a방어력$ 50%)",
+				"'재조립' 공격의 범위가 상승하며, $f공격 속도$가 최대 35%까지 점점 빨라집니다. (공격을 멈추면 초기화)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T10:52:45.759153+00:00",
+		"uuid": "2e5a2b41-8fec-4760-9669-5caaee87e8de",
+		"id": 48,
+		"value": "shim_hong_whirlpool",
+		"value_kor": "심홍의 소용돌이",
+		"tier": 3,
+		"parent": "shim_hongs_thorns",
+		"image": "https://img.sephiria.wiki/weapons/shim_hong_whirlpool.png",
+		"effects": {
+			"reward": [
+				"대상을 공격하여 $p상처 악화$ 디버프를 부여합니다.",
+				"$s일반 공격$,$s대시 공격$이 3연타로 변경됩니다. 각 타격의 피해량이 기존 피해량의 40%로 조정됩니다. $p상처 악화$의 최대 중첩이 3 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T10:54:16.171254+00:00",
+		"uuid": "b387d6fe-2828-4b49-b9ca-91c337461bac",
+		"id": 49,
+		"value": "heretic_questioner",
+		"value_kor": "이단심문관",
+		"tier": 3,
+		"parent": "shim_hongs_thorns",
+		"image": "https://img.sephiria.wiki/weapons/heretic_questioner.png",
+		"effects": {
+			"reward": [
+				"대상을 공격하여 $p상처 악화$ 디버프를 부여합니다.",
+				"$n무기$로 가한 물리 피해가 $c혼돈$ 속성으로 적용됩니다. $s특수 공격$이 $s특수 공격: 상처 폭발$로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T10:55:40.573225+00:00",
+		"uuid": "6711ee84-495f-4155-b6fa-1c2f66cee908",
+		"id": 50,
+		"value": "lightning_sword_S3G",
+		"value_kor": "전격 대검 \"S3G\"",
+		"tier": 3,
+		"parent": "lightning_sword_E2G",
+		"image": "https://img.sephiria.wiki/weapons/lightning_sword_S3G.png",
+		"effects": {
+			"reward": [
+				"$s직접 공격$ 시 대상에게 $l번개속성 피해$의 30% 피해만큼 추가 피해를 가합니다.",
+				"$s직접 공격$ 시, 대상에게 $l감전$을 부여합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T10:57:04.167931+00:00",
+		"uuid": "06622b1c-2f35-44e3-bb56-ce74ff98d6a4",
+		"id": 51,
+		"value": "lightning_sword_E3G",
+		"value_kor": "전격 대검 \"E3G\"",
+		"tier": 3,
+		"parent": "lightning_sword_E2G",
+		"image": "https://img.sephiria.wiki/weapons/lightning_sword_E3G.png",
+		"effects": {
+			"reward": [
+				"$s직접 공격$ 시 대상에게 $l번개속성 피해$의 30% 피해만큼 추가 피해를 가합니다.",
+				"5회 공격마다 $l먹구름$ 수치를 3개 획득합니다. $s특수 공격: 소용돌이$ 사용 시 $l먹구름의 소모 속도$가 200% 증가하는 버프를 획득합니다 (지속시간 4초)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T11:01:17.767179+00:00",
+		"uuid": "6479dbc4-6b69-4bc6-b84f-562ef5bdc6cc",
+		"id": 54,
+		"value": "speech_sword",
+		"value_kor": "축사의 대검",
+		"tier": 3,
+		"parent": "chilled_sword",
+		"image": "https://img.sephiria.wiki/weapons/speech_sword.png",
+		"effects": {
+			"reward": [
+				"$s직접 공격$ 시 대상에게 $i얼음속성 피해$의 30% 피해만큼 추가 피해를 가합니다.",
+				"축사의 검집이 50% 빨리 충전됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T11:02:49.931649+00:00",
+		"uuid": "ca1a7207-9470-438b-a2b1-14cfdf0d0250",
+		"id": 55,
+		"value": "fence",
+		"value_kor": "만년한검",
+		"tier": 3,
+		"parent": "chilled_sword",
+		"image": "https://img.sephiria.wiki/weapons/fence.png",
+		"effects": {
+			"reward": [
+				"$s직접 공격$ 시 대상에게 $i얼음속성 피해$의 30% 피해만큼 추가 피해를 가합니다.",
+				"추가 피해 계수가 25% 증가합니다.\n$s일반 공격$ 범위가 증가하고, 기본 콤보가 15% 더 빨라집니다. (전체 시간 기준)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T11:03:56.434217+00:00",
+		"uuid": "798536f9-1053-4e5c-8151-0ebd329c5289",
+		"id": 56,
+		"value": "icicle_sword",
+		"value_kor": "고드름 검",
+		"tier": 3,
+		"parent": "chilled_sword",
+		"image": "https://img.sephiria.wiki/weapons/icicle_sword.png",
+		"effects": {
+			"reward": [
+				"$s직접 공격$ 시 대상에게 $i얼음속성 피해$의 30% 피해만큼 추가 피해를 가합니다.",
+				"$s직접 공격$시 80%의 확률로 $i동상$을 부여합니다. $i빙결$의 피해량이 20% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T11:18:20.670388+00:00",
+		"uuid": "982960af-3b68-4d0b-b6de-2585a2682003",
+		"id": 58,
+		"value": "passing_door",
+		"value_kor": "문지방 넘기",
+		"tier": 2,
+		"parent": "dagger",
+		"image": "https://img.sephiria.wiki/weapons/passing_door.png",
+		"effects": {
+			"reward": [
+				"$s대시 공격$ 시, 10초간 $s일반 공격$ 피해 +20%, $s대시 공격$ 피해 30% 버프를 획득합니다. $s특수 공격: 퓨리$가 비활성화됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T11:25:15.475562+00:00",
+		"uuid": "889ef6a0-8ffe-40e9-9e33-c9439c86b007",
+		"id": 59,
+		"value": "dry_wind",
+		"value_kor": "건조한 바람",
+		"tier": 2,
+		"parent": "dagger",
+		"image": "https://img.sephiria.wiki/weapons/dry_wind.webp",
+		"effects": {
+			"reward": ["$s특수 공격: 퓨리$의 피해량이 20% 증가합니다."]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T11:26:28.239443+00:00",
+		"uuid": "f39e8cad-0ef1-4fc7-adc8-005583db2232",
+		"id": 60,
+		"value": "flame_dagger",
+		"value_kor": "불꽃 단검",
+		"tier": 2,
+		"parent": "dagger",
+		"image": "https://img.sephiria.wiki/weapons/flame_dagger.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 패리$가 '단검 투척'으로 대체됩니다. 전방으로 단검을 5발 발사합니다. (피해량: $b화염속성 피해$의 100%)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T11:27:14.917339+00:00",
+		"uuid": "490866b0-0556-41db-8dd7-cd2fd3483bbe",
+		"id": 61,
+		"value": "lightning_dagger",
+		"value_kor": "번개 단검",
+		"tier": 2,
+		"parent": "dagger",
+		"image": "https://img.sephiria.wiki/weapons/lightning_dagger.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$ 시 대상에게 $l번개속성 피해$의 20% 피해만큼 추가 피해를 가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T11:27:54.373261+00:00",
+		"uuid": "2f6a8905-5009-4185-b4b2-88e775708606",
+		"id": 62,
+		"value": "cotton_leg",
+		"value_kor": "솜다리",
+		"tier": 2,
+		"parent": "dagger",
+		"image": "https://img.sephiria.wiki/weapons/cotton_leg.png",
+		"effects": { "reward": ["공격이 '수리검 투척'으로 변경됩니다."] },
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T11:29:07.264753+00:00",
+		"uuid": "3c4ec959-0c67-440e-971f-7c3fd16c9437",
+		"id": 63,
+		"value": "jade",
+		"value_kor": "옥빛 잔영",
+		"tier": 2,
+		"parent": "dagger",
+		"image": "https://img.sephiria.wiki/weapons/jade.png",
+		"effects": {
+			"reward": [
+				"더 이상 $s특수 공격: 패리$를 사용할 수 없지만, 2.8초마다 $s몰입$을 획득합니다. ($e회피$ 1당 충전 속도 1% 증가, 최대 33%)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T14:57:11.497857+00:00",
+		"uuid": "bc163c52-da28-4324-8cc7-bc130bb34192",
+		"id": 66,
+		"value": "blade_without_light",
+		"value_kor": "빛없는 칼날",
+		"tier": 3,
+		"parent": "passing_door",
+		"image": "https://img.sephiria.wiki/weapons/blade_without_light.png",
+		"effects": {
+			"reward": [
+				"$s대시 공격$ 시, 10초간 $s일반 공격$ 피해 +20%, $s대시 공격$ 피해 30% 버프를 획득합니다. $s특수 공격: 퓨리$가 비활성화됩니다.",
+				"$d대시$ 소모 시 $s대시 공격$이 $s대시 공격: 검상 감옥$으로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T15:00:10.321578+00:00",
+		"uuid": "8eab98b9-1a21-402a-a962-344e868eed83",
+		"id": 67,
+		"value": "absolute_envy",
+		"value_kor": "절대 선망",
+		"tier": 3,
+		"parent": "passing_door",
+		"image": "https://img.sephiria.wiki/weapons/absolute_envy.png",
+		"effects": {
+			"reward": [
+				"$s대시 공격$ 시, 10초간 $s일반 공격$ 피해 +20%, $s대시 공격$ 피해 30% 버프를 획득합니다. $s특수 공격: 퓨리$가 비활성화됩니다.",
+				"3,4,5번째 $s일반 공격$ 피해량이 25% 증가하고, 경직 수치가 높아집니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T15:06:42.14915+00:00",
+		"uuid": "ebe23f44-b791-4e6b-99dd-0b8f573d4cf5",
+		"id": 68,
+		"value": "crawling",
+		"value_kor": "기어 오는 절망",
+		"tier": 3,
+		"parent": "dry_wind",
+		"image": "https://img.sephiria.wiki/weapons/crawling.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 퓨리$의 피해량이 20% 증가합니다.",
+				"$s특수 공격: 퓨리$의 피해량이 10% 추가로 증가합니다.\n$s특수 공격: 패리$ 성공 시 $s몰입$이 2회 충전됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T15:08:21.372882+00:00",
+		"uuid": "674cb0ba-073d-45d3-8ae3-4da4ab75ab16",
+		"id": 71,
+		"value": "difficult_experiments",
+		"value_kor": "어려운 실험",
+		"tier": 3,
+		"parent": "dry_wind",
+		"image": "https://img.sephiria.wiki/weapons/difficult_experiments.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 퓨리$의 피해량이 20% 증가합니다.",
+				"더 이상 $s특수 공격: 패리$를 사용할 수 없지만 $s무기 공격$ 시 20% 확률로 $s몰입$을 획득합니다. ($s몰입$은 2회까지 충전 가능)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T15:12:07.584882+00:00",
+		"uuid": "ac9bcc01-b214-4b8d-b730-c65ca03c38f4",
+		"id": 72,
+		"value": "heated_blade",
+		"value_kor": "달궈진 칼날",
+		"tier": 3,
+		"parent": "flame_dagger",
+		"image": "https://img.sephiria.wiki/weapons/heated_blade.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 패리$가 '단검 투척'으로 대체됩니다. 전방으로 단검을 5발 발사합니다. (피해량: $b화염속성 피해$의 100%)",
+				"투척 단검은 적을 관통합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T15:13:11.430206+00:00",
+		"uuid": "fc2e156c-435e-4a29-aec2-b36c8cf9770e",
+		"id": 73,
+		"value": "teeth",
+		"value_kor": "타오르는 이빨",
+		"tier": 3,
+		"parent": "flame_dagger",
+		"image": "https://img.sephiria.wiki/weapons/teeth.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 패리$가 '단검 투척'으로 대체됩니다. 전방으로 단검을 5발 발사합니다. (피해량: $b화염속성 피해$의 100%)",
+				"투척 단검이 적에게 $b화상$ 디버프를 부여합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T15:16:43.499272+00:00",
+		"uuid": "db74a27a-0279-46df-b975-de0b3e23d8e9",
+		"id": 74,
+		"value": "dried_dark",
+		"value_kor": "드리운 암운",
+		"tier": 3,
+		"parent": "lightning_dagger",
+		"image": "https://img.sephiria.wiki/weapons/dried_dark.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$ 시 대상에게 $l번개속성 피해$의 20% 피해만큼 추가 피해를 가합니다.",
+				"$l먹구름의 추가 피해량$이 15%, $l번개속성 피해$가 5 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T15:18:47.561391+00:00",
+		"uuid": "4cc28d9f-db7d-4cea-b6dd-429d0e2854c4",
+		"id": 75,
+		"value": "lightning_fury",
+		"value_kor": "번개의 분노",
+		"tier": 3,
+		"parent": "lightning_dagger",
+		"image": "https://img.sephiria.wiki/weapons/lightning_fury.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$ 시 대상에게 $l번개속성 피해$의 20% 피해만큼 추가 피해를 가합니다.",
+				"$s직접 공격$ 시 $l감전$ 디버프를 부여합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T15:24:17.267229+00:00",
+		"uuid": "5974f571-e86a-42be-b277-0b53519bdf11",
+		"id": 76,
+		"value": "ice_bird_flower",
+		"value_kor": "얼음새꽃",
+		"tier": 3,
+		"parent": "cotton_leg",
+		"image": "https://img.sephiria.wiki/weapons/ice_bird_flower.png",
+		"effects": {
+			"reward": [
+				"공격이 '수리검 투척'으로 변경됩니다.",
+				"$s직접 공격$으로 입히는 $f치명타 피해$가 30% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T15:26:11.505238+00:00",
+		"uuid": "13e51336-d26c-44e3-a63d-466b94ba1850",
+		"id": 77,
+		"value": "endless_sleep",
+		"value_kor": "가없는 침잠",
+		"tier": 3,
+		"parent": "jade",
+		"image": "https://img.sephiria.wiki/weapons/endless_sleep.png",
+		"effects": {
+			"reward": [
+				"더 이상 $s특수 공격: 패리$를 사용할 수 없지만, 2.8초마다 $s몰입$을 획득합니다. ($e회피$ 1당 충전 속도 1% 증가, 최대 33%)",
+				"$s몰입$의 충전 효율이 25% 증가하고, $e회피$에 따른 충전 속도 보너스 상한이 없어집니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T16:02:22.163346+00:00",
+		"uuid": "4d7bdd18-9a2f-4a43-8080-3ec9dd5218e6",
+		"id": 79,
+		"value": "large_crossbow_reloading_device",
+		"value_kor": "대형 석궁: 재장전 장치",
+		"tier": 2,
+		"parent": "crossbow",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_reloading_device.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격$이 '고급 재장전'으로 대체됩니다.\n고급 재장전: $iMP$ 25를 소모하여, 재장전 속도의 400% 속도로 재장전합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T16:04:22.959646+00:00",
+		"uuid": "0471c17b-3a4d-4ad1-8b9f-33ea2d2f2922",
+		"id": 80,
+		"value": "large_crossbow_shotguns",
+		"value_kor": "대형 석궁: 산탄 격발기",
+		"tier": 2,
+		"parent": "crossbow",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_shotguns.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$이 $f근접 공격$ 판정을 갖는 '화약탄'으로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T16:05:31.243776+00:00",
+		"uuid": "1c500083-feb5-4ed0-990d-fff9cebe58b0",
+		"id": 82,
+		"value": "large_crossbow_special_bolt_enhancement",
+		"value_kor": "대형 석궁: 특수볼트 강화",
+		"tier": 2,
+		"parent": "crossbow",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_special_bolt_enhancement.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 강화$ 화살의 공격 범위가 더 넓어지고, 피해량이 30% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T16:06:32.632023+00:00",
+		"uuid": "8d174237-6d5e-4022-8a08-bfd4a44e42b7",
+		"id": 83,
+		"value": "large_crossbow_fireworks_mine",
+		"value_kor": "대형 석궁: 불꽃 지뢰",
+		"tier": 2,
+		"parent": "crossbow",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_fireworks_mine.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$의 피해량이 20% 감소하지만, $b화염속성 피해$ 기반으로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T16:07:36.457746+00:00",
+		"uuid": "b7aaf7dc-de8f-4dfb-bbef-62954155b132",
+		"id": 84,
+		"value": "large_crossbow_lightning_marker_unstable",
+		"value_kor": "대형 석궁: 불안정한 번개 표식",
+		"tier": 2,
+		"parent": "crossbow",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_lightning_marker_unstable.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$ 시 35% 확률로 '번개 화살'을 발사합니다.\n번개 화살: $l번개속성 피해$의 160% 피해, 적중 시 인접한 적 1회 추가 공격"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-02T16:08:43.439295+00:00",
+		"uuid": "7b12524c-19d1-4f2a-b19a-ab80fcbbb2f1",
+		"id": 85,
+		"value": "large_crossbow_frost_curtain",
+		"value_kor": "대형 석궁: 서리 장막",
+		"tier": 2,
+		"parent": "crossbow",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_frost_curtain.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격$이 '서리 장막'으로 대체됩니다.\n서리 장막: 30$iMP$를 소모하여 10초 동안 $s일반 공격$의 피해량이 10% 증가하고, $s일반 공격$이 $i얼음$ 속성 기반으로 변경되는 버프를 얻습니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-03T10:03:07.889937+00:00",
+		"uuid": "f9771060-b514-4c52-b321-8dcdd4a69bc5",
+		"id": 86,
+		"value": "large_crossbow_acceleration",
+		"value_kor": "대형 석궁: 가속 코어",
+		"tier": 3,
+		"parent": "large_crossbow_reloading_device",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_acceleration.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격$이 '고급 재장전'으로 대체됩니다.\n고급 재장전: $iMP$ 25를 소모하여, 재장전 속도의 400% 속도로 재장전합니다.",
+				"공격할수록 $f공격 속도$가 쌓이며, 최대 +60%까지 기존 $f공격 속도$에 더해집니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-03T14:38:43.595759+00:00",
+		"uuid": "e5482aad-4837-4596-9810-253c215c52e3",
+		"id": 87,
+		"value": "crossbow_twins",
+		"value_kor": "석궁: 쌍둥이",
+		"tier": 3,
+		"parent": "large_crossbow_reloading_device",
+		"image": "https://img.sephiria.wiki/weapons/crossbow_twins.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격$이 '고급 재장전'으로 대체됩니다.\n고급 재장전: $iMP$ 25를 소모하여, 재장전 속도의 400% 속도로 재장전합니다.",
+				"$s일반 공격$은 두 발의 투사체를 발사하며, 공격 도중 조금 더 자유롭게 이동할 수 있습니다. 추가 $f이동 속도$ 1%당 $f공격 속도$가 1% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-03T14:42:29.976854+00:00",
+		"uuid": "3e892d50-f571-45dc-bdb6-d5720cd8166e",
+		"id": 89,
+		"value": "large_crossbow_gunpowdercho_softness",
+		"value_kor": "대형 석궁: 화약초 연성",
+		"tier": 3,
+		"parent": "large_crossbow_shotguns",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_gunpowdercho_softness.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$이 $f근접 공격$ 판정을 갖는 '화약탄'으로 변경됩니다.",
+				"$s무기 공격$의 $f치명타 확률$이 35% 증가하고, 공격이 치명타로 적중하면 탄환이 1개 충전됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-03T14:47:00.891028+00:00",
+		"uuid": "51825f1c-5163-4541-a913-3b01ece65d0e",
+		"id": 92,
+		"value": "large_crossbow_explosive_device",
+		"value_kor": "대형 석궁: 폭발 장치",
+		"tier": 3,
+		"parent": "large_crossbow_shotguns",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_explosive_device.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$이 $f근접 공격$ 판정을 갖는 '화약탄'으로 변경됩니다.",
+				"$s일반 공격$의 피해량이 10% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-03T14:48:44.9772+00:00",
+		"uuid": "5f9f30c7-2c23-4bc7-86ad-07dbad630ccd",
+		"id": 93,
+		"value": "large_crossbow_speaking_device",
+		"value_kor": "대형 석궁: 연사 장치",
+		"tier": 3,
+		"parent": "large_crossbow_special_bolt_enhancement",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_speaking_device.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 강화$ 화살의 공격 범위가 더 넓어지고, 피해량이 30% 증가합니다.",
+				"$s특수 공격: 강화$ 화살을 연속으로(2초 내) 시전하는 경우 연속 시전 횟수당 10%의 추가 피해를 가합니다. (최대 50%)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-03T14:50:48.404578+00:00",
+		"uuid": "575381c9-cfe7-4b0e-9ab5-5d2472c5f9d1",
+		"id": 94,
+		"value": "large_crossbow_judo_module_mounted",
+		"value_kor": "대형 석궁: 유도모듈 장착",
+		"tier": 3,
+		"parent": "large_crossbow_fireworks_mine",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_judo_module_mounted.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$의 피해량이 20% 감소하지만, $b화염속성 피해$ 기반으로 변경됩니다.",
+				"$s특수 공격$의 비용이 3으로 감소하고, $i추가 MP$ 1당 피해량이 0.9% 증가합니다. $s특수 공격$이 주변 적을 추적합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-03T14:51:39.646677+00:00",
+		"uuid": "9000bfb1-ca6e-4e03-857a-94bb17e8d1b1",
+		"id": 95,
+		"value": "mini_cannon",
+		"value_kor": "미니 캐논",
+		"tier": 3,
+		"parent": "large_crossbow_fireworks_mine",
+		"image": "https://img.sephiria.wiki/weapons/mini_cannon.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$의 피해량이 20% 감소하지만, $b화염속성 피해$ 기반으로 변경됩니다.",
+				"$s일반 공격$으로 유탄을 발사합니다. 피해량이 40% 증가하고, $b화염속성 피해$ 기반으로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-03T14:53:21.098174+00:00",
+		"uuid": "a89aa1c9-4ec9-45be-b333-b203257f508e",
+		"id": 96,
+		"value": "large_crossbow_stabilization_marker",
+		"value_kor": "대형 석궁: 표식 안정화",
+		"tier": 3,
+		"parent": "large_crossbow_lightning_marker_unstable",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_stabilization_marker.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$ 시 35% 확률로 '번개 화살'을 발사합니다.\n번개 화살: $l번개속성 피해$의 160% 피해, 적중 시 인접한 적 1회 추가 공격",
+				"'번개 화살' 피해량과 발사 확률이 30% 추가로 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-03T14:54:16.90844+00:00",
+		"uuid": "2b8403ba-882a-4a5d-9af5-06aebc39fcbd",
+		"id": 97,
+		"value": "large_crossbow_cloud_report",
+		"value_kor": "대형 석궁: 구름 포집기",
+		"tier": 3,
+		"parent": "large_crossbow_lightning_marker_unstable",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_cloud_report.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$ 시 35% 확률로 '번개 화살'을 발사합니다.\n번개 화살: $l번개속성 피해$의 160% 피해, 적중 시 인접한 적 1회 추가 공격",
+				"'번개 화살'이 적에게 적중하면 $l먹구름$ 수치를 3개 획득합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-03T14:57:05.229082+00:00",
+		"uuid": "e59cf377-8b69-42dc-b1a1-ab3307e608dc",
+		"id": 98,
+		"value": "large_crossbow_required_determination",
+		"value_kor": "대형 석궁: 급랭 결정",
+		"tier": 3,
+		"parent": "large_crossbow_frost_curtain",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_required_determination.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격$이 '서리 장막'으로 대체됩니다.\n서리 장막: 30$iMP$를 소모하여 10초 동안 $s일반 공격$의 피해량이 10% 증가하고, $s일반 공격$이 $i얼음$ 속성 기반으로 변경되는 버프를 얻습니다.",
+				"$s서리 장막$이 지속되는 동안 화살을 소모하지 않습니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-03T14:58:00.847188+00:00",
+		"uuid": "e7683e96-e844-4542-9d93-a22c006f08d9",
+		"id": 99,
+		"value": "large_crossbow_expansion_device",
+		"value_kor": "대형 석궁: 팽창 장치",
+		"tier": 3,
+		"parent": "large_crossbow_frost_curtain",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_expansion_device.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격$이 '서리 장막'으로 대체됩니다.\n서리 장막: 30$iMP$를 소모하여 10초 동안 $s일반 공격$의 피해량이 10% 증가하고, $s일반 공격$이 $i얼음$ 속성 기반으로 변경되는 버프를 얻습니다.",
+				"$s서리 장막$이 지속되는 동안 적을 관통하는 $s동상 탄환$을 발사합니다. 탄창 용량이 5발로 고정됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T17:51:02.612923+00:00",
+		"uuid": "db1a99e1-4a71-442b-a4d1-c7f7f5bbb5ca",
+		"id": 100,
+		"value": "katana",
+		"value_kor": "도",
+		"tier": 1,
+		"parent": null,
+		"image": "https://img.sephiria.wiki/weapons/katana.png",
+		"effects": { "reward": [""] },
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:02:57.826227+00:00",
+		"uuid": "025b23ed-f9d5-422a-802c-9bed129bb215",
+		"id": 101,
+		"value": "tachi_onohara",
+		"value_kor": "태도 '오노하라'",
+		"tier": 2,
+		"parent": "katana",
+		"image": "https://img.sephiria.wiki/weapons/tachi_onohara.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 강베기$가 $f공격 속도$의 영향을 받습니다. $f공격 속도$가 15% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:04:19.178965+00:00",
+		"uuid": "26d29ba3-da98-4cc7-8b20-0e97dae7810c",
+		"id": 102,
+		"value": "hellbanus",
+		"value_kor": "헬바누스",
+		"tier": 2,
+		"parent": "katana",
+		"image": "https://img.sephiria.wiki/weapons/hellbanus.png",
+		"effects": {
+			"reward": [
+				"$s직접 공격$ 시 대상에게 $b화염속성 피해$의 30% 피해만큼 추가 피해를 가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:05:18.18325+00:00",
+		"uuid": "581e3eec-c378-4f47-ac1f-db8b3b96216e",
+		"id": 103,
+		"value": "celestial_light_sword_cheongwangsak",
+		"value_kor": "검참도: 천광삭",
+		"tier": 2,
+		"parent": "katana",
+		"image": "https://img.sephiria.wiki/weapons/celestial_light_sword_cheongwangsak.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$을 통해 '검참'을 획득합니다. '$s특수 공격: 강베기$'가 '$s일반 공격: 거합베기$'로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:06:19.422285+00:00",
+		"uuid": "e8d14bb5-2b8d-4e91-9688-f57de7b8d6a8",
+		"id": 104,
+		"value": "waiting_blue_radiant_sword",
+		"value_kor": "기다리는 청휘검",
+		"tier": 2,
+		"parent": "katana",
+		"image": "https://img.sephiria.wiki/weapons/waiting_blue_radiant_sword.png",
+		"effects": {
+			"reward": [
+				"$s납도$시 '검참'을 지속적으로 획득합니다. 마법 사용시 검참 10을 소모해 $i마법 피해량$ 20%를 증가시킵니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:07:26.219445+00:00",
+		"uuid": "1c295690-3348-427a-90c4-8df8603cd4c6",
+		"id": 105,
+		"value": "library_soul_seal_association_type_1",
+		"value_kor": "도서관 혼령봉인연구회 제1형",
+		"tier": 2,
+		"parent": "katana",
+		"image": "https://img.sephiria.wiki/weapons/library_soul_seal_association_type_1.png",
+		"effects": {
+			"reward": [
+				"$d대시 공격 피해$가 30% 증가하고, $d대시 횟수$ 소모 시 혼령이 근처 적에게 $s대시 공격$을 2회 수행합니다. (재사용 대기시간 2.5초)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:08:14.890577+00:00",
+		"uuid": "e4290f09-6252-4e60-909b-941455b8644c",
+		"id": 106,
+		"value": "winter_blacksmiths_draft",
+		"value_kor": "겨울 대장장이의 습작",
+		"tier": 2,
+		"parent": "katana",
+		"image": "https://img.sephiria.wiki/weapons/winter_blacksmiths_draft.png",
+		"effects": {
+			"reward": [
+				"$s납도$는 $s태클$로 변경됩니다. $s직접 공격$시 $i얼음속성 피해$의 15%만큼 추가 피해를 가합니다.\n$i얼음속성 피해$가 3 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:24:50.499793+00:00",
+		"uuid": "d3a96237-9a40-4f7f-8506-8ee8b0948b8f",
+		"id": 107,
+		"value": "renowned_blade_muramasa",
+		"value_kor": "명도 '무라마사'",
+		"tier": 3,
+		"parent": "tachi_onohara",
+		"image": "https://img.sephiria.wiki/weapons/renowned_blade_muramasa.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 강베기$가 $f공격 속도$의 영향을 받습니다. $f공격 속도$가 15% 증가합니다.",
+				"상시 $s납도$ 상태가 되고, $s특수 공격: 강베기$가 $s특수 공격: 신속 베기$으로 변경됩니다. $f공격 속도$의 효율이 60% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:25:59.110099+00:00",
+		"uuid": "4c61660c-fa2f-412d-ba2e-b1236b0a543c",
+		"id": 108,
+		"value": "executioner_blade_hou",
+		"value_kor": "괵도 '호우'",
+		"tier": 3,
+		"parent": "tachi_onohara",
+		"image": "https://img.sephiria.wiki/weapons/executioner_blade_hou.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 강베기$가 $f공격 속도$의 영향을 받습니다. $f공격 속도$가 15% 증가합니다.",
+				"$s특수 공격: 강베기$의 기본 공격 속도가 24% 느려지지만 원거리의 적을 타격하고, $e회피$ 2당 피해량이 1% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:27:54.718607+00:00",
+		"uuid": "493321d8-4d53-45a5-9de6-f94d40afc483",
+		"id": 109,
+		"value": "raging_helbanus",
+		"value_kor": "들끓는 헬바누스",
+		"tier": 3,
+		"parent": "hellbanus",
+		"image": "https://img.sephiria.wiki/weapons/raging_helbanus.png",
+		"effects": {
+			"reward": [
+				"$s직접 공격$ 시 대상에게 $b화염속성 피해$의 30% 피해만큼 추가 피해를 가합니다.",
+				"$b화상 디버프 중첩$이 2 증가하고, $b화염속성 피해$가 4 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:29:11.322271+00:00",
+		"uuid": "25699cbb-e288-4d63-8838-8e80535af425",
+		"id": 110,
+		"value": "heidi",
+		"value_kor": "하이디",
+		"tier": 3,
+		"parent": "hellbanus",
+		"image": "https://img.sephiria.wiki/weapons/heidi.png",
+		"effects": {
+			"reward": [
+				"$s직접 공격$ 시 대상에게 $b화염속성 피해$의 30% 피해만큼 추가 피해를 가합니다.",
+				"$d대시 횟수$ 소모 시 '$s오버히트$' 스택을 획득합니다. ( 기본 1, $s납도$ 시 2 획득, 최대 6회)\n$s일반 공격$시 스택을 소모합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:31:35.316058+00:00",
+		"uuid": "738691f0-85e0-42a9-9ecc-87e0a91f2d0e",
+		"id": 111,
+		"value": "slashing_sword_biryuu",
+		"value_kor": "검참도: 비류",
+		"tier": 3,
+		"parent": "celestial_light_sword_cheongwangsak",
+		"image": "https://img.sephiria.wiki/weapons/slashing_sword_biryuu.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$을 통해 '검참'을 획득합니다. '$s특수 공격: 강베기$'가 '$s일반 공격: 거합베기$'로 변경됩니다.",
+				"$f치명타 확률$이 30% 증가하고, $s일반 공격: 대거합베기$의 범위가 전체공격으로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:33:57.012846+00:00",
+		"uuid": "38f24966-a0f1-4dc8-9c15-7b98fe66d3c0",
+		"id": 112,
+		"value": "slashing_sword_pamu",
+		"value_kor": "검참도: 파무",
+		"tier": 3,
+		"parent": "celestial_light_sword_cheongwangsak",
+		"image": "https://img.sephiria.wiki/weapons/slashing_sword_pamu.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$을 통해 '검참'을 획득합니다. '$s특수 공격: 강베기$'가 '$s일반 공격: 거합베기$'로 변경됩니다.",
+				"'$s일반 공격: 대거합베기$'를 사용할 수 없지만, 검참 게이지 100% 시 '난무' 버프를 획득합니다.\n난무 중에는 일반 공격이 4회 연타로 변경되고,\n일반 공격 사이에 물리 피해 75%의 추가 피해를 가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:35:39.309192+00:00",
+		"uuid": "0e2e80a0-8ded-49dd-a6c5-6fbce1ef6f0b",
+		"id": 113,
+		"value": "yuis_short_dagger",
+		"value_kor": "유이의 소단검",
+		"tier": 3,
+		"parent": "waiting_blue_radiant_sword",
+		"image": "https://img.sephiria.wiki/weapons/yuis_short_dagger.png",
+		"effects": {
+			"reward": [
+				"$s납도$시 '검참'을 지속적으로 획득합니다. 마법 사용시 검참 10을 소모해 $i마법 피해량$ 20%를 증가시킵니다.",
+				"$i마법의 치명타 확률$이 30% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:36:43.30774+00:00",
+		"uuid": "a8de894f-db32-4722-97ae-d8bc3e76d085",
+		"id": 114,
+		"value": "adamahs_vow",
+		"value_kor": "아다마흐의 서약",
+		"tier": 3,
+		"parent": "waiting_blue_radiant_sword",
+		"image": "https://img.sephiria.wiki/weapons/adamahs_vow.png",
+		"effects": {
+			"reward": [
+				"$s납도$시 '검참'을 지속적으로 획득합니다. 마법 사용시 검참 10을 소모해 $i마법 피해량$ 20%를 증가시킵니다.",
+				"마법 사용시 적을 향해 날아가 피해를 입히는 '마력도'를 소환합니다. (피해량: 20 + 비어 있는 $iMP$ 수치의 70%)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:38:29.682705+00:00",
+		"uuid": "80365c05-db3b-46ac-a048-6cc0e87864c8",
+		"id": 115,
+		"value": "library_soul_seal_association_type_2",
+		"value_kor": "도서관 혼령봉인연구회 제2형",
+		"tier": 3,
+		"parent": "library_soul_seal_association_type_1",
+		"image": "https://img.sephiria.wiki/weapons/library_soul_seal_association_type_2.png",
+		"effects": {
+			"reward": [
+				"$d대시 공격 피해$가 30% 증가하고, $d대시 횟수$ 소모 시 혼령이 근처 적에게 $s대시 공격$을 2회 수행합니다. (재사용 대기시간 2.5초)",
+				"혼령의 $s대시 공격$ 재사용 대기시간이 1초로 변경됩니다.\n$s납도$ 무적 판정 시간이 50% 증가하며, 공격을 막아낼 경우 혼령이 $s대시 공격$을 $d대시 횟수$만큼 수행합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:40:04.385255+00:00",
+		"uuid": "3722cff7-60d6-4929-b763-a7e9574d378a",
+		"id": 116,
+		"value": "eternal_snow_silence",
+		"value_kor": "만년설의 침묵",
+		"tier": 3,
+		"parent": "winter_blacksmiths_draft",
+		"image": "https://img.sephiria.wiki/weapons/eternal_snow_silence.png",
+		"effects": {
+			"reward": [
+				"$s납도$는 $s태클$로 변경됩니다. $s직접 공격$시 $i얼음속성 피해$의 15%만큼 추가 피해를 가합니다.\n$i얼음속성 피해$가 3 증가합니다.",
+				"$s태클$이 $s특수 공격: 아이스 슬라이딩$으로 변경됩니다. 무적 시간 동안 적의 공격을 막으면 아티팩트 빙하의 메아리가 즉시 발동됩니다. 발동 될 때 주변 적에게 $i얼음속성 피해$ 120%의 피해를 입힙니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-09-12T18:41:15.666751+00:00",
+		"uuid": "b4cad7f3-8df0-475e-92c0-642211deb7e8",
+		"id": 117,
+		"value": "nastronds_shard",
+		"value_kor": "나스트론드의 조각",
+		"tier": 3,
+		"parent": "winter_blacksmiths_draft",
+		"image": "https://img.sephiria.wiki/weapons/nastronds_shard.png",
+		"effects": {
+			"reward": [
+				"$s납도$는 $s태클$로 변경됩니다. $s직접 공격$시 $i얼음속성 피해$의 15%만큼 추가 피해를 가합니다.\n$i얼음속성 피해$가 3 증가합니다.",
+				"$s태클$ 직후 공격 시 $i얼음 무구: 스카디$를 발동합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-11-12T10:58:44.310824+00:00",
+		"uuid": "b2952e15-e76f-4448-b6d4-859d7bf03f62",
+		"id": 118,
+		"value": "forged_sword_finish",
+		"value_kor": "잔불 단조검",
+		"tier": 2,
+		"parent": "great_sword",
+		"image": "https://img.sephiria.wiki/weapons/forged_sword_finish.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$ 시 대상에게 $b화염속성 피해$의 30% 피해만큼 추가 피해를 가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-11-12T11:00:28.859534+00:00",
+		"uuid": "2d8766d2-ce00-4abe-8ee3-2ce1f9e68535",
+		"id": 119,
+		"value": "crushing_red_snake",
+		"value_kor": "붉은 뱀의 분쇄",
+		"tier": 3,
+		"parent": "forged_sword_finish",
+		"image": "https://img.sephiria.wiki/weapons/crushing_red_snake.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$ 시 대상에게 $b화염속성 피해$의 30% 피해만큼 추가 피해를 가합니다.",
+				"공격을 휘두를 때마다 붉은 뱀의 눈의 쿨다운이 1.5초 감소합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-11-12T11:02:08.235412+00:00",
+		"uuid": "dd0f2048-4f38-43e6-a388-280ceb7d7eeb",
+		"id": 120,
+		"value": "solis_kineris",
+		"value_kor": "솔리스 키네리스",
+		"tier": 3,
+		"parent": "forged_sword_finish",
+		"image": "https://img.sephiria.wiki/weapons/solis_kineris.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$ 시 대상에게 $b화염속성 피해$의 30% 피해만큼 추가 피해를 가합니다.",
+				"$s무기 공격$ 시 $b태양검$이 2회 추가 발동합니다. $b태양검$의 $f치명타 피해$가 33% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-11-28T17:20:11.406843+00:00",
+		"uuid": "156592a6-bf28-48ae-bfa5-8a01d4b6eb5f",
+		"id": 121,
+		"value": "mastermind",
+		"value_kor": "흑막",
+		"tier": 3,
+		"parent": "cotton_leg",
+		"image": "https://img.sephiria.wiki/weapons/mastermind.png",
+		"effects": {
+			"reward": [
+				"공격이 '수리검 투척'으로 변경됩니다.",
+				"$s무기 공격$ 시, 지배 버프를 획득합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-11-28T19:02:50.601823+00:00",
+		"uuid": "e2f40a8a-303c-46fa-9410-3f193dfc1cef",
+		"id": 122,
+		"value": "lightning_bronte",
+		"value_kor": "전격도 브론테",
+		"tier": 2,
+		"parent": "katana",
+		"image": "https://img.sephiria.wiki/weapons/lightning_bronte.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$의 피해량이 20% 감소하지만, $l번개속성 피해$ 기반으로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-11-28T19:04:17.142897+00:00",
+		"uuid": "cad8ae26-293f-443c-87b0-c44e4216198d",
+		"id": 123,
+		"value": "jeon_gwang",
+		"value_kor": "전광일각",
+		"tier": 3,
+		"parent": "lightning_bronte",
+		"image": "https://img.sephiria.wiki/weapons/jeon_gwang.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$의 피해량이 20% 감소하지만, $l번개속성 피해$ 기반으로 변경됩니다.",
+				"$l감전$으로 피해를 입힐 시 '축전' 1스택을 얻습니다. (최대 10)\n$s특수 공격: 강베기$시 '축전'을 2스택 소모하여 $s특수 공격: 일섬$을 시전합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-12-24T17:18:52.557358+00:00",
+		"uuid": "f2940c9b-070e-4144-973e-d5dbf71b9157",
+		"id": 124,
+		"value": "kagumede",
+		"value_kor": "카구메데",
+		"tier": 2,
+		"parent": "crossbow",
+		"image": "https://img.sephiria.wiki/weapons/kagumede.png",
+		"effects": {
+			"reward": ["대상을 공격하여 $c중독$ 디버프를 부여합니다."]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2025-12-24T17:20:02.462775+00:00",
+		"uuid": "7ff10d87-656b-41a9-9c5d-0a04c2821739",
+		"id": 125,
+		"value": "karim_shape",
+		"value_kor": "카림의 형상",
+		"tier": 3,
+		"parent": "kagumede",
+		"image": "https://img.sephiria.wiki/weapons/karim_shape.png",
+		"effects": {
+			"reward": [
+				"대상을 공격하여 $c중독$ 디버프를 부여합니다.",
+				"헤이타의 영혼 가루, 테로의 영혼 가루, 아마드의 영혼 가루가 두 번 공격하고, 주는 피해량이 25% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-01-08T15:52:15.259498+00:00",
+		"uuid": "6258f5dc-4dbc-41b0-96da-dd639dec25c7",
+		"id": 126,
+		"value": "academy_magic_sword",
+		"value_kor": "아카데미 마법검",
+		"tier": 2,
+		"parent": "dagger",
+		"image": "https://img.sephiria.wiki/weapons/academy_magic_sword.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 패리$의 소모 MP가 0이 되고, $s특수 공격: 패리$ 성공 시 MP를 22% 회복합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-01-08T15:53:31.538108+00:00",
+		"uuid": "3731cc65-d1f9-48eb-a8fd-e6543cb4eb93",
+		"id": 127,
+		"value": "book_of_lmitation",
+		"value_kor": "모방의 서",
+		"tier": 3,
+		"parent": "academy_magic_sword",
+		"image": "https://img.sephiria.wiki/weapons/book_of_lmitation.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 패리$의 소모 MP가 0이 되고, $s특수 공격: 패리$ 성공 시 MP를 22% 회복합니다.",
+				"$s특수 공격: 퓨리$가 $s마법서: 복제$로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-01-08T15:54:20.1812+00:00",
+		"uuid": "473a7305-5a52-4a2f-8411-06906597bbfe",
+		"id": 128,
+		"value": "academy_magic_sword_liberation",
+		"value_kor": "아카데미 마법검 - 해방",
+		"tier": 3,
+		"parent": "academy_magic_sword",
+		"image": "https://img.sephiria.wiki/weapons/academy_magic_sword_liberation.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 패리$의 소모 MP가 0이 되고, $s특수 공격: 패리$ 성공 시 MP를 22% 회복합니다.",
+				"$s특수 공격: 퓨리$가 $s특수 공격: 해방$으로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-01-23T13:24:19.488877+00:00",
+		"uuid": "e3c50e79-7c3d-4f7c-89f9-09f74d757699",
+		"id": 130,
+		"value": "stone_sword",
+		"value_kor": "바위검",
+		"tier": 3,
+		"parent": "protection",
+		"image": "https://img.sephiria.wiki/weapons/stone_sword.png",
+		"effects": {
+			"reward": [
+				"$s가드$ 성공 시 $s가드$에 소모되는 MP가 50% 감소합니다.",
+				"$s특수 공격: 휩쓸기$가 $s특수 공격: 방패치기$로 변경되고, 소모되는 MP가 50% 감소합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-02-12T14:28:23.580876+00:00",
+		"uuid": "cd23b857-cba1-4a51-9293-26de4d7bc85f",
+		"id": 131,
+		"value": "m_9199",
+		"value_kor": "M-9199",
+		"tier": 2,
+		"parent": "crossbow",
+		"image": "https://img.sephiria.wiki/weapons/m_9199.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$이 적을 관통하고, $s특수 공격$이 $s특수 공격: 탄환 응축$으로 대체됩니다"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-02-12T14:29:55.897913+00:00",
+		"uuid": "9b099cf6-2fdd-4304-aa2d-1d04c77fc809",
+		"id": 132,
+		"value": "xra_9",
+		"value_kor": "XRA-9",
+		"tier": 3,
+		"parent": "m_9199",
+		"image": "https://img.sephiria.wiki/weapons/xra_9.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$이 적을 관통하고, $s특수 공격$이 $s특수 공격: 탄환 응축$으로 대체됩니다",
+				"일반 공격으로 마지막 탄환을 사용할 때, 모든 $i마법서$와 $s발동형 아티팩트$의 현재 쿨다운이 25% 감소합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-02-12T14:31:34.184985+00:00",
+		"uuid": "fc4c9c5c-50fc-4930-b639-2c9b9635246a",
+		"id": 133,
+		"value": "pallet_bee_palace",
+		"value_kor": "자갑벌궁",
+		"tier": 3,
+		"parent": "kagumede",
+		"image": "https://img.sephiria.wiki/weapons/pallet_bee_palace.png",
+		"effects": {
+			"reward": [
+				"대상을 공격하여 $c중독$ 디버프를 부여합니다.",
+				"$c중독$ 중첩이 3 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T15:51:15.618629+00:00",
+		"uuid": "54170b06-548d-421a-8032-614f26e77eee",
+		"id": 134,
+		"value": "staff",
+		"value_kor": "봉",
+		"tier": 1,
+		"parent": null,
+		"image": "https://img.sephiria.wiki/weapons/staff.png",
+		"effects": { "reward": [""] },
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T15:53:14.774091+00:00",
+		"uuid": "a1593987-9765-42d8-a45b-ad811703fcd3",
+		"id": 135,
+		"value": "flame_staff",
+		"value_kor": "화곤봉",
+		"tier": 2,
+		"parent": "staff",
+		"image": "https://img.sephiria.wiki/weapons/flame_staff.png",
+		"effects": {
+			"reward": ["$s일반 공격$이 $s일반 공격: 화곤$으로 변경됩니다."]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T15:54:48.66832+00:00",
+		"uuid": "22284551-a757-42e3-b5fb-b4e066cdcb7c",
+		"id": 136,
+		"value": "mighty_strength_staff",
+		"value_kor": "대력곤",
+		"tier": 3,
+		"parent": "flame_staff",
+		"image": "https://img.sephiria.wiki/weapons/mighty_strength_staff.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$이 $s일반 공격: 화곤$으로 변경됩니다.",
+				"$n일반 공격 피해$가 30% 증가하고, 공격 도중에는 $a방어력$의 5% 만큼 보호막을 얻습니다. (20초마다 갱신)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T15:56:22.572578+00:00",
+		"uuid": "43966be3-a27d-4449-b6a7-73dec44d7cda",
+		"id": 137,
+		"value": "all_element_staff_ilonica",
+		"value_kor": "정령융합봉 일로니카",
+		"tier": 3,
+		"parent": "flame_staff",
+		"image": "https://img.sephiria.wiki/weapons/all_element_staff_ilonica.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$이 $s일반 공격: 화곤$으로 변경됩니다.",
+				"모든 $i마법서$ 직접 시전이 불가능해집니다. $s일반 공격: 화곤$이 $s마법서: 볼트 난사$로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T15:59:14.94305+00:00",
+		"uuid": "70a5460b-4f4a-44b4-9179-71880449cc3f",
+		"id": 138,
+		"value": "shinjin_iron_staff",
+		"value_kor": "신진철곤",
+		"tier": 2,
+		"parent": "staff",
+		"image": "https://img.sephiria.wiki/weapons/shinjin_iron_staff.png",
+		"effects": {
+			"reward": ["$s무기 공격$ 시, $s봉 늘리기$ 버프를 획득합니다."]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:00:35.238189+00:00",
+		"uuid": "1f861d2e-88ed-45dc-8baf-ad53f92bb731",
+		"id": 140,
+		"value": "distant_starlight",
+		"value_kor": "먼 곳의 별빛",
+		"tier": 2,
+		"parent": "staff",
+		"image": "https://img.sephiria.wiki/weapons/distant_starlight.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 되받아치기$의 피해량이 20% 증가합니다. $i최대 MP$가 100 이상인 경우, $s특수 공격: 되받아치기$ 사용 중 모든 방향을 $s가드$합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:01:25.861445+00:00",
+		"uuid": "e0a65afd-41a5-468c-bdb1-94c252059e16",
+		"id": 141,
+		"value": "assault_spear_gioroid",
+		"value_kor": "돌격창 기오로이드",
+		"tier": 2,
+		"parent": "staff",
+		"image": "https://img.sephiria.wiki/weapons/assault_spear_gioroid.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격: 창격$과 $s대시 공격: 창격$을 사용할 수 있습니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:02:28.359343+00:00",
+		"uuid": "f71737ce-126e-4b7c-b906-2f3f1a18fab6",
+		"id": 142,
+		"value": "ember_staff",
+		"value_kor": "잿불의 봉",
+		"tier": 2,
+		"parent": "staff",
+		"image": "https://img.sephiria.wiki/weapons/ember_staff.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$의 피해량이 15% 감소하지만, $b화염속성 피해$기반으로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:03:21.587361+00:00",
+		"uuid": "5da46f0f-3071-44bf-ab22-01ffae1a7828",
+		"id": 143,
+		"value": "white_elephant_staff",
+		"value_kor": "백상의 봉",
+		"tier": 2,
+		"parent": "staff",
+		"image": "https://img.sephiria.wiki/weapons/white_elephant_staff.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$의 피해량이 15% 감소하지만, $i얼음속성 피해$기반으로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:04:34.037468+00:00",
+		"uuid": "feb4f7a0-2598-45c7-86d1-2f2b1e999f75",
+		"id": 144,
+		"value": "thunderclap_staff",
+		"value_kor": "뇌정의 봉",
+		"tier": 2,
+		"parent": "staff",
+		"image": "https://img.sephiria.wiki/weapons/thunderclap_staff.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$의 피해량이 15% 감소하지만, $l번개속성 피해$기반으로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:06:14.407539+00:00",
+		"uuid": "57553203-e401-4b43-b07f-6c83d0de37d1",
+		"id": 145,
+		"value": "ocean_weight_staff",
+		"value_kor": "바다의 추",
+		"tier": 3,
+		"parent": "shinjin_iron_staff",
+		"image": "https://img.sephiria.wiki/weapons/ocean_weight_staff.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$ 시, $s봉 늘리기$ 버프를 획득합니다.",
+				"$s가드$ 성공 시, $s무거운 봉$ 버프를 획득합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:07:39.392941+00:00",
+		"uuid": "a7be35eb-a080-47f2-ba78-dede07e49f97",
+		"id": 146,
+		"value": "khakkhara_of_no_sorrows",
+		"value_kor": "무환석장",
+		"tier": 3,
+		"parent": "shinjin_iron_staff",
+		"image": "https://img.sephiria.wiki/weapons/khakkhara_of_no_sorrows.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$ 시, $s봉 늘리기$ 버프를 획득합니다.",
+				"$f치명타 확률$ 능력치가 30% 이하인 경우, 주는 피해가 25% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:09:07.468563+00:00",
+		"uuid": "64e63b9a-d834-4561-85df-310f582da39f",
+		"id": 147,
+		"value": "fragment_of_star_sea",
+		"value_kor": "성해의 편린",
+		"tier": 3,
+		"parent": "distant_starlight",
+		"image": "https://img.sephiria.wiki/weapons/fragment_of_star_sea.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 되받아치기$의 피해량이 20% 증가합니다. $i최대 MP$가 100 이상인 경우, $s특수 공격: 되받아치기$ 사용 중 모든 방향을 $s가드$합니다.",
+				"$s가드$ 성공 후, $s일반 공격$ 시 '$s수정 폭발$'을 사용합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:10:58.505028+00:00",
+		"uuid": "55e7475f-1423-45ad-8f9e-cc7c2c8b997c",
+		"id": 148,
+		"value": "assault_spear_ruashulea",
+		"value_kor": "돌격창 루아슐레아",
+		"tier": 3,
+		"parent": "assault_spear_gioroid",
+		"image": "https://img.sephiria.wiki/weapons/assault_spear_ruashulea.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격: 창격$과 $s대시 공격: 창격$을 사용할 수 있습니다.",
+				"$f공격 속도$가 10% 증가합니다. 무기 공격 시 $d대시 횟수$ 능력치 1당 피해량이 5% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:12:14.279331+00:00",
+		"uuid": "c97b37ac-3b6b-4c92-b654-cd0c48d888bf",
+		"id": 149,
+		"value": "assault_spear_puarsuka",
+		"value_kor": "돌격창 푸아르스카",
+		"tier": 3,
+		"parent": "assault_spear_gioroid",
+		"image": "https://img.sephiria.wiki/weapons/assault_spear_puarsuka.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격: 창격$과 $s대시 공격: 창격$을 사용할 수 있습니다.",
+				"$s대시 공격: 창격$ 시전 시 $s가드$가 부여되고 직전에 사용한 $d대시$ 1당 피해량이 30% 증가합니다. (최대 6회)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:13:44.460298+00:00",
+		"uuid": "925294cf-3f41-4cc4-8f6d-a6bde6f33d81",
+		"id": 150,
+		"value": "gavel_piaolla",
+		"value_kor": "피아올라 의사봉",
+		"tier": 3,
+		"parent": "ember_staff",
+		"image": "https://img.sephiria.wiki/weapons/gavel_piaolla.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$의 피해량이 15% 감소하지만, $b화염속성 피해$기반으로 변경됩니다.",
+				"$b화상$ 부여 시 불의 고리를 만들어 10초간 5칸 내 적들을 공격합니다. (피해량: 0.5당 $b화염속성 피해$ 40%, $b화상 디버프 추가 피해량$에 따라 피해량이 증가)"
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:14:52.701217+00:00",
+		"uuid": "2cf7dfed-ed8e-4292-a9d4-3d93122eb65e",
+		"id": 151,
+		"value": "solis_bracca",
+		"value_kor": "솔리스 브라카",
+		"tier": 3,
+		"parent": "ember_staff",
+		"image": "https://img.sephiria.wiki/weapons/solis_bracca.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$의 피해량이 15% 감소하지만, $b화염속성 피해$기반으로 변경됩니다.",
+				"$b태양검$ 회수 시 1개가 추가로 회수됩니다. $s특수 공격$이 $n특수 공격: 태양창 단조$로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:15:48.274183+00:00",
+		"uuid": "47fe0b3a-7a49-4ee1-9ee4-27d7a836c0a1",
+		"id": 152,
+		"value": "prophecy_of_shaman",
+		"value_kor": "무녀의 예언",
+		"tier": 3,
+		"parent": "white_elephant_staff",
+		"image": "https://img.sephiria.wiki/weapons/prophecy_of_shaman.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$의 피해량이 15% 감소하지만, $i얼음속성 피해$기반으로 변경됩니다.",
+				"$s무기 공격$을 3회 적중시키면 조준 방향으로 아티팩트 볼루스파를 발동시킵니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:17:06.452346+00:00",
+		"uuid": "d349395e-6a72-45ee-970a-7ac32222b858",
+		"id": 153,
+		"value": "malaspina_staff",
+		"value_kor": "말라스피나",
+		"tier": 3,
+		"parent": "white_elephant_staff",
+		"image": "https://img.sephiria.wiki/weapons/malaspina_staff.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$의 피해량이 15% 감소하지만, $i얼음속성 피해$기반으로 변경됩니다.",
+				"$s무기 공격$ 시 30% 확률로 $i동상$을 부여합니다. $i얼음속성 피해$가 5 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:17:55.11594+00:00",
+		"uuid": "5c9c8a48-7707-44a7-bb15-d67bc80af778",
+		"id": 154,
+		"value": "viduka_staff",
+		"value_kor": "비듀카",
+		"tier": 3,
+		"parent": "thunderclap_staff",
+		"image": "https://img.sephiria.wiki/weapons/viduka_staff.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$의 피해량이 15% 감소하지만, $l번개속성 피해$기반으로 변경됩니다.",
+				"전격 차크람이 주는 피해가 25% 증가하고, 조준점까지 확장합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:18:57.514021+00:00",
+		"uuid": "a3587dd0-99c9-44b9-ac84-5ff06d2b2f11",
+		"id": 155,
+		"value": "neporax_staff",
+		"value_kor": "네포락스",
+		"tier": 3,
+		"parent": "thunderclap_staff",
+		"image": "https://img.sephiria.wiki/weapons/neporax_staff.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$의 피해량이 15% 감소하지만, $l번개속성 피해$기반으로 변경됩니다.",
+				"$s대시 공격$이 $s구름 병 던지기$로 변경됩니다. $s대시 공격$ 적중 시 대상에게 $l먹구름$이 70%의 피해로 즉시 발동됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:20:01.777532+00:00",
+		"uuid": "63b6672d-71b0-46cb-aa48-85ab66ee1213",
+		"id": 156,
+		"value": "incendium",
+		"value_kor": "인센디움",
+		"tier": 2,
+		"parent": "shield_sword",
+		"image": "https://img.sephiria.wiki/weapons/incendium.png",
+		"effects": { "reward": ["$b화염속성 피해$가 5증가합니다."] },
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:21:34.00799+00:00",
+		"uuid": "b4bfca21-4f9f-4992-9bf4-7dd51b0acd78",
+		"id": 157,
+		"value": "solis_mission",
+		"value_kor": "솔리스 미시온",
+		"tier": 3,
+		"parent": "incendium",
+		"image": "https://img.sephiria.wiki/weapons/solis_mission.png",
+		"effects": {
+			"reward": [
+				"$b화염속성 피해$가 5증가합니다.",
+				"'$s재점화$' 효과를 획득합니다. $s가드$ 중 $f이동 속도$가 90% 감소합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:22:21.031648+00:00",
+		"uuid": "cbaf1514-7ea6-4103-a81b-5a0fc3901eb5",
+		"id": 158,
+		"value": "fire_eating_haetae",
+		"value_kor": "불먹는 해태",
+		"tier": 3,
+		"parent": "incendium",
+		"image": "https://img.sephiria.wiki/weapons/fire_eating_haetae.png",
+		"effects": {
+			"reward": [
+				"$b화염속성 피해$가 5증가합니다.",
+				"$s특수 공격: 휩쓸기$가 $s일반 공격: 화염 강타$로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:24:04.287288+00:00",
+		"uuid": "9bfefc43-43d7-467c-b647-38a0badd3300",
+		"id": 159,
+		"value": "solis_eclipse",
+		"value_kor": "솔리스 에클리",
+		"tier": 3,
+		"parent": "hellbanus",
+		"image": "https://img.sephiria.wiki/weapons/solis_eclipse.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$ 시 대상에게 $b화염속성 피해$의 30% 피해만큼 추가 피해를 가합니다.",
+				"$s납도$가 $s일식$으로 변경됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:28:29.545634+00:00",
+		"uuid": "f84eaa02-3863-4be8-a7c4-234f83741eb3",
+		"id": 160,
+		"value": "broken_armor_blade",
+		"value_kor": "절갑도",
+		"tier": 2,
+		"parent": "katana",
+		"image": "https://img.sephiria.wiki/weapons/broken_armor_blade.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$이 $a방어력$ 수치 2당 피해량이 1% 증가합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-03-25T16:29:20.449142+00:00",
+		"uuid": "edb17904-0f12-4653-86ae-c5d6df9e62c2",
+		"id": 161,
+		"value": "armor_piercing_blade",
+		"value_kor": "파갑도",
+		"tier": 3,
+		"parent": "broken_armor_blade",
+		"image": "https://img.sephiria.wiki/weapons/armor_piercing_blade.png",
+		"effects": {
+			"reward": [
+				"$s일반 공격$이 $a방어력$ 수치 2당 피해량이 1% 증가합니다.",
+				"$s납도$하지 않는 동안 0.8초 마다 $b경화$ 1스택을 얻습니다."
+			]
+		},
+		"disabled": null
+	}
+]

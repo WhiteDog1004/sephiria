@@ -1,37 +1,18 @@
-import type { PostgrestError } from "@supabase/supabase-js";
-import { createBrowserSupabaseClient } from "@/lib/supabase/client";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import type { WeaponRow } from "@/src/entities/weapon/model/types";
+import weaponsJson from "@/src/entities/weapon/model/wepons.json";
 
-const handleError = (error: PostgrestError | null) => {
-	if (error) {
-		throw error;
-	}
+type WeaponStaticRow = WeaponRow & { disabled?: boolean | null };
+
+const getWeaponRows = () => {
+	return weaponsJson as WeaponStaticRow[];
 };
 
 export const getWeaponLists = async () => {
-	const supabase = await createServerSupabaseClient();
-
-	const { data, error } = await supabase
-		.from("weapons")
-		.select("created_at,uuid,id,value,value_kor,tier,parent,image,effects,disabled")
-		.or("disabled.is.null,disabled.eq.false")
-		.order("id", { ascending: true });
-
-	handleError(error);
-
-	return data;
+	return getWeaponRows()
+		.filter((weapon) => weapon.disabled !== true)
+		.sort((a, b) => a.id - b.id);
 };
 
 export const getClientWeaponLists = async () => {
-	const supabase = await createBrowserSupabaseClient();
-
-	const { data, error } = await supabase
-		.from("weapons")
-		.select("created_at,uuid,id,value,value_kor,tier,parent,image,effects,disabled")
-		.or("disabled.is.null,disabled.eq.false")
-		.order("id", { ascending: true });
-
-	handleError(error);
-
-	return data;
+	return getWeaponLists();
 };

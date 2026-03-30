@@ -1,21 +1,10 @@
-import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { PostgrestError } from "@supabase/supabase-js";
+import type { CostumeRow } from "@/src/entities/costume/model/costume.types";
+import costumesJson from "@/src/entities/costume/model/costumes.json";
 
-const handleError = (error: PostgrestError | null) => {
-	if (error) {
-		throw error;
-	}
+const getCostumeRows = () => {
+	return costumesJson as CostumeRow[];
 };
 
 export const getDetailList = async () => {
-	const supabase = await createServerSupabaseClient();
-
-	const { data, error } = await supabase
-		.from("costume")
-		.select("*")
-		.order("id", { ascending: true });
-
-	handleError(error);
-
-	return data;
+	return getCostumeRows().sort((a, b) => a.id - b.id);
 };
