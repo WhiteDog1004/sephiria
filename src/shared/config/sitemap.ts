@@ -3,6 +3,7 @@ export const SITEMAP = {
 	COSTUME: "/costume",
 	TALENT: "/talent",
 	LARGE: "/large",
+	COMBO: "/combo",
 	ARTIFACT: "/artifact",
 	MIRACLE: "/miracle",
 	WEAPON: "/weapon",
@@ -27,6 +28,11 @@ export const SITE_METADATA = {
 		title: "세피리아 - 재능",
 		description: "세피리아 위키: 재능",
 		alternates: { canonical: SITEMAP.TALENT },
+	},
+	combo: {
+		title: "세피리아 - 콤보",
+		description: "세피리아 위키: 콤보",
+		alternates: { canonical: SITEMAP.COMBO },
 	},
 	miracle: {
 		title: "세피리아 - 기적",

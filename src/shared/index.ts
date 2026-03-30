@@ -4,6 +4,7 @@ export * from "./config/costumes";
 export * from "./config/sitemap";
 export * from "./config/talentTextOptions";
 export * from "./model/clipboardHandler";
+export * from "./model/getComboBuildSearchHref";
 export * from "./model/getWriterBuildSearchHref";
 export * from "./ui/accordion";
 export * from "./ui/avatar";

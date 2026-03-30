@@ -14,6 +14,10 @@ export const MENU_LIST = [
 		link: SITEMAP.TALENT,
 	},
 	{
+		label: "콤보",
+		link: SITEMAP.COMBO,
+	},
+	{
 		label: "아티팩트",
 		link: SITEMAP.ARTIFACT,
 	},
