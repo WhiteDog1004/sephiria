@@ -1,29 +1,19 @@
-import type { PostgrestError } from "@supabase/supabase-js";
 import { notFound } from "next/navigation";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { getBuildDetailCached } from "@/src/entities/builds/api/buildsCache";
 
 type BuildDetailProps = {
 	id: string;
 };
 
-const handleError = (error: PostgrestError | null) => {
-	if (error) {
+const handleError = (hasError: boolean) => {
+	if (hasError) {
 		return notFound();
 	}
 };
 
 export const getBuildDetail = async ({ id }: BuildDetailProps) => {
-	const supabase = await createServerSupabaseClient();
-
-	const { data, error } = await supabase
-		.from("builds")
-		.select(
-			"id,postUuid,title,costume,weapon,miracle,combo,version,content,ability,description,postLike,created_at,updated_at,writer",
-		)
-		.eq("postUuid", id)
-		.single();
-
-	handleError(error);
+	const { data } = await getBuildDetailCached(id);
+	handleError(!data);
 
 	return { data };
 };

@@ -5,22 +5,38 @@ import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
 export const createServerSupabaseClient = async (
-	cookieStore: ReturnType<typeof cookies> = cookies(),
+	cookieStore?: ReturnType<typeof cookies>,
 	admin = false
 ) => {
+	if (admin) {
+		return createServerClient<Database>(
+			process.env.NEXT_PUBLIC_SUPABASE_URL!,
+			process.env.NEXT_SUPABASE_SERVICE_ROLE!,
+			{
+				cookies: {
+					async get() {
+						return undefined;
+					},
+					async set() {},
+					async remove() {},
+				},
+			}
+		);
+	}
+
+	const store = cookieStore ?? cookies();
+
 	return createServerClient<Database>(
 		process.env.NEXT_PUBLIC_SUPABASE_URL!,
-		admin
-			? process.env.NEXT_SUPABASE_SERVICE_ROLE!
-			: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
 		{
 			cookies: {
 				async get(name: string) {
-					return (await cookieStore).get(name)?.value;
+					return (await store).get(name)?.value;
 				},
 				async set(name: string, value: string, options: CookieOptions) {
 					try {
-						(await cookieStore).set({ name, value, ...options });
+						(await store).set({ name, value, ...options });
 					} catch (error) {
 						// The `set` method was called from a Server Component.
 						// This can be ignored if you have middleware refreshing
@@ -30,7 +46,7 @@ export const createServerSupabaseClient = async (
 				},
 				async remove(name: string, options: CookieOptions) {
 					try {
-						(await cookieStore).set({
+						(await store).set({
 							name,
 							value: "",
 							...options,
@@ -48,7 +64,7 @@ export const createServerSupabaseClient = async (
 };
 
 export const createServerSupabaseAdminClient = async (
-	cookieStore: ReturnType<typeof cookies> = cookies()
+	cookieStore?: ReturnType<typeof cookies>
 ) => {
 	return createServerSupabaseClient(cookieStore, true);
 };

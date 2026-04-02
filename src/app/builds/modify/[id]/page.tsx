@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import NotFound from "@/src/app/not-found";
-import { getBuildDetail } from "@/src/entities/build-detail";
+import { getBuildDetail } from "@/src/entities/build-detail/api/getBuildDetail";
 import { AddBuildClientPage } from "@/src/modules/add-build";
 import { SITE_METADATA } from "@/src/shared";
 import { getServerLoginInfo } from "@/src/shared/api";

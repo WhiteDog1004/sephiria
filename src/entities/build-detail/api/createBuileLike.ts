@@ -1,26 +1,21 @@
-import type { PostgrestError } from "@supabase/supabase-js";
 import { toast } from "sonner";
-import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 import type { CreateBuildLikeTypes } from "../model/createBuildLike.types";
-
-const handleError = (error: PostgrestError | null) => {
-	if (error) {
-		throw error;
-	}
-};
 
 export const createBuildLike = async ({
 	postUuid,
 	userId,
 }: CreateBuildLikeTypes) => {
-	const supabase = await createBrowserSupabaseClient();
+	const response = await fetch(`/api/builds/${postUuid}/like`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ userId }),
+	});
+	const json = await response.json();
 
-	const { data, error } = await supabase
-		.from("likes")
-		.insert([{ post_id: postUuid, user_id: userId }]);
-
-	if (error) {
-		if (error.code === "23505") {
+	if (!response.ok) {
+		if (json?.code === "23505") {
 			toast("이미 좋아요를 눌렀어요!", {
 				position: "bottom-center",
 				style: {
@@ -29,10 +24,9 @@ export const createBuildLike = async ({
 				},
 			});
 			throw new Error("ALREADY_LIKED");
-		} else {
-			handleError(error);
 		}
-		return null;
+
+		throw new Error(json?.message ?? "Failed to create like");
 	}
 
 	toast("좋아요 성공!", {
@@ -43,5 +37,5 @@ export const createBuildLike = async ({
 		},
 	});
 
-	return data as any;
+	return { postUuid, userId };
 };

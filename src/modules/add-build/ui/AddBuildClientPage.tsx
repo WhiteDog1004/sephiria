@@ -10,6 +10,7 @@ import type {
 	CreateBuildType,
 	PostBuildType,
 } from "@/src/entities/add-build/model/createBuild.types";
+import type { BuildRow } from "@/src/entities/builds/model/builds.types";
 import { useUpdateBuild } from "@/src/entities/modify-build";
 import {
 	AddTitle,
@@ -41,7 +42,7 @@ import { AddItems } from "./AddItems";
 export const AddBuildClientPage = ({
 	modify,
 }: {
-	modify?: CreateBuildType;
+	modify?: BuildRow;
 }) => {
 	const router = useRouter();
 	const { data: info, isSuccess } = useSession();
@@ -145,7 +146,14 @@ export const AddBuildClientPage = ({
 				miracle: modify.miracle,
 				combo: modify.combo || [],
 				talent: modify.ability,
-				lists: modify.content,
+				lists: modify.content.map((list) => ({
+					label: list.label,
+					description: list.description,
+					items: list.items.map((item) => ({
+						id: String(item.id),
+						value: item.value,
+					})),
+				})),
 			});
 		} else {
 			form.reset({
