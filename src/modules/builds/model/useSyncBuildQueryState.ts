@@ -27,6 +27,7 @@ export const useSyncBuildQueryState = ({
 	setSearchList,
 }: UseSyncBuildQueryStateProps) => {
 	const isMounted = useRef(false);
+	const isFilterSyncMounted = useRef(false);
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
@@ -55,7 +56,11 @@ export const useSyncBuildQueryState = ({
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: intentionally run once on mount
 	useEffect(() => {
-		if (resetRef?.current || searchParams.size === 0) return;
+		if (resetRef?.current) return;
+		if (!isFilterSyncMounted.current) {
+			isFilterSyncMounted.current = true;
+			return;
+		}
 
 		const params = new URLSearchParams();
 		params.set("page", searchParams.get("page") || "1");
