@@ -22,6 +22,7 @@ export const useGetBuilds = ({
 		],
 		queryFn: () =>
 			getBuilds({ page, limit, isLatestVersion, like, isWriter, ...req }),
+		retry: 1,
 		staleTime: 1000 * 60 * 60,
 		gcTime: 1000 * 60 * 60,
 	});

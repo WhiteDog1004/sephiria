@@ -98,6 +98,6 @@ export const useSyncBuildQueryState = ({
 			if (value) params.set(key, value);
 		});
 
-		router.replace(`${pathname}?${params.toString()}`);
+		router.push(`${pathname}?${params.toString()}`);
 	}, [page]);
 };
