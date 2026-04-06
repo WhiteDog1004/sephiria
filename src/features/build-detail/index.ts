@@ -1,5 +1,6 @@
 export * from "./ui/build-artifact/BuildArtifact";
 export * from "./ui/build-description/BuildDescription";
+export * from "./ui/fruit-skewer/FruitSkewerDetail";
 export * from "./ui/build-like/BuildLike";
 export * from "./ui/build-section/SectionCostume";
 export * from "./ui/build-section/SectionMiracle";

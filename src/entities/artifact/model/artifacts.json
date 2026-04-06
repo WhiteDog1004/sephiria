@@ -2793,7 +2793,7 @@
 		"label_eng": "blue_wrist_guard",
 		"tier": "legend",
 		"effect": {
-			"sets": ["mystery"],
+			"sets": ["firmness"],
 			"content": "[고유] 특수 공격 피해 +7/14/21/28/35/42%"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/blue_wrist_guard.png",

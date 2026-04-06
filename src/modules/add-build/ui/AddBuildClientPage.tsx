@@ -16,6 +16,7 @@ import {
 	AddTitle,
 	SelectCombo,
 	SelectCostume,
+	SelectFruitSkewer,
 	SelectMiracle,
 	SelectTalent,
 	SelectWeapon,
@@ -60,6 +61,7 @@ export const AddBuildClientPage = ({
 			weapon: "",
 			miracle: "",
 			combo: [],
+			fruit_skewer: [],
 			talent: {
 				anger: 0,
 				rapid: 0,
@@ -85,6 +87,7 @@ export const AddBuildClientPage = ({
 					weapon: value.weapon,
 					miracle: value.miracle,
 					combo: value.combo,
+					fruit_skewer: value.fruit_skewer,
 					content: value.lists,
 					version: process.env.NEXT_PUBLIC_GAME_VERSION,
 					youtube_link: value.youtube_link,
@@ -114,6 +117,7 @@ export const AddBuildClientPage = ({
 					weapon: value.weapon,
 					miracle: value.miracle,
 					combo: value.combo,
+					fruit_skewer: value.fruit_skewer,
 					content: value.lists,
 					version: process.env.NEXT_PUBLIC_GAME_VERSION,
 					youtube_link: value.youtube_link,
@@ -145,6 +149,7 @@ export const AddBuildClientPage = ({
 				weapon: modify.weapon,
 				miracle: modify.miracle,
 				combo: modify.combo || [],
+				fruit_skewer: modify.fruit_skewer || [],
 				talent: modify.ability,
 				lists: modify.content.map((list) => ({
 					label: list.label,
@@ -163,6 +168,7 @@ export const AddBuildClientPage = ({
 				weapon: "",
 				miracle: "",
 				combo: [],
+				fruit_skewer: [],
 				talent: {
 					anger: 0,
 					rapid: 0,
@@ -213,6 +219,7 @@ export const AddBuildClientPage = ({
 						<SelectTalent {...form} />
 
 						<SelectCombo {...form} />
+						<SelectFruitSkewer {...form} />
 						<AddItems {...form} />
 
 						<AddDescription {...form} />

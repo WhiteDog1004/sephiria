@@ -56,7 +56,7 @@ const getBuildsFromDb = async (params: NormalizedBuildsParams): Promise<GetBuild
 	let query = supabase
 		.from("builds")
 		.select(
-			"id,postUuid,title,description,costume,weapon,miracle,combo,version,content,ability,postLike,created_at,updated_at,writer",
+			"id,postUuid,title,description,costume,weapon,miracle,combo,fruit_skewer,version,content,ability,postLike,created_at,updated_at,writer",
 			{ count: "exact" },
 		)
 		.range(from, to);
@@ -113,7 +113,7 @@ const getBuildDetailFromDb = async (id: string) => {
 	const { data, error } = await supabase
 		.from("builds")
 		.select(
-			"id,postUuid,title,costume,weapon,miracle,combo,version,content,ability,description,postLike,created_at,updated_at,writer",
+			"id,postUuid,title,costume,weapon,miracle,combo,fruit_skewer,version,content,ability,description,postLike,created_at,updated_at,writer",
 		)
 		.eq("postUuid", id)
 		.single();

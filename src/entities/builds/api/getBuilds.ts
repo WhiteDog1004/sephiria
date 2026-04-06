@@ -25,7 +25,7 @@ export const getBuilds = async ({
 	let query = supabase
 		.from("builds")
 		.select(
-			"id,postUuid,title,description,costume,weapon,miracle,combo,version,content,ability,postLike,created_at,updated_at,writer",
+			"id,postUuid,title,description,costume,weapon,miracle,combo,fruit_skewer,version,content,ability,postLike,created_at,updated_at,writer",
 			{ count: "exact" },
 		)
 		.range(from, to);

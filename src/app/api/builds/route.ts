@@ -50,6 +50,7 @@ export const POST = async (request: Request) => {
 			weapon: payload.weapon,
 			miracle: payload.miracle,
 			combo: payload.combo,
+			fruit_skewer: payload.fruit_skewer ?? [],
 			ability: payload.ability,
 			version: payload.version,
 			writer: payload.writer,
@@ -71,4 +72,3 @@ export const POST = async (request: Request) => {
 		return NextResponse.json({ message: "Failed to create build" }, { status: 500 });
 	}
 };
-

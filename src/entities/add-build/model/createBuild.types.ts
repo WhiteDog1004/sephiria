@@ -28,6 +28,11 @@ export type WriterType = {
 	profileImage: string | null;
 };
 
+export type FruitSkewerItemType = {
+	key: string;
+	value: number;
+};
+
 export type CreateBuildType = {
 	title: string;
 	description: string;
@@ -36,6 +41,7 @@ export type CreateBuildType = {
 	weapon: string;
 	miracle: string;
 	combo: string[];
+	fruit_skewer?: FruitSkewerItemType[];
 	ability: TalentType;
 	writer: WriterType;
 	youtube_link?: string;
@@ -52,6 +58,7 @@ export type PostBuildType = {
 	weapon: string;
 	miracle: string;
 	combo: string[];
+	fruit_skewer?: FruitSkewerItemType[];
 	talent: TalentType;
 	writer: WriterType;
 	youtube_link?: string;

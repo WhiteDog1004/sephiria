@@ -10,6 +10,7 @@ import {
 	BuildArtifact,
 	BuildDescription,
 	BuildLike,
+	FruitSkewerDetail,
 	SectionCostume,
 	SectionMiracle,
 	SectionWeapon,
@@ -60,6 +61,12 @@ export const BuildDetailClientPage = ({ data }: { data: BuildRow }) => {
 				</Box>
 				<Separator />
 				<TalentDetail talent={data.ability} />
+				{data.fruit_skewer?.length ? (
+					<>
+						<Separator />
+						<FruitSkewerDetail fruitSkewer={data.fruit_skewer} />
+					</>
+				) : null}
 				<Separator />
 				<BuildArtifact artifacts={data.content} />
 				<Separator />

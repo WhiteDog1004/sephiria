@@ -167,6 +167,10 @@ export type Database = {
 					weapon: string;
 					miracle: string;
 					combo: string[];
+					fruit_skewer?: {
+						key: string;
+						value: number;
+					}[] | null;
 					youtube_link?: string;
 					version: string;
 					ability: Record<string, number>;
@@ -186,6 +190,10 @@ export type Database = {
 					weapon: string;
 					miracle: string;
 					combo?: string[];
+					fruit_skewer?: {
+						key: string;
+						value: number;
+					}[] | null;
 					ability: TalentType;
 					writer: WriterType;
 					youtube_link?: string;

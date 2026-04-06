@@ -48,6 +48,7 @@ export const PATCH = async (request: Request, context: RouteContext) => {
 				weapon: payload.weapon,
 				miracle: payload.miracle,
 				combo: payload.combo,
+				fruit_skewer: payload.fruit_skewer ?? [],
 				ability: payload.ability,
 				version: payload.version,
 				updated_at: new Date().toISOString(),
@@ -95,4 +96,3 @@ export const DELETE = async (_request: Request, context: RouteContext) => {
 		return NextResponse.json({ message: "Failed to delete build" }, { status: 500 });
 	}
 };
-

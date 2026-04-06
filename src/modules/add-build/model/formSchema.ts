@@ -1,4 +1,8 @@
 import { z } from "zod";
+import {
+	FRUIT_SKEWER_MAX_POINTS,
+	FRUIT_SKEWER_SPECIAL_KEY,
+} from "@/src/features/add-build/config/fruitSkewer";
 
 export const addFormSchema = z.object({
 	title: z
@@ -14,6 +18,36 @@ export const addFormSchema = z.object({
 	weapon: z.string().min(1, { message: "무기를 선택해 주세요" }),
 	miracle: z.string().min(1, { message: "기적을 선택해 주세요" }),
 	combo: z.array(z.string()).max(2, { message: "핵심 콤보는 최대 2개입니다" }),
+	fruit_skewer: z
+		.array(
+			z.object({
+				key: z.string().min(1, { message: "효과를 선택해 주세요" }),
+				value: z
+					.number()
+					.int()
+					.min(-2, { message: "수치는 -2 이상이어야 합니다" })
+					.max(3, { message: "수치는 +3 이하여야 합니다" })
+					.refine((value) => value !== 0, {
+						message: "수치는 0을 선택할 수 없습니다",
+					}),
+			}),
+		)
+		.refine(
+			(list) =>
+				list.every((item) =>
+					item.key === FRUIT_SKEWER_SPECIAL_KEY ? item.value === 1 : true,
+				),
+			{ message: "적응형 드롭 보너스는 +1만 선택할 수 있습니다" },
+		)
+		.refine(
+			(list) =>
+				list.reduce((total, item) => total + Math.abs(item.value), 0) <=
+				FRUIT_SKEWER_MAX_POINTS,
+			{ message: `수치 절대값 합은 최대 ${FRUIT_SKEWER_MAX_POINTS}까지 가능합니다` },
+		)
+		.refine((list) => new Set(list.map((item) => item.key)).size === list.length, {
+			message: "동일한 효과를 중복으로 선택할 수 없습니다",
+		}),
 	talent: z
 		.object({
 			anger: z.number().min(0).max(20),
