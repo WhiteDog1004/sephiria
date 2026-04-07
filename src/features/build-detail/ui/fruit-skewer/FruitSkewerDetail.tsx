@@ -4,7 +4,7 @@ import {
 	getFruitSkewerChanceText,
 	getFruitSkewerLabel,
 } from "@/src/features/add-build/config/fruitSkewer";
-import { Card, Row, Typography } from "@/src/shared";
+import { Card, Row, Separator, Typography } from "@/src/shared";
 
 type FruitSkewerItem = {
 	key: string;
@@ -20,7 +20,7 @@ export const FruitSkewerDetail = ({
 
 	return (
 		<Card className="w-full gap-3 p-4">
-			<Row className="w-full gap-2 justify-center">
+			<Row className="w-full gap-2 items-center">
 				<Image
 					width={48}
 					height={48}
@@ -28,11 +28,15 @@ export const FruitSkewerDetail = ({
 					src={`/fruit.png`}
 					alt="fruit"
 				/>
-				<Typography>과일 꼬치</Typography>
+				<Typography variant="header3">과일 꼬치</Typography>
 			</Row>
-			<Row className="w-full flex-wrap gap-x-6 gap-y-3 justify-center">
+			<Separator />
+			<Row className="w-full flex-wrap gap-x-6 gap-y-3">
 				{fruitSkewer.map((item, index) => (
-					<Row key={`${item.key}-${index}`} className="items-center gap-2">
+					<Row
+						key={`${item.key}-${index}`}
+						className="items-center gap-2 rounded-md bg-zinc-500/10 px-2.5 py-1"
+					>
 						{item.key === FRUIT_SKEWER_SPECIAL_KEY ? (
 							<Image
 								width={16}

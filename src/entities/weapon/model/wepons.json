@@ -2326,5 +2326,22 @@
 			]
 		},
 		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T09:09:13.432839+00:00",
+		"uuid": "db5caecc-44ff-4386-baa0-4889361bf5f5",
+		"id": 162,
+		"value": "returning_guardian",
+		"value_kor": "회귀하는 수호",
+		"tier": 3,
+		"parent": "small_destruction",
+		"image": "https://img.sephiria.wiki/weapons/returning_guardian.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격 피해$가 40% 증가합니다.",
+				"$s특수 공격: 휩쓸기$가 $s특수 공격: 방패 던지기$로 변경됩니다."
+			]
+		},
+		"disabled": null
 	}
 ]
