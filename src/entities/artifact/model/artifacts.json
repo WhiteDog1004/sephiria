@@ -479,7 +479,7 @@
 		"tier": "advanced",
 		"effect": {
 			"sets": ["guardian"],
-			"content": "[고유] 피해를 입을 때 공격자에게 방어력 150/300/450%의 피해\n방어력 +2/5/10"
+			"content": "[고유] 가시 +150/300/450%\n방어력 +2/5/10"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/thorn_shell.png",
 		"description": "스스로가 찔리지 않도록 팔을 잘 조절해야 합니다.",
@@ -1400,7 +1400,7 @@
 		"tier": "advanced",
 		"effect": {
 			"sets": ["ice_weapon"],
-			"content": "<제약> 아이템이 인벤토리 가장자리에 있을 때 효과 발동\n[고유] 6초마다 충전, 일반 공격 시 얼음 속성 검기 발사\n[피해량: 10/16/24/34/46/60/80 (얼음속성 피해 50/80/120/170/230/300%)]"
+			"content": "<제약> 아이템이 인벤토리 가장자리에 있을 때 효과 발동\n[고유] 6초마다 충전, 일반 공격 시 얼음 속성 검기 발사\n[피해량: 24 (24 + 얼음속성 피해 100/150/200/260/320/380/460%)]"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/gap.png",
 		"description": "달랠 수 없는 영혼을 끌어내는 데 사용되는 검집.",
@@ -1777,7 +1777,7 @@
 		"tier": "legend",
 		"effect": {
 			"sets": ["magic_engineering"],
-			"content": "[고유] 감전 디버프 부여 시 15/30/45/60% 확률로 즉시 감전 발동 피해를 가함 (기존 디버프는 유지)\n번개 속성 피해 +2/4/6/8"
+			"content": "[고유] 감전 부여 시 15/30/45/60% 확률로 강화 감전 부여\n번개속성 피해 +2/4/6/8"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/brain.png",
 		"description": "뇌운을 쫒기 위해 만들어진 공학 도구.",
@@ -3667,7 +3667,7 @@
 		"tier": "advanced",
 		"effect": {
 			"sets": ["element"],
-			"content": "[고유] 발동형 아티팩트 (재사용 대기시간: 3초)\n가장 높은 속성 피해의 +100/150/200/250%만큼 피해를 주는 속성 폭탄을 +1/2/3/4개 발사"
+			"content": "[고유] 발동형 아티팩트 (재사용 대기시간: 6초)\n가장 높은 속성 피해의 +100/150/200/250%만큼 피해를 주는 속성 폭탄을 +1/2/3/4개 발사"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/multicolored_candy_jar.png",
 		"description": "항상 어린 동물의 손에 닿지 않는 곳에 존재합니다.",
@@ -3783,6 +3783,21 @@
 		},
 		"image": "https://img.sephiria.wiki/artifacts/elastic_band.png",
 		"description": "뻣뻣한 동물들을 위해서 만들어졌습니다.",
+		"level": 2,
+		"created_at": "2026-02-12T14:57:12.574076+00:00",
+		"disabled": null
+	},
+	{
+		"id": 247,
+		"value": "unalloyed_gold_needle",
+		"label_kor": "북향의 금빛 침",
+		"label_eng": "unalloyed_gold_needle",
+		"tier": "rare",
+		"effect": {
+			"content": "윗 칸 아티팩트의 피해량 +6/8/10%\n등급이 고급 이하라면 추가 피해량 +15/20/25%\n직접 피해를 가하는 아티팩트에만 적용"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/unalloyed_gold_needle.png",
+		"description": "자성은 없지만, 언제나 북쪽을 가리키는 붉은 침을 품은 나침반.",
 		"level": 2,
 		"created_at": "2026-02-12T14:57:12.574076+00:00",
 		"disabled": null
