@@ -3809,6 +3809,7 @@
 		"label_eng": "thunder_judgment",
 		"tier": "legend",
 		"effect": {
+			"sets": ["magic_engineering"],
 			"content": "[고유] 스킬 천둥의 심판 획득"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/thunder_judgment.png",
