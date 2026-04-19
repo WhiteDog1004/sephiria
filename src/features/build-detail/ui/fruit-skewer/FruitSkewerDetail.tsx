@@ -56,7 +56,7 @@ export const FruitSkewerDetail = ({
 						)}
 						<Typography>{getFruitSkewerLabel(item.key)}</Typography>
 						{item.key === FRUIT_SKEWER_SPECIAL_KEY ? (
-							<Typography className="text-green-400">드롭 활성화</Typography>
+							<Typography className="text-green-400">드롭 보너스</Typography>
 						) : (
 							<Typography
 								className={item.value > 0 ? "text-green-400" : "text-red-500"}
