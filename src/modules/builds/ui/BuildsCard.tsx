@@ -7,8 +7,8 @@ import Link from "next/link";
 import { AvatarBox, Title, VersionBox } from "@/src/entities/builds";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
 import { ContentItem, CostumeItem } from "@/src/features/builds";
-import type { BuildsOptions } from "@/src/features/builds/model/builds.types";
 import { useBuildSearchStore } from "@/src/features/builds/model/buildSearchStore";
+import type { BuildsOptions } from "@/src/features/builds/model/builds.types";
 import {
 	Box,
 	Button,
@@ -38,6 +38,7 @@ export const BuildsCard = ({
 	artifact?: ArtifactInstance["item"][];
 }) => {
 	const { isAscending, isLatestVersion } = useBuildSearchStore();
+	const displayDate = data.updated_at || data.created_at;
 
 	return (
 		<Column className="w-full bg-card p-4 gap-4 justify-center items-end rounded-md border shadow-sm">
@@ -146,9 +147,14 @@ export const BuildsCard = ({
 						<ThumbsUp className="w-5 h-5" />
 						<Typography variant="caption">{data.postLike || 0}</Typography>
 					</Row>
-					<Typography variant="caption" className="text-gray-500">
-						{dayjs(data.created_at).format("YY.MM.DD")}
-					</Typography>
+					<Row className="items-end">
+						<Typography variant="caption" className="text-gray-500">
+							{dayjs(displayDate).format("YY.MM.DD")}
+						</Typography>
+						<Typography variant="caption" className="text-gray-600 text-[10px]">
+							{data.updated_at && "(수정됨)"}
+						</Typography>
+					</Row>
 				</Row>
 				<Link href={`${SITEMAP.BUILDS}/${data.postUuid}`} prefetch={false}>
 					<Button variant="secondary" className="max-w-24 border">
