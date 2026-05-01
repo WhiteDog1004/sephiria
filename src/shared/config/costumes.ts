@@ -77,7 +77,7 @@ export const COSTUMES: CostumeMap = {
 		name: "붉은 여우",
 		unlock: "석판 10개 동시에 보유",
 		story: "귀엽습니다. 그쵸?",
-		options: ["인벤토리 슬롯 +6", "치유량 감소 -50%"],
+		options: ["인벤토리 슬롯 +6", "치유 저주: 받는 회복량이 -50% 감소"],
 	},
 	frog: {
 		name: "개구리",
@@ -187,5 +187,11 @@ export const COSTUMES: CostumeMap = {
 		unlock: "과일 꼬치를 사용하지 않고 게임을 클리어 하세요.",
 		story: "밭일보다 과수원 일을 좋아합니다.",
 		options: ["과일 꼬치 상한 +2", "무기 피해량 -14%"],
+	},
+	turtle: {
+		name: "거북이",
+		unlock: "한 모험에서 최대 레벨을 달성한 아티팩트를 12개 소지하세요.",
+		story: "외형만으로 나이를 전혀 가늠할 수 없습니다..",
+		options: ["아티팩트 피해량 +15%", "무기 피해량 -15%"],
 	},
 };

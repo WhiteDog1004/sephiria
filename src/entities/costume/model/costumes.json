@@ -173,5 +173,12 @@
 		"image": "https://img.sephiria.wiki/costume/squirrel.png",
 		"uuid": "48479ddb-e16f-449b-ad0c-f6febf446011",
 		"value": "squirrel"
+	},
+	{
+		"created_at": "2026-01-09T02:53:46.343293+00:00",
+		"id": 28,
+		"image": "https://img.sephiria.wiki/costume/turtle.png",
+		"uuid": "9db54942-b1bb-45f9-ba08-d5bf3f7c118d",
+		"value": "turtle"
 	}
 ]

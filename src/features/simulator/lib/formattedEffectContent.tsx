@@ -14,7 +14,7 @@ const FormattedEffectContent = ({ content }: FormattedEffectContentProps) => {
 
 	const processedContent = content.replace(/\[고유\]/g, "[고유]\n");
 
-	const regex = /([-+]?\d+(?:\.\d+)?(?:\/\d+(?:\.\d+)?)+%?)/g;
+	const regex = /([-+]?\d+(?:\.\d+)?(?:\/[-+]?\d+(?:\.\d+)?)+%?)/g;
 
 	const parts = processedContent.split(regex);
 
@@ -45,13 +45,12 @@ const FormattedEffectContent = ({ content }: FormattedEffectContentProps) => {
 				}
 
 				if (index % 2 === 1) {
-					const isNegative = part.startsWith("-");
 					const isMpConsumption =
 						parts[index - 1]?.includes("MP 소모") ?? false;
 					const hasPercent = part.endsWith("%");
 
-					const numbersOnly = part.replace(/[-|%]/g, "");
-					const numbers = numbersOnly.split("/");
+					const numbers = part.replace(/%/g, "").split("/");
+					let inheritedSign: "-" | "+" | null = null;
 
 					return (
 						<Typography
@@ -59,22 +58,40 @@ const FormattedEffectContent = ({ content }: FormattedEffectContentProps) => {
 							variant="caption"
 							key={`${part}-${index}-number`}
 						>
-							{isNegative && "-"}
-							{numbers.map((num, numIndex) => (
-								<Fragment key={`${num}-${numIndex}-numbers`}>
-									<Typography
-										variant="caption"
-										className={`inline ${clsx(isNegative && !isMpConsumption ? "text-red-400" : "text-green-500")}`}
-									>
-										{num}
-									</Typography>
-									{numIndex < numbers.length - 1 && (
-										<Typography className="inline" variant="caption">
-											/
+							{numbers.map((num, numIndex) => {
+								const explicitSign = num.startsWith("-")
+									? "-"
+									: num.startsWith("+")
+										? "+"
+										: null;
+								const sign = explicitSign ?? inheritedSign;
+								const value = num.replace(/^[+-]/, "");
+								const isPenaltyValue = sign === "-" && !isMpConsumption;
+								const colorClass = isPenaltyValue
+									? "text-red-400"
+									: "text-green-500";
+
+								if (explicitSign) {
+									inheritedSign = explicitSign;
+								}
+
+								return (
+									<Fragment key={`${num}-${numIndex}-numbers`}>
+										<Typography
+											variant="caption"
+											className={`inline ${clsx(colorClass)}`}
+										>
+											{explicitSign}
+											{value}
 										</Typography>
-									)}
-								</Fragment>
-							))}
+										{numIndex < numbers.length - 1 && (
+											<Typography className="inline" variant="caption">
+												/
+											</Typography>
+										)}
+									</Fragment>
+								);
+							})}
 							{hasPercent && "%"}
 						</Typography>
 					);

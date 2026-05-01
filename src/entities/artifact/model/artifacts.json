@@ -1809,7 +1809,7 @@
 		"tier": "solid",
 		"effect": {
 			"sets": ["yinggalbul", "glacier"],
-			"content": "[고유] 인벤토리 왼편에선 화염 속성, 오른편에선 얼음 속성이 부여됨\n부여된 속성 피해 +2/4/6/9/11/15\n반대 속성 피해 0/1/2/3/4/5"
+			"content": "[고유] 인벤토리 왼편에선 화염 속성, 오른편에선 얼음 속성이 부여됨\n부여된 속성 피해 +2/4/6/9/11/15\n반대 속성 피해 +0/1/2/3/4/5"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/libra.png",
 		"description": "절대로 균형을 맞출 수 없다.",
@@ -3814,6 +3814,86 @@
 		},
 		"image": "https://img.sephiria.wiki/artifacts/thunder_judgment.png",
 		"description": "천둥의 심판 마법이 적혀 있는 책",
+		"level": 4,
+		"created_at": "2026-02-12T14:57:12.574076+00:00",
+		"disabled": null
+	},
+	{
+		"id": 249,
+		"value": "academy_fountain_pen",
+		"label_kor": "아카데미 만년필",
+		"label_eng": "academy_fountain_pen",
+		"tier": "solid",
+		"effect": {
+			"sets": ["shadow", "academy"],
+			"content": "[고유] 회피 수치 1.5당 마법서 피해량 1% 획득\n회피 성공 시 모든 마법서 재사용 대기시간 5/10/15/20/25% 가속"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/academy_fountain_pen.png",
+		"description": "비상시에 사용할 수 있는 호신 기능이 있습니다.",
+		"level": 4,
+		"created_at": "2026-02-12T14:57:12.574076+00:00",
+		"disabled": null
+	},
+	{
+		"id": 250,
+		"value": "zorous_watering_can",
+		"label_kor": "조로우의 물뿌리개",
+		"label_eng": "zorous_watering_can",
+		"tier": "solid",
+		"effect": {
+			"sets": ["lake", "academy"],
+			"content": "[고유] 최대 MP가 500/400/320/250/200 이상인 경우, 마법서 1회 추가 시전\n마법서 피해량 +3/6/9/12/15%"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/zorous_watering_can.png",
+		"description": "식물에게 정확히 필요한 양의 물만 뿌려집니다.",
+		"level": 4,
+		"created_at": "2026-02-12T14:57:12.574076+00:00",
+		"disabled": null
+	},
+	{
+		"id": 251,
+		"value": "snow_mountain_big_eared_bat",
+		"label_kor": "설산 큰귀박쥐",
+		"label_eng": "snow_mountain_big_eared_bat",
+		"tier": "solid",
+		"effect": {
+			"sets": ["glacier", "spring_song"],
+			"content": "[고유] 0.5초마다 동상에 걸린 적에게 얼음 투사체를 발사\n[피해량: 0 (얼음속성 피해의 50% x 공격속도의 100/120/140/160/200%)]\n이 피해는 서리 손길 효과가 적용되지 않음\n공격 속도 +2/5/6/8/10%"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/snow_mountain_big_eared_bat.png",
+		"description": "매우 빠르게 날 수 있지만, 느긋한 걸 좋아합니다.",
+		"level": 4,
+		"created_at": "2026-02-12T14:57:12.574076+00:00",
+		"disabled": null
+	},
+	{
+		"id": 252,
+		"value": "plasma_helmet",
+		"label_kor": "플라즈마 헬맷",
+		"label_eng": "plasma_helmet",
+		"tier": "solid",
+		"effect": {
+			"sets": ["yinggalbul", "magic_engineering"],
+			"content": "[고유] 화상과 감전이 플라즈마로 변경\n플라즈마 피해량 -15/10/5/0/+5%"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/plasma_helmet.png",
+		"description": "착용자가 공포를 극복한다면, 막강한 힘을 휘두를 수 있습니다.",
+		"level": 4,
+		"created_at": "2026-02-12T14:57:12.574076+00:00",
+		"disabled": null
+	},
+	{
+		"id": 253,
+		"value": "red_planet_observation_log",
+		"label_kor": "붉은행성 관찰일지",
+		"label_eng": "red_planet_observation_log",
+		"tier": "solid",
+		"effect": {
+			"sets": ["planet", "yinggalbul"],
+			"content": "[고유] 행성 공격이 적중 시, 화상 틱 피해량만큼 피해량이 증가합니다. 아티팩트 등급이 높을수록 증가량이 커집니다.\n일반: 화상 1틱 피해량\n고급: 화상 2틱 피해량\n희귀: 화상 3틱 피해량\n전설: 화상 4틱 피해량"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/red_planet_observation_log.png",
+		"description": "행성이 붉은빛으로 반짝였다는 내용 이후의 기록은 없습니다.",
 		"level": 4,
 		"created_at": "2026-02-12T14:57:12.574076+00:00",
 		"disabled": null
