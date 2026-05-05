@@ -3,12 +3,18 @@ import {
 	type Dispatch,
 	type SetStateAction,
 	useEffect,
+	useMemo,
 	useState,
 } from "react";
 import { useForm } from "react-hook-form";
 import { useGetMiracles, useGetWeapons } from "@/src/entities/builds";
+import type { WeaponRow } from "@/src/entities/weapon/model/types";
 import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
 import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
 	Button,
 	COSTUMES,
 	Column,
@@ -19,12 +25,13 @@ import {
 	FormLabel,
 	ImageWithFallback,
 	Input,
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
 	Row,
 	Select,
 	SelectContent,
-	SelectGroup,
 	SelectItem,
-	SelectLabel,
 	SelectTrigger,
 	SelectValue,
 	Sheet,
@@ -37,6 +44,64 @@ import {
 } from "@/src/shared";
 import { getCloudflareUrl } from "@/src/shared/utils/image";
 import { useBuildSearchStore } from "../model/buildSearchStore";
+
+const getTier2Weapons = (weapons: WeaponRow[], tier1Value: string) =>
+	weapons.filter((weapon) => weapon.tier === 2 && weapon.parent === tier1Value);
+
+const getTier3Weapons = (weapons: WeaponRow[], tier2Values: Set<string>) =>
+	weapons.filter(
+		(weapon) => weapon.tier === 3 && tier2Values.has(weapon.parent ?? ""),
+	);
+
+const WeaponOptionButton = ({
+	weapon,
+	isSelected,
+	onSelect,
+	variant = "grid",
+}: {
+	weapon: WeaponRow;
+	isSelected: boolean;
+	onSelect: (value: string) => void;
+	variant?: "grid" | "row";
+}) => (
+	<button
+		type="button"
+		onClick={() => onSelect(weapon.value)}
+		className={`border bg-background transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+			isSelected ? "border-primary bg-primary/10" : "border-border"
+		} ${
+			variant === "grid"
+				? "flex h-24 w-full flex-col items-center justify-center gap-2 rounded-md p-2"
+				: "flex min-h-12 w-full items-center gap-2 rounded-md px-3 py-2 text-left"
+		}`}
+	>
+		<ImageWithFallback
+			className={`object-contain p-0 ${
+				variant === "grid"
+					? "min-h-9 max-h-9 min-w-9 max-w-9"
+					: "min-h-7 max-h-7 min-w-7 max-w-7"
+			}`}
+			width={36}
+			height={36}
+			src={getCloudflareUrl(`/weapons/${weapon.value}.png`)}
+			alt={weapon.value}
+		/>
+		<Typography
+			variant="caption"
+			className={variant === "grid" ? "text-center leading-tight" : "truncate"}
+		>
+			{weapon.value_kor}
+		</Typography>
+	</button>
+);
+
+type BuildSearchFormValues = {
+	title: string;
+	costume: string;
+	weapon: string;
+	miracle: string;
+	combo: string;
+};
 
 export const BuildSearchButton = ({
 	setPage,
@@ -52,8 +117,9 @@ export const BuildSearchButton = ({
 	const { data: miracles } = useGetMiracles();
 	const [isTitle, setIsTitle] = useState(false);
 	const [hideFloatingButton, setHideFloatingButton] = useState(false);
+	const [weaponPopoverOpen, setWeaponPopoverOpen] = useState(false);
 
-	const form = useForm({
+	const form = useForm<BuildSearchFormValues>({
 		defaultValues: {
 			title: "",
 			costume: "",
@@ -63,7 +129,7 @@ export const BuildSearchButton = ({
 		},
 	});
 
-	const onSubmit = (value: any) => {
+	const onSubmit = (value: BuildSearchFormValues) => {
 		setSearchList({ ...value, isWriter: !isTitle });
 		setOpen(false);
 		setPage(1);
@@ -71,10 +137,41 @@ export const BuildSearchButton = ({
 
 	const onReset = () => {
 		form.reset();
+		setWeaponPopoverOpen(false);
 		setSearchList({});
 		setOpen(false);
 		setPage(1);
 	};
+
+	const selectedWeaponValue = form.watch("weapon");
+
+	const selectedWeapon = useMemo(
+		() => weapons?.find((weapon) => weapon.value === selectedWeaponValue),
+		[weapons, selectedWeaponValue],
+	);
+
+	const tier1Weapons = useMemo(
+		() => weapons?.filter((weapon) => weapon.tier === 1) ?? [],
+		[weapons],
+	);
+
+	const tier3WeaponGroups = useMemo(() => {
+		if (!weapons) return [];
+
+		return tier1Weapons
+			.map((tier1) => {
+				const childTier2Weapons = getTier2Weapons(weapons, tier1.value);
+				const tier2Values = new Set(
+					childTier2Weapons.map((weapon) => weapon.value),
+				);
+
+				return {
+					tier1,
+					weapons: getTier3Weapons(weapons, tier2Values),
+				};
+			})
+			.filter((group) => group.weapons.length > 0);
+	}, [tier1Weapons, weapons]);
 
 	useEffect(() => {
 		const updateButtonVisibility = () => {
@@ -93,7 +190,9 @@ export const BuildSearchButton = ({
 		};
 
 		updateButtonVisibility();
-		window.addEventListener("scroll", updateButtonVisibility, { passive: true });
+		window.addEventListener("scroll", updateButtonVisibility, {
+			passive: true,
+		});
 		window.addEventListener("resize", updateButtonVisibility);
 
 		return () => {
@@ -183,9 +282,7 @@ export const BuildSearchButton = ({
 															className="min-w-4 max-w-4 p-0"
 															width={24}
 															height={24}
-															src={getCloudflareUrl(
-																`/costume/${costume}.png`,
-															)}
+															src={getCloudflareUrl(`/costume/${costume}.png`)}
 															alt={costume}
 														/>
 														{COSTUMES[costume].name}
@@ -203,57 +300,145 @@ export const BuildSearchButton = ({
 								render={({ field }) => (
 									<FormItem className="w-full">
 										<FormLabel>무기</FormLabel>
-										<Select onValueChange={field.onChange} value={field.value}>
-											<SelectTrigger className="w-full">
-												<SelectValue placeholder="무기 선택" />
-											</SelectTrigger>
-											<SelectContent>
-												{weapons
-													?.filter((weapon) => weapon.tier === 1)
-													.map((tier1) => (
-														<SelectGroup key={tier1.value}>
-															<SelectLabel className="flex items-center bg-gray-300/50 dark:bg-gray-950/50 gap-1">
-																<ImageWithFallback
-																	className="min-w-6 max-w-6 min-h-6 max-h-6 object-contain p-0"
-																	width={24}
-																	height={24}
-																	src={getCloudflareUrl(
-																		`/weapons/${tier1.value}.png`,
-																	)}
-																	alt={tier1.value}
-																/>
-																{tier1.value_kor}
-															</SelectLabel>
+										<Popover
+											open={weaponPopoverOpen}
+											onOpenChange={setWeaponPopoverOpen}
+										>
+											<PopoverTrigger asChild>
+												<Button
+													type="button"
+													variant="outline"
+													className="w-full justify-start"
+												>
+													{selectedWeapon ? (
+														<>
+															<ImageWithFallback
+																className="min-h-5 max-h-5 min-w-5 max-w-5 object-contain p-0"
+																width={20}
+																height={20}
+																src={getCloudflareUrl(
+																	`/weapons/${selectedWeapon.value}.png`,
+																)}
+																alt={selectedWeapon.value}
+															/>
+															<Typography
+																variant="caption"
+																className="truncate"
+															>
+																{selectedWeapon.value_kor}
+															</Typography>
+														</>
+													) : (
+														<Typography
+															variant="caption"
+															className="opacity-60"
+														>
+															무기 선택
+														</Typography>
+													)}
+												</Button>
+											</PopoverTrigger>
+											<PopoverContent
+												align="start"
+												collisionPadding={16}
+												portalled={false}
+												sideOffset={8}
+												className="z-[60] max-h-[var(--radix-popover-content-available-height)] w-[min(calc(100vw-2rem),360px)] overflow-y-auto p-3"
+											>
+												<Column className="w-full gap-3">
+													<div className="grid w-full grid-cols-3 gap-2">
+														{tier1Weapons.map((weapon) => (
+															<WeaponOptionButton
+																key={weapon.value}
+																weapon={weapon}
+																isSelected={
+																	selectedWeaponValue === weapon.value
+																}
+																onSelect={(value) => {
+																	field.onChange(value);
+																	setWeaponPopoverOpen(false);
+																}}
+															/>
+														))}
+													</div>
 
-															{weapons
-																?.filter(
-																	(tier3) =>
-																		tier3.tier === 3 &&
-																		weapons.find(
-																			(tier2) =>
-																				tier2.tier === 2 &&
-																				tier2.value === tier3.parent &&
-																				tier2.parent === tier1.value,
+													<Accordion
+														type="multiple"
+														className="w-full space-y-2"
+													>
+														<AccordionItem
+															value="tier3-weapons"
+															className="rounded-md border px-2 last:border-b"
+														>
+															<AccordionTrigger
+																type="button"
+																className="py-2 hover:no-underline"
+															>
+																<Typography variant="caption">
+																	3티어 무기
+																</Typography>
+															</AccordionTrigger>
+															<AccordionContent className="pb-3 pt-2">
+																<Accordion
+																	type="multiple"
+																	className="w-full space-y-2"
+																>
+																	{tier3WeaponGroups.map(
+																		({ tier1, weapons }) => (
+																			<AccordionItem
+																				key={tier1.value}
+																				value={`tier3-${tier1.value}`}
+																				className="rounded-md border px-2 last:border-b"
+																			>
+																				<AccordionTrigger
+																					type="button"
+																					className="py-2 hover:no-underline"
+																				>
+																					<Row className="min-w-0 gap-2">
+																						<ImageWithFallback
+																							className="min-h-6 max-h-6 min-w-6 max-w-6 object-contain p-0"
+																							width={24}
+																							height={24}
+																							src={getCloudflareUrl(
+																								`/weapons/${tier1.value}.png`,
+																							)}
+																							alt={tier1.value}
+																						/>
+																						<Typography
+																							variant="caption"
+																							className="truncate"
+																						>
+																							{tier1.value_kor}
+																						</Typography>
+																					</Row>
+																				</AccordionTrigger>
+																				<AccordionContent className="grid gap-1 pb-2 pt-1">
+																					{weapons.map((weapon) => (
+																						<WeaponOptionButton
+																							key={weapon.value}
+																							weapon={weapon}
+																							isSelected={
+																								selectedWeaponValue ===
+																								weapon.value
+																							}
+																							onSelect={(value) => {
+																								field.onChange(value);
+																								setWeaponPopoverOpen(false);
+																							}}
+																							variant="row"
+																						/>
+																					))}
+																				</AccordionContent>
+																			</AccordionItem>
 																		),
-																)
-																.map((tier3) => (
-																	<SelectItem key={tier3.value} value={tier3.value}>
-																			<ImageWithFallback
-																				className="min-w-6 max-w-6 min-h-6 max-h-6 object-contain p-0"
-																				width={24}
-																				height={24}
-																				src={getCloudflareUrl(
-																					`/weapons/${tier3.value}.png`,
-																				)}
-																				alt={tier3.value}
-																			/>
-																		{tier3.value_kor}
-																	</SelectItem>
-																))}
-														</SelectGroup>
-													))}
-											</SelectContent>
-										</Select>
+																	)}
+																</Accordion>
+															</AccordionContent>
+														</AccordionItem>
+													</Accordion>
+												</Column>
+											</PopoverContent>
+										</Popover>
 									</FormItem>
 								)}
 							/>
@@ -275,7 +460,7 @@ export const BuildSearchButton = ({
 															className="min-w-4 max-w-4 p-0"
 															width={24}
 															height={24}
-																src={getCloudflareUrl(miracle.image || "")}
+															src={getCloudflareUrl(miracle.image || "")}
 															alt={miracle.value}
 														/>
 														{miracle.value_kor}

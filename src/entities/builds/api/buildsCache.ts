@@ -3,6 +3,8 @@ import "server-only";
 import type { PostgrestError } from "@supabase/supabase-js";
 import { unstable_cache } from "next/cache";
 import { createServerSupabaseAdminClient } from "@/lib/supabase/server";
+import type { WeaponRow } from "@/src/entities/weapon/model/types";
+import weaponsJson from "@/src/entities/weapon/model/wepons.json";
 import type {
 	BuildRow,
 	GetBuildsParams,
@@ -15,6 +17,12 @@ export const getBuildDetailTag = (postUuid: string) =>
 
 const LIST_REVALIDATE_SECONDS = 60 * 60 * 24;
 const DETAIL_REVALIDATE_SECONDS = 60 * 60 * 24;
+
+type WeaponStaticRow = WeaponRow & { disabled?: boolean | null };
+
+const WEAPONS = (weaponsJson as WeaponStaticRow[]).filter(
+	(weapon) => weapon.disabled !== true,
+);
 
 type NormalizedBuildsParams = {
 	page: number;
@@ -39,10 +47,30 @@ const getBuildDisplayTime = (
 	build: Pick<BuildRow, "created_at" | "updated_at">,
 ) => new Date(build.updated_at || build.created_at).getTime();
 
+const getRelatedWeaponValues = (weaponValue: string) => {
+	const selectedWeapon = WEAPONS.find((weapon) => weapon.value === weaponValue);
+	if (!selectedWeapon) return [weaponValue];
+
+	const values = new Set([selectedWeapon.value]);
+	const addChildren = (parentValue: string) => {
+		WEAPONS.filter((weapon) => weapon.parent === parentValue).forEach(
+			(weapon) => {
+				values.add(weapon.value);
+				addChildren(weapon.value);
+			},
+		);
+	};
+
+	addChildren(selectedWeapon.value);
+
+	return [...values];
+};
+
 const applyBuildsFilters = <T>(query: T, params: NormalizedBuildsParams): T => {
 	let filteredQuery = query as T & {
 		ilike: (column: string, pattern: string) => typeof filteredQuery;
 		eq: (column: string, value: string) => typeof filteredQuery;
+		in: (column: string, values: string[]) => typeof filteredQuery;
 		contains: (column: string, value: string[]) => typeof filteredQuery;
 	};
 
@@ -65,7 +93,11 @@ const applyBuildsFilters = <T>(query: T, params: NormalizedBuildsParams): T => {
 
 	if (params.costume)
 		filteredQuery = filteredQuery.eq("costume", params.costume);
-	if (params.weapon) filteredQuery = filteredQuery.eq("weapon", params.weapon);
+	if (params.weapon)
+		filteredQuery = filteredQuery.in(
+			"weapon",
+			getRelatedWeaponValues(params.weapon),
+		);
 	if (params.miracle)
 		filteredQuery = filteredQuery.eq("miracle", params.miracle);
 	if (params.combo)
