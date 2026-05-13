@@ -3826,7 +3826,7 @@
 		"tier": "solid",
 		"effect": {
 			"sets": ["shadow", "academy"],
-			"content": "[고유] 회피 수치 1.5당 마법서 피해량 1% 획득\n회피 성공 시 모든 마법서 재사용 대기시간 5/10/15/20/25% 가속"
+			"content": "[고유] 회피 수치 +5/4/3/2/1당 마법서 피해량 1% 획득\n회피 성공 시 모든 마법서 재사용 대기시간 5/10/15/20/25% 가속"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/academy_fountain_pen.png",
 		"description": "비상시에 사용할 수 있는 호신 기능이 있습니다.",
