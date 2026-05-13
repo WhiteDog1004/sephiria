@@ -479,7 +479,7 @@
 		"tier": "advanced",
 		"effect": {
 			"sets": ["guardian"],
-			"content": "[고유] 가시 +150/300/450%\n방어력 +2/5/10"
+			"content": "[고유] 가시 +150/300/450%\n방어력 +1/2/3"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/thorn_shell.png",
 		"description": "스스로가 찔리지 않도록 팔을 잘 조절해야 합니다.",
@@ -860,7 +860,7 @@
 		"tier": "advanced",
 		"effect": {
 			"sets": ["guardian"],
-			"content": "[고유] 최대 HP +6/12/18/24\n회피 -5/4/3/2"
+			"content": "[고유] 최대 HP +5/10/15/20\n회피 -5/4/3/2"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/shield_earring.webp",
 		"description": "검과 방패로 한 쌍의 귀고리가 완성된다.",
@@ -2586,7 +2586,7 @@
 		"tier": "legend",
 		"effect": {
 			"sets": ["academy"],
-			"content": "<제약> 인벤토리 가장 아래 칸에 있을 때 효과 발동\n[고유] 마법서 가속 +40/60/80\n치명타 피해 +8/14/20%"
+			"content": "<제약> 인벤토리 가장 아래 칸에 있을 때 효과 발동\n[고유] 마법서 가속 +40/60/80\n치명타 피해 +8/14/20%\n마법서 소모 MP +5/5/10%"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/riley_congregation_clock.png",
 		"description": "오른쪽으로 저항감이 느껴질 때까지 천천히 태엽을 돌려야 합니다.",
@@ -2682,11 +2682,11 @@
 		"tier": "legend",
 		"effect": {
 			"sets": ["academy"],
-			"content": "오른쪽 칸의 마법서 마법서 가속 +30/60/100/140%"
+			"content": "오른쪽 칸의 마법서 마법서 가속 +60/100/140%"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/shining_hourglass.png",
 		"description": "모래에서 은은한 빛이 흘러나온다.",
-		"level": 3,
+		"level": 2,
 		"created_at": "2025-08-18T09:35:45.280384+00:00",
 		"disabled": null
 	},
@@ -2698,7 +2698,7 @@
 		"tier": "legend",
 		"effect": {
 			"sets": ["firmness"],
-			"content": "[고유]휩쓸기 MP 소모 -15/30/45/60/70/80/100%\n무기 피해량 +2/4/6/8/10/12/15%\n공격 속도 -20/20/20/10/10/5/5%\n검과 방패 전용"
+			"content": "[고유]휩쓸기 MP 소모 -15/30/45/60/70/80/100%\n무기 피해량 +2/4/6/9/12/15/20%\n공격 속도 -20/20/20/10/5/5/0%\n검과 방패 전용"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/shield_mate.png",
 		"description": "방패를 더 안정적으로 사용할 수 있도록 설계된 건틀릿.",
@@ -2855,7 +2855,7 @@
 		"tier": "legend",
 		"effect": {
 			"sets": ["spring_song"],
-			"content": "[고유] 몰입 획득 시 0/0/1 추가 획득\n공격 속도 +3/6/10%\n대시 회복 속도 +5/5/10%\n단검 전용"
+			"content": "[고유] 몰입 획득 시 0/0/1 추가 획득\n특수 공격 피해 +10/16/22%\n대시 회복 속도 +5/5/10%\n단검 전용"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/iridescent_feathers.png",
 		"description": "무지개가 뜰 때 가끔 바람이 날려 온다.",
@@ -3380,7 +3380,7 @@
 		"tier": "legend",
 		"effect": {
 			"sets": ["ice_weapon"],
-			"content": "[고유] 발동형 아티팩트\n0.8초마다 1발씩 자동 충전 (최대 7)\n적에게 얼음 화살을 발사해 얼음 피해를 가함\n[피해량: 20/22/24/26/28/30 (10 + 얼음속성 피해 50/60/70/80/90/100%)]"
+			"content": "[고유] 발동형 아티팩트\n0.8초마다 1발씩 자동 충전 (최대 7)\n적에게 얼음 화살을 발사해 얼음 피해를 가함\n[피해량: 20/22/24/26/28/30 (12 + 얼음속성 피해 50/60/70/80/100/120%)]"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/frozen_bow.png",
 		"description": "오랜 시간을 견뎌내면 활을 잡은 이에게만은 냉기를 뿌리지 않습니다.",
@@ -3635,7 +3635,7 @@
 		"tier": "solid",
 		"effect": {
 			"sets": ["glacier", "firmness"],
-			"content": "[고유] 일반 공격 적중 시, 16/24/36% 확률로 추가 피해를 가함.\n[피해량: 물리 피해 + 얼음속성 피해의 80/150/250% (일반 공격 피해로 간주됨)]"
+			"content": "[고유] 일반 공격 적중 시, 16/24/36% 확률로 추가 피해를 가함.\n[피해량: 물리 피해 72/130/230% + 얼음속성 피해의 80/150/250% (일반 공격 피해로 간주됨)]"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/eternal_winter.png",
 		"description": ". . .",
@@ -3858,7 +3858,7 @@
 		"tier": "solid",
 		"effect": {
 			"sets": ["glacier", "spring_song"],
-			"content": "[고유] 0.5초마다 동상에 걸린 적에게 얼음 투사체를 발사\n[피해량: 0 (얼음속성 피해의 50% x 공격속도의 100/120/140/160/200%)]\n이 피해는 서리 손길 효과가 적용되지 않음\n공격 속도 +2/5/6/8/10%"
+			"content": "[고유] 0.5초마다 동상에 걸린 적에게 얼음 투사체를 발사\n[피해량: 0 (얼음속성 피해의 45% x 공격속도의 100/120/140/160/200%)]\n이 피해는 서리 손길 효과가 적용되지 않음\n공격 속도 +2/5/6/8/10%"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/snow_mountain_big_eared_bat.png",
 		"description": "매우 빠르게 날 수 있지만, 느긋한 걸 좋아합니다.",
