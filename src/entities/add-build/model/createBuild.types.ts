@@ -34,6 +34,7 @@ export type FruitSkewerItemType = {
 };
 
 export type CreateBuildType = {
+	preset_code?: string | null;
 	title: string;
 	description: string;
 	content: ListType[];
@@ -51,6 +52,7 @@ export type CreateBuildType = {
 };
 
 export type PostBuildType = {
+	preset_code?: string;
 	title: string;
 	description: string;
 	lists: ListType[];

@@ -10,6 +10,7 @@ import {
 	BuildArtifact,
 	BuildDescription,
 	BuildLike,
+	BuildPreset,
 	FruitSkewerDetail,
 	SectionCostume,
 	SectionMiracle,
@@ -72,13 +73,16 @@ export const BuildDetailClientPage = ({ data }: { data: BuildRow }) => {
 				<Separator />
 				<BuildDescription description={data.description} />
 				<Separator />
-				<BuildLike
-					postUuid={data.postUuid}
-					userId={user?.user.id}
-					postLike={data.postLike}
-					setInitialLike={setInitialLike}
-					initialLike={initialLike}
-				/>
+				<Row className="w-full justify-center gap-2">
+					<BuildLike
+						postUuid={data.postUuid}
+						userId={user?.user.id}
+						postLike={data.postLike}
+						setInitialLike={setInitialLike}
+						initialLike={initialLike}
+					/>
+					<BuildPreset presetCode={data.preset_code} />
+				</Row>
 				<Separator />
 				<Row className="justify-between gap-2 mb-12">
 					<Button onClick={() => router.push(SITEMAP.BUILDS)}>목록으로</Button>

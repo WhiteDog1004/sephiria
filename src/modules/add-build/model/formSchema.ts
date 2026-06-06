@@ -3,8 +3,10 @@ import {
 	FRUIT_SKEWER_MAX_POINTS,
 	FRUIT_SKEWER_SPECIAL_KEY,
 } from "@/src/features/add-build/config/fruitSkewer";
+import { presetCodeSchema } from "@/src/shared/model/presetCode";
 
 export const addFormSchema = z.object({
+	preset_code: presetCodeSchema,
 	title: z
 		.string()
 		.min(1, {

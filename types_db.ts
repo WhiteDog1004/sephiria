@@ -148,6 +148,7 @@ export type Database = {
 			};
 			builds: {
 				Row: {
+					preset_code: string | null;
 					created_at: string;
 					id: number;
 					postUuid: string;
@@ -182,6 +183,7 @@ export type Database = {
 					};
 				};
 				Insert: {
+					preset_code?: string | null;
 					created_at?: string;
 					title: string;
 					description: string;

@@ -3890,7 +3890,7 @@
 		"tier": "solid",
 		"effect": {
 			"sets": ["planet", "yinggalbul"],
-			"content": "[고유] 행성 공격이 적중 시, 화상 틱 피해량만큼 피해량이 증가합니다. 아티팩트 등급이 높을수록 증가량이 커집니다.\n일반: 화상 1틱 피해량\n고급: 화상 2틱 피해량\n희귀: 화상 3틱 피해량\n전설: 화상 4틱 피해량"
+			"content": "[고유] 행성 공격 적중 시, 화상 틱 피해량에 비례하여 피해량이 증가\n아티팩트 등급이 높을수록 증가량 상승\n일반: 화상 1틱 피해량\n고급: 화상 2틱 피해량\n희귀: 화상 3틱 피해량\n전설: 화상 4틱 피해량"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/red_planet_observation_log.png",
 		"description": "행성이 붉은빛으로 반짝였다는 내용 이후의 기록은 없습니다.",

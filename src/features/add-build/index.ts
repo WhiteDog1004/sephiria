@@ -1,4 +1,5 @@
 export * from "./config/talentList";
+export * from "./ui/add-preset-code/AddPresetCode";
 export * from "./ui/add-title/AddTitle";
 export * from "./ui/items-add-description/ItemsAddDescription";
 export * from "./ui/items-add-items/ItemsAddItems";

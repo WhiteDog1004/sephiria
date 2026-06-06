@@ -222,7 +222,7 @@ const getBuildDetailFromDb = async (id: string) => {
 	const { data, error } = await supabase
 		.from("builds")
 		.select(
-			"id,postUuid,title,costume,weapon,miracle,combo,fruit_skewer,version,content,ability,description,postLike,created_at,updated_at,writer",
+			"id,postUuid,title,costume,weapon,miracle,combo,fruit_skewer,version,content,ability,description,preset_code,postLike,created_at,updated_at,writer",
 		)
 		.eq("postUuid", id)
 		.single();

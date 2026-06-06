@@ -6,13 +6,11 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useCreateBuild } from "@/src/entities/add-build";
-import type {
-	CreateBuildType,
-	PostBuildType,
-} from "@/src/entities/add-build/model/createBuild.types";
+import type { PostBuildType } from "@/src/entities/add-build/model/createBuild.types";
 import type { BuildRow } from "@/src/entities/builds/model/builds.types";
 import { useUpdateBuild } from "@/src/entities/modify-build";
 import {
+	AddPresetCode,
 	AddTitle,
 	SelectCombo,
 	SelectCostume,
@@ -40,11 +38,7 @@ import { useSession } from "../../header/model/useUserInfo";
 import { addFormSchema } from "../model/formSchema";
 import { AddItems } from "./AddItems";
 
-export const AddBuildClientPage = ({
-	modify,
-}: {
-	modify?: BuildRow;
-}) => {
+export const AddBuildClientPage = ({ modify }: { modify?: BuildRow }) => {
 	const router = useRouter();
 	const { data: info, isSuccess } = useSession();
 	const { mutate } = useCreateBuild();
@@ -55,6 +49,7 @@ export const AddBuildClientPage = ({
 	const form = useForm({
 		resolver: zodResolver(addFormSchema),
 		defaultValues: {
+			preset_code: "",
 			title: "",
 			description: "",
 			costume: "",
@@ -80,6 +75,7 @@ export const AddBuildClientPage = ({
 		if (modify) {
 			update(
 				{
+					preset_code: value.preset_code,
 					postUuid: modify.postUuid,
 					title: value.title,
 					description: value.description,
@@ -110,6 +106,7 @@ export const AddBuildClientPage = ({
 		} else {
 			mutate(
 				{
+					preset_code: value.preset_code,
 					postUuid: crypto.randomUUID(),
 					title: value.title,
 					description: value.description,
@@ -143,6 +140,7 @@ export const AddBuildClientPage = ({
 	useEffect(() => {
 		if (modify) {
 			form.reset({
+				preset_code: modify.preset_code || "",
 				title: modify.title,
 				description: modify.description,
 				costume: modify.costume,
@@ -162,6 +160,7 @@ export const AddBuildClientPage = ({
 			});
 		} else {
 			form.reset({
+				preset_code: "",
 				title: "",
 				description: "",
 				costume: "",
@@ -223,6 +222,7 @@ export const AddBuildClientPage = ({
 						<AddItems {...form} />
 
 						<AddDescription {...form} />
+						<AddPresetCode {...form} />
 
 						<Button size="lg" className="w-full mt-12" type="submit">
 							빌드 작성 완료

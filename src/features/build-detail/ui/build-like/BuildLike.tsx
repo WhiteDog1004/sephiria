@@ -19,7 +19,7 @@ export const BuildLike = (req: BuildLikeProps) => {
 	const [openDialog, setOpenDialog] = useState(false);
 
 	return (
-		<Row className="w-full justify-center">
+		<Row>
 			<Button
 				variant="default"
 				onClick={() => {

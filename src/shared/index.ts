@@ -6,6 +6,7 @@ export * from "./config/talentTextOptions";
 export * from "./model/clipboardHandler";
 export * from "./model/getComboBuildSearchHref";
 export * from "./model/getWriterBuildSearchHref";
+export * from "./model/presetCode";
 export * from "./ui/accordion";
 export * from "./ui/avatar";
 export * from "./ui/badge";

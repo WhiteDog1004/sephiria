@@ -7,6 +7,7 @@ import {
 	getBuildDetailTag,
 } from "@/src/entities/builds/api/buildsCache";
 import type { UpdateBuildType } from "@/src/entities/modify-build/model/updateBuild.types";
+import { isValidPresetCode, normalizePresetCode } from "@/src/shared/model/presetCode";
 
 export const dynamic = "force-dynamic";
 
@@ -35,10 +36,16 @@ export const PATCH = async (request: Request, context: RouteContext) => {
 		const { id } = await context.params;
 		const payload = (await request.json()) as UpdateBuildType;
 		const supabase = await createServerSupabaseClient();
+		const presetCode = normalizePresetCode(payload.preset_code);
+
+		if (presetCode && !isValidPresetCode(presetCode)) {
+			return NextResponse.json({ message: "Invalid preset code" }, { status: 400 });
+		}
 
 		const { error } = await supabase
 			.from("builds")
 			.update({
+				preset_code: presetCode,
 				postUuid: id,
 				youtube_link: payload.youtube_link || null,
 				title: payload.title,
