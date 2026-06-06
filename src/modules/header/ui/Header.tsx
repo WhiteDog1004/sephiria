@@ -28,6 +28,7 @@ import {
 	discordLogoutHandler,
 } from "../model/discordLoginHelper";
 import { useSession } from "../model/useUserInfo";
+import { CoffeeDonationButton } from "./CoffeeDonationButton";
 import { ModeToggle } from "./ModeToggle";
 
 export const Header = () => {
@@ -55,10 +56,10 @@ export const Header = () => {
 						</Typography>
 					</Row>
 				</Box>
-				<Box className="w-max p-0 gap-3">
+				<Box className="w-max p-0 gap-2">
 					<nav
 						aria-label="메인 메뉴"
-						className="hidden lg:flex items-center gap-2"
+						className="hidden lg:flex items-center gap-1"
 					>
 						{MENU_LIST.map((list) => (
 							<Link
@@ -66,7 +67,7 @@ export const Header = () => {
 								href={list.link}
 								aria-current={isActive(list.link) ? "page" : undefined}
 								className={cn(
-									"text-sm rounded-md px-2 py-1 transition-colors",
+									"whitespace-nowrap text-sm rounded-md px-1.5 py-1 transition-colors",
 									isActive(list.link)
 										? "text-blue-500 hover:text-blue-500 underline"
 										: "text-foreground/80 hover:text-foreground hover:bg-accent/50",
@@ -76,6 +77,7 @@ export const Header = () => {
 							</Link>
 						))}
 					</nav>
+					<CoffeeDonationButton />
 					<ModeToggle />
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>

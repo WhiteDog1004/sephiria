@@ -120,3 +120,40 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+@keyframes coffee-donation-shine {
+	0%,
+	60% {
+		left: -35%;
+	}
+	100% {
+		left: 115%;
+	}
+}
+
+.coffee-donation-button {
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0 0 12px color-mix(in oklab, #f59e0b 20%, transparent);
+}
+
+.coffee-donation-button::before {
+	position: absolute;
+	inset: 0 auto 0 -35%;
+	width: 24%;
+	content: "";
+	transform: skewX(-20deg);
+	background: linear-gradient(
+		90deg,
+		transparent,
+		color-mix(in oklab, #fef3c7 75%, transparent),
+		transparent
+	);
+	animation: coffee-donation-shine 3.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.coffee-donation-button::before {
+		animation: none;
+	}
+}
