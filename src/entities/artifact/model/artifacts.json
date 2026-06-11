@@ -1340,6 +1340,7 @@
 		"label_eng": "rat_pendant",
 		"tier": "advanced",
 		"effect": {
+			"sets": ["academy"],
 			"content": "[고유] 볼트 마법이 적을 향해 유도\nMP 재생 +2/5"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/rat_pendant.png",
