@@ -595,7 +595,7 @@
 		},
 		"image": "https://img.sephiria.wiki/artifacts/golden_hand_bell.png",
 		"description": "금빛 핸드벨.",
-		"level": 8,
+		"level": 4,
 		"created_at": "2025-08-05T11:11:37.706543+00:00",
 		"disabled": null
 	},
@@ -679,15 +679,15 @@
 	{
 		"id": 45,
 		"value": "lip",
-		"label_kor": "리포스테 검 조각",
+		"label_kor": "리포스테 봉 파편",
 		"label_eng": "lip",
 		"tier": "advanced",
 		"effect": {
 			"sets": ["firmness"],
-			"content": "[고유] 카운터: 가드 시 전방으로 짧은 근접 공격 생성함 (물리 피해의 50/100/170/260/380/550%)\n검과 방패 전용"
+			"content": "[고유] 카운터: 가드 시 전방으로 짧은 근접 공격 생성함 (물리 피해의 100/200/310/440/580/720%)\n봉 전용"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/lip.png",
-		"description": "소유자의 움직임을 방해하지 않는 정교한 검날.",
+		"description": "소유자의 움직임을 방해하지 않는 정교한 봉 파편.",
 		"level": 5,
 		"created_at": "2025-08-05T11:20:21.438951+00:00",
 		"disabled": null
