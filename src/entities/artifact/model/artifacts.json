@@ -6,7 +6,7 @@
 		"label_eng": "reinforced_potion_lid",
 		"tier": "common",
 		"effect": {
-			"sets": ["mystery"],
+			"sets": ["alchemy"],
 			"content": "[고유] 현재 HP가 30% 이하일 때 HP 포션 효과가 +30% 증가"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/reinforced_potion_lid.webp",
@@ -3636,10 +3636,10 @@
 		"tier": "solid",
 		"effect": {
 			"sets": ["glacier", "firmness"],
-			"content": "[고유] 일반 공격 적중 시, 16/24/36% 확률로 추가 피해를 가함.\n[피해량: 물리 피해 72/130/230% + 얼음속성 피해의 80/150/250% (일반 공격 피해로 간주됨)]"
+			"content": "[고유] 일반 공격 적중 시, 16/24/36% 확률로 추가 피해를 가함.\n[피해량: 물리 피해 40/75/125% + 얼음속성 피해의 80/150/250% (일반 공격 피해로 간주됨)]"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/eternal_winter.png",
-		"description": ". . .",
+		"description": "흙 속에 묻혀있었어. 이 세상 물건이 아닌 것 같군. - 타가",
 		"level": 2,
 		"created_at": "2026-01-09T03:21:35.951263+00:00",
 		"disabled": null
@@ -3897,6 +3897,269 @@
 		"description": "행성이 붉은빛으로 반짝였다는 내용 이후의 기록은 없습니다.",
 		"level": 4,
 		"created_at": "2026-02-12T14:57:12.574076+00:00",
+		"disabled": null
+	},
+	{
+		"id": 254,
+		"value": "water_spirit",
+		"label_kor": "물의 정령",
+		"label_eng": "water_spirit",
+		"tier": "solid",
+		"effect": {
+			"sets": ["lake", "precision"],
+			"content": "[고유] 발동형 아티팩트 (재사용 대기시간 8초)\n최대 MP 30%를 사용하여, 조준 지점에 '워터 그램' 시전\n[피해량: 최대 MP x 160/240/320/400/500]\n이 공격의 치명타 피해 10/15/20/25/30% 증폭"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/water_spirit.png",
+		"description": "평소에는 동그란 물구슬 안에서 놀고 있습니다.",
+		"level": 4,
+		"created_at": "2026-07-31T14:57:12.574076+00:00",
+		"disabled": null
+	},
+	{
+		"id": 255,
+		"value": "frost_guillotine",
+		"label_kor": "혹한의 길로틴",
+		"label_eng": "frost_guillotine",
+		"tier": "solid",
+		"effect": {
+			"sets": ["ice_weapon", "magic_engineering"],
+			"content": "[고유] 6초마다 주변 적 최대 4명에게 얼음+번개 속성 칼날을 소환. 적에게 감전 피해를 입히면 대기시간 1초로 감소\n피해량 : (번개속성 피해, 얼음속성 피해 중 높은 피해 + 낮은 피해의 30%) x 150/200/250%"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/frost_guillotine.png",
+		"description": "동물의 평등을 위해 만들어진 마법 장치",
+		"level": 2,
+		"created_at": "2026-07-31T14:57:12.574076+00:00",
+		"disabled": null
+	},
+	{
+		"id": 256,
+		"value": "archive_sun",
+		"label_kor": "서고의 태양",
+		"label_eng": "archive_sun",
+		"tier": "solid",
+		"effect": {
+			"sets": ["sun_sword", "academy"],
+			"content": "[고유] 마법서 피해량 1%당 태양검 피해량 1% 증가\n마법서 피해를 입힐 시, 태양검 0/0/1/1/2회 추가 발동"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/archive_sun.png",
+		"description": "수많은 기록과 연구가 태양의 정령을 현현시킨 순간을 기념한 모형.",
+		"level": 4,
+		"created_at": "2026-07-31T14:57:12.574076+00:00",
+		"disabled": null
+	},
+	{
+		"id": 257,
+		"value": "yakumo_kodachi",
+		"label_kor": "소태도 야쿠모",
+		"label_eng": "yakumo_kodachi",
+		"tier": "rare",
+		"effect": {
+			"sets": ["firmness"],
+			"content": "대시 공격 피해 +10/20/30/40%\n대시 회복 속도 +4/8/12/16%"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/yakumo_kodachi.png",
+		"description": "구름 위를 나는 듯 가벼운 기운이어라.",
+		"level": 3,
+		"created_at": "2026-07-31T14:57:12.574076+00:00",
+		"disabled": null
+	},
+	{
+		"id": 258,
+		"value": "angry_potato",
+		"label_kor": "화난 감자",
+		"label_eng": "angry_potato",
+		"tier": "rare",
+		"effect": {
+			"sets": ["alchemy"],
+			"content": "[고유] 방어 관통 +4/7/11/15%\n행운 +1/2/3/4\n이동 속도 +5/5/10/10%"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/angry_potato.png",
+		"description": "물 대신 다양한 포션을 먹여 키운 감자.",
+		"level": 3,
+		"created_at": "2026-07-31T14:57:12.574076+00:00",
+		"disabled": null
+	},
+	{
+		"id": 259,
+		"value": "wanderer_blessing",
+		"label_kor": "나그네의 축복",
+		"label_eng": "wanderer_blessing",
+		"tier": "rare",
+		"effect": {
+			"sets": ["alchemy"],
+			"content": "[고유] 무기 피해량 +4/8/12%\n마법서 피해량 +4/8/12%\n고정 피해 +0/1/2\n이동 속도 +3/6/9%"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/wanderer_blessing.png",
+		"description": "나그네가 쓰다듬어 주었다.",
+		"level": 2,
+		"created_at": "2026-07-31T14:57:12.574076+00:00",
+		"disabled": null
+	},
+	{
+		"id": 260,
+		"value": "alchemist_flask",
+		"label_kor": "나그네의 축복",
+		"label_eng": "alchemist_flask",
+		"tier": "rare",
+		"effect": {
+			"sets": ["alchemy"],
+			"content": "[고유] 포션을 마시면 15초 동안 모든 피해 증폭 +5/10/15 증가 버프 획득"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/alchemist_flask.png",
+		"description": "단순하지만 수많은 실험을 통해 계량된 유리병",
+		"level": 2,
+		"created_at": "2026-07-31T14:57:12.574076+00:00",
+		"disabled": null
+	},
+	{
+		"id": 261,
+		"value": "courage_amulet",
+		"label_kor": "용기의 아뮬렛",
+		"label_eng": "courage_amulet",
+		"tier": "advanced",
+		"effect": {
+			"sets": ["firmness"],
+			"content": "[고유] 무기 피해량 +3/6/10%\nHP 흡수 +1/1/1\n대검 전용"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/courage_amulet.png",
+		"description": "소지하면 왠지 힘이 샘솟는 것 같다.",
+		"level": 2,
+		"created_at": "2026-07-31T14:57:12.574076+00:00",
+		"disabled": null
+	},
+	{
+		"id": 262,
+		"value": "whirlwind_stone",
+		"label_kor": "회오리 돌",
+		"label_eng": "whirlwind_stone",
+		"tier": "advanced",
+		"effect": {
+			"content": "[고유] 모든 피해 증폭 +2/?/?/?%\n이동 속도 +6/?/?/?%"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/whirlwind_stone.png",
+		"description": "시간과 공간이 휘몰아치는 곳에서 왔다고 전해지는 돌",
+		"level": 3,
+		"created_at": "2026-07-31T00:00:00+00:00",
+		"disabled": null
+	},
+	{
+		"id": 263,
+		"value": "toxic_spore_pouch",
+		"label_kor": "맹독 포자 주머니",
+		"label_eng": "toxic_spore_pouch",
+		"tier": "rare",
+		"effect": {
+			"content": "보스와 미니보스에게 주는 추가 피해량 +4/?/?/?"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/toxic_spore_pouch.png",
+		"description": "껍질이 딱딱해도 취급에 주의하세요.",
+		"level": 3,
+		"created_at": "2026-07-31T00:00:00+00:00",
+		"disabled": null
+	},
+	{
+		"id": 264,
+		"value": "topaz_badge",
+		"label_kor": "토파즈 배지",
+		"label_eng": "topaz_badge",
+		"tier": "advanced",
+		"effect": {
+			"content": "[고유] 무기 피해량 +2/?/?/?/?%\n번개속성 피해 +2/?/?/?/?"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/topaz_badge.png",
+		"description": "아카데미에서 총명을 보인 학생에게 주어지는 배지",
+		"level": 4,
+		"created_at": "2026-07-31T00:00:00+00:00",
+		"disabled": null
+	},
+	{
+		"id": 265,
+		"value": "garnet_badge",
+		"label_kor": "가넷 배지",
+		"label_eng": "garnet_badge",
+		"tier": "advanced",
+		"effect": {
+			"content": "[고유] 무기 피해량 +2/?/?/?/?%\n화염속성 피해 +2/?/?/?/?"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/garnet_badge.png",
+		"description": "아카데미에서 열정을 보인 학생에게 주어지는 배지",
+		"level": 4,
+		"created_at": "2026-07-31T00:00:00+00:00",
+		"disabled": null
+	},
+	{
+		"id": 266,
+		"value": "diamond_badge",
+		"label_kor": "다이아몬드 배지",
+		"label_eng": "diamond_badge",
+		"tier": "advanced",
+		"effect": {
+			"content": "[고유] 무기 피해량 +2/?/?/?/?%\n얼음속성 피해 +2/?/?/?/?"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/diamond_badge.png",
+		"description": "",
+		"level": 4,
+		"created_at": "2026-07-31T00:00:00+00:00",
+		"disabled": null
+	},
+	{
+		"id": 267,
+		"value": "red_mushroom",
+		"label_kor": "빨간 버섯",
+		"label_eng": "red_mushroom",
+		"tier": "advanced",
+		"effect": {
+			"content": "[고유] 디버프로 주는 피해량 +4/?/?/?%당 공격 속도 1% 증가"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/red_mushroom.png",
+		"description": "스튜로 만들기에는 수상한 색을 띠고 있습니다.",
+		"level": 3,
+		"created_at": "2026-07-31T00:00:00+00:00",
+		"disabled": null
+	},
+	{
+		"id": 268,
+		"value": "tome_of_transmutation_lightning",
+		"label_kor": "변환의 서 : 번개",
+		"label_eng": "tome_of_transmutation_lightning",
+		"tier": "rare",
+		"effect": {
+			"content": "[고유] 추가 물리 피해가 0이 되고, 그 20/?/?/?/?%가 번개속성 피해로 변환"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/tome_of_transmutation_lightning.png",
+		"description": "소지자의 힘을 번개 속성으로 바꾸는 책, 처음의 무력감은 금방 사라집니다",
+		"level": 4,
+		"created_at": "2026-07-31T00:00:00+00:00",
+		"disabled": null
+	},
+	{
+		"id": 269,
+		"value": "tome_of_transmutation_ice",
+		"label_kor": "변환의 서 : 얼음",
+		"label_eng": "tome_of_transmutation_ice",
+		"tier": "rare",
+		"effect": {
+			"content": "[고유] 추가 물리 피해가 0이 되고, 그 20/?/?/?/?%가 얼음속성 피해로 변환"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/tome_of_transmutation_ice.png",
+		"description": "소지자의 힘을 얼음 속성으로 바꾸는 책, 처음의 무력감은 금방 사라집니다.",
+		"level": 4,
+		"created_at": "2026-07-31T00:00:00+00:00",
+		"disabled": null
+	},
+	{
+		"id": 270,
+		"value": "tome_of_transmutation_fire",
+		"label_kor": "변환의 서 : 화염",
+		"label_eng": "tome_of_transmutation_fire",
+		"tier": "rare",
+		"effect": {
+			"content": "[고유] 추가 물리 피해가 0이 되고, 그 20/?/?/?/?%가 화염속성 피해로 변환"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/tome_of_transmutation_fire.png",
+		"description": "소지자의 힘을 화염 속성으로 바꾸는 책, 처음의 무력감은 금방 사라집니다",
+		"level": 4,
+		"created_at": "2026-07-31T00:00:00+00:00",
 		"disabled": null
 	}
 ]

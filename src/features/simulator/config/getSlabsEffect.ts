@@ -139,7 +139,7 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 	// compete 경쟁
 	compete: (x, y, _, item, effects) => {
 		const baseOffsets = [
-			{ dx: 0, dy: 1, value: 2 },
+			{ dx: 0, dy: 1, value: 3 },
 			{ dx: 0, dy: -1, value: -1 },
 			{ dx: -1, dy: -1, value: -1 },
 		];
@@ -385,7 +385,7 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 	preparation: (x, y, _, item, effects) => {
 		const baseOffsets = [
 			{ dx: -1, dy: -1 },
-			{ dx: 1, dy: 1 },
+			{ dx: 1, dy: 1, value: 2 },
 		];
 		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
 	},
@@ -403,7 +403,7 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 	// tide 파도
 	tide: (x, y, _, item, effects) => {
 		const baseOffsets = [
-			{ dx: 1, dy: -1, value: 2 },
+			{ dx: 1, dy: -1, value: 3 },
 			{ dx: 0, dy: -1, value: -1 },
 			{ dx: 1, dy: 0, value: -1 },
 		];
@@ -426,6 +426,25 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 		const baseOffsets = [
 			{ dx: 0, dy: -1, value: 2 },
 			{ dx: -1, dy: -2 },
+		];
+		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
+	},
+
+	// rally 집결
+	rally: (x, y, _, item, effects) => {
+		const baseOffsets = [
+			{ dx: 0, dy: -1, value: 2 },
+			{ dx: -1, dy: 0, value: 2 },
+		];
+		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
+	},
+
+	// development 발전
+	development: (x, y, _, item, effects) => {
+		const baseOffsets = [
+			{ dx: -1, dy: -1, value: 2 },
+			{ dx: 0, dy: -1 },
+			{ dx: -1, dy: 0 },
 		];
 		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
 	},
@@ -543,6 +562,57 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 		if (flag && flag[targetSlotIgnore] !== undefined) {
 			flag[targetSlotIgnore] = "ignore";
 		}
+	},
+
+	// junction 접합
+	junction: (x, y, _, item, effects) => {
+		const baseOffsets = [
+			{ dx: 0, dy: -1 },
+			{ dx: 0, dy: -2 },
+			{ dx: 0, dy: -3 },
+			{ dx: 1, dy: 0 },
+			{ dx: 2, dy: 0 },
+			{ dx: 3, dy: 0 },
+		];
+		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
+	},
+
+	// last_stand 배수진
+	last_stand: (x, y, _, __, effects) => {
+		const baseOffsets = [
+			{ dx: 0, dy: -1, value: 5 },
+			{ dx: -1, dy: 0, value: -1 },
+			{ dx: 1, dy: 0, value: -1 },
+			{ dx: 0, dy: 1, value: -1 },
+		];
+		return calculateRotatedEffects(baseOffsets, x, y, effects);
+	},
+
+	// flag 깃발
+	flag: (x, y, _, __, effects) => {
+		if (x !== 0) return;
+
+		const baseOffsets = [
+			{ dx: 0, dy: -1 },
+			{ dx: 1, dy: 0 },
+			{ dx: 2, dy: 0, value: 2 },
+			{ dx: 3, dy: 0, value: 3 },
+			{ dx: 0, dy: 1, value: -1 },
+		];
+		return calculateRotatedEffects(baseOffsets, x, y, effects);
+	},
+
+	// defender 방어수
+	defender: (x, y, _, __, effects) => {
+		const baseOffsets = [
+			{ dx: -1, dy: -1 },
+			{ dx: 1, dy: -1, value: 2 },
+			{ dx: -1, dy: 0, value: -1 },
+			{ dx: 1, dy: 0, value: -1 },
+			{ dx: -1, dy: 1, value: 2 },
+			{ dx: 1, dy: 1 },
+		];
+		return calculateRotatedEffects(baseOffsets, x, y, effects);
 	},
 
 	// shade 차양
@@ -692,14 +762,10 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 	// daydream 백일몽
 	daydream: (x, y, _, item, effects) => {
 		const baseOffsets = [
-			{ dx: -1, dy: -1 },
-			{ dx: -1, dy: -2 },
-			{ dx: 1, dy: -1 },
-			{ dx: 1, dy: -2 },
-			{ dx: -1, dy: 1 },
-			{ dx: -1, dy: 2 },
-			{ dx: 1, dy: 1 },
-			{ dx: 1, dy: 2 },
+			{ dx: -1, dy: -1, value: 2 },
+			{ dx: 1, dy: -1, value: 2 },
+			{ dx: -1, dy: 1, value: 2 },
+			{ dx: 1, dy: 1, value: 2 },
 		];
 		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
 	},

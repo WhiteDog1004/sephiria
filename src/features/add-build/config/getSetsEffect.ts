@@ -142,4 +142,10 @@ export const SETS_EFFECT_COUNT_LABEL: Record<string, Record<number, string>> = {
 		4: "+6 가장 높은 속성 피해",
 		6: "모든 속성 피해 +10% 증폭",
 	},
+	// 연금술
+	alchemy: {
+		1: "+1 포션 가방 슬롯",
+		2: "+1 포션 가방 슬롯",
+		3: "무작위 포션 1개 (일반~희귀)",
+	},
 };

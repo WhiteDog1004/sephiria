@@ -42,7 +42,7 @@ export const COSTUMES: CostumeMap = {
 		name: "주황색 토끼",
 		unlock: undefined,
 		story: "알게 모르게 색이 조금씩 다릅니다. 본인만 신경 쓰고 있습니다.",
-		options: ["최대 HP +10", "최대 MP -15"],
+		options: ["+14% 디버프로 주는 피해량", "-8 방어력"],
 	},
 	red_rabbit: {
 		name: "빨간망토 토끼",
@@ -54,7 +54,7 @@ export const COSTUMES: CostumeMap = {
 		name: "흰색 토끼",
 		unlock: undefined,
 		story: "시력이 조금 나쁘지만 매력적입니다.",
-		options: ["일반 공격 피해 +8%", "특수 공격 피해 -5%"],
+		options: ["+12% 특수 공격 피해", "+8 최대 MP", "-15 회피"],
 	},
 	wing_ear_rabbit: {
 		name: "날개 귀 토끼",
@@ -69,8 +69,8 @@ export const COSTUMES: CostumeMap = {
 		story: "그늘진 얼굴이지만 모자챙이 넓을 뿐입니다.",
 		options: [
 			"시작 아이템 : 파이어 볼트",
-			"화염속성 피해 +5",
-			"얼음속성 피해 -5",
+			"+15% 화염속성 피해 증폭",
+			"-20% 물리 피해 증폭",
 		],
 	},
 	red_fox: {
@@ -85,8 +85,8 @@ export const COSTUMES: CostumeMap = {
 		story: "특이하게도 꼬리가 없습니다.",
 		options: [
 			"시작 아이템 : 라이트닝 볼트",
-			"번개속성 피해 +5",
-			"화염속성 피해 -5",
+			"+15% 번개속성 피해 증폭",
+			"-20% 물리 피해 증폭",
 		],
 	},
 	mole: {
@@ -102,13 +102,13 @@ export const COSTUMES: CostumeMap = {
 		options: ["무한 대시", "대시 무적 비활성화"],
 	},
 	wizard_rabbit: {
-		name: "위자드 토끼",
+		name: "마법사 토끼",
 		unlock: "마법으로 적 50마리 처치",
 		story: "마법 좀 하는 토끼입니다.",
 		options: [
 			"시작 아이템 : 아이스 볼트",
-			"얼음속성 피해 +5",
-			"번개속성 피해 -5",
+			"+15% 얼음속성 피해 증폭",
+			"-20% 물리 피해 증폭",
 		],
 	},
 	ghost: {
@@ -135,7 +135,7 @@ export const COSTUMES: CostumeMap = {
 		name: "스켈레톤",
 		unlock: "단일 판에서 잃은 체력 누적 333 달성",
 		story: "...",
-		options: ["사망 시 60% 체력으로 부활 (2회)", "최대 HP가 50으로 고정됨"],
+		options: ["시작 아이템 : '저주' 석판", "가하는 피해가 20% 증폭"],
 	},
 	wings_lost_bat: {
 		name: "날개 잃은 박쥐",
@@ -193,5 +193,11 @@ export const COSTUMES: CostumeMap = {
 		unlock: "한 모험에서 최대 레벨을 달성한 아티팩트를 12개 소지하세요.",
 		story: "외형만으로 나이를 전혀 가늠할 수 없습니다..",
 		options: ["아티팩트 피해량 +15%", "무기 피해량 -15%"],
+	},
+	forest_cat: {
+		name: "숲 고양이",
+		unlock: "2500 잎을 모으세요.",
+		story: "곤란할 때면 오른손을 들어올리는 버릇이 있습니다.",
+		options: ["탐험 시작 시 800 잎", "+10% 이동 속도"],
 	},
 };

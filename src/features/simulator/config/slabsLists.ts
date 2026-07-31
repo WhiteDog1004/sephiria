@@ -4,6 +4,7 @@ export type SlabsData = {
 	eng_label: string;
 	image: string;
 	rotate?: boolean;
+	activationCondition?: string;
 	tier: string;
 };
 
@@ -15,8 +16,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "common",
 		ko_label: "기사도",
 		eng_label: "chivalry",
-		image:
-			"/slabs/chivalry.png",
+		image: "/slabs/chivalry.png",
 		rotate: true,
 	},
 	{
@@ -24,16 +24,14 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "common",
 		ko_label: "건조",
 		eng_label: "dry",
-		image:
-			"/slabs/dry.png",
+		image: "/slabs/dry.png",
 	},
 	{
 		value: "approximation",
 		tier: "common",
 		ko_label: "근사",
 		eng_label: "approximation",
-		image:
-			"/slabs/approximation.png",
+		image: "/slabs/approximation.png",
 		rotate: true,
 	},
 	{
@@ -41,8 +39,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "common",
 		ko_label: "도래",
 		eng_label: "advent",
-		image:
-			"/slabs/advent.png",
+		image: "/slabs/advent.png",
 		rotate: true,
 	},
 	{
@@ -50,16 +47,14 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "common",
 		ko_label: "선의",
 		eng_label: "linear",
-		image:
-			"/slabs/linear.png",
+		image: "/slabs/linear.png",
 	},
 	{
 		value: "sight",
 		tier: "common",
 		ko_label: "시선",
 		eng_label: "sight",
-		image:
-			"/slabs/sight.png",
+		image: "/slabs/sight.png",
 		rotate: true,
 	},
 	{
@@ -67,8 +62,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "common",
 		ko_label: "악수",
 		eng_label: "handshake",
-		image:
-			"/slabs/handshake.png",
+		image: "/slabs/handshake.png",
 		rotate: true,
 	},
 	{
@@ -76,16 +70,14 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "common",
 		ko_label: "운명",
 		eng_label: "fate",
-		image:
-			"/slabs/fate.webp",
+		image: "/slabs/fate.webp",
 	},
 	{
 		value: "wit",
 		tier: "common",
 		ko_label: "재치",
 		eng_label: "wit",
-		image:
-			"/slabs/wit.png",
+		image: "/slabs/wit.png",
 		rotate: true,
 	},
 	{
@@ -93,8 +85,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "common",
 		ko_label: "착취",
 		eng_label: "exploitation",
-		image:
-			"/slabs/exploitation.png",
+		image: "/slabs/exploitation.png",
 		rotate: true,
 	},
 	{
@@ -102,8 +93,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "common",
 		ko_label: "화합",
 		eng_label: "unity",
-		image:
-			"/slabs/unity.png",
+		image: "/slabs/unity.png",
 		rotate: true,
 	},
 	{
@@ -111,16 +101,14 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "common",
 		ko_label: "환호",
 		eng_label: "cheer",
-		image:
-			"/slabs/cheer.webp",
+		image: "/slabs/cheer.webp",
 	},
 	{
 		value: "hope",
 		tier: "common",
 		ko_label: "희망",
 		eng_label: "hope",
-		image:
-			"/slabs/hope.png",
+		image: "/slabs/hope.png",
 		rotate: true,
 	},
 
@@ -130,8 +118,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "advanced",
 		ko_label: "경쟁",
 		eng_label: "compete",
-		image:
-			"/slabs/compete.png",
+		image: "/slabs/compete.png",
 		rotate: true,
 	},
 	{
@@ -139,8 +126,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "advanced",
 		ko_label: "고동",
 		eng_label: "beating",
-		image:
-			"/slabs/beating.png",
+		image: "/slabs/beating.png",
 		rotate: true,
 	},
 	{
@@ -148,8 +134,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "advanced",
 		ko_label: "고양",
 		eng_label: "home_town",
-		image:
-			"/slabs/home-town.png",
+		image: "/slabs/home-town.png",
 		rotate: true,
 	},
 	{
@@ -157,8 +142,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "advanced",
 		ko_label: "과거",
 		eng_label: "past",
-		image:
-			"/slabs/past.png",
+		image: "/slabs/past.png",
 		rotate: true,
 	},
 	{
@@ -166,8 +150,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "advanced",
 		ko_label: "미래",
 		eng_label: "future",
-		image:
-			"/slabs/future.png",
+		image: "/slabs/future.png",
 		rotate: true,
 	},
 	{
@@ -175,24 +158,21 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "advanced",
 		ko_label: "분배",
 		eng_label: "distribution",
-		image:
-			"/slabs/distribution.png",
+		image: "/slabs/distribution.png",
 	},
 	{
 		value: "triceps",
 		tier: "advanced",
 		ko_label: "삼두",
 		eng_label: "triceps",
-		image:
-			"/slabs/triceps.png",
+		image: "/slabs/triceps.png",
 	},
 	{
 		value: "harvesting",
 		tier: "advanced",
 		ko_label: "수확",
 		eng_label: "harvesting",
-		image:
-			"/slabs/harvesting.png",
+		image: "/slabs/harvesting.png",
 		rotate: true,
 	},
 	{
@@ -200,17 +180,15 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "advanced",
 		ko_label: "쌍성",
 		eng_label: "binary_star",
-		image:
-			"/slabs/binary_star.png",
+		image: "/slabs/binary_star.png",
 		rotate: true,
 	},
 	{
 		value: "nurture",
-		tier: "advanced",
+		tier: "common",
 		ko_label: "양육",
 		eng_label: "nurture",
-		image:
-			"/slabs/nurture.png",
+		image: "/slabs/nurture.png",
 		rotate: true,
 	},
 	{
@@ -218,16 +196,14 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "advanced",
 		ko_label: "열망",
 		eng_label: "yearning",
-		image:
-			"/slabs/yearning.png",
+		image: "/slabs/yearning.png",
 	},
 	{
 		value: "agglutination",
 		tier: "advanced",
 		ko_label: "응집",
 		eng_label: "agglutination",
-		image:
-			"/slabs/agglutination.png",
+		image: "/slabs/agglutination.png",
 		rotate: true,
 	},
 	{
@@ -235,16 +211,14 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "advanced",
 		ko_label: "입구",
 		eng_label: "entrance",
-		image:
-			"/slabs/entrance.png",
+		image: "/slabs/entrance.png",
 	},
 	{
 		value: "joke",
-		tier: "advanced",
+		tier: "common",
 		ko_label: "장난",
 		eng_label: "joke",
-		image:
-			"/slabs/joke.png",
+		image: "/slabs/joke.png",
 		rotate: true,
 	},
 	{
@@ -252,8 +226,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "advanced",
 		ko_label: "적재",
 		eng_label: "load",
-		image:
-			"/slabs/load.png",
+		image: "/slabs/load.png",
 		rotate: true,
 	},
 	{
@@ -261,8 +234,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "advanced",
 		ko_label: "전이",
 		eng_label: "transition",
-		image:
-			"/slabs/transition.png",
+		image: "/slabs/transition.png",
 		rotate: true,
 	},
 	{
@@ -270,8 +242,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "advanced",
 		ko_label: "전진",
 		eng_label: "advance",
-		image:
-			"/slabs/advance.png",
+		image: "/slabs/advance.png",
 		rotate: true,
 	},
 	{
@@ -279,16 +250,14 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "advanced",
 		ko_label: "정의",
 		eng_label: "justice",
-		image:
-			"/slabs/justice.png",
+		image: "/slabs/justice.png",
 	},
 	{
 		value: "preparation",
 		tier: "advanced",
 		ko_label: "준비",
 		eng_label: "preparation",
-		image:
-			"/slabs/preparation.png",
+		image: "/slabs/preparation.png",
 		rotate: true,
 	},
 	{
@@ -296,16 +265,14 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "advanced",
 		ko_label: "출구",
 		eng_label: "exit",
-		image:
-			"/slabs/exit.png",
+		image: "/slabs/exit.png",
 	},
 	{
 		value: "tide",
 		tier: "advanced",
 		ko_label: "파도",
 		eng_label: "tide",
-		image:
-			"/slabs/tide.png",
+		image: "/slabs/tide.png",
 		rotate: true,
 	},
 	{
@@ -313,16 +280,30 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "advanced",
 		ko_label: "헌정",
 		eng_label: "dedication",
-		image:
-			"/slabs/dedication.png",
+		image: "/slabs/dedication.png",
 	},
 	{
 		value: "honor",
 		tier: "advanced",
 		ko_label: "명예",
 		eng_label: "honor",
-		image:
-			"/slabs/honor.png",
+		image: "/slabs/honor.png",
+		rotate: true,
+	},
+	{
+		value: "rally",
+		tier: "advanced",
+		ko_label: "집결",
+		eng_label: "rally",
+		image: "/slabs/rally.png",
+		rotate: true,
+	},
+	{
+		value: "development",
+		tier: "advanced",
+		ko_label: "발전",
+		eng_label: "development",
+		image: "/slabs/development.png",
 		rotate: true,
 	},
 
@@ -332,16 +313,14 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "rare",
 		ko_label: "기반",
 		eng_label: "base",
-		image:
-			"/slabs/base.png",
+		image: "/slabs/base.png",
 	},
 	{
 		value: "warrant",
 		tier: "rare",
 		ko_label: "권능",
 		eng_label: "warrant",
-		image:
-			"/slabs/warrant.png",
+		image: "/slabs/warrant.png",
 		rotate: true,
 	},
 	{
@@ -349,24 +328,21 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "rare",
 		ko_label: "단절",
 		eng_label: "disconnection",
-		image:
-			"/slabs/disconnection.png",
+		image: "/slabs/disconnection.png",
 	},
 	{
 		value: "concurrency",
 		tier: "rare",
 		ko_label: "동시성",
 		eng_label: "concurrency",
-		image:
-			"/slabs/concurrency.png",
+		image: "/slabs/concurrency.png",
 	},
 	{
 		value: "vow",
 		tier: "rare",
 		ko_label: "맹세",
 		eng_label: "vow",
-		image:
-			"/slabs/vow.png",
+		image: "/slabs/vow.png",
 		rotate: true,
 	},
 	{
@@ -374,8 +350,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "rare",
 		ko_label: "반항",
 		eng_label: "rebellion",
-		image:
-			"/slabs/rebellion.png",
+		image: "/slabs/rebellion.png",
 		rotate: true,
 	},
 	{
@@ -383,17 +358,45 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "rare",
 		ko_label: "이음",
 		eng_label: "connection",
-		image:
-			"/slabs/connection.png",
+		image: "/slabs/connection.png",
 		rotate: true,
+	},
+	{
+		value: "junction",
+		tier: "rare",
+		ko_label: "접합",
+		eng_label: "junction",
+		image: "/slabs/junction.png",
+		rotate: true,
+	},
+	{
+		value: "last_stand",
+		tier: "rare",
+		ko_label: "배수진",
+		eng_label: "last_stand",
+		image: "/slabs/last_stand.png",
+	},
+	{
+		value: "flag",
+		tier: "rare",
+		ko_label: "깃발",
+		eng_label: "flag",
+		image: "/slabs/flag.png",
+		activationCondition: "[위치] 왼쪽 끝",
+	},
+	{
+		value: "defender",
+		tier: "rare",
+		ko_label: "방어수",
+		eng_label: "defender",
+		image: "/slabs/defender.png",
 	},
 	{
 		value: "shade",
 		tier: "rare",
 		ko_label: "차양",
 		eng_label: "shade",
-		image:
-			"/slabs/shade.png",
+		image: "/slabs/shade.png",
 	},
 
 	// LEGEND
@@ -402,24 +405,21 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "legend",
 		ko_label: "가시",
 		eng_label: "thorn",
-		image:
-			"/slabs/thorn.png",
+		image: "/slabs/thorn.png",
 	},
 	{
 		value: "boundary",
 		tier: "legend",
 		ko_label: "경계",
 		eng_label: "boundary",
-		image:
-			"/slabs/boundary.png",
+		image: "/slabs/boundary.png",
 	},
 	{
 		value: "sheen",
 		tier: "legend",
 		ko_label: "광휘",
 		eng_label: "sheen",
-		image:
-			"/slabs/sheen.png",
+		image: "/slabs/sheen.png",
 		rotate: true,
 	},
 	{
@@ -427,16 +427,14 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "legend",
 		ko_label: "기적",
 		eng_label: "miracle",
-		image:
-			"/slabs/miracle.png",
+		image: "/slabs/miracle.png",
 	},
 	{
 		value: "daydream",
 		tier: "legend",
 		ko_label: "백일몽",
 		eng_label: "daydream",
-		image:
-			"/slabs/daydream.png",
+		image: "/slabs/daydream.png",
 		rotate: true,
 	},
 	{
@@ -444,8 +442,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "legend",
 		ko_label: "압축",
 		eng_label: "compression",
-		image:
-			"/slabs/compression.png",
+		image: "/slabs/compression.png",
 		rotate: true,
 	},
 	{
@@ -453,8 +450,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "legend",
 		ko_label: "확신",
 		eng_label: "certitude",
-		image:
-			"/slabs/certitude.png",
+		image: "/slabs/certitude.png",
 		rotate: true,
 	},
 	{
@@ -462,16 +458,14 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "legend",
 		ko_label: "환대",
 		eng_label: "hospitality",
-		image:
-			"/slabs/hospitality.png",
+		image: "/slabs/hospitality.png",
 	},
 	{
 		value: "courage",
 		tier: "legend",
 		ko_label: "용기",
 		eng_label: "courage",
-		image:
-			"/slabs/courage.png",
+		image: "/slabs/courage.png",
 		rotate: true,
 	},
 	{
@@ -479,8 +473,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		tier: "legend",
 		ko_label: "평화",
 		eng_label: "peace",
-		image:
-			"/slabs/peace.png",
+		image: "/slabs/peace.png",
 		rotate: true,
 	},
 ];

@@ -38,4 +38,5 @@ export const EFFECT_LABELS: Record<string, string> = {
 	curse: "저주",
 	bargaining: "교섭",
 	element: "원소",
+	alchemy: "연금술",
 };

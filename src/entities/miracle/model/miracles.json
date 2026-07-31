@@ -188,5 +188,34 @@
 		"value_kor": "학자",
 		"image": "https://img.sephiria.wiki/miracle/scholar.png",
 		"effects": { "reward": ["+15 MP 재생"] }
+	},
+	{
+		"id": 20,
+		"uuid": "61d5c2b1-a43e-4b4b-969b-efcff1f55813",
+		"created_at": "2026-07-31T09:31:33.453792+00:00",
+		"value": "fisher",
+		"value_kor": "낚시꾼",
+		"image": "https://img.sephiria.wiki/miracle/fisher.png",
+		"effects": {
+			"reward": ["+15% MP를 소모하는 능력의 피해량", "+15 최대 MP"]
+		}
+	},
+	{
+		"id": 21,
+		"uuid": "61d5c2b1-a43e-4b4b-969b-efcff1f55715",
+		"created_at": "2026-07-31T09:31:33.453792+00:00",
+		"value": "electromancer",
+		"value_kor": "전격술사",
+		"image": "https://img.sephiria.wiki/miracle/electromancer.png",
+		"effects": { "reward": ["+7 번개속성 피해", "+18% 감전 피해량"] }
+	},
+	{
+		"id": 22,
+		"uuid": "61d5c2b1-a43e-4b4b-969b-efcff1f55846",
+		"created_at": "2026-07-31T09:31:33.453792+00:00",
+		"value": "meteoric_smith",
+		"value_kor": "운철 대장장이",
+		"image": "https://img.sephiria.wiki/miracle/meteoric_smith.png",
+		"effects": { "reward": ["+2 태양검 개수 상한", "+10% 태양검 피해량"] }
 	}
 ]
