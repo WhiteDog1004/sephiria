@@ -1,4 +1,5 @@
 import { getDetailList } from "@/src/features/costume/model/actions";
+import { Congratulation } from "@/src/modules/home/ui/Congratulation";
 import { Footer } from "@/src/modules/home/ui/Footer";
 import { ShortcutBox } from "@/src/modules/home/ui/ShortcutBox";
 import { Box } from "@/src/shared/ui/box";
@@ -9,6 +10,7 @@ const Main = async () => {
 	if (typeof window !== "undefined") return;
 	return (
 		<Box className="flex-col gap-8 p-0">
+			<Congratulation />
 			<ShortcutBox data={data || []} />
 			<Footer />
 		</Box>
