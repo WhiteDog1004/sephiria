@@ -4049,7 +4049,7 @@
 		"label_eng": "toxic_spore_pouch",
 		"tier": "rare",
 		"effect": {
-			"content": "보스와 미니보스에게 주는 추가 피해량 +4/?/?/?"
+			"content": "보스와 미니보스에게 주는 추가 피해량 +4/6/8/10%"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/toxic_spore_pouch.png",
 		"description": "껍질이 딱딱해도 취급에 주의하세요.",
@@ -4064,7 +4064,7 @@
 		"label_eng": "topaz_badge",
 		"tier": "advanced",
 		"effect": {
-			"content": "[고유] 무기 피해량 +2/?/?/?/?%\n번개속성 피해 +2/?/?/?/?"
+			"content": "[고유] 무기 피해량 +2/4/6/8/10%\n번개속성 피해 +2/3/4/5/6"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/topaz_badge.png",
 		"description": "아카데미에서 총명을 보인 학생에게 주어지는 배지",
@@ -4079,7 +4079,7 @@
 		"label_eng": "garnet_badge",
 		"tier": "advanced",
 		"effect": {
-			"content": "[고유] 무기 피해량 +2/?/?/?/?%\n화염속성 피해 +2/?/?/?/?"
+			"content": "[고유] 무기 피해량 +2/4/6/8/10%\n화염속성 피해 +2/3/4/5/6"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/garnet_badge.png",
 		"description": "아카데미에서 열정을 보인 학생에게 주어지는 배지",
@@ -4094,7 +4094,7 @@
 		"label_eng": "diamond_badge",
 		"tier": "advanced",
 		"effect": {
-			"content": "[고유] 무기 피해량 +2/?/?/?/?%\n얼음속성 피해 +2/?/?/?/?"
+			"content": "[고유] 무기 피해량 +2/4/6/8/10%\n얼음속성 피해 +2/3/4/5/6"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/diamond_badge.png",
 		"description": "",
@@ -4124,7 +4124,7 @@
 		"label_eng": "tome_of_transmutation_lightning",
 		"tier": "rare",
 		"effect": {
-			"content": "[고유] 추가 물리 피해가 0이 되고, 그 20/?/?/?/?%가 번개속성 피해로 변환"
+			"content": "[고유] 추가 물리 피해가 0이 되고, 그 20/40/60/80/100%가 번개속성 피해로 변환"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/tome_of_transmutation_lightning.png",
 		"description": "소지자의 힘을 번개 속성으로 바꾸는 책, 처음의 무력감은 금방 사라집니다",
@@ -4139,7 +4139,7 @@
 		"label_eng": "tome_of_transmutation_ice",
 		"tier": "rare",
 		"effect": {
-			"content": "[고유] 추가 물리 피해가 0이 되고, 그 20/?/?/?/?%가 얼음속성 피해로 변환"
+			"content": "[고유] 추가 물리 피해가 0이 되고, 그 20/40/60/80/100%가 얼음속성 피해로 변환"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/tome_of_transmutation_ice.png",
 		"description": "소지자의 힘을 얼음 속성으로 바꾸는 책, 처음의 무력감은 금방 사라집니다.",
@@ -4154,11 +4154,41 @@
 		"label_eng": "tome_of_transmutation_fire",
 		"tier": "rare",
 		"effect": {
-			"content": "[고유] 추가 물리 피해가 0이 되고, 그 20/?/?/?/?%가 화염속성 피해로 변환"
+			"content": "[고유] 추가 물리 피해가 0이 되고, 그 20/40/60/80/100%가 화염속성 피해로 변환"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/tome_of_transmutation_fire.png",
 		"description": "소지자의 힘을 화염 속성으로 바꾸는 책, 처음의 무력감은 금방 사라집니다",
 		"level": 4,
+		"created_at": "2026-07-31T00:00:00+00:00",
+		"disabled": null
+	},
+	{
+		"id": 271,
+		"value": "bento",
+		"label_kor": "도시락",
+		"label_eng": "bento",
+		"tier": "advanced",
+		"effect": {
+			"content": "HP 흡수 +?/?/?/?/2"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/bento.png",
+		"description": "생당근, 삶은 당근, 구운 당근이 들어있는 것 같다.",
+		"level": 4,
+		"created_at": "2026-07-31T00:00:00+00:00",
+		"disabled": null
+	},
+	{
+		"id": 272,
+		"value": "cursed_letter",
+		"label_kor": "저주받은 편지",
+		"label_eng": "cursed_letter",
+		"tier": "advanced",
+		"effect": {
+			"content": "가시 +?/?/200%\n공격 속도 -?/?/4%"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/cursed_letter.png",
+		"description": "나흘째 떠나지 못한 편지. 찌릿찌릿한 원한이 느껴집니다.",
+		"level": 2,
 		"created_at": "2026-07-31T00:00:00+00:00",
 		"disabled": null
 	}
