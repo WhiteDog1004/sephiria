@@ -3,6 +3,10 @@ import {
 	FRUIT_SKEWER_MAX_POINTS,
 	FRUIT_SKEWER_SPECIAL_KEY,
 } from "@/src/features/add-build/config/fruitSkewer";
+import {
+	TALENT_MAX_POINTS,
+	TALENT_MIN_POINTS,
+} from "@/src/features/add-build/config/talentList";
 import { presetCodeSchema } from "@/src/shared/model/presetCode";
 
 export const addFormSchema = z.object({
@@ -70,10 +74,10 @@ export const addFormSchema = z.object({
 					talent.wisdom +
 					talent.will +
 					talent.base;
-				return total === 40;
+				return total >= TALENT_MIN_POINTS && total <= TALENT_MAX_POINTS;
 			},
 			{
-				message: "포인트를 전부 사용해야 합니다",
+				message: `포인트는 ${TALENT_MIN_POINTS}~${TALENT_MAX_POINTS} 사이로 사용해야 합니다`,
 			},
 		),
 	lists: z.array(

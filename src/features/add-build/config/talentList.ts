@@ -7,6 +7,9 @@ export type TalentType =
 	| "will"
 	| "base";
 
+export const TALENT_MIN_POINTS = 40;
+export const TALENT_MAX_POINTS = 50;
+
 export type TalentLevel = {
 	label: string[];
 	point: number[];

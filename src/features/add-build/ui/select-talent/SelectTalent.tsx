@@ -19,13 +19,14 @@ import {
 	Typography,
 } from "@/src/shared";
 import {
+	TALENT_MAX_POINTS,
 	TALENT_NAME,
 	TALENT_STATUS,
 	type TalentType,
 } from "../../config/talentList";
 
 export const SelectTalent = (form: any) => {
-	const [count, setCount] = useState(40);
+	const [count, setCount] = useState(TALENT_MAX_POINTS);
 
 	useEffect(() => {
 		const talentValues = form.getValues("talent");
@@ -33,7 +34,7 @@ export const SelectTalent = (form: any) => {
 			(sum: number, val) => sum + Number(val),
 			0,
 		);
-		setCount(40 - total);
+		setCount(TALENT_MAX_POINTS - total);
 	}, [form]);
 
 	return (
@@ -72,7 +73,7 @@ export const SelectTalent = (form: any) => {
 												base: 0,
 											},
 										});
-										setCount(40);
+										setCount(TALENT_MAX_POINTS);
 									}}
 								>
 									<RotateCw />
@@ -155,7 +156,7 @@ export const SelectTalent = (form: any) => {
 																		prevValue +
 																		newValue;
 
-																	if (usedPointsAfter > 40) return;
+																	if (usedPointsAfter > TALENT_MAX_POINTS) return;
 
 																	const updatedTalent = {
 																		...currentTalent,
@@ -166,7 +167,7 @@ export const SelectTalent = (form: any) => {
 																		shouldDirty: true,
 																	});
 
-																	setCount(40 - usedPointsAfter);
+																	setCount(TALENT_MAX_POINTS - usedPointsAfter);
 																}}
 															>
 																<Typography variant="caption">
