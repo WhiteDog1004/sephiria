@@ -1,9 +1,15 @@
 import sanitizeHtml from "sanitize-html";
 
+const colorStylePatterns = [
+	/^#[0-9a-fA-F]{6}$/,
+	/^rgb\(\s*(?:\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*,\s*(?:\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*,\s*(?:\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*\)$/,
+	/^rgba\(\s*(?:\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*,\s*(?:\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*,\s*(?:\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*,\s*(?:0|1|0?\.\d+)\s*\)$/,
+];
+
 const allowedStyles = {
 	"*": {
-		color: [/^#[0-9a-fA-F]{6}$/],
-		"background-color": [/^#[0-9a-fA-F]{6}$/],
+		color: colorStylePatterns,
+		"background-color": colorStylePatterns,
 		"font-size": [/^(12|14|16|18|20|24|28)px$/],
 	},
 };
