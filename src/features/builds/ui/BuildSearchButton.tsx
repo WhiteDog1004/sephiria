@@ -225,10 +225,10 @@ export const BuildSearchButton = ({
 
 				<Form {...form}>
 					<form
-						className="flex flex-col gap-4 px-4 pb-4 h-full overflow-y-auto justify-between"
+						className="flex min-h-0 flex-1 flex-col overflow-hidden md:gap-4 md:overflow-y-auto md:px-4 md:pb-4"
 						onSubmit={form.handleSubmit(onSubmit)}
 					>
-						<Column className="w-full gap-4 items-end">
+						<Column className="min-h-0 w-full flex-1 gap-4 overflow-y-auto px-4 pb-3 items-end md:flex-none md:overflow-visible md:px-0 md:pb-0">
 							<FormField
 								control={form.control}
 								name="title"
@@ -500,16 +500,22 @@ export const BuildSearchButton = ({
 									</FormItem>
 								)}
 							/>
+						</Column>
 
-							<Button type="reset" onClick={onReset}>
+						<Row className="sticky bottom-0 shrink-0 gap-2 border-t bg-background/95 px-4 py-3 backdrop-blur md:static md:border-0 md:bg-transparent md:px-0 md:py-0 md:backdrop-blur-none">
+							<Button type="reset" onClick={onReset} size="lg">
 								<RotateCw />
 								<Typography variant="caption">초기화</Typography>
 							</Button>
-						</Column>
-
-						<Button disabled={!form.formState.isDirty} type="submit" size="lg">
-							검색하기
-						</Button>
+							<Button
+								className="min-w-0 flex-1"
+								disabled={!form.formState.isDirty}
+								type="submit"
+								size="lg"
+							>
+								빌드 검색하기
+							</Button>
+						</Row>
 					</form>
 				</Form>
 			</SheetContent>
