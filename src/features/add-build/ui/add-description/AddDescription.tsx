@@ -7,9 +7,10 @@ import {
 	FormLabel,
 	FormMessage,
 	Row,
-	Textarea,
 	Typography,
 } from "@/src/shared";
+import { stripBuildDescriptionHtml } from "@/src/shared/model/buildDescriptionHtml";
+import { BuildDescriptionEditor } from "./BuildDescriptionEditor";
 
 export const AddDescription = (form: any) => {
 	return (
@@ -21,10 +22,9 @@ export const AddDescription = (form: any) => {
 					<FormLabel>빌드 설명</FormLabel>
 					<FormControl>
 						<Column className="items-end gap-2">
-							<Textarea
-								className="text-xs resize-none w-full max-h-40"
-								placeholder="2000자내로 입력해 주세요."
-								{...field}
+							<BuildDescriptionEditor
+								value={field.value}
+								onChange={field.onChange}
 							/>
 							<Row className="items-center justify-between w-full">
 								{form.formState.errors.description ? (
@@ -33,7 +33,7 @@ export const AddDescription = (form: any) => {
 									<Box className="p-0" />
 								)}
 								<Typography variant="caption">
-									{field.value.length}/2000
+									{stripBuildDescriptionHtml(field.value).length}/2000
 								</Typography>
 							</Row>
 						</Column>

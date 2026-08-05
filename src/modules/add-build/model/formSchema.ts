@@ -7,6 +7,7 @@ import {
 	TALENT_MAX_POINTS,
 	TALENT_MIN_POINTS,
 } from "@/src/features/add-build/config/talentList";
+import { stripBuildDescriptionHtml } from "@/src/shared/model/buildDescriptionHtml";
 import { presetCodeSchema } from "@/src/shared/model/presetCode";
 
 export const addFormSchema = z.object({
@@ -19,7 +20,11 @@ export const addFormSchema = z.object({
 		.max(80, {
 			message: "80자 내로 입력해 주세요",
 		}),
-	description: z.string().max(2000, { message: "2000자 내로 입력해 주세요" }),
+	description: z
+		.string()
+		.refine((value) => stripBuildDescriptionHtml(value).length <= 2000, {
+			message: "2000자 내로 입력해 주세요",
+		}),
 	costume: z.string().min(1, { message: "코스튬을 선택해 주세요" }),
 	weapon: z.string().min(1, { message: "무기를 선택해 주세요" }),
 	miracle: z.string().min(1, { message: "기적을 선택해 주세요" }),

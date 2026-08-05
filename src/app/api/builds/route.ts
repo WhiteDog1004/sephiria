@@ -8,6 +8,7 @@ import {
 } from "@/src/entities/builds/api/buildsCache";
 import type { CreateBuildType } from "@/src/entities/add-build/model/createBuild.types";
 import type { GetBuildsParams } from "@/src/entities/builds/model/builds.types";
+import { sanitizeBuildDescriptionHtml } from "@/src/shared/model/buildDescriptionHtml";
 import { isValidPresetCode, normalizePresetCode } from "@/src/shared/model/presetCode";
 
 export const dynamic = "force-dynamic";
@@ -51,7 +52,7 @@ export const POST = async (request: Request) => {
 			postUuid: payload.postUuid,
 			youtube_link: payload.youtube_link || null,
 			title: payload.title,
-			description: payload.description,
+			description: sanitizeBuildDescriptionHtml(payload.description),
 			content: payload.content,
 			costume: payload.costume,
 			weapon: payload.weapon,

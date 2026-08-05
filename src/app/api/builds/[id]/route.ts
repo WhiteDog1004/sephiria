@@ -7,6 +7,7 @@ import {
 	getBuildDetailTag,
 } from "@/src/entities/builds/api/buildsCache";
 import type { UpdateBuildType } from "@/src/entities/modify-build/model/updateBuild.types";
+import { sanitizeBuildDescriptionHtml } from "@/src/shared/model/buildDescriptionHtml";
 import { isValidPresetCode, normalizePresetCode } from "@/src/shared/model/presetCode";
 
 export const dynamic = "force-dynamic";
@@ -49,7 +50,7 @@ export const PATCH = async (request: Request, context: RouteContext) => {
 				postUuid: id,
 				youtube_link: payload.youtube_link || null,
 				title: payload.title,
-				description: payload.description,
+				description: sanitizeBuildDescriptionHtml(payload.description),
 				content: payload.content,
 				costume: payload.costume,
 				weapon: payload.weapon,
