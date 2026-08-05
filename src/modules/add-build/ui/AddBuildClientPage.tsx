@@ -33,6 +33,7 @@ import {
 	SITEMAP,
 	Typography,
 } from "@/src/shared";
+import NotLogin from "@/src/shared/components/NotLogin";
 import { useSession } from "../../header/model/useUserInfo";
 import { addFormSchema } from "../model/formSchema";
 import { AddItems } from "./AddItems";
@@ -189,7 +190,7 @@ export const AddBuildClientPage = ({ modify }: { modify?: BuildRow }) => {
 	}, [info, isSuccess]);
 
 	if (!isSuccess) return null;
-	// if (!isLogin) return <NotLogin />;
+	if (!isLogin) return <NotLogin />;
 	return (
 		<Column className="w-full p-2 sm:p-8 items-center">
 			<Image src="/white-wolf.png" alt="white-wolf" width={120} height={120} />
