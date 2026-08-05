@@ -43,10 +43,6 @@ const handleError = (error: PostgrestError | null) => {
 	}
 };
 
-const getBuildDisplayTime = (
-	build: Pick<BuildRow, "created_at" | "updated_at">,
-) => new Date(build.updated_at || build.created_at).getTime();
-
 const getRelatedWeaponValues = (weaponValue: string) => {
 	const selectedWeapon = WEAPONS.find((weapon) => weapon.value === weaponValue);
 	if (!selectedWeapon) return [weaponValue];
@@ -156,50 +152,19 @@ const getBuildsFromDb = async (
 		};
 	}
 
-	const dateQuery = applyBuildsFilters(
-		supabase
-			.from("builds")
-			.select("id,postUuid,created_at,updated_at", { count: "exact" }),
+	const query = applyBuildsFilters(
+		supabase.from("builds").select(selectColumns, { count: "exact" }),
 		params,
-	);
-	const { data: dateData, error: dateError, count } = await dateQuery;
-	handleError(dateError);
-
-	const pageIds = (
-		(dateData as Pick<
-			BuildRow,
-			"id" | "postUuid" | "created_at" | "updated_at"
-		>[]) ?? []
 	)
-		.sort(
-			(a, b) => getBuildDisplayTime(b) - getBuildDisplayTime(a) || b.id - a.id,
-		)
-		.slice(from, to + 1)
-		.map((build) => build.postUuid);
+		.order("display_at", { ascending: false })
+		.order("id", { ascending: false })
+		.range(from, to);
 
-	if (pageIds.length === 0) {
-		return {
-			data: [],
-			count: count ?? 0,
-		};
-	}
-
-	const { data, error } = await supabase
-		.from("builds")
-		.select(selectColumns)
-		.in("postUuid", pageIds);
+	const { data, error, count } = await query;
 	handleError(error);
 
-	const pageIdOrder = new Map(
-		pageIds.map((postUuid, index) => [postUuid, index]),
-	);
-
 	return {
-		data: ((data as BuildRow[]) ?? []).sort(
-			(a, b) =>
-				(pageIdOrder.get(a.postUuid) ?? Number.MAX_SAFE_INTEGER) -
-				(pageIdOrder.get(b.postUuid) ?? Number.MAX_SAFE_INTEGER),
-		),
+		data: (data as BuildRow[]) ?? [],
 		count: count ?? 0,
 	};
 };
