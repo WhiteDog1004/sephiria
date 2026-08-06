@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Avatar, AvatarImage, Button, Column, Row } from "@/src/shared";
 import { Typography } from "@/src/shared/ui/typography";
+import { SupportersDialogButton } from "./SupportersDialogButton";
 
 export const Footer = () => {
 	return (
@@ -38,6 +39,7 @@ export const Footer = () => {
 						</Row>
 					</Button>
 				</Link>
+				<SupportersDialogButton />
 			</Row>
 		</Column>
 	);
