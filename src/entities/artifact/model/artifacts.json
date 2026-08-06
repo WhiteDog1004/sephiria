@@ -4034,7 +4034,7 @@
 		"label_eng": "whirlwind_stone",
 		"tier": "advanced",
 		"effect": {
-			"content": "[고유] 모든 피해 증폭 +2/?/?/?%\n이동 속도 +6/?/?/?%"
+			"content": "[고유] 모든 피해 증폭 +2/4/6/8%\n이동 속도 +6/12/18/24%"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/whirlwind_stone.png",
 		"description": "시간과 공간이 휘몰아치는 곳에서 왔다고 전해지는 돌",
@@ -4109,7 +4109,7 @@
 		"label_eng": "red_mushroom",
 		"tier": "advanced",
 		"effect": {
-			"content": "[고유] 디버프로 주는 피해량 +4/?/?/?%당 공격 속도 1% 증가"
+			"content": "[고유] 디버프로 주는 피해량 +4/3/2/1%당 공격 속도 1% 증가"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/red_mushroom.png",
 		"description": "스튜로 만들기에는 수상한 색을 띠고 있습니다.",
@@ -4184,7 +4184,7 @@
 		"label_eng": "cursed_letter",
 		"tier": "advanced",
 		"effect": {
-			"content": "가시 +?/?/200%\n공격 속도 -?/?/4%"
+			"content": "가시 +50/100/200%\n공격 속도 -6/5/4%"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/cursed_letter.png",
 		"description": "나흘째 떠나지 못한 편지. 찌릿찌릿한 원한이 느껴집니다.",
