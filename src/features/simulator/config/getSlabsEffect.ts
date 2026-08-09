@@ -468,6 +468,12 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
 	},
 
+	// wedge 쐐기
+	wedge: (x, y, _, item, effects) => {
+		const baseOffsets = [{ dx: -1, dy: -1, value: 3 }];
+		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
+	},
+
 	// disconnection 단절
 	disconnection: (x, y, _, item, effects) => {
 		const baseOffsets = [

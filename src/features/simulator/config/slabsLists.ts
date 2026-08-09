@@ -398,6 +398,14 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		eng_label: "shade",
 		image: "/slabs/shade.png",
 	},
+	{
+		value: "wedge",
+		tier: "rare",
+		ko_label: "쐐기",
+		eng_label: "wedge",
+		image: "/slabs/wedge.png",
+		rotate: true,
+	},
 
 	// LEGEND
 	{
