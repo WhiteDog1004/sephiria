@@ -83,6 +83,8 @@ export default function RootLayout({
             }
           `}
 				</script>
+				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3851224465271826"
+     crossorigin="anonymous"></script>
 			</head>
 			<body>
 				<QueryProvider>
