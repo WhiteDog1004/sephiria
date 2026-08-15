@@ -26,20 +26,18 @@ export const AdSenseHorizontal = ({ className }: AdSenseHorizontalProps) => {
 	return (
 		<div
 			className={cn(
-				"w-full max-w-5xl px-0 py-3 min-h-[90px] overflow-hidden",
+				"mx-auto w-full max-w-5xl px-0 py-3 min-h-[90px] overflow-hidden",
 				className,
 			)}
 		>
-			<div className="flex w-full justify-center">
-				<ins
-					className="adsbygoogle"
-					style={{ display: "block", margin: "0 auto" }}
-					data-ad-client="ca-pub-3851224465271826"
-					data-ad-slot="7125865834"
-					data-ad-format="auto"
-					data-full-width-responsive="true"
-				/>
-			</div>
+			<ins
+				className="adsbygoogle"
+				style={{ display: "block", width: "100%", minHeight: 90 }}
+				data-ad-client="ca-pub-3851224465271826"
+				data-ad-slot="7125865834"
+				data-ad-format="auto"
+				data-full-width-responsive="true"
+			/>
 		</div>
 	);
 };
