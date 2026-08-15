@@ -87,8 +87,8 @@ export const BuildArtifact = ({
 		.filter(Boolean);
 
 	return (
-		<Column className="md:flex-row gap-2">
-			<Column className="gap-4 flex-2/3">
+		<Column className="w-full min-w-0 md:flex-row gap-2">
+			<Column className="gap-4 min-w-0 flex-2/3">
 				{artifacts.map((list, index) => (
 					<Card key={list.label + index} className="p-6 gap-4">
 						<Column>
@@ -161,13 +161,13 @@ export const BuildArtifact = ({
 					</Card>
 				))}
 			</Column>
-			<Column className="flex-1/5 border rounded-lg p-4 gap-2">
+			<Column className="w-full min-w-0 max-w-[285px] md:flex-1/5 border rounded-lg p-4 gap-2">
 				<Typography variant="body2" className="opacity-60">
 					콤보 효과
 				</Typography>
 				<Separator />
 
-				<Row className="md:flex-col gap-2 flex-wrap">
+				<Row className="w-full min-w-0 md:flex-col gap-2 flex-wrap">
 					{effects
 						.sort((a, b) => (b?.count || 0) - (a?.count || 0))
 						.map((setInfo, index) => {
@@ -176,9 +176,9 @@ export const BuildArtifact = ({
 							return (
 								<Column
 									key={setInfo.set + index}
-									className={`border rounded-lg p-3 gap-1 ${clsx(!setInfo.isActivated && "text-gray-500 opacity-40")}`}
+									className={`w-full min-w-0 border rounded-lg p-3 gap-1 ${clsx(!setInfo.isActivated && "text-gray-500 opacity-40")}`}
 								>
-									<Row className="items-center">
+									<Row className="items-center min-w-0">
 										<Image
 											width={20}
 											height={20}
@@ -194,15 +194,22 @@ export const BuildArtifact = ({
 									{setInfo.effectTexts.map((effect, textIndex) => (
 										<Fragment key={textIndex}>
 											<Separator />
-											<Row className="items-center gap-1">
-												<Typography variant="caption">
+											<Row className="items-start gap-1 min-w-0 w-full">
+												<Typography variant="caption" className="shrink-0">
 													{effect.level}:
 												</Typography>
-												{setInfo.isActivated ? (
-													highlightNumbers(effect.text)
-												) : (
-													<Typography variant="body2">{effect.text}</Typography>
-												)}
+												<Row className="min-w-0 flex-1 flex-wrap whitespace-normal break-words [&_[data-slot=div]]:min-w-0 [&_[data-slot=div]]:whitespace-normal [&_[data-slot=div]]:break-words [&_[data-slot=div]]:overflow-visible [&_[data-slot=div]]:text-clip">
+													{setInfo.isActivated ? (
+														highlightNumbers(effect.text)
+													) : (
+														<Typography
+															variant="body2"
+															className="min-w-0 whitespace-normal break-words"
+														>
+															{effect.text}
+														</Typography>
+													)}
+												</Row>
 											</Row>
 										</Fragment>
 									))}
