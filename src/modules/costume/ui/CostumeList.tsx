@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { AdSenseHorizontal } from "@/src/shared";
 import { SectionHeader } from "@/src/shared/components/section-header";
 import { COSTUMES, type CostumeDataType } from "@/src/shared/config/costumes";
 import { containsRedKeyword } from "@/src/shared/model/containsWords";
@@ -19,6 +20,7 @@ export const CostumeList = ({ data }: { data: CostumeDataType }) => {
 				title={"코스튬"}
 				description={"자신에게 맞는 코스튬을 찾아보세요!"}
 			/>
+			<AdSenseHorizontal />
 			<Box className="grid grid-cols-[repeat(auto-fit,_minmax(160px,_1fr))]  md:grid-cols-[repeat(auto-fit,_minmax(240px,_1fr))] gap-4 max-w-5xl w-full p-0">
 				{data.map((costume) => (
 					<Card key={costume.id} className="w-full h-auto items-center p-4">

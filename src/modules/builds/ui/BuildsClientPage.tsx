@@ -12,6 +12,7 @@ import { useBuildSearchStore } from "@/src/features/builds/model/buildSearchStor
 import { BuildPagination } from "@/src/features/builds/ui/BuildPagination";
 import { BuildSearchButton } from "@/src/features/builds/ui/BuildSearchButton";
 import {
+	AdSenseHorizontal,
 	Box,
 	Button,
 	Checkbox,
@@ -156,6 +157,7 @@ export const BuildsClientPage = () => {
 						)}
 					</Column>
 					<Separator />
+					<AdSenseHorizontal className="py-0" />
 					<Row className="w-full justify-between items-center">
 						<Row className="items-center">
 							<Label className="w-max h-10 p-2 hover:bg-accent/50 flex items-center gap-3 rounded-lg">
@@ -264,11 +266,14 @@ export const BuildsClientPage = () => {
 			</Row>
 
 			{data?.data.length !== 0 && (
-				<BuildPagination
-					page={page}
-					setPage={(v) => setPage(v as number)}
-					totalPage={totalPage}
-				/>
+				<>
+					<BuildPagination
+						page={page}
+						setPage={(v) => setPage(v as number)}
+						totalPage={totalPage}
+					/>
+					<AdSenseHorizontal className="py-0" />
+				</>
 			)}
 
 			<BuildSearchButton

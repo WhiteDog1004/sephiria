@@ -2,6 +2,7 @@
 
 import type { MiracleOptions } from "@/src/entities/miracle/model/types";
 import { MiracleList } from "@/src/features/miracle/ui/MiracleList";
+import { AdSenseHorizontal } from "@/src/shared";
 import { SectionHeader } from "@/src/shared/components/section-header";
 import { Box } from "@/src/shared/ui/box";
 
@@ -12,6 +13,7 @@ export const MiracleLists = ({ data }: MiracleOptions) => {
 				title={"기적"}
 				description={"나무뿌리를 통해 새로운 빌드를 구성해 보세요!"}
 			/>
+			<AdSenseHorizontal />
 			<MiracleList data={data} />
 		</Box>
 	);

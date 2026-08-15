@@ -19,6 +19,7 @@ import {
 	TitleDetail,
 } from "@/src/features/build-detail";
 import {
+	AdSenseHorizontal,
 	Box,
 	Button,
 	Column,
@@ -52,6 +53,7 @@ export const BuildDetailClientPage = ({ data }: { data: BuildRow }) => {
 					setInitialLike={setInitialLike}
 					{...data}
 				/>
+				<AdSenseHorizontal className="py-2" />
 				<Separator />
 				<Box className="md:flex-row flex-col items-start gap-4 md:gap-2 mt-4 p-0">
 					<Row className="w-full gap-2">
@@ -83,6 +85,7 @@ export const BuildDetailClientPage = ({ data }: { data: BuildRow }) => {
 					/>
 					<BuildPreset presetCode={data.preset_code} />
 				</Row>
+				<AdSenseHorizontal className="py-2" />
 				<Separator />
 				<Row className="justify-between gap-2 mb-12">
 					<Button onClick={() => router.push(SITEMAP.BUILDS)}>목록으로</Button>

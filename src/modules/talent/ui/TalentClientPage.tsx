@@ -1,7 +1,7 @@
 "use client";
 
 import { TalentWrapper } from "@/src/features/talent";
-import { Box, Column } from "@/src/shared";
+import { AdSenseHorizontal, Box, Column } from "@/src/shared";
 import { SectionHeader } from "@/src/shared/components/section-header";
 
 export const TalentClientPage = () => {
@@ -12,6 +12,7 @@ export const TalentClientPage = () => {
 					title={"재능"}
 					description={"재능을 확인하고 나만의 빌드를 완성해 보세요!"}
 				/>
+				<AdSenseHorizontal />
 				<TalentWrapper />
 			</Column>
 		</Box>

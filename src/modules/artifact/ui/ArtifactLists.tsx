@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArtifactList } from "@/src/features/artifact/ui/ArtifactList";
 import { SearchItems } from "@/src/features/simulator/ui/SearchItems";
+import { AdSenseHorizontal } from "@/src/shared";
 import { SectionHeader } from "@/src/shared/components/section-header";
 import { Box } from "@/src/shared/ui/box";
 import type { ArtifactProps } from "../model/types";
@@ -26,8 +27,11 @@ export const ArtifactLists = ({ data }: ArtifactProps) => {
 		<Box className="flex-col">
 			<SectionHeader
 				title={"아티팩트"}
-				description={"아티팩트를 클릭하면 상세 정보와 콤보 효과를 볼 수 있어요!"}
+				description={
+					"아티팩트를 클릭하면 상세 정보와 콤보 효과를 볼 수 있어요!"
+				}
 			/>
+			<AdSenseHorizontal />
 			<Box className="justify-end px-0 py-4 w-full max-w-3xl">
 				<SearchItems
 					type={"artifact"}

@@ -7,7 +7,14 @@ import { useEffect, useState } from "react";
 import type { WeaponOptions } from "@/src/entities/weapon/model/types";
 import { WeaponContent } from "@/src/features/weapon/ui/WeaponContent";
 import { WeaponTierList } from "@/src/features/weapon/ui/WeaponTierTabs";
-import { Column, Row, Separator, Tabs, Typography } from "@/src/shared";
+import {
+	AdSenseHorizontal,
+	Column,
+	Row,
+	Separator,
+	Tabs,
+	Typography,
+} from "@/src/shared";
 import { SectionHeader } from "@/src/shared/components/section-header";
 import { getCloudflareUrl } from "@/src/shared/utils/image";
 import { parseColoredString } from "../../../shared/utils/parseColoredString";
@@ -39,6 +46,7 @@ export const WeaponList = ({ data }: { data: WeaponOptions[] }) => {
 				title={"무기"}
 				description={"다양한 무기를 확인해 보세요!"}
 			/>
+			<AdSenseHorizontal className="py-0" />
 			<Row className="flex-col-reverse lg:flex-row justify-center lg:justify-start items-center lg:items-start gap-8 w-full">
 				<Column className="w-full gap-12">
 					<Column className="gap-4">
