@@ -6,6 +6,8 @@ export type GetBuildsParams = {
 	like: "asc" | "desc";
 	isLatestVersion?: boolean;
 	isWriter?: boolean;
+	likedOnly?: boolean;
+	likedByUserId?: string;
 	combo?: string;
 } & Partial<Pick<BuildRow, "title" | "costume" | "weapon" | "miracle">>;
 

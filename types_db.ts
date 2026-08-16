@@ -204,6 +204,27 @@ export type Database = {
 					postUuid: string;
 				};
 			};
+			likes: {
+				Row: {
+					id: number;
+					post_id: string;
+					user_id: string;
+					created_at: string;
+				};
+				Insert: {
+					id?: number;
+					post_id: string;
+					user_id: string;
+					created_at?: string;
+				};
+				Update: {
+					id?: number;
+					post_id?: string;
+					user_id?: string;
+					created_at?: string;
+				};
+				Relationships: [];
+			};
 		};
 		Views: {
 			[_ in never]: never;

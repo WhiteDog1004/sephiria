@@ -6,6 +6,7 @@ export const getBuilds = async ({
 	isLatestVersion = false,
 	like,
 	isWriter,
+	likedOnly,
 	...req
 }: GetBuildsParams): Promise<GetBuildsResponse> => {
 	const params = new URLSearchParams({
@@ -14,6 +15,7 @@ export const getBuilds = async ({
 		like,
 		isLatestVersion: String(isLatestVersion),
 		isWriter: String(Boolean(isWriter)),
+		likedOnly: String(Boolean(likedOnly)),
 	});
 
 	const { title, costume, weapon, miracle, combo } = req;

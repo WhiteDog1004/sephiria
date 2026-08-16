@@ -10,6 +10,8 @@ interface UseSyncBuildQueryStateProps {
 	setIsAscending: (v: boolean) => void;
 	isLatestVersion: boolean;
 	setIsLatestVersion: (v: boolean) => void;
+	likedOnly: boolean;
+	setLikedOnly: (v: boolean) => void;
 	searchList: Record<string, any>;
 	setSearchList: (v: Record<string, any>) => void;
 	resetRef: RefObject<boolean>;
@@ -23,6 +25,8 @@ export const useSyncBuildQueryState = ({
 	setIsAscending,
 	isLatestVersion,
 	setIsLatestVersion,
+	likedOnly,
+	setLikedOnly,
 	searchList,
 	setSearchList,
 }: UseSyncBuildQueryStateProps) => {
@@ -37,6 +41,7 @@ export const useSyncBuildQueryState = ({
 		const urlPage = Number(searchParams.get("page")) || 1;
 		const urlAsc = searchParams.get("like") === "asc";
 		const urlLatest = searchParams.get("latest") === "true";
+		const urlLikedOnly = searchParams.get("liked") === "true";
 
 		const urlSearchList: Record<string, string | boolean> = {};
 		["title", "costume", "weapon", "miracle", "combo"].forEach((key) => {
@@ -51,6 +56,7 @@ export const useSyncBuildQueryState = ({
 		setPage(urlPage);
 		setIsAscending(urlAsc);
 		setIsLatestVersion(urlLatest);
+		setLikedOnly(urlLikedOnly);
 		setSearchList(urlSearchList);
 	}, []);
 
@@ -66,16 +72,20 @@ export const useSyncBuildQueryState = ({
 		params.set("page", searchParams.get("page") || "1");
 		params.set("like", isAscending ? "asc" : "desc");
 		params.set("latest", isLatestVersion ? "true" : "false");
+		params.set("liked", likedOnly ? "true" : "false");
 
 		Object.entries(searchList).forEach(([key, value]) => {
 			if (value) params.set(key, value);
 		});
 
 		router.replace(`${pathname}?${params.toString()}`);
-		if (params.get("latest") !== searchParams.get("latest")) {
+		if (
+			params.get("latest") !== searchParams.get("latest") ||
+			params.get("liked") !== searchParams.get("liked")
+		) {
 			setPage(1);
 		}
-	}, [isAscending, isLatestVersion, searchList]);
+	}, [isAscending, isLatestVersion, likedOnly, searchList]);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: intentionally run once on mount
 	useEffect(() => {
@@ -93,6 +103,7 @@ export const useSyncBuildQueryState = ({
 		params.set("page", String(page));
 		params.set("like", isAscending ? "asc" : "desc");
 		params.set("latest", isLatestVersion ? "true" : "false");
+		params.set("liked", likedOnly ? "true" : "false");
 
 		Object.entries(searchList).forEach(([key, value]) => {
 			if (value) params.set(key, value);

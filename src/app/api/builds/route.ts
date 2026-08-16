@@ -22,12 +22,30 @@ export const GET = async (request: Request) => {
 			like: searchParams.get("like") === "asc" ? "asc" : "desc",
 			isLatestVersion: searchParams.get("isLatestVersion") === "true",
 			isWriter: searchParams.get("isWriter") === "true",
+			likedOnly: searchParams.get("likedOnly") === "true",
 			title: searchParams.get("title") ?? undefined,
 			costume: searchParams.get("costume") ?? undefined,
 			weapon: searchParams.get("weapon") ?? undefined,
 			miracle: searchParams.get("miracle") ?? undefined,
 			combo: searchParams.get("combo") ?? undefined,
 		};
+
+		if (params.likedOnly) {
+			const supabase = await createServerSupabaseClient();
+			const {
+				data: { user },
+				error,
+			} = await supabase.auth.getUser();
+
+			if (error || !user) {
+				return NextResponse.json(
+					{ message: "Login is required" },
+					{ status: 401 },
+				);
+			}
+
+			params.likedByUserId = user.id;
+		}
 
 		const result = await getBuildsCached(params);
 		return NextResponse.json(result, { status: 200 });

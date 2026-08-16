@@ -35,6 +35,7 @@ type NormalizedBuildsParams = {
 	weapon: string;
 	miracle: string;
 	combo: string;
+	likedByUserId: string;
 };
 
 const handleError = (error: PostgrestError | null) => {
@@ -123,6 +124,7 @@ export const normalizeBuildsParams = (
 		weapon: params.weapon?.trim() ?? "",
 		miracle: params.miracle?.trim() ?? "",
 		combo: params.combo?.trim() ?? "",
+		likedByUserId: params.likedByUserId?.trim() ?? "",
 	};
 };
 
@@ -134,12 +136,34 @@ const getBuildsFromDb = async (
 	const to = from + params.limit - 1;
 	const selectColumns =
 		"id,postUuid,title,description,costume,weapon,miracle,combo,fruit_skewer,version,content,ability,postLike,created_at,updated_at,writer";
+	let likedPostIds: string[] | null = null;
+
+	if (params.likedByUserId) {
+		const { data: likes, error } = await supabase
+			.from("likes")
+			.select("post_id")
+			.eq("user_id", params.likedByUserId);
+
+		handleError(error);
+		likedPostIds = likes?.map((like) => like.post_id).filter(Boolean) ?? [];
+
+		if (likedPostIds.length === 0) {
+			return {
+				data: [],
+				count: 0,
+			};
+		}
+	}
 
 	if (params.like === "asc") {
-		const query = applyBuildsFilters(
+		let query = applyBuildsFilters(
 			supabase.from("builds").select(selectColumns, { count: "exact" }),
 			params,
-		)
+		);
+
+		if (likedPostIds) query = query.in("postUuid", likedPostIds);
+
+		query = query
 			.order("postLike", { ascending: false, nullsFirst: false })
 			.range(from, to);
 
@@ -152,10 +176,14 @@ const getBuildsFromDb = async (
 		};
 	}
 
-	const query = applyBuildsFilters(
+	let query = applyBuildsFilters(
 		supabase.from("builds").select(selectColumns, { count: "exact" }),
 		params,
-	)
+	);
+
+	if (likedPostIds) query = query.in("postUuid", likedPostIds);
+
+	query = query
 		.order("display_at", { ascending: false })
 		.order("id", { ascending: false })
 		.range(from, to);

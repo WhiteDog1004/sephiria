@@ -46,6 +46,8 @@ export const BuildsClientPage = () => {
 		setPage,
 		isLatestVersion,
 		setIsLatestVersion,
+		likedOnly,
+		setLikedOnly,
 		isAscending,
 		setIsAscending,
 		searchList,
@@ -56,6 +58,7 @@ export const BuildsClientPage = () => {
 		page,
 		limit: PAGE_SIZE,
 		isLatestVersion,
+		likedOnly,
 		like: isAscending ? "asc" : "desc",
 		isWriter: searchList.isWriter,
 		...searchList,
@@ -72,11 +75,13 @@ export const BuildsClientPage = () => {
 
 		setSearchList({});
 		setPage(1);
+		setLikedOnly(false);
 
 		const params = new URLSearchParams();
-		params.set("page", String(page));
+		params.set("page", "1");
 		params.set("like", isAscending ? "asc" : "desc");
 		params.set("latest", String(isLatestVersion));
+		params.set("liked", "false");
 
 		router.replace(`${pathname}?${params.toString()}`);
 
@@ -95,6 +100,8 @@ export const BuildsClientPage = () => {
 		setIsAscending,
 		isLatestVersion,
 		setIsLatestVersion,
+		likedOnly,
+		setLikedOnly,
 		searchList,
 		setSearchList,
 	});
@@ -141,7 +148,7 @@ export const BuildsClientPage = () => {
 								actionText="빌드를 공유하시려면"
 							/>
 						</Row>
-						{Object.keys(searchList).length !== 0 && (
+						{(Object.keys(searchList).length !== 0 || likedOnly) && (
 							<Row className="w-full justify-end">
 								<Button
 									className="w-max"
@@ -158,36 +165,53 @@ export const BuildsClientPage = () => {
 					</Column>
 					<Separator />
 					<AdSenseHorizontal className="py-0" />
-					<Row className="w-full justify-between items-center">
-						<Row className="items-center">
-							<Label className="w-max h-10 p-2 hover:bg-accent/50 flex items-center gap-3 rounded-lg">
+					<Row className="w-full flex-col items-start gap-2 sm:flex-row sm:justify-between sm:items-center">
+						<Row className="flex-wrap items-center gap-x-4 gap-y-2">
+							<Row className="shrink-0 items-center gap-1">
+								<Label className="w-max h-10 p-2 pr-0 hover:bg-accent/50 flex items-center gap-2 rounded-lg">
+									<Checkbox
+										checked={isLatestVersion}
+										onCheckedChange={(checked: boolean) =>
+											setIsLatestVersion(checked)
+										}
+										className="size-5 data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
+									/>
+									<Typography variant="body2">최신버전 보기</Typography>
+								</Label>
+								<Tooltip>
+									<TooltipTrigger asChild>
+										<CircleHelpIcon className="w-5 h-5" />
+									</TooltipTrigger>
+									<TooltipContent sideOffset={16}>
+										<Row className="gap-1 bg-accent border-2 dark:text-white text-black p-2 justify-center items-center text-center">
+											<Typography variant="caption" className="text-blue-500">
+												{process.env.NEXT_PUBLIC_GAME_VERSION?.split(".")
+													.slice(0, 2)
+													.join(".")}
+												.*
+											</Typography>
+											<Typography variant="caption">버전만 검색</Typography>
+										</Row>
+									</TooltipContent>
+								</Tooltip>
+							</Row>
+							<Label className="w-max h-10 p-2 hover:bg-accent/50 flex items-center gap-2 rounded-lg">
 								<Checkbox
-									checked={isLatestVersion}
-									onCheckedChange={(checked: boolean) =>
-										setIsLatestVersion(checked)
-									}
+									checked={likedOnly}
+									onCheckedChange={(checked: boolean) => {
+										if (checked && !info) {
+											setOpenDialog(true);
+											return;
+										}
+
+										setLikedOnly(checked);
+									}}
 									className="size-5 data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
 								/>
-								<Typography variant="body2">최신버전 보기</Typography>
+								<Typography variant="body2">좋아요한 빌드 보기</Typography>
 							</Label>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<CircleHelpIcon className="w-5 h-5" />
-								</TooltipTrigger>
-								<TooltipContent sideOffset={16}>
-									<Row className="gap-1 bg-accent border-2 dark:text-white text-black p-2 justify-center items-center text-center">
-										<Typography variant="caption" className="text-blue-500">
-											{process.env.NEXT_PUBLIC_GAME_VERSION?.split(".")
-												.slice(0, 2)
-												.join(".")}
-											.*
-										</Typography>
-										<Typography variant="caption">버전만 검색</Typography>
-									</Row>
-								</TooltipContent>
-							</Tooltip>
 						</Row>
-						<Row className="h-full items-center">
+						<Row className="h-full w-full justify-end items-center sm:w-auto">
 							<Button
 								size="sm"
 								variant="ghost"
