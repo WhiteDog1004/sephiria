@@ -16,12 +16,14 @@ import {
 type AvatarBoxProps = {
 	img: string;
 	nickname: string;
-	onViewWriterPosts?: (nickname: string) => void;
+	uuid: string;
+	onViewWriterPosts?: (uuid: string) => void;
 };
 
 export const AvatarBox = ({
 	img,
 	nickname,
+	uuid,
 	onViewWriterPosts,
 }: AvatarBoxProps) => {
 	return (
@@ -40,12 +42,12 @@ export const AvatarBox = ({
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="start">
 					{onViewWriterPosts ? (
-						<DropdownMenuItem onSelect={() => onViewWriterPosts(nickname)}>
+						<DropdownMenuItem onSelect={() => onViewWriterPosts(uuid)}>
 							작성글 보기
 						</DropdownMenuItem>
 					) : (
 						<DropdownMenuItem asChild>
-							<Link href={getWriterBuildSearchHref(nickname)}>작성글 보기</Link>
+							<Link href={getWriterBuildSearchHref(uuid)}>작성글 보기</Link>
 						</DropdownMenuItem>
 					)}
 				</DropdownMenuContent>

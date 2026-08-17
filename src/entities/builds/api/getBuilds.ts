@@ -18,8 +18,9 @@ export const getBuilds = async ({
 		likedOnly: String(Boolean(likedOnly)),
 	});
 
-	const { title, costume, weapon, miracle, combo } = req;
+	const { title, writerUuid, costume, weapon, miracle, combo } = req;
 	if (title) params.set("title", title);
+	if (writerUuid) params.set("writerUuid", writerUuid);
 	if (costume) params.set("costume", costume);
 	if (weapon) params.set("weapon", weapon);
 	if (miracle) params.set("miracle", miracle);

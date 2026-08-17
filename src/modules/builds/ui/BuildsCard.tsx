@@ -46,13 +46,13 @@ export const BuildsCard = ({
 				<AvatarBox
 					img={data.writer.profileImage}
 					nickname={data.writer.nickname}
-					onViewWriterPosts={(nickname) => {
+					uuid={data.writer.uuid}
+					onViewWriterPosts={(uuid) => {
 						const params = new URLSearchParams();
 						params.set("page", "1");
 						params.set("like", isAscending ? "asc" : "desc");
 						params.set("latest", isLatestVersion ? "true" : "false");
-						params.set("title", nickname);
-						params.set("isWriter", "true");
+						params.set("writerUuid", uuid);
 
 						window.location.href = `${SITEMAP.BUILDS}?${params.toString()}`;
 					}}

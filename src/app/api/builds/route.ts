@@ -24,6 +24,7 @@ export const GET = async (request: Request) => {
 			isWriter: searchParams.get("isWriter") === "true",
 			likedOnly: searchParams.get("likedOnly") === "true",
 			title: searchParams.get("title") ?? undefined,
+			writerUuid: searchParams.get("writerUuid") ?? undefined,
 			costume: searchParams.get("costume") ?? undefined,
 			weapon: searchParams.get("weapon") ?? undefined,
 			miracle: searchParams.get("miracle") ?? undefined,

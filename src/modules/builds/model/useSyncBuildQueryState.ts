@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type RefObject, useEffect, useRef } from "react";
+import type { BuildSearchState } from "@/src/features/builds/model/buildSearchStore";
 
 interface UseSyncBuildQueryStateProps {
 	page: number;
@@ -12,8 +13,8 @@ interface UseSyncBuildQueryStateProps {
 	setIsLatestVersion: (v: boolean) => void;
 	likedOnly: boolean;
 	setLikedOnly: (v: boolean) => void;
-	searchList: Record<string, any>;
-	setSearchList: (v: Record<string, any>) => void;
+	searchList: BuildSearchState["searchList"];
+	setSearchList: (v: BuildSearchState["searchList"]) => void;
 	resetRef: RefObject<boolean>;
 }
 
@@ -44,7 +45,14 @@ export const useSyncBuildQueryState = ({
 		const urlLikedOnly = searchParams.get("liked") === "true";
 
 		const urlSearchList: Record<string, string | boolean> = {};
-		["title", "costume", "weapon", "miracle", "combo"].forEach((key) => {
+		[
+			"title",
+			"writerUuid",
+			"costume",
+			"weapon",
+			"miracle",
+			"combo",
+		].forEach((key) => {
 			const val = searchParams.get(key);
 			if (val) urlSearchList[key] = val;
 		});
@@ -75,7 +83,7 @@ export const useSyncBuildQueryState = ({
 		params.set("liked", likedOnly ? "true" : "false");
 
 		Object.entries(searchList).forEach(([key, value]) => {
-			if (value) params.set(key, value);
+			if (value) params.set(key, String(value));
 		});
 
 		router.replace(`${pathname}?${params.toString()}`);
@@ -106,7 +114,7 @@ export const useSyncBuildQueryState = ({
 		params.set("liked", likedOnly ? "true" : "false");
 
 		Object.entries(searchList).forEach(([key, value]) => {
-			if (value) params.set(key, value);
+			if (value) params.set(key, String(value));
 		});
 
 		router.push(`${pathname}?${params.toString()}`);

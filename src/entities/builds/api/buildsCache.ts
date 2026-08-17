@@ -30,6 +30,7 @@ type NormalizedBuildsParams = {
 	isLatestVersion: boolean;
 	like: "asc" | "desc";
 	isWriter: boolean;
+	writerUuid: string;
 	title: string;
 	costume: string;
 	weapon: string;
@@ -77,7 +78,9 @@ const applyBuildsFilters = <T>(query: T, params: NormalizedBuildsParams): T => {
 		filteredQuery = filteredQuery.ilike("version", `${currentMajorMinor}.%`);
 	}
 
-	if (params.title) {
+	if (params.writerUuid) {
+		filteredQuery = filteredQuery.eq("writer->>uuid", params.writerUuid);
+	} else if (params.title) {
 		if (params.isWriter) {
 			filteredQuery = filteredQuery.ilike(
 				"writer->>nickname",
@@ -119,6 +122,7 @@ export const normalizeBuildsParams = (
 		isLatestVersion: Boolean(params.isLatestVersion),
 		like: params.like === "asc" ? "asc" : "desc",
 		isWriter: Boolean(params.isWriter),
+		writerUuid: params.writerUuid?.trim() ?? "",
 		title: params.title?.trim() ?? "",
 		costume: params.costume?.trim() ?? "",
 		weapon: params.weapon?.trim() ?? "",

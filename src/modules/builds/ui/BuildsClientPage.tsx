@@ -3,7 +3,7 @@
 import { CircleHelpIcon, FilePlus2, RotateCw, Search } from "lucide-react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGetArtifacts } from "@/src/entities/builds/model/useGetArtifacts";
 import { useGetBuilds } from "@/src/entities/builds/model/useGetBuilds";
 import { useGetMiracles } from "@/src/entities/builds/model/useGetMiracles";
@@ -33,6 +33,58 @@ import { useSyncBuildQueryState } from "../model/useSyncBuildQueryState";
 import { BuildsCard } from "./BuildsCard";
 
 const PAGE_SIZE = 10;
+const BUILD_LIST_LOADING_IMAGES = [
+	"/face/FaceChip_Player_Adventurer.png",
+	"/face/FaceChip_Player_Armored.png",
+	"/face/FaceChip_Player_Fox.png",
+	"/face/FaceChip_Player_Holy.png",
+	"/face/FaceChip_Player_Mage.png",
+	"/face/FaceChip_Player_RedHoly.png",
+	"/face/FaceChip_Player_Skeleton.png",
+	"/face/FaceChip_Player_WhiteWolf.png",
+];
+
+const getRandomLoadingImageIndex = () =>
+	Math.floor(Math.random() * BUILD_LIST_LOADING_IMAGES.length);
+
+const getNextLoadingImageIndex = (currentIndex: number) => {
+	if (BUILD_LIST_LOADING_IMAGES.length <= 1) return currentIndex;
+
+	const nextIndex = getRandomLoadingImageIndex();
+	if (nextIndex !== currentIndex) return nextIndex;
+
+	return (currentIndex + 1) % BUILD_LIST_LOADING_IMAGES.length;
+};
+
+const BuildListLoading = () => {
+	const [imageIndex, setImageIndex] = useState(getRandomLoadingImageIndex);
+
+	useEffect(() => {
+		const intervalId = window.setInterval(() => {
+			setImageIndex((currentIndex) => getNextLoadingImageIndex(currentIndex));
+		}, 500);
+
+		return () => window.clearInterval(intervalId);
+	}, []);
+
+	return (
+		<Column className="min-h-80 w-full items-center justify-center gap-5">
+			<Image
+				key={BUILD_LIST_LOADING_IMAGES[imageIndex]}
+				src={BUILD_LIST_LOADING_IMAGES[imageIndex]}
+				alt="loading"
+				width={120}
+				height={120}
+				className="h-28 w-28 object-contain"
+				priority
+				unoptimized
+			/>
+			<Typography variant="body2" className="text-secondary-foreground">
+				목록을 불러오고 있어요...
+			</Typography>
+		</Column>
+	);
+};
 
 export const BuildsClientPage = () => {
 	const resetRef = useRef(false);
@@ -54,7 +106,7 @@ export const BuildsClientPage = () => {
 		setSearchList,
 	} = useBuildSearchStore();
 
-	const { data } = useGetBuilds({
+	const { data, isLoading, isFetching } = useGetBuilds({
 		page,
 		limit: PAGE_SIZE,
 		isLatestVersion,
@@ -69,6 +121,7 @@ export const BuildsClientPage = () => {
 	const { data: info } = useSession();
 
 	const totalPage = data?.count ? Math.ceil(data.count / PAGE_SIZE) : 0;
+	const isBuildListLoading = isLoading || (isFetching && !data);
 
 	const handleReset = () => {
 		resetRef.current = true;
@@ -242,7 +295,9 @@ export const BuildsClientPage = () => {
 							</Button>
 						</Row>
 					</Row>
-					{data?.data.length === 0 ? (
+					{isBuildListLoading ? (
+						<BuildListLoading />
+					) : data?.data.length === 0 ? (
 						<Column className="gap-4 justify-center items-center w-full h-full mt-12">
 							<Column className="gap-8 items-center">
 								<Image

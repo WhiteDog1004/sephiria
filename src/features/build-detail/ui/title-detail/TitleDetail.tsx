@@ -114,7 +114,7 @@ export const TitleDetail = ({
 						</DropdownMenuTrigger>
 						<DropdownMenuContent align="start">
 							<DropdownMenuItem asChild>
-								<Link href={getWriterBuildSearchHref(writer.nickname)}>
+								<Link href={getWriterBuildSearchHref(writer.uuid)}>
 									작성글 보기
 								</Link>
 							</DropdownMenuItem>
