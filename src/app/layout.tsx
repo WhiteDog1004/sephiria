@@ -6,6 +6,7 @@ import "./globals.css";
 import Script from "next/script";
 import { useId } from "react";
 import { Toaster } from "sonner";
+import { ADS_ENABLED, ADSENSE_CLIENT_ID } from "../shared/config/ads";
 import QueryProvider from "../shared/providers/theme/QueryProvider";
 
 const font = localFont({
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
 		],
 	},
 	other: {
-		"google-adsense-account": "ca-pub-3851224465271826",
+		"google-adsense-account": ADSENSE_CLIENT_ID,
 		"naver-site-verification": "86fdf6f8f06302154e669f26d571f603adfa70fb",
 		"google-site-verification": "fA9mrqAmKoNPLkgu1Ac1G3TlW3HnsmKlJ_qClW2MRXM",
 	},
@@ -83,11 +84,13 @@ export default function RootLayout({
             }
           `}
 				</script>
-				<script
-					async
-					src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3851224465271826"
-					crossOrigin="anonymous"
-				></script>
+				{ADS_ENABLED && (
+					<script
+						async
+						src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+						crossOrigin="anonymous"
+					></script>
+				)}
 			</head>
 			<body>
 				<QueryProvider>
