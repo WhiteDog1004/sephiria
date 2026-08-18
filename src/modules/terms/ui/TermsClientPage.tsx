@@ -28,8 +28,6 @@ export const TermsClientPage = () => {
 					- 서비스의 일부 기능(빌드 작성, 좋아요 등)은 Discord 계정을 통한
 					로그인 후 이용할 수 있습니다.
 					<br />- 이용자는 자신의 계정으로 이루어진 활동에 대해 책임을 집니다.
-					<br />- 계정 삭제를 원하는 경우 아래 8항의 문의처로 요청할 수
-					있습니다.
 				</PolicySection>
 
 				<PolicySection title="3. 이용자의 의무">
