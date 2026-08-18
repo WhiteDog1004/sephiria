@@ -139,7 +139,7 @@ const getBuildsFromDb = async (
 	const from = (params.page - 1) * params.limit;
 	const to = from + params.limit - 1;
 	const selectColumns =
-		"id,postUuid,title,description,costume,weapon,miracle,combo,fruit_skewer,version,content,ability,postLike,created_at,updated_at,writer";
+		"id,postUuid,title,description,costume,weapon,miracle,combo,fruit_skewer,version,content,ability,preset_code,postLike,created_at,updated_at,writer";
 	let likedPostIds: string[] | null = null;
 
 	if (params.likedByUserId) {
@@ -203,7 +203,7 @@ const getBuildsFromDb = async (
 
 const getBuildsCachedFn = unstable_cache(
 	async (params: NormalizedBuildsParams) => getBuildsFromDb(params),
-	["builds:list:v1"],
+	["builds:list:v2"],
 	{
 		tags: [BUILDS_LIST_TAG],
 		revalidate: LIST_REVALIDATE_SECONDS,

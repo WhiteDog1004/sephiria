@@ -39,6 +39,7 @@ export const BuildsCard = ({
 }) => {
 	const { isAscending, isLatestVersion } = useBuildSearchStore();
 	const displayDate = data.updated_at || data.created_at;
+	const hasPresetCode = Boolean(data.preset_code?.trim());
 
 	return (
 		<Column className="w-full bg-card p-4 gap-4 justify-center items-end rounded-md border shadow-sm">
@@ -57,7 +58,7 @@ export const BuildsCard = ({
 						window.location.href = `${SITEMAP.BUILDS}?${params.toString()}`;
 					}}
 				/>
-				<VersionBox version={data.version} />
+				<VersionBox version={data.version} hasPresetCode={hasPresetCode} />
 			</Row>
 			<Column className="w-full items-center lg:flex-row gap-2">
 				<CostumeItem costume={data.costume} />
@@ -141,7 +142,7 @@ export const BuildsCard = ({
 					</Row>
 				</Column>
 			</Column>
-			<Row className="justify-between w-full items-center">
+			<Row className="justify-between w-full flex-wrap items-center gap-2">
 				<Row className="items-center gap-4">
 					<Row className="items-center gap-2">
 						<ThumbsUp className="w-5 h-5" />
@@ -156,11 +157,13 @@ export const BuildsCard = ({
 						</Typography>
 					</Row>
 				</Row>
-				<Link href={`${SITEMAP.BUILDS}/${data.postUuid}`} prefetch={false}>
-					<Button variant="secondary" className="max-w-24 border">
-						빌드 보기
-					</Button>
-				</Link>
+				<Row className="items-end justify-end gap-2">
+					<Link href={`${SITEMAP.BUILDS}/${data.postUuid}`} prefetch={false}>
+						<Button variant="secondary" className="max-w-24 border">
+							빌드 보기
+						</Button>
+					</Link>
+				</Row>
 			</Row>
 		</Column>
 	);

@@ -30,12 +30,18 @@ export const AvatarBox = ({
 		<Row className="w-full min-w-0 items-center gap-2">
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
-					<Button variant="ghost" className="h-auto p-0">
+					<Button
+						variant="ghost"
+						className="h-auto min-w-0 max-w-full shrink justify-start overflow-hidden p-0"
+					>
 						<Avatar>
 							<AvatarImage src={img} />
 							<AvatarFallback>?</AvatarFallback>
 						</Avatar>
-						<Typography variant="body2" className="truncate">
+						<Typography
+							variant="body2"
+							className="min-w-0 max-w-full truncate"
+						>
 							{nickname}
 						</Typography>
 					</Button>

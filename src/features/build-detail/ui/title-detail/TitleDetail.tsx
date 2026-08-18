@@ -63,8 +63,11 @@ export const TitleDetail = ({
 						))}
 					</Row>
 				)}
-				<Row className="w-full justify-between">
-					<Typography variant="body" className="truncate md:text-2xl text-base">
+				<Row className="w-full min-w-0 justify-between gap-2">
+					<Typography
+						variant="body"
+						className="min-w-0 truncate md:text-2xl text-base"
+					>
 						{title}
 					</Typography>
 					<Button
@@ -99,15 +102,21 @@ export const TitleDetail = ({
 					/>
 				</Row>
 			</Column>
-			<Row className="h-8 justify-between items-center gap-2">
-				<Row className="min-w-0 items-center gap-2">
+			<Row className="h-8 justify-between items-center gap-2 overflow-hidden">
+				<Row className="min-w-0 items-center gap-2 overflow-hidden">
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
-							<Button variant="ghost" className="h-auto p-0">
+							<Button
+								variant="ghost"
+								className="h-auto min-w-0 max-w-full shrink justify-start overflow-hidden p-0"
+							>
 								<Avatar>
 									<AvatarImage src={writer.profileImage} />
 								</Avatar>
-								<Typography variant="body2" className="truncate">
+								<Typography
+									variant="body2"
+									className="min-w-0 max-w-full truncate"
+								>
 									{writer.nickname}
 								</Typography>
 							</Button>
@@ -121,7 +130,7 @@ export const TitleDetail = ({
 						</DropdownMenuContent>
 					</DropdownMenu>
 				</Row>
-				<Row className="h-full items-center gap-2">
+				<Row className="h-full shrink-0 items-center gap-2">
 					{version && (
 						<Typography variant="body2" className="text-gray-500">
 							v{version}
