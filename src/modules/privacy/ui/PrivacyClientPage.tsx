@@ -56,16 +56,28 @@ export const PrivacyClientPage = () => {
 					동안 보관합니다.
 				</PolicySection>
 
-				<PolicySection title="4. 개인정보의 제3자 제공">
+				<PolicySection title="4. 개인정보의 파기절차 및 파기방법">
+					서비스는 개인정보의 보유기간이 경과하거나 처리 목적이 달성된 경우 지체
+					없이 해당 정보를 파기합니다.
+					<br />- 파기절차: 이용자가 삭제를 요청하거나 탈퇴 의사를 밝힌 경우,
+					별도의 보관 없이 데이터베이스에서 삭제합니다. 다만 관계 법령에 따라
+					보존해야 하는 정보가 있는 경우에는 해당 기간 동안 분리하여 보관한 후
+					파기합니다.
+					<br />- 파기방법: 서비스가 처리하는 개인정보는 모두 전자적 파일 형태로
+					저장되어 있으며, 복구가 불가능한 방법으로 영구 삭제합니다. 종이 출력물
+					형태로 보관하는 개인정보는 없습니다.
+				</PolicySection>
+
+				<PolicySection title="5. 개인정보의 제3자 제공">
 					- 본 서비스는 이용자의 개인정보를 제3자에게 판매하거나 제공하지
 					않습니다.
-					<br />- 다만 아래 7항에 기재된 바와 같이, 광고 게재 및 서비스 분석을
+					<br />- 다만 아래 8항에 기재된 바와 같이, 광고 게재 및 서비스 분석을
 					위해 Google 등 제3자 도구가 쿠키 등을 통해 정보를 수집할 수 있습니다.
 					<br />- 법령에 근거하거나 수사기관의 적법한 절차에 따른 요청이 있는
 					경우에는 예외로 합니다.
 				</PolicySection>
 
-				<PolicySection title="5. 개인정보 처리 위탁 및 국외 이전">
+				<PolicySection title="6. 개인정보 처리 위탁 및 국외 이전">
 					서비스 제공을 위해 아래와 같이 개인정보 처리 업무를 위탁하고 있습니다.
 					<br />- Vercel Inc.: 서비스 호스팅 및 배포
 					<br />- Supabase Inc.: 데이터베이스 운영 및 로그인(인증) 기능 제공
@@ -87,16 +99,16 @@ export const PrivacyClientPage = () => {
 					보호합니다.
 				</PolicySection>
 
-				<PolicySection title="6. 이용자의 권리와 그 행사 방법">
+				<PolicySection title="7. 이용자의 권리와 그 행사 방법">
 					- 이용자는 언제든지 자신의 개인정보에 대해 열람, 수정, 삭제를 요청할
 					수 있습니다.
 					<br />- Discord 로그인 계정 정보 수정은 Discord 플랫폼을 통해 직접
 					변경 가능합니다.
-					<br />- 아래 9항의 방법으로 맞춤형 광고 및 분석 목적의 정보 수집을
+					<br />- 아래 10항의 방법으로 맞춤형 광고 및 분석 목적의 정보 수집을
 					거부할 수 있습니다.
 				</PolicySection>
 
-				<PolicySection title="7. 광고 및 분석 도구의 쿠키 사용">
+				<PolicySection title="8. 광고 및 분석 도구의 쿠키 사용">
 					- 본 서비스는 Google을 포함한 제3자 광고 공급업체가 쿠키를 사용하여
 					광고를 게재하도록 허용하고 있습니다.
 					<br />- Google은 광고 쿠키를 사용함으로써 이용자가 본 서비스 및 다른
@@ -118,7 +130,7 @@ export const PrivacyClientPage = () => {
 					에서 확인할 수 있습니다.
 				</PolicySection>
 
-				<PolicySection title="8. 행태정보의 수집·이용 및 거부">
+				<PolicySection title="9. 행태정보의 수집·이용 및 거부">
 					- 수집하는 행태정보 항목: 서비스 방문 이력, 페이지 조회 및 클릭 기록,
 					기기·브라우저 정보, 광고 식별자
 					<br />- 수집 방법: 이용자가 서비스를 방문·이용할 때 Google AdSense 및
@@ -127,11 +139,11 @@ export const PrivacyClientPage = () => {
 					이용 통계 분석 및 개선
 					<br />- 보유·이용기간: Google의 데이터 보존 정책 및 설정에 따라 보관된
 					후 파기
-					<br />- 이용자 통제권 행사 방법: 아래 9항의 방법으로 언제든지 거부할
+					<br />- 이용자 통제권 행사 방법: 아래 10항의 방법으로 언제든지 거부할
 					수 있습니다.
 				</PolicySection>
 
-				<PolicySection title="9. 쿠키의 설치·운영 및 거부 방법">
+				<PolicySection title="10. 쿠키의 설치·운영 및 거부 방법">
 					- 웹 브라우저의 설정에서 쿠키 허용 여부를 직접 선택하거나 저장된
 					쿠키를 삭제할 수 있습니다.
 					<br />- 맞춤형 광고 거부:{" "}
@@ -146,12 +158,47 @@ export const PrivacyClientPage = () => {
 					있습니다.
 				</PolicySection>
 
-				<PolicySection title="10. 개인정보 보호 책임자">
-					- 이름: WolfDog (개발자)
-					<br />- 문의: #whitedog (디스코드 DM)
+				<PolicySection title="11. 개인정보의 안전성 확보조치">
+					서비스는 개인정보의 안전성 확보를 위해 다음과 같은 조치를 취하고
+					있습니다.
+					<br />- 접근 권한의 최소화: 개인정보가 저장된 데이터베이스에 접근할 수
+					있는 권한은 운영자로 한정하고 있습니다.
+					<br />- 비밀번호 미보관: 로그인은 Discord OAuth 방식으로만 이루어지며,
+					서비스는 이용자의 비밀번호를 직접 수집하거나 보관하지 않습니다.
+					<br />- 전송 구간 암호화: 서비스와 이용자 사이의 모든 통신은 HTTPS로
+					암호화하여 전송합니다.
+					<br />- 접근 통제: 데이터베이스 접근 권한을 가진 인증 키는 서버
+					환경에서만 사용되며 이용자에게 노출되지 않습니다.
+					<br />- 접속기록의 보관: 시스템 접속기록은 위탁업체가 제공하는 로그
+					기능을 통해 보관·관리됩니다.
 				</PolicySection>
 
-				<PolicySection title="11. 기타">
+				<PolicySection title="12. 개인정보 보호 책임자">
+					- 이름: WolfDog (개발자)
+					<br />- 이메일: baek_dog@naver.com
+					<br />- 디스코드: #whitedog (DM)
+				</PolicySection>
+
+				<PolicySection title="13. 개인정보 침해 신고 및 상담">
+					이용자는 개인정보 침해로 인한 피해를 구제받기 위해 아래 기관에 분쟁
+					해결이나 상담을 신청할 수 있습니다.
+					<br />- 개인정보 분쟁조정위원회: 1833-6972 /{" "}
+					<PolicyLink href="https://www.kopico.go.kr">
+						www.kopico.go.kr
+					</PolicyLink>
+					<br />- 개인정보침해신고센터: (국번없이) 118 /{" "}
+					<PolicyLink href="https://privacy.kisa.or.kr">
+						privacy.kisa.or.kr
+					</PolicyLink>
+					<br />- 대검찰청 사이버수사과: (국번없이) 1301 /{" "}
+					<PolicyLink href="https://www.spo.go.kr">www.spo.go.kr</PolicyLink>
+					<br />- 경찰청 사이버수사국: (국번없이) 182 /{" "}
+					<PolicyLink href="https://ecrm.police.go.kr">
+						ecrm.police.go.kr
+					</PolicyLink>
+				</PolicySection>
+
+				<PolicySection title="14. 기타">
 					- 본 방침은 관련 법령 및 서비스 정책에 따라 변경될 수 있으며, 변경 시
 					본 페이지에 고지합니다.
 				</PolicySection>
