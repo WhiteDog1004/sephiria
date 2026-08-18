@@ -1,6 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Avatar, AvatarImage, Button, Column, Row } from "@/src/shared";
+import {
+	Avatar,
+	AvatarImage,
+	Button,
+	Column,
+	Row,
+	SITEMAP,
+} from "@/src/shared";
 import { Typography } from "@/src/shared/ui/typography";
 import { SupportersDialogButton } from "./SupportersDialogButton";
 
@@ -40,6 +47,19 @@ export const Footer = () => {
 					</Button>
 				</Link>
 				<SupportersDialogButton />
+			</Row>
+
+			<Row className="items-center gap-3 text-gray-500">
+				<Link href={SITEMAP.TERMS} className="hover:text-foreground">
+					<Typography variant="body2">이용약관</Typography>
+				</Link>
+				<span
+					aria-hidden
+					className="size-1 rounded-full bg-gray-500 shrink-0"
+				/>
+				<Link href={SITEMAP.PRIVACY} className="hover:text-foreground">
+					<Typography variant="body2">개인정보처리방침</Typography>
+				</Link>
 			</Row>
 		</Column>
 	);

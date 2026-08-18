@@ -11,6 +11,7 @@ export const SITEMAP = {
 	BUILDS: "/builds",
 	ADD_BUILD: "/builds/add",
 	PRIVACY: "/privacy",
+	TERMS: "/terms",
 };
 
 export const SITE_METADATA = {
@@ -63,5 +64,10 @@ export const SITE_METADATA = {
 		title: "세피리아 - 개인정보처리방침",
 		description: "세피리아 위키: 개인정보처리방침",
 		alternates: { canonical: SITEMAP.PRIVACY },
+	},
+	terms: {
+		title: "세피리아 - 이용약관",
+		description: "세피리아 위키: 이용약관",
+		alternates: { canonical: SITEMAP.TERMS },
 	},
 };
