@@ -31,21 +31,19 @@ export const GET = async (request: Request) => {
 			combo: searchParams.get("combo") ?? undefined,
 		};
 
-		if (params.likedOnly) {
-			const supabase = await createServerSupabaseClient();
-			const {
-				data: { user },
-				error,
-			} = await supabase.auth.getUser();
+		const supabase = await createServerSupabaseClient();
+		const {
+			data: { user },
+			error,
+		} = await supabase.auth.getUser();
 
-			if (error || !user) {
-				return NextResponse.json(
-					{ message: "Login is required" },
-					{ status: 401 },
-				);
-			}
-
+		if (user) {
 			params.likedByUserId = user.id;
+		} else if (params.likedOnly) {
+			return NextResponse.json(
+				{ message: error?.message ?? "Login is required" },
+				{ status: 401 },
+			);
 		}
 
 		const result = await getBuildsCached(params);

@@ -7,6 +7,7 @@ export const getBuilds = async ({
 	like,
 	isWriter,
 	likedOnly,
+	viewerId: _viewerId,
 	...req
 }: GetBuildsParams): Promise<GetBuildsResponse> => {
 	const params = new URLSearchParams({

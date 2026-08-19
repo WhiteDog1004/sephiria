@@ -1,5 +1,8 @@
 import { toast } from "sonner";
-import type { CreateBuildLikeTypes } from "../model/createBuildLike.types";
+import type {
+	BuildLikeResponse,
+	CreateBuildLikeTypes,
+} from "../model/createBuildLike.types";
 
 export const getBuildLikeStatus = async ({
 	postUuid,
@@ -52,7 +55,7 @@ export const createBuildLike = async ({
 		},
 	});
 
-	return { postUuid, userId };
+	return json as BuildLikeResponse;
 };
 
 export const deleteBuildLike = async ({
@@ -80,5 +83,5 @@ export const deleteBuildLike = async ({
 		},
 	});
 
-	return { postUuid, userId };
+	return json as BuildLikeResponse;
 };

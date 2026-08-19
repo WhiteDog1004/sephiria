@@ -12,7 +12,7 @@ import {
 	useCreateBuildLike,
 	useDeleteBuildLike,
 } from "@/src/entities/build-detail";
-import type { BuildRow } from "@/src/entities/builds/model/builds.types";
+import type { BuildWithLikeStatus } from "@/src/entities/builds/model/builds.types";
 import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
 import {
 	Avatar,
@@ -36,17 +36,25 @@ export const TitleDetail = ({
 	userId,
 	setInitialLike,
 	...data
-}: BuildRow & {
+}: BuildWithLikeStatus & {
 	initialLike: number;
 	userId?: string;
 	setInitialLike: Dispatch<SetStateAction<number | undefined>>;
 }) => {
-	const { title, writer, created_at, updated_at, version, postUuid, combo } =
-		data;
+	const {
+		title,
+		writer,
+		created_at,
+		updated_at,
+		version,
+		postUuid,
+		combo,
+		isLiked: initialLiked,
+	} = data;
 	const queryClient = useQueryClient();
 	const likeReq = { postUuid, userId: userId ?? "" };
 	const { data: likeStatus, isLoading: isLikeStatusLoading } =
-		useBuildLikeStatus(likeReq, Boolean(userId));
+		useBuildLikeStatus(likeReq, Boolean(userId), initialLiked);
 	const { mutate: createLike, isPending: isCreatePending } =
 		useCreateBuildLike();
 	const { mutate: deleteLike, isPending: isDeletePending } =
@@ -103,26 +111,35 @@ export const TitleDetail = ({
 
 							if (isLiked) {
 								deleteLike(likeReq, {
-									onSuccess: () => {
+									onSuccess: (response) => {
 										updateLikeStatus(false);
-										setInitialLike((current) => Math.max((current ?? 0) - 1, 0));
+										setInitialLike(response.postLike);
 									},
 								});
 								return;
 							}
 
 							createLike(likeReq, {
-								onSuccess: () => {
+								onSuccess: (response) => {
 									updateLikeStatus(true);
-									setInitialLike((current) => (current ?? 0) + 1);
+									setInitialLike(response.postLike);
 								},
 							});
 						}}
 					>
-						<Row className="items-center gap-2">
-							<ThumbsUp
-								className={clsx("w-5 h-5", isLiked && "fill-current")}
-							/>
+						<Row className="items-center gap-1">
+							<span
+								className={clsx(
+									"inline-flex size-5 items-center justify-center rounded-md",
+									isLiked &&
+										"size-6 bg-yellow-200 text-amber-700 dark:bg-yellow-400/20 dark:text-yellow-300",
+								)}
+							>
+								<ThumbsUp
+									className="size-4"
+									strokeWidth={2}
+								/>
+							</span>
 							<Typography variant="body2">{initialLike || 0}</Typography>
 						</Row>
 					</Button>

@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import dayjs from "dayjs";
 import { ThumbsUp } from "lucide-react";
 import Image from "next/image";
@@ -144,8 +145,19 @@ export const BuildsCard = ({
 			</Column>
 			<Row className="justify-between w-full flex-wrap items-center gap-2">
 				<Row className="items-center gap-4">
-					<Row className="items-center gap-2">
-						<ThumbsUp className="w-5 h-5" />
+					<Row className="items-center gap-1">
+						<span
+							className={clsx(
+								"inline-flex size-5 items-center justify-center rounded-md",
+								data.isLiked &&
+									"size-6 bg-yellow-200 text-amber-700 dark:bg-yellow-400/20 dark:text-yellow-300",
+							)}
+						>
+							<ThumbsUp
+								className="size-4"
+								strokeWidth={2}
+							/>
+						</span>
 						<Typography variant="caption">{data.postLike || 0}</Typography>
 					</Row>
 					<Row className="items-end">

@@ -9,12 +9,17 @@ export type GetBuildsParams = {
 	writerUuid?: string;
 	likedOnly?: boolean;
 	likedByUserId?: string;
+	viewerId?: string;
 	combo?: string;
 } & Partial<Pick<BuildRow, "title" | "costume" | "weapon" | "miracle">>;
 
 export type BuildRow = Database["public"]["Tables"]["builds"]["Row"];
 
+export type BuildWithLikeStatus = BuildRow & {
+	isLiked?: boolean;
+};
+
 export type GetBuildsResponse = {
-	data: BuildRow[];
+	data: BuildWithLikeStatus[];
 	count: number | null;
 };

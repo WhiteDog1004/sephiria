@@ -107,12 +107,14 @@ export const BuildsClientPage = () => {
 		searchList,
 		setSearchList,
 	} = useBuildSearchStore();
+	const { data: info } = useSession();
 
 	const { data, isLoading, isFetching } = useGetBuilds({
 		page,
 		limit: PAGE_SIZE,
 		isLatestVersion,
 		likedOnly,
+		viewerId: info?.user.id,
 		like: isAscending ? "asc" : "desc",
 		isWriter: searchList.isWriter,
 		...searchList,
@@ -120,7 +122,6 @@ export const BuildsClientPage = () => {
 	const { data: weapons } = useGetWeapons();
 	const { data: miracles } = useGetMiracles();
 	const { data: artifacts } = useGetArtifacts();
-	const { data: info } = useSession();
 
 	const totalPage = data?.count ? Math.ceil(data.count / PAGE_SIZE) : 0;
 	const isBuildListLoading = isLoading || (isFetching && !data);

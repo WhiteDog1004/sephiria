@@ -7,6 +7,7 @@ import type { WeaponRow } from "@/src/entities/weapon/model/types";
 import weaponsJson from "@/src/entities/weapon/model/wepons.json";
 import type {
 	BuildRow,
+	BuildWithLikeStatus,
 	GetBuildsParams,
 	GetBuildsResponse,
 } from "../model/builds.types";
@@ -36,6 +37,7 @@ type NormalizedBuildsParams = {
 	weapon: string;
 	miracle: string;
 	combo: string;
+	likedOnly: boolean;
 	likedByUserId: string;
 };
 
@@ -128,8 +130,21 @@ export const normalizeBuildsParams = (
 		weapon: params.weapon?.trim() ?? "",
 		miracle: params.miracle?.trim() ?? "",
 		combo: params.combo?.trim() ?? "",
+		likedOnly: Boolean(params.likedOnly),
 		likedByUserId: params.likedByUserId?.trim() ?? "",
 	};
+};
+
+const addLikeStatus = (
+	builds: BuildRow[],
+	likedPostIds: string[] | null,
+): BuildWithLikeStatus[] => {
+	const likedPostIdSet = new Set(likedPostIds ?? []);
+
+	return builds.map((build) => ({
+		...build,
+		isLiked: likedPostIdSet.has(build.postUuid),
+	}));
 };
 
 const getBuildsFromDb = async (
@@ -151,7 +166,7 @@ const getBuildsFromDb = async (
 		handleError(error);
 		likedPostIds = likes?.map((like) => like.post_id).filter(Boolean) ?? [];
 
-		if (likedPostIds.length === 0) {
+		if (params.likedOnly && likedPostIds.length === 0) {
 			return {
 				data: [],
 				count: 0,
@@ -165,7 +180,9 @@ const getBuildsFromDb = async (
 			params,
 		);
 
-		if (likedPostIds) query = query.in("postUuid", likedPostIds);
+		if (params.likedOnly && likedPostIds) {
+			query = query.in("postUuid", likedPostIds);
+		}
 
 		query = query
 			.order("postLike", { ascending: false, nullsFirst: false })
@@ -175,7 +192,7 @@ const getBuildsFromDb = async (
 		handleError(error);
 
 		return {
-			data: (data as BuildRow[]) ?? [],
+			data: addLikeStatus((data as BuildRow[]) ?? [], likedPostIds),
 			count: count ?? 0,
 		};
 	}
@@ -185,7 +202,9 @@ const getBuildsFromDb = async (
 		params,
 	);
 
-	if (likedPostIds) query = query.in("postUuid", likedPostIds);
+	if (params.likedOnly && likedPostIds) {
+		query = query.in("postUuid", likedPostIds);
+	}
 
 	query = query
 		.order("display_at", { ascending: false })
@@ -196,7 +215,7 @@ const getBuildsFromDb = async (
 	handleError(error);
 
 	return {
-		data: (data as BuildRow[]) ?? [],
+		data: addLikeStatus((data as BuildRow[]) ?? [], likedPostIds),
 		count: count ?? 0,
 	};
 };

@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
-import { getBuildDetail } from "@/src/entities/build-detail/api/getBuildDetail";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
+import {
+	getBuildDetail,
+	getBuildLikeStatusForUser,
+} from "@/src/entities/build-detail/api/getBuildDetail";
 import { BuildDetailClientPage } from "@/src/modules/build-detail";
 import { COSTUMES } from "@/src/shared";
 
@@ -49,7 +53,7 @@ export async function generateMetadata({
 	};
 }
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 const BuildsDetailPage = async ({
 	params,
@@ -61,7 +65,17 @@ const BuildsDetailPage = async ({
 	if (!data) {
 		return notFound();
 	}
-	return <BuildDetailClientPage data={data} />;
+
+	const supabase = await createServerSupabaseClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	const isLiked = await getBuildLikeStatusForUser({
+		postUuid: data.postUuid,
+		userId: user?.id,
+	});
+
+	return <BuildDetailClientPage data={{ ...data, isLiked }} />;
 };
 
 export default BuildsDetailPage;

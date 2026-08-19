@@ -1,6 +1,9 @@
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import {
+	createServerSupabaseAdminClient,
+	createServerSupabaseClient,
+} from "@/lib/supabase/server";
 import {
 	BUILDS_LIST_TAG,
 	getBuildDetailTag,
@@ -12,22 +15,48 @@ type RouteContext = {
 	params: Promise<{ id: string }>;
 };
 
-export const GET = async (request: Request, context: RouteContext) => {
+const syncBuildLikeCount = async (postUuid: string) => {
+	const adminSupabase = await createServerSupabaseAdminClient();
+	const { count, error: countError } = await adminSupabase
+		.from("likes")
+		.select("id", { count: "exact", head: true })
+		.eq("post_id", postUuid);
+
+	if (countError) {
+		throw countError;
+	}
+
+	const postLike = count ?? 0;
+	const { error: updateError } = await adminSupabase
+		.from("builds")
+		.update({ postLike })
+		.eq("postUuid", postUuid);
+
+	if (updateError) {
+		throw updateError;
+	}
+
+	return postLike;
+};
+
+export const GET = async (_request: Request, context: RouteContext) => {
 	try {
 		const { id } = await context.params;
-		const { searchParams } = new URL(request.url);
-		const userId = searchParams.get("userId")?.trim();
+		const supabase = await createServerSupabaseClient();
+		const {
+			data: { user },
+		} = await supabase.auth.getUser();
 
-		if (!userId) {
-			return NextResponse.json({ message: "userId is required" }, { status: 400 });
+		if (!user) {
+			return NextResponse.json({ liked: false });
 		}
 
-		const supabase = await createServerSupabaseClient();
-		const { data, error } = await supabase
+		const adminSupabase = await createServerSupabaseAdminClient();
+		const { data, error } = await adminSupabase
 			.from("likes")
 			.select("id")
 			.eq("post_id", id)
-			.eq("user_id", userId)
+			.eq("user_id", user.id)
 			.maybeSingle();
 
 		if (error) {
@@ -47,17 +76,20 @@ export const GET = async (request: Request, context: RouteContext) => {
 export const POST = async (request: Request, context: RouteContext) => {
 	try {
 		const { id } = await context.params;
-		const payload = (await request.json()) as { userId?: string };
-		const userId = payload.userId?.trim();
+		const supabase = await createServerSupabaseClient();
+		const {
+			data: { user },
+			error: authError,
+		} = await supabase.auth.getUser();
 
-		if (!userId) {
-			return NextResponse.json({ message: "userId is required" }, { status: 400 });
+		if (authError || !user) {
+			return NextResponse.json({ message: "Login is required" }, { status: 401 });
 		}
 
-		const supabase = await createServerSupabaseClient();
-		const { error } = await supabase
+		const adminSupabase = await createServerSupabaseAdminClient();
+		const { error } = await adminSupabase
 			.from("likes")
-			.insert([{ post_id: id, user_id: userId }]);
+			.insert([{ post_id: id, user_id: user.id }]);
 
 		if (error) {
 			return NextResponse.json(
@@ -66,10 +98,15 @@ export const POST = async (request: Request, context: RouteContext) => {
 			);
 		}
 
+		const postLike = await syncBuildLikeCount(id);
+
 		revalidateTag(BUILDS_LIST_TAG);
 		revalidateTag(getBuildDetailTag(id));
 
-		return NextResponse.json({ postUuid: id, userId }, { status: 201 });
+		return NextResponse.json(
+			{ postUuid: id, userId: user.id, postLike },
+			{ status: 201 },
+		);
 	} catch (error) {
 		console.error("POST /api/builds/[id]/like failed", error);
 		return NextResponse.json({ message: "Failed to create like" }, { status: 500 });
@@ -79,19 +116,22 @@ export const POST = async (request: Request, context: RouteContext) => {
 export const DELETE = async (request: Request, context: RouteContext) => {
 	try {
 		const { id } = await context.params;
-		const payload = (await request.json()) as { userId?: string };
-		const userId = payload.userId?.trim();
+		const supabase = await createServerSupabaseClient();
+		const {
+			data: { user },
+			error: authError,
+		} = await supabase.auth.getUser();
 
-		if (!userId) {
-			return NextResponse.json({ message: "userId is required" }, { status: 400 });
+		if (authError || !user) {
+			return NextResponse.json({ message: "Login is required" }, { status: 401 });
 		}
 
-		const supabase = await createServerSupabaseClient();
-		const { error } = await supabase
+		const adminSupabase = await createServerSupabaseAdminClient();
+		const { error } = await adminSupabase
 			.from("likes")
 			.delete()
 			.eq("post_id", id)
-			.eq("user_id", userId);
+			.eq("user_id", user.id);
 
 		if (error) {
 			return NextResponse.json(
@@ -100,10 +140,12 @@ export const DELETE = async (request: Request, context: RouteContext) => {
 			);
 		}
 
+		const postLike = await syncBuildLikeCount(id);
+
 		revalidateTag(BUILDS_LIST_TAG);
 		revalidateTag(getBuildDetailTag(id));
 
-		return NextResponse.json({ postUuid: id, userId });
+		return NextResponse.json({ postUuid: id, userId: user.id, postLike });
 	} catch (error) {
 		console.error("DELETE /api/builds/[id]/like failed", error);
 		return NextResponse.json({ message: "Failed to delete like" }, { status: 500 });

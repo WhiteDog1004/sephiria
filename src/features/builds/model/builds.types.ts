@@ -1,3 +1,3 @@
-import type { Database } from "@/types_db";
+import type { BuildWithLikeStatus } from "@/src/entities/builds/model/builds.types";
 
-export type BuildsOptions = Database["public"]["Tables"]["builds"]["Row"];
+export type BuildsOptions = BuildWithLikeStatus;

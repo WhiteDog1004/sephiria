@@ -4,7 +4,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import type { BuildRow } from "@/src/entities/builds/model/builds.types";
+import type { BuildWithLikeStatus } from "@/src/entities/builds/model/builds.types";
 import { useDeleteBuild } from "@/src/entities/builds/model/useDeleteBuild";
 import {
 	BuildArtifact,
@@ -35,7 +35,7 @@ import {
 } from "@/src/shared";
 import { useSession } from "../../header/model/useUserInfo";
 
-export const BuildDetailClientPage = ({ data }: { data: BuildRow }) => {
+export const BuildDetailClientPage = ({ data }: { data: BuildWithLikeStatus }) => {
 	const router = useRouter();
 	const { mutate } = useDeleteBuild();
 	const { data: user } = useSession();
@@ -80,6 +80,7 @@ export const BuildDetailClientPage = ({ data }: { data: BuildRow }) => {
 						postUuid={data.postUuid}
 						userId={user?.user.id}
 						postLike={data.postLike}
+						initialLiked={data.isLiked}
 						setInitialLike={setInitialLike}
 						initialLike={initialLike}
 					/>
