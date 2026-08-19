@@ -28,6 +28,9 @@ import {
 	RequireLoginDialog,
 	Row,
 	Separator,
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
 	Typography,
 } from "@/src/shared";
 
@@ -62,6 +65,11 @@ export const TitleDetail = ({
 	const [openDialog, setOpenDialog] = useState(false);
 	const isLiked = Boolean(likeStatus?.liked);
 	const isPending = isLikeStatusLoading || isCreatePending || isDeletePending;
+	const createdDate = dayjs(created_at).format("YY.MM.DD");
+	const createdTooltipDate = dayjs(created_at).format("YY.MM.DD HH:mm");
+	const updatedTooltipDate = updated_at
+		? dayjs(updated_at).format("YY.MM.DD HH:mm")
+		: "-";
 
 	const updateLikeStatus = (liked: boolean) => {
 		queryClient.setQueryData(buildLikeQueryKey(likeReq), { liked });
@@ -185,13 +193,30 @@ export const TitleDetail = ({
 						</Typography>
 					)}
 					<Separator className="max-h-1/3 bg-gray-700" orientation="vertical" />
-					<Typography
-						variant="body2"
-						className="text-gray-500 whitespace-nowrap"
-					>
-						작성일: {dayjs(created_at).format("YY.MM.DD")}{" "}
-						{updated_at && "(수정됨)"}
-					</Typography>
+					<Tooltip delayDuration={300}>
+						<TooltipTrigger asChild>
+							<Typography
+								asChild
+								variant="body2"
+								className="cursor-help text-gray-500 whitespace-nowrap"
+							>
+								<span>
+									작성일: {createdDate} {updated_at && "(수정됨)"}
+								</span>
+							</Typography>
+						</TooltipTrigger>
+						<TooltipContent
+							sideOffset={8}
+							className="space-y-1 rounded-sm bg-gray-800 px-3 py-2 text-white"
+						>
+							<Typography variant="caption" className="leading-4">
+								작성일 : {createdTooltipDate}
+							</Typography>
+							<Typography variant="caption" className="leading-4">
+								수정일 : {updatedTooltipDate}
+							</Typography>
+						</TooltipContent>
+					</Tooltip>
 				</Row>
 			</Row>
 			<Row className="w-full justify-end">

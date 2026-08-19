@@ -18,6 +18,9 @@ import {
 	Row,
 	SITEMAP,
 	Skeleton,
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
 	Typography,
 } from "@/src/shared";
 import { getCloudflareUrl } from "@/src/shared/utils/image";
@@ -41,6 +44,10 @@ export const BuildsCard = ({
 	const { isAscending, isLatestVersion } = useBuildSearchStore();
 	const displayDate = data.updated_at || data.created_at;
 	const hasPresetCode = Boolean(data.preset_code?.trim());
+	const createdTooltipDate = dayjs(data.created_at).format("YY.MM.DD HH:mm");
+	const updatedTooltipDate = data.updated_at
+		? dayjs(data.updated_at).format("YY.MM.DD HH:mm")
+		: "-";
 
 	return (
 		<Column className="w-full bg-card p-4 gap-4 justify-center items-end rounded-md border shadow-sm">
@@ -160,14 +167,32 @@ export const BuildsCard = ({
 						</span>
 						<Typography variant="caption">{data.postLike || 0}</Typography>
 					</Row>
-					<Row className="items-end">
-						<Typography variant="caption" className="text-gray-500">
-							{dayjs(displayDate).format("YY.MM.DD")}
-						</Typography>
-						<Typography variant="caption" className="text-gray-600 text-[10px]">
-							{data.updated_at && "(수정됨)"}
-						</Typography>
-					</Row>
+					<Tooltip delayDuration={300}>
+						<TooltipTrigger asChild>
+							<Row className="cursor-help items-end">
+								<Typography variant="caption" className="text-gray-500">
+									{dayjs(displayDate).format("YY.MM.DD")}
+								</Typography>
+								<Typography
+									variant="caption"
+									className="text-gray-600 text-[10px]"
+								>
+									{data.updated_at && "(수정됨)"}
+								</Typography>
+							</Row>
+						</TooltipTrigger>
+						<TooltipContent
+							sideOffset={8}
+							className="space-y-1 rounded-sm bg-gray-800 px-3 py-2 text-white"
+						>
+							<Typography variant="caption" className="leading-4">
+								작성일 : {createdTooltipDate}
+							</Typography>
+							<Typography variant="caption" className="leading-4">
+								수정일 : {updatedTooltipDate}
+							</Typography>
+						</TooltipContent>
+					</Tooltip>
 				</Row>
 				<Row className="items-end justify-end gap-2">
 					<Link href={`${SITEMAP.BUILDS}/${data.postUuid}`} prefetch={false}>
