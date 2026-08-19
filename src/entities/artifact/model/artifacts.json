@@ -515,7 +515,7 @@
 		},
 		"image": "https://img.sephiria.wiki/artifacts/simple_contract.png",
 		"description": "주로 소환 마법에 사용되는, 마법을 담아둘 수 있는 신비한 종이.",
-		"level": 5,
+		"level": 4,
 		"created_at": "2025-08-05T11:03:20.013563+00:00",
 		"disabled": null
 	},
@@ -3895,7 +3895,7 @@
 		},
 		"image": "https://img.sephiria.wiki/artifacts/red_planet_observation_log.png",
 		"description": "행성이 붉은빛으로 반짝였다는 내용 이후의 기록은 없습니다.",
-		"level": 4,
+		"level": 0,
 		"created_at": "2026-02-12T14:57:12.574076+00:00",
 		"disabled": null
 	},
@@ -3998,7 +3998,7 @@
 	{
 		"id": 260,
 		"value": "alchemist_flask",
-		"label_kor": "나그네의 축복",
+		"label_kor": "연금술사의 플라스크",
 		"label_eng": "alchemist_flask",
 		"tier": "rare",
 		"effect": {
@@ -4169,7 +4169,7 @@
 		"label_eng": "bento",
 		"tier": "advanced",
 		"effect": {
-			"content": "HP 흡수 +?/?/?/?/2"
+			"content": "HP 흡수 +1/1/1/1/2"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/bento.png",
 		"description": "생당근, 삶은 당근, 구운 당근이 들어있는 것 같다.",
