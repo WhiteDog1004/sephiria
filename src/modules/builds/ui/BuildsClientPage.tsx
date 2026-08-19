@@ -91,6 +91,8 @@ export const BuildsClientPage = () => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const [openDialog, setOpenDialog] = useState(false);
+	const [loginActionText, setLoginActionText] =
+		useState("빌드를 공유하시려면");
 	const [openSearch, setOpenSearch] = useState(false);
 
 	const {
@@ -189,6 +191,7 @@ export const BuildsClientPage = () => {
 										return;
 									}
 
+									setLoginActionText("빌드를 공유하시려면");
 									setOpenDialog(true);
 								}}
 							>
@@ -198,7 +201,7 @@ export const BuildsClientPage = () => {
 							<RequireLoginDialog
 								open={openDialog}
 								onOpenChange={setOpenDialog}
-								actionText="빌드를 공유하시려면"
+								actionText={loginActionText}
 							/>
 						</Row>
 						{(Object.keys(searchList).length !== 0 || likedOnly) && (
@@ -253,6 +256,7 @@ export const BuildsClientPage = () => {
 									checked={likedOnly}
 									onCheckedChange={(checked: boolean) => {
 										if (checked && !info) {
+											setLoginActionText("좋아요한 빌드를 보시려면");
 											setOpenDialog(true);
 											return;
 										}

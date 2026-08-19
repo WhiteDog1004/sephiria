@@ -1,6 +1,21 @@
 import { toast } from "sonner";
 import type { CreateBuildLikeTypes } from "../model/createBuildLike.types";
 
+export const getBuildLikeStatus = async ({
+	postUuid,
+	userId,
+}: CreateBuildLikeTypes) => {
+	const params = new URLSearchParams({ userId });
+	const response = await fetch(`/api/builds/${postUuid}/like?${params}`);
+	const json = await response.json();
+
+	if (!response.ok) {
+		throw new Error(json?.message ?? "Failed to get like");
+	}
+
+	return json as { liked: boolean };
+};
+
 export const createBuildLike = async ({
 	postUuid,
 	userId,
@@ -30,6 +45,34 @@ export const createBuildLike = async ({
 	}
 
 	toast("좋아요 성공!", {
+		position: "bottom-center",
+		style: {
+			backgroundColor: "#3e3e3ec5",
+			color: "#ffffff",
+		},
+	});
+
+	return { postUuid, userId };
+};
+
+export const deleteBuildLike = async ({
+	postUuid,
+	userId,
+}: CreateBuildLikeTypes) => {
+	const response = await fetch(`/api/builds/${postUuid}/like`, {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ userId }),
+	});
+	const json = await response.json();
+
+	if (!response.ok) {
+		throw new Error(json?.message ?? "Failed to delete like");
+	}
+
+	toast("좋아요를 취소했어요.", {
 		position: "bottom-center",
 		style: {
 			backgroundColor: "#3e3e3ec5",

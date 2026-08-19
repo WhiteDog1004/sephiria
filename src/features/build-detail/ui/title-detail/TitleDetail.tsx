@@ -1,10 +1,17 @@
 import dayjs from "dayjs";
+import clsx from "clsx";
 import { ThumbsUp } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useQueryClient } from "@tanstack/react-query";
 import type { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
-import { useCreateBuildLike } from "@/src/entities/build-detail";
+import {
+	buildLikeQueryKey,
+	useBuildLikeStatus,
+	useCreateBuildLike,
+	useDeleteBuildLike,
+} from "@/src/entities/build-detail";
 import type { BuildRow } from "@/src/entities/builds/model/builds.types";
 import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
 import {
@@ -36,8 +43,21 @@ export const TitleDetail = ({
 }) => {
 	const { title, writer, created_at, updated_at, version, postUuid, combo } =
 		data;
-	const { mutate } = useCreateBuildLike();
+	const queryClient = useQueryClient();
+	const likeReq = { postUuid, userId: userId ?? "" };
+	const { data: likeStatus, isLoading: isLikeStatusLoading } =
+		useBuildLikeStatus(likeReq, Boolean(userId));
+	const { mutate: createLike, isPending: isCreatePending } =
+		useCreateBuildLike();
+	const { mutate: deleteLike, isPending: isDeletePending } =
+		useDeleteBuildLike();
 	const [openDialog, setOpenDialog] = useState(false);
+	const isLiked = Boolean(likeStatus?.liked);
+	const isPending = isLikeStatusLoading || isCreatePending || isDeletePending;
+
+	const updateLikeStatus = (liked: boolean) => {
+		queryClient.setQueryData(buildLikeQueryKey(likeReq), { liked });
+	};
 
 	return (
 		<Column className="w-full gap-2">
@@ -74,24 +94,35 @@ export const TitleDetail = ({
 						variant="ghost"
 						size="sm"
 						className="h-auto p-0"
+						disabled={Boolean(userId) && isPending}
 						onClick={() => {
 							if (!userId) {
 								setOpenDialog(true);
 								return;
 							}
 
-							mutate(
-								{ postUuid, userId },
-								{
+							if (isLiked) {
+								deleteLike(likeReq, {
 									onSuccess: () => {
-										setInitialLike((initialLike || 0) + 1);
+										updateLikeStatus(false);
+										setInitialLike((current) => Math.max((current ?? 0) - 1, 0));
 									},
+								});
+								return;
+							}
+
+							createLike(likeReq, {
+								onSuccess: () => {
+									updateLikeStatus(true);
+									setInitialLike((current) => (current ?? 0) + 1);
 								},
-							);
+							});
 						}}
 					>
 						<Row className="items-center gap-2">
-							<ThumbsUp className="w-5 h-5" />
+							<ThumbsUp
+								className={clsx("w-5 h-5", isLiked && "fill-current")}
+							/>
 							<Typography variant="body2">{initialLike || 0}</Typography>
 						</Row>
 					</Button>
