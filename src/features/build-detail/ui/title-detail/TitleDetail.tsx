@@ -1,9 +1,8 @@
-import dayjs from "dayjs";
+import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
+import dayjs from "dayjs";
 import { ThumbsUp } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import { useQueryClient } from "@tanstack/react-query";
 import type { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 import {
@@ -12,19 +11,13 @@ import {
 	useCreateBuildLike,
 	useDeleteBuildLike,
 } from "@/src/entities/build-detail";
+import { AvatarBox } from "@/src/entities/builds";
 import type { BuildWithLikeStatus } from "@/src/entities/builds/model/builds.types";
 import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
 import {
-	Avatar,
-	AvatarImage,
 	Button,
 	Column,
 	copyToClipboard,
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-	getWriterBuildSearchHref,
 	RequireLoginDialog,
 	Row,
 	Separator,
@@ -154,37 +147,20 @@ export const TitleDetail = ({
 					<RequireLoginDialog
 						open={openDialog}
 						onOpenChange={setOpenDialog}
-						actionText="좋아요를 누르시려면"
+						actionText="좋아요를 누르려면"
 					/>
 				</Row>
 			</Column>
 			<Row className="h-8 justify-between items-center gap-2 overflow-hidden">
 				<Row className="min-w-0 items-center gap-2 overflow-hidden">
-					<DropdownMenu>
-						<DropdownMenuTrigger asChild>
-							<Button
-								variant="ghost"
-								className="h-auto min-w-0 max-w-full shrink justify-start overflow-hidden p-0"
-							>
-								<Avatar>
-									<AvatarImage src={writer.profileImage} />
-								</Avatar>
-								<Typography
-									variant="body2"
-									className="min-w-0 max-w-full truncate"
-								>
-									{writer.nickname}
-								</Typography>
-							</Button>
-						</DropdownMenuTrigger>
-						<DropdownMenuContent align="start">
-							<DropdownMenuItem asChild>
-								<Link href={getWriterBuildSearchHref(writer.uuid)}>
-									작성글 보기
-								</Link>
-							</DropdownMenuItem>
-						</DropdownMenuContent>
-					</DropdownMenu>
+					<AvatarBox
+						img={writer.profileImage}
+						nickname={writer.nickname}
+						uuid={writer.uuid}
+						badgeLevel={data.writerStats?.badge_level}
+						nicknameColor={data.writerStats?.nickname_color}
+						buildCount={data.writerStats?.build_count}
+					/>
 				</Row>
 				<Row className="h-full shrink-0 items-center gap-2">
 					{version && (
@@ -201,7 +177,7 @@ export const TitleDetail = ({
 								className="cursor-help text-gray-500 whitespace-nowrap"
 							>
 								<span>
-									작성일: {createdDate} {updated_at && "(수정됨)"}
+									작성일 {createdDate} {updated_at && "(수정됨)"}
 								</span>
 							</Typography>
 						</TooltipTrigger>
@@ -210,10 +186,10 @@ export const TitleDetail = ({
 							className="space-y-1 rounded-sm bg-gray-800 px-3 py-2 text-white"
 						>
 							<Typography variant="caption" className="leading-4">
-								작성일 : {createdTooltipDate}
+								작성일: {createdTooltipDate}
 							</Typography>
 							<Typography variant="caption" className="leading-4">
-								수정일 : {updatedTooltipDate}
+								수정일: {updatedTooltipDate}
 							</Typography>
 						</TooltipContent>
 					</Tooltip>

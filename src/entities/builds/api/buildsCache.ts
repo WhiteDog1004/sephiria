@@ -10,6 +10,7 @@ import type {
 	BuildWithLikeStatus,
 	GetBuildsParams,
 	GetBuildsResponse,
+	WriterBuildStatsRow,
 } from "../model/builds.types";
 
 export const BUILDS_LIST_TAG = "builds:list";
@@ -147,6 +148,58 @@ const addLikeStatus = (
 	}));
 };
 
+const DEFAULT_WRITER_STATS: Pick<
+	WriterBuildStatsRow,
+	"build_count" | "badge_level" | "nickname_color"
+> = {
+	build_count: 0,
+	badge_level: 0,
+	nickname_color: "default",
+};
+
+const attachWriterStats = async (
+	builds: BuildWithLikeStatus[],
+): Promise<BuildWithLikeStatus[]> => {
+	if (builds.length === 0) return builds;
+
+	const writerIds = [
+		...new Set(
+			builds.map((build) => build.writer.uuid).filter((uuid) => Boolean(uuid)),
+		),
+	];
+
+	if (writerIds.length === 0) {
+		return builds.map((build) => ({
+			...build,
+			writerStats: DEFAULT_WRITER_STATS,
+		}));
+	}
+
+	const supabase = await createServerSupabaseAdminClient();
+	const { data, error } = await supabase
+		.from("writer_build_stats")
+		.select("user_id,build_count,badge_level,nickname_color")
+		.in("user_id", writerIds);
+
+	handleError(error);
+
+	const statsMap = new Map(
+		(data ?? []).map((stats) => [
+			stats.user_id,
+			{
+				build_count: stats.build_count,
+				badge_level: stats.badge_level,
+				nickname_color: stats.nickname_color,
+			},
+		]),
+	);
+
+	return builds.map((build) => ({
+		...build,
+		writerStats: statsMap.get(build.writer.uuid) ?? DEFAULT_WRITER_STATS,
+	}));
+};
+
 const getBuildsFromDb = async (
 	params: NormalizedBuildsParams,
 ): Promise<GetBuildsResponse> => {
@@ -191,8 +244,10 @@ const getBuildsFromDb = async (
 		const { data, error, count } = await query;
 		handleError(error);
 
+		const builds = addLikeStatus((data as BuildRow[]) ?? [], likedPostIds);
+
 		return {
-			data: addLikeStatus((data as BuildRow[]) ?? [], likedPostIds),
+			data: await attachWriterStats(builds),
 			count: count ?? 0,
 		};
 	}
@@ -214,15 +269,17 @@ const getBuildsFromDb = async (
 	const { data, error, count } = await query;
 	handleError(error);
 
+	const builds = addLikeStatus((data as BuildRow[]) ?? [], likedPostIds);
+
 	return {
-		data: addLikeStatus((data as BuildRow[]) ?? [], likedPostIds),
+		data: await attachWriterStats(builds),
 		count: count ?? 0,
 	};
 };
 
 const getBuildsCachedFn = unstable_cache(
 	async (params: NormalizedBuildsParams) => getBuildsFromDb(params),
-	["builds:list:v2"],
+	["builds:list:v3"],
 	{
 		tags: [BUILDS_LIST_TAG],
 		revalidate: LIST_REVALIDATE_SECONDS,
@@ -244,13 +301,16 @@ const getBuildDetailFromDb = async (id: string) => {
 		.single();
 
 	handleError(error);
-	return { data: (data as BuildRow | null) ?? null };
+	const build = (data as BuildRow | null) ?? null;
+	const builds = build ? await attachWriterStats([build]) : [];
+
+	return { data: builds[0] ?? null };
 };
 
 export const getBuildDetailCached = async (id: string) => {
 	return unstable_cache(
 		async () => getBuildDetailFromDb(id),
-		[`builds:detail:v1:${id}`],
+		[`builds:detail:v2:${id}`],
 		{
 			tags: [getBuildDetailTag(id)],
 			revalidate: DETAIL_REVALIDATE_SECONDS,

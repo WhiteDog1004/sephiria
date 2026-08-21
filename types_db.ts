@@ -225,6 +225,36 @@ export type Database = {
 				};
 				Relationships: [];
 			};
+			writer_build_stats: {
+				Row: {
+					user_id: string;
+					nickname: string;
+					profile_image: string | null;
+					build_count: number;
+					badge_level: 0 | 1 | 2 | 3 | 4;
+					nickname_color: "default" | "level_1" | "level_2" | "level_3" | "level_4";
+					updated_at: string;
+				};
+				Insert: {
+					user_id: string;
+					nickname: string;
+					profile_image?: string | null;
+					build_count?: number;
+					badge_level?: 0 | 1 | 2 | 3 | 4;
+					nickname_color?: "default" | "level_1" | "level_2" | "level_3" | "level_4";
+					updated_at?: string;
+				};
+				Update: {
+					user_id?: string;
+					nickname?: string;
+					profile_image?: string | null;
+					build_count?: number;
+					badge_level?: 0 | 1 | 2 | 3 | 4;
+					nickname_color?: "default" | "level_1" | "level_2" | "level_3" | "level_4";
+					updated_at?: string;
+				};
+				Relationships: [];
+			};
 		};
 		Views: {
 			[_ in never]: never;

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
 	Avatar,
@@ -10,13 +11,32 @@ import {
 	DropdownMenuTrigger,
 	getWriterBuildSearchHref,
 	Row,
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
 	Typography,
 } from "@/src/shared";
+import type { WriterBuildStatsRow } from "../model/builds.types";
+
+type BadgeLevel = WriterBuildStatsRow["badge_level"];
+type NicknameColor = WriterBuildStatsRow["nickname_color"];
+
+const getBadgeSrc = (badgeLevel: BadgeLevel) =>
+	`/level/level_${badgeLevel}.png`;
+
+const getBadgeTooltipText = (badgeLevel: BadgeLevel, buildCount?: number) => {
+	const countText = buildCount === undefined ? "" : ` · 작성글 ${buildCount}개`;
+
+	return `레벨 ${badgeLevel}${countText}`;
+};
 
 type AvatarBoxProps = {
 	img: string;
 	nickname: string;
 	uuid: string;
+	badgeLevel?: BadgeLevel;
+	nicknameColor?: NicknameColor;
+	buildCount?: number;
 	onViewWriterPosts?: (uuid: string) => void;
 };
 
@@ -24,6 +44,8 @@ export const AvatarBox = ({
 	img,
 	nickname,
 	uuid,
+	badgeLevel = 0,
+	buildCount,
 	onViewWriterPosts,
 }: AvatarBoxProps) => {
 	return (
@@ -38,12 +60,34 @@ export const AvatarBox = ({
 							<AvatarImage src={img} />
 							<AvatarFallback>?</AvatarFallback>
 						</Avatar>
-						<Typography
-							variant="body2"
-							className="min-w-0 max-w-full truncate"
-						>
-							{nickname}
-						</Typography>
+						<Row className="min-w-0 items-center gap-1">
+							<Tooltip delayDuration={200}>
+								<TooltipTrigger asChild>
+									<Image
+										width={18}
+										height={18}
+										src={getBadgeSrc(badgeLevel)}
+										alt={`작성자 뱃지 ${badgeLevel}단계`}
+										className="shrink-0"
+										unoptimized
+									/>
+								</TooltipTrigger>
+								<TooltipContent
+									sideOffset={8}
+									className="rounded-sm bg-gray-800 px-3 py-2 text-white"
+								>
+									<Typography variant="caption">
+										{getBadgeTooltipText(badgeLevel, buildCount)}
+									</Typography>
+								</TooltipContent>
+							</Tooltip>
+							<Typography
+								variant="body2"
+								className="min-w-0 max-w-full truncate"
+							>
+								{nickname}
+							</Typography>
+						</Row>
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="start">

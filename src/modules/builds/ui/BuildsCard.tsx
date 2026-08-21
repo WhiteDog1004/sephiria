@@ -56,6 +56,9 @@ export const BuildsCard = ({
 					img={data.writer.profileImage}
 					nickname={data.writer.nickname}
 					uuid={data.writer.uuid}
+					badgeLevel={data.writerStats?.badge_level}
+					nicknameColor={data.writerStats?.nickname_color}
+					buildCount={data.writerStats?.build_count}
 					onViewWriterPosts={(uuid) => {
 						const params = new URLSearchParams();
 						params.set("page", "1");
