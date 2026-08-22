@@ -17,6 +17,14 @@ import {
 
 const supporters = [
 	{
+		nickname: "이*재",
+		costume: "https://img.sephiria.wiki/costume/wizard_rabbit.png",
+	},
+	{
+		nickname: "pjh815",
+		costume: "https://img.sephiria.wiki/costume/white_wolf.png",
+	},
+	{
 		nickname: "ㅇ크라이ㅇ",
 		costume: "https://img.sephiria.wiki/costume/pink_rabbit.png",
 	},
@@ -27,10 +35,6 @@ const supporters = [
 	{
 		nickname: "38올컬랙을향하여",
 		costume: "https://img.sephiria.wiki/costume/braid.png",
-	},
-	{
-		nickname: "pjh815",
-		costume: "https://img.sephiria.wiki/costume/white_wolf.png",
 	},
 ];
 
