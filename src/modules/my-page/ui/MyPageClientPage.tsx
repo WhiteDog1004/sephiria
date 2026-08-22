@@ -3,7 +3,7 @@
 import type { User } from "@supabase/supabase-js";
 import { FileText, Heart, UserRound } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useGetBuilds } from "@/src/entities/builds/model/useGetBuilds";
 import { useGetMiracles } from "@/src/entities/builds/model/useGetMiracles";
@@ -47,6 +47,18 @@ const MY_PAGE_MENUS: {
 		icon: Heart,
 	},
 ];
+
+const isMyPageMenuValue = (value: string | null): value is MyPageMenuValue =>
+	MY_PAGE_MENUS.some((menu) => menu.value === value);
+
+const getMyPageMenuValue = (value: string | null): MyPageMenuValue =>
+	isMyPageMenuValue(value) ? value : "written";
+
+const getMyPagePage = (value: string | null) => {
+	const page = Number(value);
+
+	return Number.isFinite(page) && page > 0 ? page : 1;
+};
 
 const getDisplayName = (user: User) =>
 	user.user_metadata.custom_claims?.global_name ||
@@ -130,11 +142,14 @@ const EmptyBuilds = ({ type }: { type: MyPageMenuValue }) => (
 const MyBuildsSection = ({
 	type,
 	userId,
+	page,
+	onPageChange,
 }: {
 	type: MyPageMenuValue;
 	userId: string;
+	page: number;
+	onPageChange: (page: number) => void;
 }) => {
-	const [page, setPage] = useState(1);
 	const { data, isLoading, isFetching } = useGetBuilds({
 		page,
 		limit: PAGE_SIZE,
@@ -179,7 +194,7 @@ const MyBuildsSection = ({
 			{totalPage > 1 && (
 				<BuildPagination
 					page={page}
-					setPage={(value) => setPage(value as number)}
+					setPage={(value) => onPageChange(value as number)}
 					totalPage={totalPage}
 				/>
 			)}
@@ -188,8 +203,12 @@ const MyBuildsSection = ({
 };
 
 export const MyPageClientPage = () => {
-	const [selectedMenu, setSelectedMenu] = useState<MyPageMenuValue>("written");
+	const router = useRouter();
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
 	const { data: session, isLoading } = useSession();
+	const selectedMenu = getMyPageMenuValue(searchParams.get("tab"));
+	const page = getMyPagePage(searchParams.get("page"));
 
 	if (isLoading) return <MyPageLoading />;
 	if (!session) return <NotLogin />;
@@ -197,6 +216,22 @@ export const MyPageClientPage = () => {
 	const user = session.user;
 	const displayName = getDisplayName(user);
 	const activeMenu = MY_PAGE_MENUS.find((menu) => menu.value === selectedMenu);
+	const updateMyPageQuery = (
+		nextMenu: MyPageMenuValue,
+		nextPage: number,
+		method: "push" | "replace",
+	) => {
+		const params = new URLSearchParams(searchParams.toString());
+		params.set("tab", nextMenu);
+
+		if (nextPage > 1) {
+			params.set("page", String(nextPage));
+		} else {
+			params.delete("page");
+		}
+
+		router[method](`${pathname}?${params.toString()}`, { scroll: false });
+	};
 
 	return (
 		<Column className="w-full items-center px-3 pt-3 pb-8 md:px-6 md:pt-6 md:pb-16">
@@ -232,7 +267,7 @@ export const MyPageClientPage = () => {
 									key={menu.value}
 									type="button"
 									variant="ghost"
-									onClick={() => setSelectedMenu(menu.value)}
+									onClick={() => updateMyPageQuery(menu.value, 1, "replace")}
 									className={cn(
 										"h-auto w-full justify-start rounded-md px-3 py-3 text-left",
 										isActive && "bg-accent text-accent-foreground",
@@ -270,6 +305,10 @@ export const MyPageClientPage = () => {
 							key={selectedMenu}
 							type={selectedMenu}
 							userId={user.id}
+							page={page}
+							onPageChange={(nextPage) =>
+								updateMyPageQuery(selectedMenu, nextPage, "push")
+							}
 						/>
 					</Column>
 				</Row>
