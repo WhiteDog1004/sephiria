@@ -28,6 +28,10 @@ const supporters = [
 		nickname: "38올컬랙을향하여",
 		costume: "https://img.sephiria.wiki/costume/braid.png",
 	},
+	{
+		nickname: "그냥 Nano",
+		costume: "https://img.sephiria.wiki/costume/white_wolf.png",
+	},
 ];
 
 const SUPPORTERS_PER_PAGE = 6;
