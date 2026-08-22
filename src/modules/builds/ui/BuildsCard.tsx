@@ -35,11 +35,13 @@ export const BuildsCard = ({
 	weapon,
 	miracle,
 	artifact,
+	hideArtifactSummary = false,
 }: {
 	data: BuildsOptions;
 	weapon?: { image: string | null; value_kor: string };
 	miracle?: { image: string | null; value_kor: string };
 	artifact?: ArtifactInstance["item"][];
+	hideArtifactSummary?: boolean;
 }) => {
 	const { isAscending, isLatestVersion } = useBuildSearchStore();
 	const displayDate = data.updated_at || data.created_at;
@@ -100,24 +102,26 @@ export const BuildsCard = ({
 						</Row>
 
 						<Row className="min-w-0 w-full gap-2">
-							<ContentItem
-								title={data.content[0].label}
-								content={
-									<Box className="items-center h-full p-0">
-										{artifact?.slice(0, 2).map((item) => (
-											<ImageWithFallback
-												key={item.value}
-												className="p-0"
-												width={40}
-												height={40}
-												src={getCloudflareUrl(item.image)}
-												alt={item.value}
-												unoptimized
-											/>
-										))}
-									</Box>
-								}
-							/>
+							{!hideArtifactSummary && (
+								<ContentItem
+									title={data.content[0].label}
+									content={
+										<Box className="items-center h-full p-0">
+											{artifact?.slice(0, 2).map((item) => (
+												<ImageWithFallback
+													key={item.value}
+													className="p-0"
+													width={40}
+													height={40}
+													src={getCloudflareUrl(item.image)}
+													alt={item.value}
+													unoptimized
+												/>
+											))}
+										</Box>
+									}
+								/>
+							)}
 							<ContentItem
 								title={"재능"}
 								className="min-w-max"
@@ -163,10 +167,7 @@ export const BuildsCard = ({
 									"size-6 bg-yellow-200 text-amber-700 dark:bg-yellow-400/20 dark:text-yellow-300",
 							)}
 						>
-							<ThumbsUp
-								className="size-4"
-								strokeWidth={2}
-							/>
+							<ThumbsUp className="size-4" strokeWidth={2} />
 						</span>
 						<Typography variant="caption">{data.postLike || 0}</Typography>
 					</Row>

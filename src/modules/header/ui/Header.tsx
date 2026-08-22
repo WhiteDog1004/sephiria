@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu } from "lucide-react";
+import { Menu, UserRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -121,16 +121,24 @@ export const Header = () => {
 						<DropdownMenuContent className="w-max py-2" align="end">
 							<DropdownMenuGroup>
 								{data ? (
-									<DropdownMenuItem onClick={discordLogoutHandler}>
-										<Image
-											src={"/discord-icon.svg"}
-											width={20}
-											height={20}
-											alt={"discord"}
-											className="invert dark:invert-0"
-										/>
-										로그아웃
-									</DropdownMenuItem>
+									<>
+										<DropdownMenuItem
+											onClick={() => router.push(SITEMAP.MY_PAGE)}
+										>
+											<UserRound className="size-5" />
+											마이페이지
+										</DropdownMenuItem>
+										<DropdownMenuItem onClick={discordLogoutHandler}>
+											<Image
+												src={"/discord-icon.svg"}
+												width={20}
+												height={20}
+												alt={"discord"}
+												className="invert dark:invert-0"
+											/>
+											로그아웃
+										</DropdownMenuItem>
+									</>
 								) : (
 									<DropdownMenuItem onClick={discordLoginHandler}>
 										<Image

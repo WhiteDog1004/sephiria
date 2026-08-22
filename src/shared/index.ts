@@ -1,5 +1,6 @@
 export * from "./components/adsense-horizontal";
 export * from "./components/ImageFallback";
+export { default as NotLogin } from "./components/NotLogin";
 export * from "./components/policy-section";
 export * from "./components/RequireLoginDialog";
 export * from "./config/ads";

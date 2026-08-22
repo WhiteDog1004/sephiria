@@ -10,6 +10,7 @@ export const SITEMAP = {
 	SIMULATOR: "/simulator",
 	BUILDS: "/builds",
 	ADD_BUILD: "/builds/add",
+	MY_PAGE: "/my-page",
 	PRIVACY: "/privacy",
 	TERMS: "/terms",
 };
@@ -59,6 +60,12 @@ export const SITE_METADATA = {
 		title: "세피리아 - 빌드 공유",
 		description: "세피리아 위키: 빌드 공유",
 		alternates: { canonical: SITEMAP.BUILDS },
+	},
+	myPage: {
+		title: "세피리아 - 마이페이지",
+		description:
+			"세피리아 위키: 내가 작성하거나 좋아요한 빌드를 확인해 보세요.",
+		alternates: { canonical: SITEMAP.MY_PAGE },
 	},
 	privacy: {
 		title: "세피리아 - 개인정보처리방침",
