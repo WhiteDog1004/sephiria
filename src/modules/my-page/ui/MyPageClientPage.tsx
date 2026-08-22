@@ -69,12 +69,40 @@ const getDisplayName = (user: User) =>
 const getBadgeSrc = (badgeLevel: number) =>
 	`/level/36x36_level_${badgeLevel}.png`;
 
+const BADGE_LEVEL_REQUIREMENTS = [0, 3, 10, 20, 30] as const;
+
+const getBadgeExperience = (badgeLevel: number, buildCount: number) => {
+	const currentRequired = BADGE_LEVEL_REQUIREMENTS[badgeLevel] ?? 0;
+	const nextRequired = BADGE_LEVEL_REQUIREMENTS[badgeLevel + 1];
+
+	if (nextRequired === undefined) {
+		return {
+			currentValue: buildCount,
+			nextValue: buildCount,
+			progress: 100,
+			isMaxLevel: true,
+		};
+	}
+
+	const levelRange = nextRequired - currentRequired;
+	const currentProgress = Math.max(0, buildCount - currentRequired);
+
+	return {
+		currentValue: buildCount,
+		nextValue: nextRequired,
+		progress: Math.min(100, Math.round((currentProgress / levelRange) * 100)),
+		isMaxLevel: false,
+	};
+};
+
 const MyPageSummary = () => {
 	const { data, isLoading } = useGetMyPageSummary();
 	const badgeLevel = data?.badgeLevel ?? 0;
+	const buildCount = data?.buildCount ?? 0;
+	const experience = getBadgeExperience(badgeLevel, buildCount);
 
 	return (
-		<Column className="w-full items-center gap-2 rounded-md border bg-background px-4 py-3 sm:w-36">
+		<Column className="w-full items-center gap-1 rounded-md border bg-background px-4 py-3 sm:w-40">
 			<Image
 				src={getBadgeSrc(badgeLevel)}
 				alt={`뱃지 ${badgeLevel}단계`}
@@ -87,9 +115,10 @@ const MyPageSummary = () => {
 				<Column className="w-full items-center gap-1">
 					<Skeleton className="h-4 w-16 rounded-md" />
 					<Skeleton className="h-4 w-20 rounded-md" />
+					<Skeleton className="mt-1 h-2 w-full rounded-full" />
 				</Column>
 			) : (
-				<Column className="items-center gap-1">
+				<Column className="w-full items-center gap-1">
 					<Typography variant="body2" className="whitespace-nowrap">
 						레벨 {badgeLevel}
 					</Typography>
@@ -97,8 +126,24 @@ const MyPageSummary = () => {
 						variant="caption"
 						className="whitespace-nowrap text-muted-foreground"
 					>
-						작성글 {data?.buildCount ?? 0}개
+						작성글 {buildCount}개
 					</Typography>
+					<Row className="h-4 w-full items-center overflow-hidden rounded-[2px] border border-black/70 bg-[#3c3c3c] shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]">
+						<span className="flex h-full shrink-0 items-center border-r border-black/60 bg-[#777] px-1 text-[9px] leading-none text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] [text-shadow:1px_1px_0_#111]">
+							EXP.
+						</span>
+						<div className="relative h-full min-w-0 flex-1 overflow-hidden bg-[linear-gradient(180deg,#666,#303030_55%,#1d1d1d)]">
+							<div
+								className="h-full border-r border-[#d9ff75] bg-[linear-gradient(180deg,#dfff55_0%,#8beb12_45%,#52b500_55%,#b7ff21_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.75)] transition-all"
+								style={{ width: `${experience.progress}%` }}
+							/>
+							<span className="absolute inset-y-0 right-1 flex items-center text-[9px] leading-none text-white [text-shadow:1px_1px_0_#111]">
+								{experience.isMaxLevel
+									? "MAX"
+									: `${experience.currentValue}/${experience.nextValue}`}
+							</span>
+						</div>
+					</Row>
 				</Column>
 			)}
 		</Column>
@@ -236,7 +281,7 @@ export const MyPageClientPage = () => {
 	return (
 		<Column className="w-full items-center px-3 pt-3 pb-8 md:px-6 md:pt-6 md:pb-16">
 			<Column className="w-full max-w-7xl gap-6">
-				<Row className="w-full flex-col gap-4 rounded-md border bg-card p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+				<Row className="w-full flex-col gap-4 rounded-md border bg-card p-3 shadow-sm sm:flex-row sm:items-center sm:justify-between">
 					<Row className="items-center gap-4">
 						<Avatar className="size-16 border">
 							<AvatarImage src={user.user_metadata.avatar_url} />
