@@ -150,7 +150,7 @@ const MyPageSummary = () => {
 	);
 };
 
-const MyPageLoading = () => (
+export const MyPageLoading = () => (
 	<Column className="w-full items-center px-3 pt-3 pb-8 md:px-6 md:pt-6 md:pb-16">
 		<Column className="w-full max-w-7xl gap-6">
 			<Skeleton className="h-40 w-full rounded-md" />
