@@ -1,4 +1,5 @@
 import sanitizeHtml from "sanitize-html";
+import { buildDescriptionEmoteItems } from "@/src/shared/config/emotes";
 
 const colorStylePatterns = [
 	/^#[0-9a-fA-F]{6}$/,
@@ -22,6 +23,7 @@ const allowedTags = [
 	"h2",
 	"h3",
 	"h4",
+	"img",
 	"li",
 	"ol",
 	"p",
@@ -33,6 +35,9 @@ const allowedTags = [
 	"ul",
 	"mark",
 ];
+const allowedEmoteSources = new Set(
+	buildDescriptionEmoteItems.map((emote) => emote.src),
+);
 
 const hasHtmlTag = (value: string) => /<\/?[a-z][\s\S]*>/i.test(value);
 
@@ -59,11 +64,20 @@ export const sanitizeBuildDescriptionHtml = (value?: string | null) => {
 		allowedTags,
 		allowedAttributes: {
 			"*": ["style"],
+			img: ["src", "alt", "title", "data-emote"],
 		},
 		allowedStyles,
 		allowedSchemes: ["http", "https", "mailto"],
 		disallowedTagsMode: "discard",
 		enforceHtmlBoundary: true,
+		exclusiveFilter: (frame) => {
+			if (frame.tag !== "img") return false;
+
+			return (
+				frame.attribs["data-emote"] !== "true" ||
+				!allowedEmoteSources.has(frame.attribs.src)
+			);
+		},
 	});
 };
 

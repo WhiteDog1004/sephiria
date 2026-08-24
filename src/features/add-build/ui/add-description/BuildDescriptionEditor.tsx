@@ -1,6 +1,6 @@
 "use client";
 
-import { Extension } from "@tiptap/core";
+import { Extension, mergeAttributes, Node as TiptapNode } from "@tiptap/core";
 import Color from "@tiptap/extension-color";
 import Highlight from "@tiptap/extension-highlight";
 import { TextStyle } from "@tiptap/extension-text-style";
@@ -10,6 +10,8 @@ import StarterKit from "@tiptap/starter-kit";
 import {
 	Bold,
 	ChevronDown,
+	ChevronLeft,
+	ChevronRight,
 	Code,
 	Italic,
 	List,
@@ -17,11 +19,13 @@ import {
 	PaintBucket,
 	Quote,
 	Redo2,
+	Smile,
 	Strikethrough,
 	Type,
 	UnderlineIcon,
 	Undo2,
 } from "lucide-react";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -32,6 +36,7 @@ import {
 	PopoverTrigger,
 	Row,
 } from "@/src/shared";
+import { buildDescriptionEmoteItems } from "@/src/shared/config/emotes";
 import { sanitizeBuildDescriptionHtml } from "@/src/shared/model/buildDescriptionHtml";
 
 const FontSize = Extension.create({
@@ -55,6 +60,40 @@ const FontSize = Extension.create({
 					},
 				},
 			},
+		];
+	},
+});
+
+const EmoteImage = TiptapNode.create({
+	name: "emoteImage",
+	group: "inline",
+	inline: true,
+	atom: true,
+
+	addAttributes() {
+		return {
+			src: {
+				default: null,
+			},
+			alt: {
+				default: "",
+			},
+			title: {
+				default: "",
+			},
+		};
+	},
+
+	parseHTML() {
+		return [{ tag: 'img[data-emote="true"]' }];
+	},
+
+	renderHTML({ HTMLAttributes }) {
+		return [
+			"img",
+			mergeAttributes(HTMLAttributes, {
+				"data-emote": "true",
+			}),
 		];
 	},
 });
@@ -93,7 +132,7 @@ const backgroundColors = [
 	"#581c87",
 	"#831843",
 ];
-
+const emotesPerPage = 16;
 const ToolbarButton = ({
 	active,
 	children,
@@ -216,6 +255,102 @@ const ColorPopover = ({
 	</Popover>
 );
 
+const EmotePopover = ({
+	onSelect,
+}: {
+	onSelect: (emote: (typeof buildDescriptionEmoteItems)[number]) => void;
+}) => {
+	const [open, setOpen] = useState(false);
+	const [page, setPage] = useState(0);
+	const totalPages = Math.ceil(
+		buildDescriptionEmoteItems.length / emotesPerPage,
+	);
+	const visibleEmotes = buildDescriptionEmoteItems.slice(
+		page * emotesPerPage,
+		(page + 1) * emotesPerPage,
+	);
+
+	return (
+		<Popover
+			open={open}
+			onOpenChange={(open) => {
+				setOpen(open);
+				if (open) setPage(0);
+			}}
+		>
+			<PopoverTrigger asChild>
+				<Button
+					type="button"
+					variant="ghost"
+					className="h-8 gap-1 rounded-sm border-0 px-2 shadow-none"
+					onMouseDown={(event) => event.preventDefault()}
+					title="Emote"
+				>
+					<Smile className="size-4" />
+					<ChevronDown className="size-3 opacity-60" />
+				</Button>
+			</PopoverTrigger>
+			<PopoverContent align="start" className="w-48 p-2">
+				<div className="grid grid-cols-4 gap-1">
+					{visibleEmotes.map((emote) => (
+						<button
+							key={emote.src}
+							type="button"
+							className="flex size-10 items-center justify-center rounded-sm hover:bg-accent"
+							onMouseDown={(event) => event.preventDefault()}
+							onClick={() => {
+								onSelect(emote);
+								setOpen(false);
+							}}
+							title={emote.label}
+						>
+							<Image
+								src={emote.src}
+								alt={emote.label}
+								width={28}
+								height={28}
+								className="pixelated"
+								unoptimized
+							/>
+						</button>
+					))}
+				</div>
+				<div className="mt-2 flex items-center justify-between border-t pt-2">
+					<Button
+						type="button"
+						size="icon"
+						variant="ghost"
+						className="size-7 rounded-sm"
+						disabled={page === 0}
+						onMouseDown={(event) => event.preventDefault()}
+						onClick={() => setPage((page) => Math.max(page - 1, 0))}
+						title="Previous emotes"
+					>
+						<ChevronLeft className="size-4" />
+					</Button>
+					<span className="text-xs text-muted-foreground">
+						{page + 1}/{totalPages}
+					</span>
+					<Button
+						type="button"
+						size="icon"
+						variant="ghost"
+						className="size-7 rounded-sm"
+						disabled={page >= totalPages - 1}
+						onMouseDown={(event) => event.preventDefault()}
+						onClick={() =>
+							setPage((page) => Math.min(page + 1, totalPages - 1))
+						}
+						title="Next emotes"
+					>
+						<ChevronRight className="size-4" />
+					</Button>
+				</div>
+			</PopoverContent>
+		</Popover>
+	);
+};
+
 export const BuildDescriptionEditor = ({
 	value,
 	onChange,
@@ -227,6 +362,7 @@ export const BuildDescriptionEditor = ({
 			StarterKit,
 			TextStyle,
 			FontSize,
+			EmoteImage,
 			Color,
 			Highlight.configure({ multicolor: true }),
 			Underline,
@@ -235,7 +371,7 @@ export const BuildDescriptionEditor = ({
 		editorProps: {
 			attributes: {
 				class:
-					"min-h-52 max-h-96 overflow-y-auto rounded-b-lg border-x border-b dark:bg-white/5 bg-black/5 px-3 py-3 text-sm outline-none [&_blockquote]:border-l-2 [&_blockquote]:pl-3 [&_blockquote]:text-muted-foreground [&_ol]:list-decimal [&_ol]:pl-5 [&_pre]:rounded-md [&_pre]:bg-secondary [&_pre]:p-3 [&_ul]:list-disc [&_ul]:pl-5",
+					"min-h-52 max-h-96 overflow-y-auto rounded-b-lg border-x border-b dark:bg-white/5 bg-black/5 px-3 py-3 text-sm outline-none [&_blockquote]:border-l-2 [&_blockquote]:pl-3 [&_blockquote]:text-muted-foreground [&_img[data-emote='true']]:mx-1 [&_img[data-emote='true']]:inline-block [&_img[data-emote='true']]:size-28 [&_img[data-emote='true']]:align-middle [&_img[data-emote='true']]:[image-rendering:pixelated] [&_ol]:list-decimal [&_ol]:pl-5 [&_pre]:rounded-md [&_pre]:bg-secondary [&_pre]:p-3 [&_ul]:list-disc [&_ul]:pl-5",
 			},
 			handlePaste: (_view, event) => {
 				const items = [...(event.clipboardData?.items ?? [])];
@@ -342,6 +478,23 @@ export const BuildDescriptionEditor = ({
 						editor.chain().focus().toggleHighlight({ color }).run()
 					}
 					title="배경색"
+				/>
+				<ToolbarDivider />
+				<EmotePopover
+					onSelect={(emote) =>
+						editor
+							.chain()
+							.focus()
+							.insertContent({
+								type: "emoteImage",
+								attrs: {
+									src: emote.src,
+									alt: emote.label,
+									title: emote.label,
+								},
+							})
+							.run()
+					}
 				/>
 				<ToolbarDivider />
 				<ToolbarButton
