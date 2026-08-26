@@ -1,5 +1,6 @@
 import debounce from "lodash.debounce";
-import { SlidersHorizontal } from "lucide-react";
+import { SlidersHorizontal, X } from "lucide-react";
+import Image from "next/image";
 import { type Dispatch, type SetStateAction, useMemo, useState } from "react";
 import type { ArtifactOptionFilter } from "@/src/entities/artifact/model/artifactOptionFilters";
 import { Button } from "@/src/shared/ui/button";
@@ -62,6 +63,9 @@ export const SearchItems = ({
 			label,
 		})),
 	];
+	const selectedArtifactOptionFilters = artifactOptionFilters?.filter(
+		(option) => selectedArtifactOptions.includes(option.value),
+	);
 
 	return (
 		<Row className="flex-col w-full items-end gap-2">
@@ -111,45 +115,96 @@ export const SearchItems = ({
 				artifactOptionFilters &&
 				onArtifactOptionToggle &&
 				onArtifactOptionReset && (
-					<Popover>
-						<PopoverTrigger asChild>
-							<Button size="sm" className="w-max">
-								<SlidersHorizontal />
-								옵션
-								{selectedArtifactOptions.length > 0 &&
-									` ${selectedArtifactOptions.length}`}
+					<Row className="max-w-full flex-wrap justify-end gap-1.5 p-0">
+						{selectedArtifactOptionFilters?.map((option) => (
+							<Button
+								key={option.value}
+								type="button"
+								size="sm"
+								variant="secondary"
+								className="h-8 gap-1 rounded-md px-2 text-xs"
+								onClick={() => onArtifactOptionToggle(option.value)}
+							>
+								{option.icon && (
+									<Image
+										src={option.icon}
+										alt=""
+										width={16}
+										height={16}
+										className="size-4 shrink-0 pixelated"
+									/>
+								)}
+								{option.label}
+								<X className="size-3" />
 							</Button>
-						</PopoverTrigger>
-						<PopoverContent align="end" className="w-[320px]">
-							<div className="flex max-h-[360px] flex-col gap-3 overflow-y-auto pr-1">
-								<Row className="justify-end p-0">
-									<Button
-										size="sm"
-										onClick={onArtifactOptionReset}
-										disabled={selectedArtifactOptions.length === 0}
-									>
-										초기화
-									</Button>
-								</Row>
-								<div className="grid grid-cols-2 gap-2">
-									{artifactOptionFilters.map((option) => (
-										<Label
-											key={option.value}
-											className="flex h-8 cursor-pointer items-center gap-1.5 rounded-md border bg-background px-2 text-xs font-medium shadow-xs transition-colors hover:bg-accent"
+						))}
+						<Popover>
+							<PopoverTrigger asChild>
+								<Button size="sm" className="w-max">
+									<SlidersHorizontal />
+									옵션
+									{selectedArtifactOptions.length > 0 &&
+										` ${selectedArtifactOptions.length}`}
+								</Button>
+							</PopoverTrigger>
+							<PopoverContent
+								align="end"
+								className="w-[calc(100vw-32px)] max-w-[380px] overflow-hidden p-3"
+								style={{
+									maxHeight:
+										"min(380px, var(--radix-popover-content-available-height))",
+								}}
+							>
+								<div className="flex flex-col gap-3">
+									<Row className="items-center justify-between p-0">
+										<span className="text-sm font-semibold">옵션 필터</span>
+										<Button
+											size="sm"
+											variant="ghost"
+											onClick={onArtifactOptionReset}
+											disabled={selectedArtifactOptions.length === 0}
+											className="h-7 px-2 text-xs"
 										>
-											<Checkbox
-												checked={selectedArtifactOptions.includes(option.value)}
-												onCheckedChange={() =>
-													onArtifactOptionToggle(option.value)
-												}
-											/>
-											{option.label}
-										</Label>
-									))}
+											초기화
+										</Button>
+									</Row>
+									<div
+										className="grid grid-cols-2 gap-1.5 overflow-y-auto pr-1"
+										style={{
+											maxHeight:
+												"min(300px, calc(var(--radix-popover-content-available-height) - 48px))",
+										}}
+									>
+										{artifactOptionFilters.map((option) => (
+											<Label
+												key={option.value}
+												className="flex h-8 min-w-0 cursor-pointer items-center gap-1.5 rounded-md border bg-background px-2 text-xs font-medium shadow-xs transition-colors hover:bg-accent"
+											>
+												<Checkbox
+													checked={selectedArtifactOptions.includes(
+														option.value,
+													)}
+													onCheckedChange={() =>
+														onArtifactOptionToggle(option.value)
+													}
+												/>
+												{option.icon && (
+													<Image
+														src={option.icon}
+														alt=""
+														width={16}
+														height={16}
+														className="size-4 shrink-0 pixelated"
+													/>
+												)}
+												<span className="min-w-0 truncate">{option.label}</span>
+											</Label>
+										))}
+									</div>
 								</div>
-							</div>
-						</PopoverContent>
-					</Popover>
+							</PopoverContent>
+						</Popover>
+					</Row>
 				)}
 		</Row>
 	);
