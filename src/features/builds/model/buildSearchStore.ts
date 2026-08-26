@@ -9,6 +9,7 @@ export interface BuildSearchState {
 		weapon?: string;
 		miracle?: string;
 		combo?: string;
+		artifacts?: string[];
 	};
 	isAscending: boolean;
 	isLatestVersion: boolean;

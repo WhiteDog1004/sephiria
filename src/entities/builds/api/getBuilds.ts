@@ -19,13 +19,14 @@ export const getBuilds = async ({
 		likedOnly: String(Boolean(likedOnly)),
 	});
 
-	const { title, writerUuid, costume, weapon, miracle, combo } = req;
+	const { title, writerUuid, costume, weapon, miracle, combo, artifacts } = req;
 	if (title) params.set("title", title);
 	if (writerUuid) params.set("writerUuid", writerUuid);
 	if (costume) params.set("costume", costume);
 	if (weapon) params.set("weapon", weapon);
 	if (miracle) params.set("miracle", miracle);
 	if (combo) params.set("combo", combo);
+	artifacts?.forEach((artifact) => params.append("artifacts", artifact));
 
 	const response = await fetch(`/api/builds?${params.toString()}`, {
 		method: "GET",

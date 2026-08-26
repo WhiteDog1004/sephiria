@@ -1,4 +1,6 @@
-import { RotateCw, Search } from "lucide-react";
+import clsx from "clsx";
+import debounce from "lodash.debounce";
+import { CopyPlus, RotateCw, Search, X } from "lucide-react";
 import {
 	type Dispatch,
 	type SetStateAction,
@@ -7,9 +9,19 @@ import {
 	useState,
 } from "react";
 import { useForm } from "react-hook-form";
-import { useGetMiracles, useGetWeapons } from "@/src/entities/builds";
+import {
+	useGetArtifacts,
+	useGetMiracles,
+	useGetWeapons,
+} from "@/src/entities/builds";
+import type { ArtifactInstance } from "@/src/entities/simulator/types";
 import type { WeaponRow } from "@/src/entities/weapon/model/types";
 import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
+import {
+	getRarityValue,
+	type Rarity,
+} from "@/src/features/simulator/lib/getRarityOrder";
+import { ArtifactTooltip } from "@/src/features/simulator/ui/ArtifactTooltip";
 import {
 	Accordion,
 	AccordionContent,
@@ -18,6 +30,10 @@ import {
 	Button,
 	COSTUMES,
 	Column,
+	Drawer,
+	DrawerContent,
+	DrawerHeader,
+	DrawerTitle,
 	Form,
 	FormControl,
 	FormField,
@@ -40,9 +56,13 @@ import {
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
 	Typography,
 } from "@/src/shared";
 import { getCloudflareUrl } from "@/src/shared/utils/image";
+import { getTierBorderColor } from "../../add-build/config/getTierBorderColor";
 import { useBuildSearchStore } from "../model/buildSearchStore";
 
 const getTier2Weapons = (weapons: WeaponRow[], tier1Value: string) =>
@@ -101,6 +121,196 @@ type BuildSearchFormValues = {
 	weapon: string;
 	miracle: string;
 	combo: string;
+	artifacts: string[];
+};
+
+const MAX_ARTIFACT_SEARCH_COUNT = 5;
+
+const ArtifactSearchPicker = ({
+	artifacts,
+	value,
+	onChange,
+}: {
+	artifacts: ArtifactInstance["item"][];
+	value: string[];
+	onChange: (value: string[]) => void;
+}) => {
+	const [isOpen, setIsOpen] = useState(false);
+	const [currentValue, setCurrentValue] = useState("");
+	const [searchInput, setSearchInput] = useState("");
+	const [selectedSets, setSelectedSets] = useState("all");
+	const [selectIndex, setSelectIndex] = useState(0);
+
+	const effectData = useMemo(
+		() => [
+			{ value: "all", label: "콤보 전체" },
+			...Object.entries(EFFECT_LABELS).map(([value, label]) => ({
+				value,
+				label,
+			})),
+		],
+		[],
+	);
+
+	const handleSearch = useMemo(
+		() =>
+			debounce((value: string) => {
+				setSearchInput(value);
+			}, 200),
+		[],
+	);
+
+	const filteredItems = useMemo(
+		() =>
+			[...artifacts]
+				.sort(
+					(a, b) =>
+						getRarityValue(a.tier as Rarity) - getRarityValue(b.tier as Rarity),
+				)
+				.filter((item) => {
+					const matchesSearch = item.label_kor
+						.toLowerCase()
+						.includes(searchInput.toLowerCase());
+					const matchesSets =
+						selectedSets === "all" || item.effect.sets?.includes(selectedSets);
+					return matchesSearch && matchesSets;
+				}),
+		[artifacts, searchInput, selectedSets],
+	);
+
+	const handleSelectArtifact = (itemValue: string) => {
+		const nextValue = [...value];
+		const currentIndex = nextValue.indexOf(itemValue);
+
+		if (currentIndex !== -1 && currentIndex !== selectIndex) {
+			nextValue.splice(currentIndex, 1);
+		}
+
+		if (nextValue[selectIndex]) {
+			nextValue[selectIndex] = itemValue;
+		} else if (nextValue.length < MAX_ARTIFACT_SEARCH_COUNT) {
+			nextValue.push(itemValue);
+		}
+
+		onChange(nextValue);
+		setIsOpen(false);
+	};
+
+	const removeArtifact = (index: number) => {
+		onChange(value.filter((_, itemIndex) => itemIndex !== index));
+	};
+
+	return (
+		<Drawer open={isOpen} onOpenChange={setIsOpen}>
+			<Column className="w-full gap-2">
+				<Row className="grid w-full grid-cols-[repeat(auto-fill,minmax(52px,52px))] items-center gap-1.5">
+					{value.map((artifactValue, index) => {
+						const artifact = artifacts.find(
+							(item) => item.value === artifactValue,
+						);
+
+						return (
+							<Row key={artifactValue} className="group relative">
+								<Button
+									onClick={() => {
+										setIsOpen(true);
+										setSelectIndex(index);
+									}}
+									type="button"
+									className="h-[52px] w-[52px] p-1"
+								>
+									<ImageWithFallback
+										className="max-h-11 min-w-11 max-w-11 p-0"
+										width={44}
+										height={44}
+										src={getCloudflareUrl(artifact?.image || "/")}
+										alt={artifactValue}
+									/>
+								</Button>
+								<Button
+									type="button"
+									className="absolute top-1 right-1 hidden h-max !p-0 opacity-60 group-hover:flex"
+									variant="ghost"
+									onClick={() => removeArtifact(index)}
+								>
+									<X className="text-red-500" />
+								</Button>
+							</Row>
+						);
+					})}
+					{value.length < MAX_ARTIFACT_SEARCH_COUNT && (
+						<Button
+							onClick={() => {
+								setIsOpen(true);
+								setSelectIndex(value.length);
+							}}
+							type="button"
+							className="h-[52px] w-[52px] opacity-40 hover:opacity-100"
+						>
+							<CopyPlus className="text-gray-500" />
+						</Button>
+					)}
+				</Row>
+				<DrawerContent className="w-full">
+					<DrawerHeader>
+						<DrawerTitle>
+							<Typography variant="body2">아티팩트를 선택해 주세요</Typography>
+						</DrawerTitle>
+					</DrawerHeader>
+
+					<Column className="mx-auto w-full max-w-3xl gap-2 px-4 py-4 md:px-0">
+						<Row className="w-full gap-2">
+							<Input
+								placeholder="아티팩트 검색"
+								value={currentValue}
+								onChange={(event) => {
+									setCurrentValue(event.target.value);
+									handleSearch(event.target.value);
+								}}
+							/>
+							<Select value={selectedSets} onValueChange={setSelectedSets}>
+								<SelectTrigger className="w-28 min-w-28">
+									<SelectValue placeholder="콤보 선택" />
+								</SelectTrigger>
+								<SelectContent>
+									{effectData.map((sets) => (
+										<SelectItem key={sets.value} value={sets.value}>
+											{sets.label}
+										</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
+						</Row>
+
+						<Row className="grid max-h-[260px] grid-cols-[repeat(auto-fill,minmax(48px,1fr))] gap-2 overflow-y-auto sm:max-h-[400px]">
+							{filteredItems.map((item) => (
+								<Tooltip delayDuration={400} key={item.value}>
+									<TooltipTrigger asChild>
+										<Button
+											type="button"
+											className={`h-max p-0 ${clsx(getTierBorderColor(item.tier))}`}
+											onClick={() => handleSelectArtifact(item.value)}
+										>
+											<ImageWithFallback
+												className="max-h-12 min-w-12 max-w-12 p-0"
+												width={48}
+												height={48}
+												src={getCloudflareUrl(item.image)}
+												alt={item.value}
+											/>
+										</Button>
+									</TooltipTrigger>
+									<TooltipContent sideOffset={16}>
+										<ArtifactTooltip data={item as ArtifactInstance["item"]} />
+									</TooltipContent>
+								</Tooltip>
+							))}
+						</Row>
+					</Column>
+				</DrawerContent>
+			</Column>
+		</Drawer>
+	);
 };
 
 export const BuildSearchButton = ({
@@ -115,6 +325,7 @@ export const BuildSearchButton = ({
 	const { setSearchList } = useBuildSearchStore();
 	const { data: weapons } = useGetWeapons();
 	const { data: miracles } = useGetMiracles();
+	const { data: artifacts } = useGetArtifacts();
 	const [isTitle, setIsTitle] = useState(false);
 	const [hideFloatingButton, setHideFloatingButton] = useState(false);
 	const [weaponPopoverOpen, setWeaponPopoverOpen] = useState(false);
@@ -126,6 +337,7 @@ export const BuildSearchButton = ({
 			weapon: "",
 			miracle: "",
 			combo: "",
+			artifacts: [],
 		},
 	});
 
@@ -144,6 +356,7 @@ export const BuildSearchButton = ({
 	};
 
 	const selectedWeaponValue = form.watch("weapon");
+	const selectedArtifacts = form.watch("artifacts");
 
 	const selectedWeapon = useMemo(
 		() => weapons?.find((weapon) => weapon.value === selectedWeaponValue),
@@ -497,6 +710,27 @@ export const BuildSearchButton = ({
 												))}
 											</SelectContent>
 										</Select>
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="artifacts"
+								render={() => (
+									<FormItem className="w-full">
+										<FormLabel>아티팩트</FormLabel>
+										<FormControl>
+											<ArtifactSearchPicker
+												artifacts={artifacts ?? []}
+												value={selectedArtifacts ?? []}
+												onChange={(value) =>
+													form.setValue("artifacts", value, {
+														shouldDirty: true,
+														shouldTouch: true,
+													})
+												}
+											/>
+										</FormControl>
 									</FormItem>
 								)}
 							/>

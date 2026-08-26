@@ -11,6 +11,7 @@ export type GetBuildsParams = {
 	likedByUserId?: string;
 	viewerId?: string;
 	combo?: string;
+	artifacts?: string[];
 } & Partial<Pick<BuildRow, "title" | "costume" | "weapon" | "miracle">>;
 
 export type BuildRow = Database["public"]["Tables"]["builds"]["Row"];

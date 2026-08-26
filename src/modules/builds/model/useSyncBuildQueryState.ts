@@ -44,18 +44,17 @@ export const useSyncBuildQueryState = ({
 		const urlLatest = searchParams.get("latest") === "true";
 		const urlLikedOnly = searchParams.get("liked") === "true";
 
-		const urlSearchList: Record<string, string | boolean> = {};
-		[
-			"title",
-			"writerUuid",
-			"costume",
-			"weapon",
-			"miracle",
-			"combo",
-		].forEach((key) => {
-			const val = searchParams.get(key);
-			if (val) urlSearchList[key] = val;
-		});
+		const urlSearchList: Record<string, string | boolean | string[]> = {};
+		["title", "writerUuid", "costume", "weapon", "miracle", "combo"].forEach(
+			(key) => {
+				const val = searchParams.get(key);
+				if (val) urlSearchList[key] = val;
+			},
+		);
+		const urlArtifacts = searchParams.getAll("artifacts");
+		if (urlArtifacts.length > 0) {
+			urlSearchList.artifacts = urlArtifacts;
+		}
 
 		if (searchParams.get("isWriter") === "true") {
 			urlSearchList.isWriter = true;
@@ -83,6 +82,11 @@ export const useSyncBuildQueryState = ({
 		params.set("liked", likedOnly ? "true" : "false");
 
 		Object.entries(searchList).forEach(([key, value]) => {
+			if (Array.isArray(value)) {
+				params.delete(key);
+				value.forEach((item) => params.append(key, item));
+				return;
+			}
 			if (value) params.set(key, String(value));
 		});
 
@@ -114,6 +118,11 @@ export const useSyncBuildQueryState = ({
 		params.set("liked", likedOnly ? "true" : "false");
 
 		Object.entries(searchList).forEach(([key, value]) => {
+			if (Array.isArray(value)) {
+				params.delete(key);
+				value.forEach((item) => params.append(key, item));
+				return;
+			}
 			if (value) params.set(key, String(value));
 		});
 

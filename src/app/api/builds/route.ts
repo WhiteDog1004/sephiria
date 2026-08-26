@@ -1,15 +1,18 @@
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import type { CreateBuildType } from "@/src/entities/add-build/model/createBuild.types";
 import {
 	BUILDS_LIST_TAG,
 	getBuildDetailTag,
 	getBuildsCached,
 } from "@/src/entities/builds/api/buildsCache";
-import type { CreateBuildType } from "@/src/entities/add-build/model/createBuild.types";
 import type { GetBuildsParams } from "@/src/entities/builds/model/builds.types";
 import { sanitizeBuildDescriptionHtml } from "@/src/shared/model/buildDescriptionHtml";
-import { isValidPresetCode, normalizePresetCode } from "@/src/shared/model/presetCode";
+import {
+	isValidPresetCode,
+	normalizePresetCode,
+} from "@/src/shared/model/presetCode";
 
 export const dynamic = "force-dynamic";
 
@@ -29,6 +32,7 @@ export const GET = async (request: Request) => {
 			weapon: searchParams.get("weapon") ?? undefined,
 			miracle: searchParams.get("miracle") ?? undefined,
 			combo: searchParams.get("combo") ?? undefined,
+			artifacts: searchParams.getAll("artifacts"),
 		};
 
 		const supabase = await createServerSupabaseClient();
@@ -50,7 +54,10 @@ export const GET = async (request: Request) => {
 		return NextResponse.json(result, { status: 200 });
 	} catch (error) {
 		console.error("GET /api/builds failed", error);
-		return NextResponse.json({ message: "Failed to fetch builds" }, { status: 500 });
+		return NextResponse.json(
+			{ message: "Failed to fetch builds" },
+			{ status: 500 },
+		);
 	}
 };
 
@@ -61,7 +68,10 @@ export const POST = async (request: Request) => {
 		const presetCode = normalizePresetCode(payload.preset_code);
 
 		if (presetCode && !isValidPresetCode(presetCode)) {
-			return NextResponse.json({ message: "Invalid preset code" }, { status: 400 });
+			return NextResponse.json(
+				{ message: "Invalid preset code" },
+				{ status: 400 },
+			);
 		}
 
 		const { error } = await supabase.from("builds").insert({
@@ -94,6 +104,9 @@ export const POST = async (request: Request) => {
 		return NextResponse.json({ postUuid: payload.postUuid }, { status: 201 });
 	} catch (error) {
 		console.error("POST /api/builds failed", error);
-		return NextResponse.json({ message: "Failed to create build" }, { status: 500 });
+		return NextResponse.json(
+			{ message: "Failed to create build" },
+			{ status: 500 },
+		);
 	}
 };
