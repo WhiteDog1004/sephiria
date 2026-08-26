@@ -106,6 +106,8 @@ const applyBuildsFilters = <T>(query: T, params: NormalizedBuildsParams): T => {
 		filteredQuery = filteredQuery.eq("miracle", params.miracle);
 	if (params.combo)
 		filteredQuery = filteredQuery.contains("combo", [params.combo]);
+	if (params.artifacts.length > 0)
+		filteredQuery = filteredQuery.contains("artifact_values", params.artifacts);
 
 	return filteredQuery;
 };
@@ -206,46 +208,6 @@ const attachWriterStats = async (
 	}));
 };
 
-const filterBuildsByArtifacts = (
-	builds: BuildRow[],
-	artifacts: string[],
-): BuildRow[] => {
-	if (artifacts.length === 0) return builds;
-
-	return builds.filter((build) => {
-		const buildArtifactValues = new Set(
-			build.content.flatMap((group) =>
-				group.items.map((item) => item.value).filter(Boolean),
-			),
-		);
-
-		return artifacts.every((artifact) => buildArtifactValues.has(artifact));
-	});
-};
-
-const getArtifactFilteredBuildsResponse = async ({
-	data,
-	from,
-	to,
-	likedPostIds,
-	params,
-}: {
-	data: BuildRow[] | null;
-	from: number;
-	to: number;
-	likedPostIds: string[] | null;
-	params: NormalizedBuildsParams;
-}): Promise<GetBuildsResponse> => {
-	const filteredData = filterBuildsByArtifacts(data ?? [], params.artifacts);
-	const pagedData = filteredData.slice(from, to + 1);
-	const builds = addLikeStatus(pagedData, likedPostIds);
-
-	return {
-		data: await attachWriterStats(builds),
-		count: filteredData.length,
-	};
-};
-
 const getBuildsFromDb = async (
 	params: NormalizedBuildsParams,
 ): Promise<GetBuildsResponse> => {
@@ -253,7 +215,7 @@ const getBuildsFromDb = async (
 	const from = (params.page - 1) * params.limit;
 	const to = from + params.limit - 1;
 	const selectColumns =
-		"id,postUuid,title,description,costume,weapon,miracle,combo,fruit_skewer,version,content,ability,preset_code,postLike,created_at,updated_at,writer";
+		"id,postUuid,title,description,costume,weapon,miracle,combo,fruit_skewer,version,content,artifact_values,ability,preset_code,postLike,created_at,updated_at,writer";
 	let likedPostIds: string[] | null = null;
 
 	if (params.likedByUserId) {
@@ -285,23 +247,10 @@ const getBuildsFromDb = async (
 
 		query = query
 			.order("postLike", { ascending: false, nullsFirst: false })
-			.range(
-				params.artifacts.length > 0 ? 0 : from,
-				params.artifacts.length > 0 ? 9999 : to,
-			);
+			.range(from, to);
 
 		const { data, error, count } = await query;
 		handleError(error);
-
-		if (params.artifacts.length > 0) {
-			return getArtifactFilteredBuildsResponse({
-				data: (data as BuildRow[]) ?? [],
-				from,
-				to,
-				likedPostIds,
-				params,
-			});
-		}
 
 		const builds = addLikeStatus((data as BuildRow[]) ?? [], likedPostIds);
 
@@ -323,23 +272,10 @@ const getBuildsFromDb = async (
 	query = query
 		.order("display_at", { ascending: false })
 		.order("id", { ascending: false })
-		.range(
-			params.artifacts.length > 0 ? 0 : from,
-			params.artifacts.length > 0 ? 9999 : to,
-		);
+		.range(from, to);
 
 	const { data, error, count } = await query;
 	handleError(error);
-
-	if (params.artifacts.length > 0) {
-		return getArtifactFilteredBuildsResponse({
-			data: (data as BuildRow[]) ?? [],
-			from,
-			to,
-			likedPostIds,
-			params,
-		});
-	}
 
 	const builds = addLikeStatus((data as BuildRow[]) ?? [], likedPostIds);
 
@@ -351,7 +287,7 @@ const getBuildsFromDb = async (
 
 const getBuildsCachedFn = unstable_cache(
 	async (params: NormalizedBuildsParams) => getBuildsFromDb(params),
-	["builds:list:v5"],
+	["builds:list:v6"],
 	{
 		tags: [BUILDS_LIST_TAG],
 		revalidate: LIST_REVALIDATE_SECONDS,
@@ -367,7 +303,7 @@ const getBuildDetailFromDb = async (id: string) => {
 	const { data, error } = await supabase
 		.from("builds")
 		.select(
-			"id,postUuid,title,costume,weapon,miracle,combo,fruit_skewer,version,content,ability,description,preset_code,postLike,created_at,updated_at,writer",
+			"id,postUuid,title,costume,weapon,miracle,combo,fruit_skewer,version,content,artifact_values,ability,description,preset_code,postLike,created_at,updated_at,writer",
 		)
 		.eq("postUuid", id)
 		.single();

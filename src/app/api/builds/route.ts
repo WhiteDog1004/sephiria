@@ -7,6 +7,7 @@ import {
 	getBuildDetailTag,
 	getBuildsCached,
 } from "@/src/entities/builds/api/buildsCache";
+import { getArtifactValues } from "@/src/entities/builds/lib/getArtifactValues";
 import type { GetBuildsParams } from "@/src/entities/builds/model/builds.types";
 import { sanitizeBuildDescriptionHtml } from "@/src/shared/model/buildDescriptionHtml";
 import {
@@ -81,6 +82,7 @@ export const POST = async (request: Request) => {
 			title: payload.title,
 			description: sanitizeBuildDescriptionHtml(payload.description),
 			content: payload.content,
+			artifact_values: getArtifactValues(payload.content),
 			costume: payload.costume,
 			weapon: payload.weapon,
 			miracle: payload.miracle,

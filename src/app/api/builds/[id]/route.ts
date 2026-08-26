@@ -6,9 +6,13 @@ import {
 	getBuildDetailCached,
 	getBuildDetailTag,
 } from "@/src/entities/builds/api/buildsCache";
+import { getArtifactValues } from "@/src/entities/builds/lib/getArtifactValues";
 import type { UpdateBuildType } from "@/src/entities/modify-build/model/updateBuild.types";
 import { sanitizeBuildDescriptionHtml } from "@/src/shared/model/buildDescriptionHtml";
-import { isValidPresetCode, normalizePresetCode } from "@/src/shared/model/presetCode";
+import {
+	isValidPresetCode,
+	normalizePresetCode,
+} from "@/src/shared/model/presetCode";
 
 export const dynamic = "force-dynamic";
 
@@ -28,7 +32,10 @@ export const GET = async (_request: Request, context: RouteContext) => {
 		return NextResponse.json(result, { status: 200 });
 	} catch (error) {
 		console.error("GET /api/builds/[id] failed", error);
-		return NextResponse.json({ message: "Failed to fetch build detail" }, { status: 500 });
+		return NextResponse.json(
+			{ message: "Failed to fetch build detail" },
+			{ status: 500 },
+		);
 	}
 };
 
@@ -40,7 +47,10 @@ export const PATCH = async (request: Request, context: RouteContext) => {
 		const presetCode = normalizePresetCode(payload.preset_code);
 
 		if (presetCode && !isValidPresetCode(presetCode)) {
-			return NextResponse.json({ message: "Invalid preset code" }, { status: 400 });
+			return NextResponse.json(
+				{ message: "Invalid preset code" },
+				{ status: 400 },
+			);
 		}
 
 		const { error } = await supabase
@@ -52,6 +62,7 @@ export const PATCH = async (request: Request, context: RouteContext) => {
 				title: payload.title,
 				description: sanitizeBuildDescriptionHtml(payload.description),
 				content: payload.content,
+				artifact_values: getArtifactValues(payload.content),
 				costume: payload.costume,
 				weapon: payload.weapon,
 				miracle: payload.miracle,
@@ -77,7 +88,10 @@ export const PATCH = async (request: Request, context: RouteContext) => {
 		return NextResponse.json({ postUuid: id }, { status: 200 });
 	} catch (error) {
 		console.error("PATCH /api/builds/[id] failed", error);
-		return NextResponse.json({ message: "Failed to update build" }, { status: 500 });
+		return NextResponse.json(
+			{ message: "Failed to update build" },
+			{ status: 500 },
+		);
 	}
 };
 
@@ -101,6 +115,9 @@ export const DELETE = async (_request: Request, context: RouteContext) => {
 		return NextResponse.json({ postUuid: id }, { status: 200 });
 	} catch (error) {
 		console.error("DELETE /api/builds/[id] failed", error);
-		return NextResponse.json({ message: "Failed to delete build" }, { status: 500 });
+		return NextResponse.json(
+			{ message: "Failed to delete build" },
+			{ status: 500 },
+		);
 	}
 };

@@ -155,6 +155,7 @@ export type Database = {
 					postLike?: number;
 					title: string;
 					description: string;
+					artifact_values: string[];
 					content: {
 						label: string;
 						description?: string;
@@ -168,10 +169,12 @@ export type Database = {
 					weapon: string;
 					miracle: string;
 					combo: string[];
-					fruit_skewer?: {
-						key: string;
-						value: number;
-					}[] | null;
+					fruit_skewer?:
+						| {
+								key: string;
+								value: number;
+						  }[]
+						| null;
 					youtube_link?: string;
 					version: string;
 					ability: Record<string, number>;
@@ -187,15 +190,18 @@ export type Database = {
 					created_at?: string;
 					title: string;
 					description: string;
+					artifact_values?: string[];
 					content: ListType[];
 					costume: string;
 					weapon: string;
 					miracle: string;
 					combo?: string[];
-					fruit_skewer?: {
-						key: string;
-						value: number;
-					}[] | null;
+					fruit_skewer?:
+						| {
+								key: string;
+								value: number;
+						  }[]
+						| null;
 					ability: TalentType;
 					writer: WriterType;
 					youtube_link?: string;
@@ -232,7 +238,12 @@ export type Database = {
 					profile_image: string | null;
 					build_count: number;
 					badge_level: 0 | 1 | 2 | 3 | 4;
-					nickname_color: "default" | "level_1" | "level_2" | "level_3" | "level_4";
+					nickname_color:
+						| "default"
+						| "level_1"
+						| "level_2"
+						| "level_3"
+						| "level_4";
 					updated_at: string;
 				};
 				Insert: {
@@ -241,7 +252,12 @@ export type Database = {
 					profile_image?: string | null;
 					build_count?: number;
 					badge_level?: 0 | 1 | 2 | 3 | 4;
-					nickname_color?: "default" | "level_1" | "level_2" | "level_3" | "level_4";
+					nickname_color?:
+						| "default"
+						| "level_1"
+						| "level_2"
+						| "level_3"
+						| "level_4";
 					updated_at?: string;
 				};
 				Update: {
@@ -250,7 +266,12 @@ export type Database = {
 					profile_image?: string | null;
 					build_count?: number;
 					badge_level?: 0 | 1 | 2 | 3 | 4;
-					nickname_color?: "default" | "level_1" | "level_2" | "level_3" | "level_4";
+					nickname_color?:
+						| "default"
+						| "level_1"
+						| "level_2"
+						| "level_3"
+						| "level_4";
 					updated_at?: string;
 				};
 				Relationships: [];
