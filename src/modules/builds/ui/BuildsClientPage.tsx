@@ -34,6 +34,7 @@ import { BuildsCard } from "./BuildsCard";
 
 const PAGE_SIZE = 10;
 const BUILD_LIST_LOADING_IMAGES = [
+	"/face/FaceChip_Player_WhiteWolf.png",
 	"/face/FaceChip_Player_Adventurer.png",
 	"/face/FaceChip_Player_Armored.png",
 	"/face/FaceChip_Player_Fox.png",
@@ -41,27 +42,43 @@ const BUILD_LIST_LOADING_IMAGES = [
 	"/face/FaceChip_Player_Mage.png",
 	"/face/FaceChip_Player_RedHoly.png",
 	"/face/FaceChip_Player_Skeleton.png",
-	"/face/FaceChip_Player_WhiteWolf.png",
 ];
+const BUILD_LIST_LOADING_FALLBACK_IMAGE = "/face/FaceChip_Player_WhiteWolf.png";
 
 const getRandomLoadingImageIndex = () =>
 	Math.floor(Math.random() * BUILD_LIST_LOADING_IMAGES.length);
 
-const getNextLoadingImageIndex = (currentIndex: number) => {
-	if (BUILD_LIST_LOADING_IMAGES.length <= 1) return currentIndex;
+const getRandomLoadingImage = () =>
+	BUILD_LIST_LOADING_IMAGES[getRandomLoadingImageIndex()] ??
+	BUILD_LIST_LOADING_FALLBACK_IMAGE;
+
+const getNextLoadingImage = (currentImage: string) => {
+	if (BUILD_LIST_LOADING_IMAGES.length <= 1) {
+		return BUILD_LIST_LOADING_IMAGES[0] ?? BUILD_LIST_LOADING_FALLBACK_IMAGE;
+	}
 
 	const nextIndex = getRandomLoadingImageIndex();
-	if (nextIndex !== currentIndex) return nextIndex;
+	const nextImage = BUILD_LIST_LOADING_IMAGES[nextIndex];
+	if (nextImage && nextImage !== currentImage) return nextImage;
 
-	return (currentIndex + 1) % BUILD_LIST_LOADING_IMAGES.length;
+	const currentIndex = BUILD_LIST_LOADING_IMAGES.indexOf(currentImage);
+	return (
+		BUILD_LIST_LOADING_IMAGES[
+			(currentIndex + 1) % BUILD_LIST_LOADING_IMAGES.length
+		] ?? BUILD_LIST_LOADING_FALLBACK_IMAGE
+	);
 };
 
 const BuildListLoading = () => {
-	const [imageIndex, setImageIndex] = useState(getRandomLoadingImageIndex);
+	const [imageSrc, setImageSrc] = useState(
+		BUILD_LIST_LOADING_IMAGES[0] ?? BUILD_LIST_LOADING_FALLBACK_IMAGE,
+	);
 
 	useEffect(() => {
+		setImageSrc(getRandomLoadingImage());
+
 		const intervalId = window.setInterval(() => {
-			setImageIndex((currentIndex) => getNextLoadingImageIndex(currentIndex));
+			setImageSrc((currentImage) => getNextLoadingImage(currentImage));
 		}, 500);
 
 		return () => window.clearInterval(intervalId);
@@ -70,14 +87,15 @@ const BuildListLoading = () => {
 	return (
 		<Column className="min-h-80 w-full items-center justify-center gap-5">
 			<Image
-				key={BUILD_LIST_LOADING_IMAGES[imageIndex]}
-				src={BUILD_LIST_LOADING_IMAGES[imageIndex]}
+				key={imageSrc}
+				src={imageSrc}
 				alt="loading"
 				width={120}
 				height={120}
 				className="h-28 w-28 object-contain"
 				priority
 				unoptimized
+				onError={() => setImageSrc(BUILD_LIST_LOADING_FALLBACK_IMAGE)}
 			/>
 			<Typography variant="body2" className="text-secondary-foreground">
 				목록을 불러오고 있어요...
@@ -91,8 +109,7 @@ export const BuildsClientPage = () => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const [openDialog, setOpenDialog] = useState(false);
-	const [loginActionText, setLoginActionText] =
-		useState("빌드를 공유하시려면");
+	const [loginActionText, setLoginActionText] = useState("빌드를 공유하시려면");
 	const [openSearch, setOpenSearch] = useState(false);
 
 	const {
