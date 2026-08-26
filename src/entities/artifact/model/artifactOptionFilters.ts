@@ -73,6 +73,8 @@ export const ARTIFACT_OPTION_FILTERS: ArtifactOptionFilter[] = [
 			...withNegativeVariants("공격 속도"),
 			"공격 속도의",
 			"공격 속도 감소",
+			"화상 공격",
+			"행성 공격",
 		],
 	},
 	{
@@ -214,7 +216,7 @@ export const ARTIFACT_OPTION_FILTERS: ArtifactOptionFilter[] = [
 	{
 		value: "fire_damage",
 		label: "화염속성 피해",
-		icon: "/keywords/FireSpeed.png",
+		icon: "/keywords/FlameGround.png",
 		keywords: [
 			...withSpacingVariants("화염속성 피해"),
 			...withSpacingVariants("화염 속성 피해"),
@@ -246,11 +248,19 @@ export const ARTIFACT_OPTION_FILTERS: ArtifactOptionFilter[] = [
 		label: "속성 피해",
 		icon: "/keywords/AllElementalDamage.png",
 		keywords: withSpacingVariants("속성 피해"),
+		excludeKeywords: [
+			"화염속성",
+			"화염 속성",
+			"얼음속성",
+			"얼음 속성",
+			"번개속성",
+			"번개 속성",
+		],
 	},
 	{
 		value: "burn",
 		label: "화상",
-		icon: "/keywords/FireSpeed.png",
+		icon: "/keywords/FlameGround.png",
 		keywords: ["화상"],
 	},
 	{
@@ -272,10 +282,10 @@ export const ARTIFACT_OPTION_FILTERS: ArtifactOptionFilter[] = [
 		keywords: ["보호막"],
 	},
 	{
-		value: "colleague",
-		label: "동료",
-		icon: "/keywords/Companion.png",
-		keywords: ["동료", "해파리", "두더지 대장"],
+		value: "chaos_damage",
+		label: "혼돈",
+		icon: "/keywords/ChaosDamage.png",
+		keywords: ["혼돈"],
 	},
 	{
 		value: "thorn",

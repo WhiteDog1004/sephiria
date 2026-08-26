@@ -129,9 +129,9 @@ export const SearchItems = ({
 									<Image
 										src={option.icon}
 										alt=""
-										width={16}
-										height={16}
-										className="size-4 shrink-0 pixelated"
+										width={12}
+										height={12}
+										className="size-3 shrink-0 pixelated"
 									/>
 								)}
 								{option.label}
@@ -192,9 +192,9 @@ export const SearchItems = ({
 													<Image
 														src={option.icon}
 														alt=""
-														width={16}
-														height={16}
-														className="size-4 shrink-0 pixelated"
+														width={12}
+														height={12}
+														className="size-3 shrink-0 pixelated"
 													/>
 												)}
 												<span className="min-w-0 truncate">{option.label}</span>
