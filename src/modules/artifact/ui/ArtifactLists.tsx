@@ -1,6 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import {
+	ARTIFACT_OPTION_FILTERS,
+	matchesArtifactOptionFilter,
+} from "@/src/entities/artifact/model/artifactOptionFilters";
 import { ArtifactList } from "@/src/features/artifact/ui/ArtifactList";
 import { SearchItems } from "@/src/features/simulator/ui/SearchItems";
 import { AdSenseHorizontal } from "@/src/shared";
@@ -12,6 +16,17 @@ export const ArtifactLists = ({ data }: ArtifactProps) => {
 	const [searchInput, setSearchInput] = useState("");
 	const [selectedTier, setSelectedTier] = useState("all");
 	const [selectedSets, setSelectedSets] = useState("all");
+	const [selectedArtifactOptions, setSelectedArtifactOptions] = useState<
+		string[]
+	>([]);
+
+	const handleArtifactOptionToggle = (value: string) => {
+		setSelectedArtifactOptions((prev) =>
+			prev.includes(value)
+				? prev.filter((option) => option !== value)
+				: [...prev, value],
+		);
+	};
 
 	const filteredItems = data.filter((item) => {
 		const matchesSearch = item.label_kor
@@ -20,7 +35,17 @@ export const ArtifactLists = ({ data }: ArtifactProps) => {
 		const matchesTier = selectedTier === "all" || item.tier === selectedTier;
 		const matchesSets =
 			selectedSets === "all" || item.effect.sets?.includes(selectedSets);
-		return matchesSearch && matchesTier && matchesSets;
+		const matchesOptions =
+			selectedArtifactOptions.length === 0 ||
+			selectedArtifactOptions.every((selectedOption) => {
+				const optionFilter = ARTIFACT_OPTION_FILTERS.find(
+					(option) => option.value === selectedOption,
+				);
+				if (!optionFilter) return false;
+				return matchesArtifactOptionFilter(item.effect.content, optionFilter);
+			});
+
+		return matchesSearch && matchesTier && matchesSets && matchesOptions;
 	});
 
 	return (
@@ -40,6 +65,10 @@ export const ArtifactLists = ({ data }: ArtifactProps) => {
 					setSelectedSets={setSelectedSets}
 					setSelectedTier={setSelectedTier}
 					setSearchInput={setSearchInput}
+					artifactOptionFilters={ARTIFACT_OPTION_FILTERS}
+					selectedArtifactOptions={selectedArtifactOptions}
+					onArtifactOptionToggle={handleArtifactOptionToggle}
+					onArtifactOptionReset={() => setSelectedArtifactOptions([])}
 				/>
 			</Box>
 			<ArtifactList data={filteredItems} />
