@@ -8,8 +8,11 @@ export const revalidate = 3600;
 const DEFAULT_BUILD_SITEMAP_LIMIT = 200;
 
 const getBuildSitemapLimit = () => {
-	const rawLimit = Number(process.env.SITEMAP_BUILD_LIMIT ?? DEFAULT_BUILD_SITEMAP_LIMIT);
-	if (!Number.isFinite(rawLimit) || rawLimit <= 0) return DEFAULT_BUILD_SITEMAP_LIMIT;
+	const rawLimit = Number(
+		process.env.SITEMAP_BUILD_LIMIT ?? DEFAULT_BUILD_SITEMAP_LIMIT,
+	);
+	if (!Number.isFinite(rawLimit) || rawLimit <= 0)
+		return DEFAULT_BUILD_SITEMAP_LIMIT;
 	return Math.floor(rawLimit);
 };
 
@@ -39,10 +42,17 @@ export const GET = async () => {
 		{ loc: `${baseUrl}/miracle`, lastmod: new Date() },
 		{ loc: `${baseUrl}/costume`, lastmod: new Date() },
 		{ loc: `${baseUrl}/builds`, lastmod: new Date() },
-		...posts.map((post: { postUuid: string; created_at: string; updated_at: string | null }) => ({
-			loc: `${baseUrl}/builds/${post.postUuid}`,
-			lastmod: post.updated_at || post.created_at || new Date(),
-		})),
+		{ loc: `${baseUrl}/stats`, lastmod: new Date() },
+		...posts.map(
+			(post: {
+				postUuid: string;
+				created_at: string;
+				updated_at: string | null;
+			}) => ({
+				loc: `${baseUrl}/builds/${post.postUuid}`,
+				lastmod: post.updated_at || post.created_at || new Date(),
+			}),
+		),
 	];
 
 	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

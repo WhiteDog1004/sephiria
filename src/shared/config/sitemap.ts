@@ -9,6 +9,7 @@ export const SITEMAP = {
 	WEAPON: "/weapon",
 	SIMULATOR: "/simulator",
 	BUILDS: "/builds",
+	STATS: "/stats",
 	ADD_BUILD: "/builds/add",
 	MY_PAGE: "/my-page",
 	PRIVACY: "/privacy",
@@ -60,6 +61,11 @@ export const SITE_METADATA = {
 		title: "세피리아 - 빌드 공유",
 		description: "세피리아 위키: 빌드 공유",
 		alternates: { canonical: SITEMAP.BUILDS },
+	},
+	stats: {
+		title: "세피리아 - 빌드 통계",
+		description: "세피리아 위키: 공유 빌드 사용 통계",
+		alternates: { canonical: SITEMAP.STATS },
 	},
 	myPage: {
 		title: "세피리아 - 마이페이지",

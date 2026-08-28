@@ -1,7 +1,14 @@
 "use client";
 
-import { CircleHelpIcon, FilePlus2, RotateCw, Search } from "lucide-react";
+import {
+	BarChart3,
+	CircleHelpIcon,
+	FilePlus2,
+	RotateCw,
+	Search,
+} from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useGetArtifacts } from "@/src/entities/builds/model/useGetArtifacts";
@@ -190,32 +197,40 @@ export const BuildsClientPage = () => {
 			<Row className="w-full max-w-7xl mx-auto justify-center gap-6">
 				<Column className="w-full justify-center gap-4">
 					<Column className="gap-4">
-						<Row className="w-full justify-end items-center gap-2">
-							<Button
-								variant="outline"
-								onClick={() => {
-									setOpenSearch(true);
-								}}
-							>
-								<Search />
-								빌드 상세검색
+						<Row className="w-full flex-wrap items-center justify-between gap-2">
+							<Button asChild variant="outline" className="w-max">
+								<Link href={SITEMAP.STATS}>
+									<BarChart3 />
+									빌드 통계
+								</Link>
 							</Button>
-							<Button
-								variant="secondary"
-								className="border"
-								onClick={() => {
-									if (info) {
-										router.push(SITEMAP.ADD_BUILD);
-										return;
-									}
+							<Row className="ml-auto justify-end items-center gap-2">
+								<Button
+									variant="outline"
+									onClick={() => {
+										setOpenSearch(true);
+									}}
+								>
+									<Search />
+									빌드 상세검색
+								</Button>
+								<Button
+									variant="secondary"
+									className="border"
+									onClick={() => {
+										if (info) {
+											router.push(SITEMAP.ADD_BUILD);
+											return;
+										}
 
-									setLoginActionText("빌드를 공유하시려면");
-									setOpenDialog(true);
-								}}
-							>
-								<FilePlus2 />
-								빌드 작성하기
-							</Button>
+										setLoginActionText("빌드를 공유하시려면");
+										setOpenDialog(true);
+									}}
+								>
+									<FilePlus2 />
+									빌드 작성하기
+								</Button>
+							</Row>
 							<RequireLoginDialog
 								open={openDialog}
 								onOpenChange={setOpenDialog}
