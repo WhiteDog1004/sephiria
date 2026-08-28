@@ -27,12 +27,17 @@ import {
 	Tabs,
 	TabsList,
 	TabsTrigger,
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
 	Typography,
 } from "@/src/shared";
 import { SectionHeader } from "@/src/shared/components/section-header";
 import { COSTUMES } from "@/src/shared/config/costumes";
 
 type ItemMeta = {
+	description?: string | null;
+	effectLines?: string[];
 	label: string;
 	image?: string | null;
 };
@@ -46,7 +51,17 @@ type ArtifactRow = {
 	value: string;
 	label_kor: string;
 	image: string;
+	description?: string | null;
+	effect?: {
+		content?: string | null;
+		sets?: string[];
+	};
 	disabled?: boolean | null;
+};
+
+type Effects = {
+	penalty?: string[] | null;
+	reward?: string[] | null;
 };
 
 type StatTab = {
@@ -63,6 +78,7 @@ const STAT_TABS: StatTab[] = [
 	{ value: "talent", label: "재능" },
 	{ value: "combo", label: "콤보", buildSearchKey: "combo" },
 ];
+
 const HIDE_LEAST_USED_CHART_TYPES: StatItemType[] = ["artifact", "talent"];
 
 const TALENT_META: Record<string, ItemMeta> = {
@@ -81,6 +97,14 @@ const formatItemValue = (value: string) =>
 		.filter(Boolean)
 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 		.join(" ");
+
+const stripColorTokens = (text: string) =>
+	text.replace(/\$[a-z]([^$]+)\$/gi, "$1");
+
+const getEffectLines = (effects?: Effects | null) => [
+	...(effects?.reward ?? []),
+	...(effects?.penalty ?? []),
+];
 
 const getBuildSearchHref = (tab: StatTab, value: string) => {
 	if (!tab.buildSearchKey) return SITEMAP.BUILDS;
@@ -101,8 +125,12 @@ const createItemMetaMap = (itemType: StatItemType) => {
 
 	if (itemType === "costume") {
 		(costumesJson as CostumeRow[]).forEach((item) => {
+			const costume = COSTUMES[item.value];
+
 			map.set(item.value, {
-				label: COSTUMES[item.value]?.name ?? formatItemValue(item.value),
+				description: costume?.story,
+				effectLines: costume?.options,
+				label: costume?.name ?? formatItemValue(item.value),
 				image: item.image,
 			});
 		});
@@ -113,6 +141,7 @@ const createItemMetaMap = (itemType: StatItemType) => {
 			.filter((item) => item.disabled !== true)
 			.forEach((item) => {
 				map.set(item.value, {
+					effectLines: getEffectLines(item.effects as Effects),
 					label: item.value_kor || formatItemValue(item.value),
 					image: item.image,
 				});
@@ -122,6 +151,7 @@ const createItemMetaMap = (itemType: StatItemType) => {
 	if (itemType === "miracle") {
 		(miraclesJson as MiracleRow[]).forEach((item) => {
 			map.set(item.value, {
+				effectLines: getEffectLines(item.effects as Effects),
 				label: item.value_kor || formatItemValue(item.value),
 				image: item.image,
 			});
@@ -133,6 +163,13 @@ const createItemMetaMap = (itemType: StatItemType) => {
 			.filter((item) => item.disabled !== true)
 			.forEach((item) => {
 				map.set(item.value, {
+					description: item.description,
+					effectLines: [
+						...(item.effect?.sets?.map(
+							(set) => EFFECT_LABELS[set] ?? formatItemValue(set),
+						) ?? []),
+						...(item.effect?.content ? [item.effect.content] : []),
+					],
 					label: item.label_kor || formatItemValue(item.value),
 					image: item.image,
 				});
@@ -142,6 +179,7 @@ const createItemMetaMap = (itemType: StatItemType) => {
 	if (itemType === "combo") {
 		Object.entries(EFFECT_LABELS).forEach(([key, label]) => {
 			map.set(key, {
+				description: "공유 빌드에서 선택된 콤보 효과입니다.",
 				label: label || formatItemValue(key),
 				image: `/combo/${key}.png`,
 			});
@@ -149,33 +187,44 @@ const createItemMetaMap = (itemType: StatItemType) => {
 	}
 
 	if (itemType === "talent") {
-		Object.entries(TALENT_META).forEach(([key, meta]) => map.set(key, meta));
+		Object.entries(TALENT_META).forEach(([key, meta]) =>
+			map.set(key, {
+				...meta,
+				description: "공유 빌드에서 선택된 재능 계열입니다.",
+			}),
+		);
 	}
 
 	return map;
 };
 
 const StatItemImage = ({
+	buildCount,
 	meta,
 	label,
 	size = 56,
+	usageRate,
 }: {
+	buildCount?: number;
 	meta?: ItemMeta;
 	label: string;
 	size?: number;
+	usageRate?: number;
 }) => {
-	if (!meta?.image) {
-		return (
-			<div
-				className="grid shrink-0 place-items-center rounded-md border bg-muted text-sm font-semibold"
-				style={{ width: size, height: size }}
-			>
-				{label.slice(0, 1)}
-			</div>
-		);
-	}
-
-	return (
+	const [isOpen, setIsOpen] = useState(false);
+	const effectLines = (meta?.effectLines ?? [])
+		.flatMap((line) => stripColorTokens(line).split("\n"))
+		.map((line) => line.trim())
+		.filter(Boolean)
+		.slice(0, 4);
+	const description = meta?.description
+		? stripColorTokens(meta.description).trim()
+		: null;
+	const hasTooltip = Boolean(
+		description || effectLines.length > 0 || buildCount !== undefined,
+	);
+	const imageStyle = { width: size, height: size };
+	const imageNode = meta?.image ? (
 		<Image
 			src={meta.image}
 			alt={label}
@@ -183,8 +232,78 @@ const StatItemImage = ({
 			height={size}
 			unoptimized
 			className="shrink-0 rounded-md border bg-background object-contain p-1"
-			style={{ width: size, height: size }}
+			style={imageStyle}
 		/>
+	) : (
+		<div
+			className="grid shrink-0 place-items-center rounded-md border bg-muted text-sm font-semibold"
+			style={imageStyle}
+		>
+			{label.slice(0, 1)}
+		</div>
+	);
+
+	if (!hasTooltip) {
+		return imageNode;
+	}
+
+	return (
+		<Tooltip open={isOpen} onOpenChange={setIsOpen} delayDuration={200}>
+			<TooltipTrigger asChild>
+				<button
+					type="button"
+					aria-label={`${label} 설명 보기`}
+					className="shrink-0 rounded-md outline-none transition hover:brightness-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+					onClick={(event) => {
+						event.preventDefault();
+						event.stopPropagation();
+						setIsOpen((prev) => !prev);
+					}}
+				>
+					{imageNode}
+				</button>
+			</TooltipTrigger>
+			<TooltipContent
+				sideOffset={8}
+				className="max-w-[min(20rem,calc(100vw-2rem))] break-keep border bg-popover p-3 text-popover-foreground shadow-md"
+				onPointerDownOutside={() => setIsOpen(false)}
+			>
+				<Column className="items-start gap-2 p-0 text-left">
+					<Typography variant="body2" className="font-semibold">
+						{label}
+					</Typography>
+					{description && (
+						<Typography
+							variant="caption"
+							className="break-keep whitespace-pre-line text-muted-foreground"
+						>
+							{description}
+						</Typography>
+					)}
+					{effectLines.length > 0 && (
+						<Column className="items-start gap-1 p-0">
+							{effectLines.map((line, index) => (
+								<Typography
+									key={`${line}-${index}`}
+									variant="caption"
+									className="break-keep whitespace-pre-line"
+								>
+									{line}
+								</Typography>
+							))}
+						</Column>
+					)}
+					{buildCount !== undefined && (
+						<Row className="flex-wrap gap-1 p-0">
+							<Badge variant="secondary">{buildCount}회 사용</Badge>
+							{usageRate !== undefined && (
+								<Badge variant="outline">{usageRate}%</Badge>
+							)}
+						</Row>
+					)}
+				</Column>
+			</TooltipContent>
+		</Tooltip>
 	);
 };
 
@@ -227,7 +346,12 @@ const SummaryCard = ({
 			<CardContent>
 				<Row className="items-center justify-between gap-4">
 					<Row className="min-w-0 items-center gap-3">
-						<StatItemImage meta={meta} label={label} />
+						<StatItemImage
+							buildCount={item.build_count}
+							meta={meta}
+							label={label}
+							usageRate={item.usage_rate}
+						/>
 						<Column className="min-w-0 items-start gap-1 p-0">
 							<Typography className="max-w-full truncate font-semibold">
 								{label}
@@ -312,13 +436,15 @@ const UsageChart = ({
 							: 4;
 
 						return (
-							<Link
+							<div
 								key={`${item.item_type}-${item.item_value}`}
-								href={getBuildSearchHref(tab, item.item_value)}
 								className="group flex min-w-20 flex-1 flex-col items-center gap-2"
-								title={`${label}: ${item.build_count}회`}
 							>
-								<div className="flex h-[224px] w-full items-end justify-center border-b pt-6">
+								<Link
+									href={getBuildSearchHref(tab, item.item_value)}
+									className="flex h-[224px] w-full items-end justify-center border-b pt-6"
+									title={`${label}: ${item.build_count}`}
+								>
 									<div
 										className="relative flex w-12 items-start justify-center rounded-t-md border border-red-500 bg-red-500/15 transition group-hover:bg-red-500/30 md:w-16"
 										style={{ height: `${height}%` }}
@@ -327,15 +453,21 @@ const UsageChart = ({
 											{item.build_count}
 										</span>
 									</div>
-								</div>
-								<StatItemImage meta={meta} label={label} size={36} />
-								<Typography
-									variant="caption"
-									className="line-clamp-2 min-h-8 w-20 break-keep text-center leading-4"
+								</Link>
+								<StatItemImage
+									buildCount={item.build_count}
+									meta={meta}
+									label={label}
+									size={36}
+									usageRate={item.usage_rate}
+								/>
+								<Link
+									href={getBuildSearchHref(tab, item.item_value)}
+									className="line-clamp-2 min-h-8 w-20 break-keep text-center text-xs leading-4 hover:underline"
 								>
 									{label}
-								</Typography>
-							</Link>
+								</Link>
+							</div>
 						);
 					})}
 				</div>
