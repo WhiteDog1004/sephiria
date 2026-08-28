@@ -294,14 +294,17 @@ const UsageChart = ({
 				</Column>
 				<Badge variant="outline">총 {items.length}개 항목</Badge>
 			</Row>
-			<div className="grid h-[360px] w-full grid-cols-[40px_1fr] gap-3">
-				<div className="flex h-full flex-col justify-between border-r pr-2 text-right text-xs text-muted-foreground">
-					<span>{maxCount}</span>
-					<span>{Math.round(maxCount / 2)}</span>
-					<span>0</span>
+			<div className="grid w-full grid-cols-[40px_1fr] gap-3">
+				<div className="flex flex-col">
+					<div className="h-6" />
+					<div className="flex h-[200px] flex-col justify-between border-r pr-2 text-right text-xs text-muted-foreground">
+						<span>{maxCount}</span>
+						<span>{Math.round(maxCount / 2)}</span>
+						<span>0</span>
+					</div>
 				</div>
-				<div className="flex h-full items-end gap-2 overflow-x-auto border-b pb-0">
-					{chartItems.map((item, index) => {
+				<div className="flex items-start gap-2 overflow-x-auto pb-0">
+					{chartItems.map((item) => {
 						const meta = metaMap.get(item.item_value);
 						const label = meta?.label ?? formatItemValue(item.item_value);
 						const height = maxCount
@@ -312,15 +315,15 @@ const UsageChart = ({
 							<Link
 								key={`${item.item_type}-${item.item_value}`}
 								href={getBuildSearchHref(tab, item.item_value)}
-								className="group flex h-full min-w-20 flex-1 flex-col items-center justify-end gap-2"
+								className="group flex min-w-20 flex-1 flex-col items-center gap-2"
 								title={`${label}: ${item.build_count}회`}
 							>
-								<div className="flex h-[250px] w-full items-end justify-center">
+								<div className="flex h-[224px] w-full items-end justify-center border-b pt-6">
 									<div
 										className="relative flex w-12 items-start justify-center rounded-t-md border border-red-500 bg-red-500/15 transition group-hover:bg-red-500/30 md:w-16"
 										style={{ height: `${height}%` }}
 									>
-										<span className="absolute -top-6 whitespace-nowrap text-xs font-semibold">
+										<span className="absolute -top-5 whitespace-nowrap text-xs font-semibold">
 											{item.build_count}
 										</span>
 									</div>
@@ -328,9 +331,9 @@ const UsageChart = ({
 								<StatItemImage meta={meta} label={label} size={36} />
 								<Typography
 									variant="caption"
-									className="line-clamp-2 min-h-8 w-20 text-center leading-4"
+									className="line-clamp-2 min-h-8 w-20 break-keep text-center leading-4"
 								>
-									{index + 1}. {label}
+									{label}
 								</Typography>
 							</Link>
 						);
@@ -378,12 +381,12 @@ export const StatsClientPage = () => {
 					onValueChange={(value) => setSelectedType(value as StatItemType)}
 					className="w-full gap-5"
 				>
-					<TabsList className="h-auto w-full flex-wrap justify-start">
+					<TabsList className="h-auto w-full flex-wrap justify-start gap-1 bg-transparent p-0 dark:bg-transparent">
 						{STAT_TABS.map((tab) => (
 							<TabsTrigger
 								key={tab.value}
 								value={tab.value}
-								className="min-h-9 flex-none px-4"
+								className="min-h-9 flex-none cursor-pointer border px-4 data-[state=inactive]:border-transparent data-[state=inactive]:bg-transparent"
 							>
 								{tab.label}
 							</TabsTrigger>
