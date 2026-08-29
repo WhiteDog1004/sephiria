@@ -10,8 +10,9 @@ import {
 	ItemsSets,
 } from "@/src/features/add-build";
 import { Button, Column, Separator, Typography } from "@/src/shared";
+import type { AddBuildFormType } from "../model/formSchema";
 
-export const AddItems = (form: UseFormReturn<any>) => {
+export const AddItems = (form: UseFormReturn<AddBuildFormType>) => {
 	const { data: artifacts } = useGetArtifacts();
 	const { fields, append, remove } = useFieldArray({
 		control: form.control,
@@ -24,7 +25,6 @@ export const AddItems = (form: UseFormReturn<any>) => {
 			items: [],
 			label: "",
 			description: "",
-			id: "",
 		});
 	}, [append, fields]);
 
@@ -32,7 +32,7 @@ export const AddItems = (form: UseFormReturn<any>) => {
 		<Column className="w-full items-center gap-2">
 			<Typography variant="body2">아티팩트</Typography>
 			<Column className="gap-4 p-2 sm:p-4 w-full border rounded-lg items-center bg-gray-300/10 dark:bg-transparent">
-				{fields.map((group: any, index) => (
+				{fields.map((group, index) => (
 					<Column
 						key={group.id}
 						className="w-full gap-2 p-2 sm:p-4 border items-end rounded-lg bg-secondary/10 dark:bg-secondary/40"
@@ -73,7 +73,6 @@ export const AddItems = (form: UseFormReturn<any>) => {
 								items: [],
 								label: "",
 								description: "",
-								id: "",
 							});
 						}}
 						asChild

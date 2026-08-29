@@ -54,11 +54,16 @@ export const addFormSchema = z.object({
 			(list) =>
 				list.reduce((total, item) => total + Math.abs(item.value), 0) <=
 				FRUIT_SKEWER_MAX_POINTS,
-			{ message: `수치 절대값 합은 최대 ${FRUIT_SKEWER_MAX_POINTS}까지 가능합니다` },
+			{
+				message: `수치 절대값 합은 최대 ${FRUIT_SKEWER_MAX_POINTS}까지 가능합니다`,
+			},
 		)
-		.refine((list) => new Set(list.map((item) => item.key)).size === list.length, {
-			message: "동일한 효과를 중복으로 선택할 수 없습니다",
-		}),
+		.refine(
+			(list) => new Set(list.map((item) => item.key)).size === list.length,
+			{
+				message: "동일한 효과를 중복으로 선택할 수 없습니다",
+			},
+		),
 	talent: z
 		.object({
 			anger: z.number().min(0).max(20),
@@ -106,3 +111,5 @@ export const addFormSchema = z.object({
 		}),
 	),
 });
+
+export type AddBuildFormType = z.infer<typeof addFormSchema>;

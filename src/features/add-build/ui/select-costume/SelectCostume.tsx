@@ -1,5 +1,8 @@
 import clsx from "clsx";
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import type { UseFormReturn } from "react-hook-form";
+import type { AddBuildFormType } from "@/src/modules/add-build/model/formSchema";
 import {
 	Box,
 	Button,
@@ -20,9 +23,15 @@ import {
 } from "@/src/shared";
 import { getCloudflareUrl } from "@/src/shared/utils/image";
 
-export const SelectCostume = (form: any) => {
+const optionTransition = { duration: 0.18, ease: "easeOut" } as const;
+
+export const SelectCostume = (form: UseFormReturn<AddBuildFormType>) => {
 	const [openPopover, setOpenPopover] = useState(false);
 	const [searchKeyword, setSearchKeyword] = useState("");
+	const handleOpenChange = (open: boolean) => {
+		setOpenPopover(open);
+		setSearchKeyword("");
+	};
 	const normalizedSearchKeyword = searchKeyword.trim().toLowerCase();
 	const costumeEntries = Object.entries(COSTUMES).filter(([costume, data]) => {
 		if (!normalizedSearchKeyword) return true;
@@ -42,7 +51,7 @@ export const SelectCostume = (form: any) => {
 					<FormLabel className="justify-center">코스튬</FormLabel>
 					<FormControl>
 						<Column className="w-full">
-							<Popover open={openPopover} onOpenChange={setOpenPopover}>
+							<Popover open={openPopover} onOpenChange={handleOpenChange}>
 								<PopoverTrigger asChild>
 									<Column
 										className={`p-3 min-w-0 gap-2 bg-gray-200 dark:bg-gray-800 max-w-full h-40 border border-dashed rounded-lg justify-center items-center hover:border-blue-600 cursor-pointer ${clsx(field.value && "bg-transparent dark:bg-gray-900")}`}
@@ -87,31 +96,41 @@ export const SelectCostume = (form: any) => {
 										onChange={(event) => setSearchKeyword(event.target.value)}
 										placeholder="코스튬 검색"
 									/>
-									<Row className="grid grid-cols-3 gap-2 max-h-60 overflow-y-auto">
-										{costumeEntries.map(([costume]) => (
-											<Button
-												className="flex-col h-max items-center justify-center gap-2 px-2"
-												key={costume}
-												onClick={() => {
-													field.onChange(costume);
-													setOpenPopover(false);
-												}}
-											>
-												<ImageWithFallback
-													className="min-w-10 max-w-10 min-h-10 max-h-10 object-contain p-0"
-													width={40}
-													height={40}
-													src={getCloudflareUrl(`/costume/${costume}.png`)}
-													alt={costume}
-												/>
-												<Typography
-													variant="caption"
-													className="text-[10px] w-full text-center truncate"
+									<Row className="relative grid grid-cols-3 gap-2 max-h-60 overflow-x-hidden overflow-y-auto">
+										<AnimatePresence mode="popLayout">
+											{costumeEntries.map(([costume]) => (
+												<motion.div
+													key={costume}
+													layout
+													initial={{ opacity: 0, scale: 0.96, y: 6 }}
+													animate={{ opacity: 1, scale: 1, y: 0 }}
+													exit={{ opacity: 0, scale: 0.92, y: -6 }}
+													transition={optionTransition}
 												>
-													{COSTUMES[costume].name}
-												</Typography>
-											</Button>
-										))}
+													<Button
+														className="flex-col h-max w-full items-center justify-center gap-2 px-2"
+														onClick={() => {
+															field.onChange(costume);
+															setOpenPopover(false);
+														}}
+													>
+														<ImageWithFallback
+															className="min-w-10 max-w-10 min-h-10 max-h-10 object-contain p-0"
+															width={40}
+															height={40}
+															src={getCloudflareUrl(`/costume/${costume}.png`)}
+															alt={costume}
+														/>
+														<Typography
+															variant="caption"
+															className="text-[10px] w-full text-center truncate"
+														>
+															{COSTUMES[costume].name}
+														</Typography>
+													</Button>
+												</motion.div>
+											))}
+										</AnimatePresence>
 									</Row>
 								</PopoverContent>
 							</Popover>

@@ -1,9 +1,10 @@
 import clsx from "clsx";
-import debounce from "lodash.debounce";
 import { CopyPlus, X } from "lucide-react";
-import { useMemo, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { useDeferredValue, useMemo, useState } from "react";
 import { type UseFormReturn, useFieldArray } from "react-hook-form";
 import { toast } from "sonner";
+import type { ListItemType } from "@/src/entities/add-build/model/createBuild.types";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
 import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
 import {
@@ -11,6 +12,7 @@ import {
 	type Rarity,
 } from "@/src/features/simulator/lib/getRarityOrder";
 import { ArtifactTooltip } from "@/src/features/simulator/ui/ArtifactTooltip";
+import type { AddBuildFormType } from "@/src/modules/add-build/model/formSchema";
 import {
 	Button,
 	Column,
@@ -38,64 +40,74 @@ import {
 import { getCloudflareUrl } from "@/src/shared/utils/image";
 import { getTierBorderColor } from "../../config/getTierBorderColor";
 
+const optionTransition = { duration: 0.18, ease: "easeOut" } as const;
+const MAX_ANIMATED_ARTIFACTS = 80;
+
 export const ItemsAddItems = ({
 	artifacts,
 	form,
 	index,
 }: {
 	artifacts: ArtifactInstance["item"][];
-	form: UseFormReturn;
+	form: UseFormReturn<AddBuildFormType>;
 	index: number;
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [currentValue, setCurrentValue] = useState("");
-	const [searchInput, setSearchInput] = useState("");
+	const [searchKeyword, setSearchKeyword] = useState("");
 	const [selectedSets, setSelectedSets] = useState("all");
 	const [selectIndex, setSelectIndex] = useState(0);
+	const handleOpenChange = (open: boolean) => {
+		setIsOpen(open);
+		setSearchKeyword("");
+	};
 
-	const fieldValue = form.getValues(`lists.${index}.items`) || "";
+	const fieldValue = form.watch(`lists.${index}.items`) ?? [];
 
 	const { append, update, remove } = useFieldArray({
 		control: form.control,
 		name: `lists.${index}.items`,
 	});
 
-	const EFFECT_DATA = [
-		{ value: "all", label: "콤보 전체" },
-		...Object.entries(EFFECT_LABELS).map(([value, label]) => ({
-			value,
-			label,
-		})),
-	];
-
-	const handleSearch = useMemo(
-		() =>
-			debounce((value: string) => {
-				setSearchInput(value);
-			}, 200),
+	const effectOptions = useMemo(
+		() => [
+			{ value: "all", label: "콤보 전체" },
+			...Object.entries(EFFECT_LABELS).map(([value, label]) => ({
+				value,
+				label,
+			})),
+		],
 		[],
 	);
 
-	const filteredItems = artifacts
-		?.sort(
-			(a, b) =>
-				getRarityValue(a.tier as Rarity) - getRarityValue(b.tier as Rarity),
-		)
-		.filter((item) => {
-			const matchesSearch = item.label_kor
-				.toLowerCase()
-				.includes(searchInput.toLowerCase());
-			const matchesSets =
-				selectedSets === "all" || item.effect.sets?.includes(selectedSets);
-			return matchesSearch && matchesSets;
-		});
+	const deferredSearchKeyword = useDeferredValue(searchKeyword);
+	const normalizedSearchKeyword = deferredSearchKeyword.trim().toLowerCase();
+	const filteredItems = useMemo(
+		() =>
+			[...(artifacts ?? [])]
+				.sort(
+					(a, b) =>
+						getRarityValue(a.tier as Rarity) - getRarityValue(b.tier as Rarity),
+				)
+				.filter((item) => {
+					const matchesSearch =
+						!normalizedSearchKeyword ||
+						item.label_kor.toLowerCase().includes(normalizedSearchKeyword) ||
+						item.value.toLowerCase().includes(normalizedSearchKeyword);
+					const matchesSets =
+						selectedSets === "all" || item.effect.sets?.includes(selectedSets);
+
+					return matchesSearch && matchesSets;
+				}),
+		[artifacts, normalizedSearchKeyword, selectedSets],
+	);
+	const shouldAnimateResults =
+		normalizedSearchKeyword.length > 0 &&
+		filteredItems.length <= MAX_ANIMATED_ARTIFACTS;
 
 	const handleAddItem = (itemValue: string) => {
 		const artifact = artifacts.find((a) => a.value === itemValue);
 
-		const alreadyExists = fieldValue.some(
-			(item: ArtifactInstance["item"]) => item.value === itemValue,
-		);
+		const alreadyExists = fieldValue.some((item) => item.value === itemValue);
 
 		if (artifact?.effect.content?.includes("고유") && alreadyExists) {
 			toast("이미 리스트에 동일한 [고유]효과의 아티팩트가 존재합니다", {
@@ -122,6 +134,28 @@ export const ItemsAddItems = ({
 		setIsOpen(false);
 	};
 
+	const renderArtifactButton = (item: ArtifactInstance["item"]) => (
+		<Tooltip delayDuration={400}>
+			<TooltipTrigger asChild>
+				<Button
+					className={`p-0 h-max w-full ${clsx(getTierBorderColor(item.tier))}`}
+					onClick={() => handleAddItem(item.value)}
+				>
+					<ImageWithFallback
+						className="min-w-12 max-w-12 max-h-12 p-0"
+						width={48}
+						height={48}
+						src={getCloudflareUrl(item.image)}
+						alt={item.value}
+					/>
+				</Button>
+			</TooltipTrigger>
+			<TooltipContent sideOffset={16}>
+				<ArtifactTooltip data={item as ArtifactInstance["item"]} />
+			</TooltipContent>
+		</Tooltip>
+	);
+
 	return (
 		<FormField
 			control={form.control}
@@ -130,45 +164,42 @@ export const ItemsAddItems = ({
 				<FormItem>
 					<FormControl>
 						<Column className="w-full gap-2">
-							<Drawer open={isOpen} onOpenChange={setIsOpen}>
+							<Drawer open={isOpen} onOpenChange={handleOpenChange}>
 								<Row className="grid grid-cols-[repeat(auto-fill,minmax(64px,1fr))] gap-2 items-center">
-									{fieldValue.map(
-										(list: { id: string; value: string }, index: number) => (
-											<Row key={list.id} className="relative w-max group">
-												<Button
-													onClick={() => {
-														setIsOpen(true);
-														setSelectIndex(index);
-													}}
-													type="button"
-													className={`w-16 h-16`}
-												>
-													<ImageWithFallback
-														className="min-w-12 max-w-12 max-h-12 p-0"
-														width={48}
-														height={48}
-														src={getCloudflareUrl(
-															artifacts?.find(
-																(item) =>
-																	item.value === fieldValue[index].value,
-															)?.image || "/",
-														)}
-														alt={fieldValue[index].value}
-													/>
-												</Button>
-												<Button
-													type="button"
-													className="absolute top-1 right-1 h-max !p-0 hidden group-hover:flex opacity-60"
-													variant="ghost"
-													onClick={() => {
-														remove(index);
-													}}
-												>
-													<X className="text-red-500" />
-												</Button>
-											</Row>
-										),
-									)}
+									{fieldValue.map((list: ListItemType, index: number) => (
+										<Row key={list.id} className="relative w-max group">
+											<Button
+												onClick={() => {
+													setIsOpen(true);
+													setSelectIndex(index);
+												}}
+												type="button"
+												className={`w-16 h-16`}
+											>
+												<ImageWithFallback
+													className="min-w-12 max-w-12 max-h-12 p-0"
+													width={48}
+													height={48}
+													src={getCloudflareUrl(
+														artifacts?.find(
+															(item) => item.value === fieldValue[index].value,
+														)?.image || "/",
+													)}
+													alt={fieldValue[index].value}
+												/>
+											</Button>
+											<Button
+												type="button"
+												className="absolute top-1 right-1 h-max !p-0 hidden group-hover:flex opacity-60"
+												variant="ghost"
+												onClick={() => {
+													remove(index);
+												}}
+											>
+												<X className="text-red-500" />
+											</Button>
+										</Row>
+									))}
 									{fieldValue.length < 20 && (
 										<Button
 											onClick={() => {
@@ -195,11 +226,8 @@ export const ItemsAddItems = ({
 										<Row className="w-full gap-2">
 											<Input
 												placeholder="아티팩트 검색"
-												value={currentValue}
-												onChange={(e) => {
-													setCurrentValue(e.target.value);
-													handleSearch(e.target.value);
-												}}
+												value={searchKeyword}
+												onChange={(e) => setSearchKeyword(e.target.value)}
 											/>
 											<Select
 												value={selectedSets}
@@ -209,7 +237,7 @@ export const ItemsAddItems = ({
 													<SelectValue placeholder="콤보 선택" />
 												</SelectTrigger>
 												<SelectContent>
-													{EFFECT_DATA.map((sets) => (
+													{effectOptions.map((sets) => (
 														<SelectItem key={sets.value} value={sets.value}>
 															{sets.label}
 														</SelectItem>
@@ -218,30 +246,29 @@ export const ItemsAddItems = ({
 											</Select>
 										</Row>
 
-										<Row className="grid gap-2 grid-cols-[repeat(auto-fill,minmax(48px,1fr))] max-h-[260px] sm:max-h-[400px] overflow-y-auto">
-											{filteredItems?.map((item) => (
-												<Tooltip delayDuration={400} key={item.value}>
-													<TooltipTrigger asChild>
-														<Button
-															className={`p-0 h-max ${clsx(getTierBorderColor(item.tier))}`}
-															onClick={() => handleAddItem(item.value)}
+										<Row className="relative grid gap-2 grid-cols-[repeat(auto-fill,minmax(48px,1fr))] max-h-[260px] sm:max-h-[400px] overflow-x-hidden overflow-y-auto">
+											{shouldAnimateResults ? (
+												<AnimatePresence mode="popLayout">
+													{filteredItems.map((item) => (
+														<motion.div
+															key={item.value}
+															layout
+															initial={{ opacity: 0, scale: 0.96, y: 6 }}
+															animate={{ opacity: 1, scale: 1, y: 0 }}
+															exit={{ opacity: 0, scale: 0.92, y: -6 }}
+															transition={optionTransition}
 														>
-															<ImageWithFallback
-																className="min-w-12 max-w-12 max-h-12 p-0"
-																width={48}
-																height={48}
-																src={getCloudflareUrl(item.image)}
-																alt={item.value}
-															/>
-														</Button>
-													</TooltipTrigger>
-													<TooltipContent sideOffset={16}>
-														<ArtifactTooltip
-															data={item as ArtifactInstance["item"]}
-														/>
-													</TooltipContent>
-												</Tooltip>
-											))}
+															{renderArtifactButton(item)}
+														</motion.div>
+													))}
+												</AnimatePresence>
+											) : (
+												filteredItems.map((item) => (
+													<div key={item.value}>
+														{renderArtifactButton(item)}
+													</div>
+												))
+											)}
 										</Row>
 									</Column>
 								</DrawerContent>
