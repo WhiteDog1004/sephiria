@@ -123,11 +123,36 @@ export const ShortcutBox = ({
 							))}
 						</Row>
 						<Separator className="mt-4" />
-						<Box className="h-full py-4">
-							<Typography variant="body2" className="text-gray-500">
-								다양한 아이템들을 확인해 보세요!
-							</Typography>
-						</Box>
+						<div className="relative min-h-[112px] w-full overflow-hidden">
+							<Image
+								fill
+								src="/Sephiria_Keyart_NoTitle.png"
+								alt=""
+								className="object-cover"
+								unoptimized
+							/>
+							<div className="absolute inset-0 bg-black/55" />
+							<div className="relative z-10 flex h-full min-h-[112px] items-center justify-between gap-3 px-4 py-4">
+								<div className="min-w-0">
+									<div className="flex items-center gap-1">
+										<Typography variant="header3" className="text-white">
+											미니게임 출시
+										</Typography>
+										<Typography variant="caption" className="text-amber-300">
+											TEST
+										</Typography>
+									</div>
+									<Typography variant="body2" className="mt-1 text-white/70">
+										인벤토리 퍼즐에 도전해 보세요.
+									</Typography>
+								</div>
+								<Link href={SITEMAP.SLAB_PUZZLE} className="shrink-0">
+									<Button className="border-amber-400 bg-amber-400 text-black hover:bg-amber-300 dark:text-white">
+										바로가기
+									</Button>
+								</Link>
+							</div>
+						</div>
 					</Column>
 				</Card>
 			</Row>
