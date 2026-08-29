@@ -31,7 +31,7 @@ export const AddItems = (form: UseFormReturn<any>) => {
 	return (
 		<Column className="w-full items-center gap-2">
 			<Typography variant="body2">아티팩트</Typography>
-			<Column className="gap-4 p-2 sm:p-4 w-full border rounded-lg items-center">
+			<Column className="gap-4 p-2 sm:p-4 w-full border rounded-lg items-center bg-gray-300/10 dark:bg-transparent">
 				{fields.map((group: any, index) => (
 					<Column
 						key={group.id}

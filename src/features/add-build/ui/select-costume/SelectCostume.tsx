@@ -11,6 +11,7 @@ import {
 	FormLabel,
 	FormMessage,
 	ImageWithFallback,
+	Input,
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
@@ -21,6 +22,16 @@ import { getCloudflareUrl } from "@/src/shared/utils/image";
 
 export const SelectCostume = (form: any) => {
 	const [openPopover, setOpenPopover] = useState(false);
+	const [searchKeyword, setSearchKeyword] = useState("");
+	const normalizedSearchKeyword = searchKeyword.trim().toLowerCase();
+	const costumeEntries = Object.entries(COSTUMES).filter(([costume, data]) => {
+		if (!normalizedSearchKeyword) return true;
+
+		return (
+			costume.toLowerCase().includes(normalizedSearchKeyword) ||
+			data.name.toLowerCase().includes(normalizedSearchKeyword)
+		);
+	});
 
 	return (
 		<FormField
@@ -70,8 +81,14 @@ export const SelectCostume = (form: any) => {
 									<Typography className="text-center mb-4">
 										코스튬을 선택해 주세요
 									</Typography>
+									<Input
+										className="mb-3"
+										value={searchKeyword}
+										onChange={(event) => setSearchKeyword(event.target.value)}
+										placeholder="코스튬 검색"
+									/>
 									<Row className="grid grid-cols-3 gap-2 max-h-60 overflow-y-auto">
-										{Object.keys(COSTUMES).map((costume) => (
+										{costumeEntries.map(([costume]) => (
 											<Button
 												className="flex-col h-max items-center justify-center gap-2 px-2"
 												key={costume}
@@ -84,9 +101,7 @@ export const SelectCostume = (form: any) => {
 													className="min-w-10 max-w-10 min-h-10 max-h-10 object-contain p-0"
 													width={40}
 													height={40}
-													src={getCloudflareUrl(
-														`/costume/${costume}.png`,
-													)}
+													src={getCloudflareUrl(`/costume/${costume}.png`)}
 													alt={costume}
 												/>
 												<Typography

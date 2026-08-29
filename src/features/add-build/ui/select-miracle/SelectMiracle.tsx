@@ -12,6 +12,7 @@ import {
 	FormLabel,
 	FormMessage,
 	ImageWithFallback,
+	Input,
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
@@ -26,6 +27,16 @@ import { getCloudflareUrl } from "@/src/shared/utils/image";
 export const SelectMiracle = (form: any) => {
 	const { data: miracles } = useGetMiracles();
 	const [openPopover, setOpenPopover] = useState(false);
+	const [searchKeyword, setSearchKeyword] = useState("");
+	const normalizedSearchKeyword = searchKeyword.trim().toLowerCase();
+	const filteredMiracles = miracles?.filter((miracle) => {
+		if (!normalizedSearchKeyword) return true;
+
+		return (
+			miracle.value.toLowerCase().includes(normalizedSearchKeyword) ||
+			miracle.value_kor.toLowerCase().includes(normalizedSearchKeyword)
+		);
+	});
 
 	return (
 		<FormField
@@ -78,8 +89,14 @@ export const SelectMiracle = (form: any) => {
 										<Typography className="text-center mb-4">
 											기적을 선택해 주세요
 										</Typography>
+										<Input
+											className="mb-3"
+											value={searchKeyword}
+											onChange={(event) => setSearchKeyword(event.target.value)}
+											placeholder="기적 검색"
+										/>
 										<Row className="grid grid-cols-3 gap-2 max-h-60 overflow-y-auto">
-											{miracles?.map((miracle) => (
+											{filteredMiracles?.map((miracle) => (
 												<Button
 													className="flex-col h-max items-center justify-center gap-2 px-2"
 													key={miracle.value}
@@ -94,7 +111,7 @@ export const SelectMiracle = (form: any) => {
 																className="min-w-10 max-w-10 min-h-10 max-h-10 object-contain p-0"
 																width={40}
 																height={40}
-																	src={getCloudflareUrl(miracle.image || "")}
+																src={getCloudflareUrl(miracle.image || "")}
 																alt={miracle.value}
 															/>
 														</TooltipTrigger>

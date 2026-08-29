@@ -144,7 +144,7 @@ export const SelectFruitSkewer = (form: any) => {
 							</small>
 						</FormLabel>
 						<FormControl>
-							<Column className="w-full gap-3 rounded-2xl bg-gray-300/70 dark:bg-gray-800/70 p-3">
+							<Column className="w-full gap-3 rounded-2xl bg-gray-300/30 dark:bg-gray-800/70 p-3">
 								<Row className="w-full flex-wrap items-start gap-3">
 									{selected.map((entry, index) => {
 										const valueIndex = VALUE_STEPS.indexOf(entry.value);
@@ -298,10 +298,10 @@ export const SelectFruitSkewer = (form: any) => {
 								</Row>
 
 								{selected.length === 0 && (
-									<Row className="justify-center rounded-xl border border-dashed py-4 bg-background/40">
+									<Row className="rounded-xl py-1">
 										<Typography
 											variant="caption"
-											className="text-muted-foreground"
+											className="text-gray-400 dark:text-gray-500"
 										>
 											+ 버튼으로 효과를 추가해 주세요.
 										</Typography>
