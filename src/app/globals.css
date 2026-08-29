@@ -131,6 +131,101 @@
 	}
 }
 
+@keyframes slab-puzzle-start-pulse {
+	0%,
+	100% {
+		transform: translateY(0) scale(1);
+		box-shadow: 0 0 24px rgba(251, 191, 36, 0.65);
+	}
+	50% {
+		transform: translateY(-2px) scale(1.04);
+		box-shadow: 0 0 38px rgba(251, 191, 36, 0.9);
+	}
+}
+
+@keyframes slab-puzzle-ready-pop {
+	0% {
+		opacity: 0;
+		transform: translateY(10px) scale(0.92);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+@keyframes slab-puzzle-countdown-pop {
+	0% {
+		opacity: 0;
+		transform: scale(0.55);
+	}
+	40% {
+		opacity: 1;
+		transform: scale(1.18);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes slab-puzzle-game-over-shake {
+	0% {
+		opacity: 0;
+		transform: scale(0.9) rotate(-1deg);
+	}
+	35% {
+		opacity: 1;
+		transform: scale(1.04) rotate(1deg);
+	}
+	60% {
+		transform: scale(0.98) rotate(-0.5deg);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1) rotate(0);
+	}
+}
+
+@keyframes slab-puzzle-clear-rise {
+	0% {
+		opacity: 0;
+		transform: translateY(16px) scale(0.92);
+	}
+	60% {
+		opacity: 1;
+		transform: translateY(-3px) scale(1.03);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+.slab-puzzle-start-button {
+	animation: slab-puzzle-start-pulse 1.6s ease-in-out infinite;
+}
+
+.slab-puzzle-ready-text {
+	animation: slab-puzzle-ready-pop 0.45s ease-out both;
+}
+
+.slab-puzzle-countdown-number {
+	animation: slab-puzzle-countdown-pop 0.55s ease-out both;
+}
+
+.slab-puzzle-game-over-panel {
+	animation: slab-puzzle-game-over-shake 0.48s ease-out both;
+}
+
+.slab-puzzle-clear-panel {
+	animation: slab-puzzle-clear-rise 0.48s ease-out both;
+}
+
+.slab-puzzle-game-over-title {
+	text-shadow: 0 0 18px rgba(248, 113, 113, 0.7);
+}
+
 .coffee-donation-button {
 	position: relative;
 	overflow: hidden;
@@ -154,6 +249,17 @@
 
 @media (prefers-reduced-motion: reduce) {
 	.coffee-donation-button::before {
+		animation: none;
+	}
+
+	.slab-puzzle-start-button,
+	.slab-puzzle-ready-text,
+	.slab-puzzle-countdown-number,
+	.slab-puzzle-game-over-panel {
+		animation: none;
+	}
+
+	.slab-puzzle-clear-panel {
 		animation: none;
 	}
 }

@@ -246,6 +246,48 @@ export type Database = {
 				};
 				Relationships: [];
 			};
+			slab_puzzle_rankings: {
+				Row: {
+					id: number;
+					user_id: string;
+					nickname: string;
+					profile_image: string | null;
+					score: number;
+					cleared_stages: number;
+					total_moves: number;
+					total_seconds_left: number;
+					best_stage_score: number;
+					created_at: string;
+					updated_at: string;
+				};
+				Insert: {
+					id?: number;
+					user_id: string;
+					nickname: string;
+					profile_image?: string | null;
+					score: number;
+					cleared_stages?: number;
+					total_moves: number;
+					total_seconds_left: number;
+					best_stage_score?: number;
+					created_at?: string;
+					updated_at?: string;
+				};
+				Update: {
+					id?: number;
+					user_id?: string;
+					nickname?: string;
+					profile_image?: string | null;
+					score?: number;
+					cleared_stages?: number;
+					total_moves?: number;
+					total_seconds_left?: number;
+					best_stage_score?: number;
+					created_at?: string;
+					updated_at?: string;
+				};
+				Relationships: [];
+			};
 			writer_build_stats: {
 				Row: {
 					user_id: string;

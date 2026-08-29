@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, UserRound } from "lucide-react";
+import { Gamepad2, Menu, UserRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -123,6 +123,12 @@ export const Header = () => {
 								{data ? (
 									<>
 										<DropdownMenuItem
+											onClick={() => router.push(SITEMAP.SLAB_PUZZLE)}
+										>
+											<Gamepad2 className="size-5" />
+											미니게임
+										</DropdownMenuItem>
+										<DropdownMenuItem
 											onClick={() => router.push(SITEMAP.MY_PAGE)}
 										>
 											<UserRound className="size-5" />
@@ -140,16 +146,24 @@ export const Header = () => {
 										</DropdownMenuItem>
 									</>
 								) : (
-									<DropdownMenuItem onClick={discordLoginHandler}>
-										<Image
-											src={"/discord-icon.svg"}
-											width={20}
-											height={20}
-											alt={"discord"}
-											className="invert dark:invert-0"
-										/>
-										로그인
-									</DropdownMenuItem>
+									<>
+										<DropdownMenuItem
+											onClick={() => router.push(SITEMAP.SLAB_PUZZLE)}
+										>
+											<Gamepad2 className="size-5" />
+											미니게임
+										</DropdownMenuItem>
+										<DropdownMenuItem onClick={discordLoginHandler}>
+											<Image
+												src={"/discord-icon.svg"}
+												width={20}
+												height={20}
+												alt={"discord"}
+												className="invert dark:invert-0"
+											/>
+											로그인
+										</DropdownMenuItem>
+									</>
 								)}
 							</DropdownMenuGroup>
 							<Separator className="my-2" />

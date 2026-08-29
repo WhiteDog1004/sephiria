@@ -8,6 +8,7 @@ export const SITEMAP = {
 	MIRACLE: "/miracle",
 	WEAPON: "/weapon",
 	SIMULATOR: "/simulator",
+	SLAB_PUZZLE: "/slab-puzzle",
 	BUILDS: "/builds",
 	STATS: "/stats",
 	ADD_BUILD: "/builds/add",
