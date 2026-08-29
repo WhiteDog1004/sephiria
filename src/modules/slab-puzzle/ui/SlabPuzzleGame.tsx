@@ -30,6 +30,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 import { getSlabsEffectHandlers } from "@/src/features/simulator/config/getSlabsEffect";
 import { ITEM_SLABS_DATA } from "@/src/features/simulator/config/slabsLists";
+import { AdSenseHorizontal } from "@/src/shared";
 import { Button } from "@/src/shared/ui/button";
 import { getCloudflareUrl } from "@/src/shared/utils/image";
 import type { Database } from "@/types_db";
@@ -1639,6 +1640,7 @@ const SlabPuzzleGame = ({ artifacts }: { artifacts: ArtifactRow[] }) => {
 						<SelectedSlabPanel slab={isBoardVisible ? selectedSlab : null} />
 					</aside>
 				</section>
+				<AdSenseHorizontal className="py-0" />
 			</div>
 		</main>
 	);
