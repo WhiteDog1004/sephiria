@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { isAdminUser } from "@/src/entities/admin";
 import {
 	getBuildDetail,
 	getBuildLikeStatusForUser,
@@ -74,8 +75,11 @@ const BuildsDetailPage = async ({
 		postUuid: data.postUuid,
 		userId: user?.id,
 	});
+	const isAdmin = await isAdminUser(user?.id);
 
-	return <BuildDetailClientPage data={{ ...data, isLiked }} />;
+	return (
+		<BuildDetailClientPage data={{ ...data, isLiked }} isAdmin={isAdmin} />
+	);
 };
 
 export default BuildsDetailPage;

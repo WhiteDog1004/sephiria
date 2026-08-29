@@ -35,12 +35,20 @@ import {
 } from "@/src/shared";
 import { useSession } from "../../header/model/useUserInfo";
 
-export const BuildDetailClientPage = ({ data }: { data: BuildWithLikeStatus }) => {
+export const BuildDetailClientPage = ({
+	data,
+	isAdmin = false,
+}: {
+	data: BuildWithLikeStatus;
+	isAdmin?: boolean;
+}) => {
 	const router = useRouter();
 	const { mutate } = useDeleteBuild();
 	const { data: user } = useSession();
 	const [openDialog, setOpenDialog] = useState(false);
 	const [initialLike, setInitialLike] = useState(data.postLike);
+	const isOwner = user?.user.id === data.writer.uuid;
+	const canManageBuild = isOwner || isAdmin;
 
 	return (
 		<Box
@@ -90,15 +98,17 @@ export const BuildDetailClientPage = ({ data }: { data: BuildWithLikeStatus }) =
 				<Separator />
 				<Row className="justify-between gap-2 mb-12">
 					<Button onClick={() => router.push(SITEMAP.BUILDS)}>목록으로</Button>
-					{user?.user.id === data.writer.uuid && (
+					{canManageBuild && (
 						<Row className="gap-2">
-							<Button
-								onClick={() =>
-									router.push(`${SITEMAP.BUILDS}/modify/${data.postUuid}`)
-								}
-							>
-								수정하기
-							</Button>
+							{isOwner && (
+								<Button
+									onClick={() =>
+										router.push(`${SITEMAP.BUILDS}/modify/${data.postUuid}`)
+									}
+								>
+									수정하기
+								</Button>
+							)}
 							<Dialog open={openDialog} onOpenChange={setOpenDialog}>
 								<Button
 									onClick={() => setOpenDialog(true)}

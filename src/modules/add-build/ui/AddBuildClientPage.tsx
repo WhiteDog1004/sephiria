@@ -41,10 +41,11 @@ import { AddItems } from "./AddItems";
 export const AddBuildClientPage = ({ modify }: { modify?: BuildRow }) => {
 	const router = useRouter();
 	const { data: info, isSuccess } = useSession();
-	const { mutate } = useCreateBuild();
-	const { mutate: update } = useUpdateBuild();
+	const { mutate, isPending: isCreatePending } = useCreateBuild();
+	const { mutate: update, isPending: isUpdatePending } = useUpdateBuild();
 	const [isSuccessOpen, setIsSuccessOpen] = useState(false);
 	const [isLogin, setIsLogin] = useState(false);
+	const isMutationPending = isCreatePending || isUpdatePending;
 
 	const form = useForm({
 		resolver: zodResolver(addFormSchema),
@@ -72,6 +73,8 @@ export const AddBuildClientPage = ({ modify }: { modify?: BuildRow }) => {
 	});
 
 	const onSubmit = (value: Omit<PostBuildType, "writer" | "postUuid">) => {
+		if (isMutationPending) return;
+
 		if (modify) {
 			update(
 				{
@@ -224,7 +227,12 @@ export const AddBuildClientPage = ({ modify }: { modify?: BuildRow }) => {
 						<AddDescription {...form} />
 						<AddPresetCode {...form} />
 
-						<Button size="lg" className="w-full mt-12" type="submit">
+						<Button
+							size="lg"
+							className="w-full mt-12"
+							type="submit"
+							disabled={isMutationPending}
+						>
 							빌드 작성 완료
 						</Button>
 					</form>

@@ -1,6 +1,7 @@
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { isAdminUser } from "@/src/entities/admin";
 import {
 	BUILDS_LIST_TAG,
 	getBuildDetailCached,
@@ -99,6 +100,29 @@ export const DELETE = async (_request: Request, context: RouteContext) => {
 	try {
 		const { id } = await context.params;
 		const supabase = await createServerSupabaseClient();
+		const {
+			data: { user },
+		} = await supabase.auth.getUser();
+
+		if (!user) {
+			return NextResponse.json(
+				{ message: "Login is required" },
+				{ status: 401 },
+			);
+		}
+
+		const { data: build } = await getBuildDetailCached(id);
+
+		if (!build) {
+			return NextResponse.json({ message: "Not found" }, { status: 404 });
+		}
+
+		const isOwner = build.writer.uuid === user.id;
+		const isAdmin = await isAdminUser(user.id);
+
+		if (!isOwner && !isAdmin) {
+			return NextResponse.json({ message: "Forbidden" }, { status: 403 });
+		}
 
 		const { error } = await supabase.from("builds").delete().eq("postUuid", id);
 
