@@ -795,8 +795,8 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 	// hospitality 환대
 	hospitality: (x, y, _, item, effects) => {
 		const baseOffsets = [
-			{ dx: 0, dy: -1, value: 1, flag: "ignore" },
-			{ dx: -1, dy: 0, value: 2, flag: "ignore" },
+			{ dx: 0, dy: -1, value: 2, flag: "ignore" },
+			{ dx: -1, dy: 0, value: 1, flag: "ignore" },
 		];
 		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
 	},

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useDeferredValue, useMemo, useState } from "react";
 import {
 	ARTIFACT_OPTION_FILTERS,
 	matchesArtifactOptionFilter,
@@ -28,25 +28,47 @@ export const ArtifactLists = ({ data }: ArtifactProps) => {
 		);
 	};
 
-	const filteredItems = data.filter((item) => {
-		const matchesSearch = item.label_kor
-			.toLowerCase()
-			.includes(searchInput.toLowerCase());
-		const matchesTier = selectedTier === "all" || item.tier === selectedTier;
-		const matchesSets =
-			selectedSets === "all" || item.effect.sets?.includes(selectedSets);
-		const matchesOptions =
-			selectedArtifactOptions.length === 0 ||
-			selectedArtifactOptions.every((selectedOption) => {
-				const optionFilter = ARTIFACT_OPTION_FILTERS.find(
-					(option) => option.value === selectedOption,
-				);
-				if (!optionFilter) return false;
-				return matchesArtifactOptionFilter(item.effect.content, optionFilter);
-			});
+	const deferredSearchInput = useDeferredValue(searchInput);
+	const normalizedSearchInput = deferredSearchInput.trim().toLowerCase();
+	const filteredItems = useMemo(
+		() =>
+			data.filter((item) => {
+				const matchesSearch =
+					!normalizedSearchInput ||
+					item.label_kor.toLowerCase().includes(normalizedSearchInput) ||
+					item.value.toLowerCase().includes(normalizedSearchInput);
+				const matchesTier =
+					selectedTier === "all" || item.tier === selectedTier;
+				const matchesSets =
+					selectedSets === "all" || item.effect.sets?.includes(selectedSets);
+				const matchesOptions =
+					selectedArtifactOptions.length === 0 ||
+					selectedArtifactOptions.every((selectedOption) => {
+						const optionFilter = ARTIFACT_OPTION_FILTERS.find(
+							(option) => option.value === selectedOption,
+						);
+						if (!optionFilter) return false;
+						return matchesArtifactOptionFilter(
+							item.effect.content,
+							optionFilter,
+						);
+					});
 
-		return matchesSearch && matchesTier && matchesSets && matchesOptions;
-	});
+				return matchesSearch && matchesTier && matchesSets && matchesOptions;
+			}),
+		[
+			normalizedSearchInput,
+			data,
+			selectedArtifactOptions,
+			selectedSets,
+			selectedTier,
+		],
+	);
+	const isFiltering =
+		normalizedSearchInput.length > 0 ||
+		selectedTier !== "all" ||
+		selectedSets !== "all" ||
+		selectedArtifactOptions.length > 0;
 
 	return (
 		<Box className="flex-col">
@@ -71,7 +93,7 @@ export const ArtifactLists = ({ data }: ArtifactProps) => {
 					onArtifactOptionReset={() => setSelectedArtifactOptions([])}
 				/>
 			</Box>
-			<ArtifactList data={filteredItems} />
+			<ArtifactList data={filteredItems} animateResults={isFiltering} />
 		</Box>
 	);
 };
