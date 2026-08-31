@@ -17,6 +17,10 @@ import {
 
 const supporters = [
 	{
+		nickname: "이*헌",
+		costume: "https://img.sephiria.wiki/costume/frog.png",
+	},
+	{
 		nickname: "이*재",
 		costume: "https://img.sephiria.wiki/costume/wizard_rabbit.png",
 	},
