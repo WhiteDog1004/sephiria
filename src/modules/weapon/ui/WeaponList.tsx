@@ -193,7 +193,7 @@ export const WeaponList = ({ data }: { data: WeaponOptions[] }) => {
 					<Separator />
 
 					{selectData ? (
-						<Column className="py-8 gap-6">
+						<Column className="py-4 gap-6">
 							<ul className="inline-flex flex-col gap-4 pl-4">
 								{selectData.effects.reward[0] !== "" ? (
 									selectData.effects.reward.map((reward) => (
