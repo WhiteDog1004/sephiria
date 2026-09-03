@@ -20,12 +20,18 @@ export const dynamic = "force-dynamic";
 export const GET = async (request: Request) => {
 	try {
 		const { searchParams } = new URL(request.url);
+		const recentDaysParam = Number(searchParams.get("recentDays"));
+		const recentDays =
+			recentDaysParam === 7 || recentDaysParam === 30
+				? recentDaysParam
+				: undefined;
 		const params: GetBuildsParams = {
 			page: Number(searchParams.get("page") ?? 1),
 			limit: Number(searchParams.get("limit") ?? 10),
 			like: searchParams.get("like") === "asc" ? "asc" : "desc",
 			isLatestVersion: searchParams.get("isLatestVersion") === "true",
 			isWriter: searchParams.get("isWriter") === "true",
+			recentDays,
 			likedOnly: searchParams.get("likedOnly") === "true",
 			title: searchParams.get("title") ?? undefined,
 			writerUuid: searchParams.get("writerUuid") ?? undefined,

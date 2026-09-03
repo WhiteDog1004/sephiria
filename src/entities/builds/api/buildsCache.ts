@@ -32,6 +32,7 @@ type NormalizedBuildsParams = {
 	isLatestVersion: boolean;
 	like: "asc" | "desc";
 	isWriter: boolean;
+	recentDays: 7 | 30 | null;
 	writerUuid: string;
 	title: string;
 	costume: string;
@@ -72,6 +73,7 @@ const applyBuildsFilters = <T>(query: T, params: NormalizedBuildsParams): T => {
 	let filteredQuery = query as T & {
 		ilike: (column: string, pattern: string) => typeof filteredQuery;
 		eq: (column: string, value: string) => typeof filteredQuery;
+		gte: (column: string, value: string) => typeof filteredQuery;
 		in: (column: string, values: string[]) => typeof filteredQuery;
 		contains: (column: string, value: string[]) => typeof filteredQuery;
 	};
@@ -80,6 +82,12 @@ const applyBuildsFilters = <T>(query: T, params: NormalizedBuildsParams): T => {
 		const currentVersion = process.env.NEXT_PUBLIC_GAME_VERSION ?? "0.0.0";
 		const currentMajorMinor = currentVersion.split(".").slice(0, 2).join(".");
 		filteredQuery = filteredQuery.ilike("version", `${currentMajorMinor}.%`);
+	}
+
+	if (params.recentDays) {
+		const createdAfter = new Date();
+		createdAfter.setDate(createdAfter.getDate() - params.recentDays);
+		filteredQuery = filteredQuery.gte("created_at", createdAfter.toISOString());
 	}
 
 	if (params.writerUuid) {
@@ -128,6 +136,10 @@ export const normalizeBuildsParams = (
 		isLatestVersion: Boolean(params.isLatestVersion),
 		like: params.like === "asc" ? "asc" : "desc",
 		isWriter: Boolean(params.isWriter),
+		recentDays:
+			params.recentDays === 7 || params.recentDays === 30
+				? params.recentDays
+				: null,
 		writerUuid: params.writerUuid?.trim() ?? "",
 		title: params.title?.trim() ?? "",
 		costume: params.costume?.trim() ?? "",
@@ -287,7 +299,7 @@ const getBuildsFromDb = async (
 
 const getBuildsCachedFn = unstable_cache(
 	async (params: NormalizedBuildsParams) => getBuildsFromDb(params),
-	["builds:list:v6"],
+	["builds:list:v7"],
 	{
 		tags: [BUILDS_LIST_TAG],
 		revalidate: LIST_REVALIDATE_SECONDS,

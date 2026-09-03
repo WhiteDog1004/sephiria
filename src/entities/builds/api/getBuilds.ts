@@ -7,6 +7,7 @@ export const getBuilds = async ({
 	like,
 	isWriter,
 	likedOnly,
+	recentDays,
 	viewerId: _viewerId,
 	...req
 }: GetBuildsParams): Promise<GetBuildsResponse> => {
@@ -18,6 +19,7 @@ export const getBuilds = async ({
 		isWriter: String(Boolean(isWriter)),
 		likedOnly: String(Boolean(likedOnly)),
 	});
+	if (recentDays) params.set("recentDays", String(recentDays));
 
 	const { title, writerUuid, costume, weapon, miracle, combo, artifacts } = req;
 	if (title) params.set("title", title);

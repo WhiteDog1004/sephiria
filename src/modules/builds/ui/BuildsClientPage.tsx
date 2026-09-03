@@ -27,6 +27,11 @@ import {
 	Label,
 	RequireLoginDialog,
 	Row,
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
 	Separator,
 	SITEMAP,
 	Tooltip,
@@ -126,6 +131,8 @@ export const BuildsClientPage = () => {
 		setIsLatestVersion,
 		likedOnly,
 		setLikedOnly,
+		recentDays,
+		setRecentDays,
 		isAscending,
 		setIsAscending,
 		searchList,
@@ -138,6 +145,7 @@ export const BuildsClientPage = () => {
 		limit: PAGE_SIZE,
 		isLatestVersion,
 		likedOnly,
+		recentDays: isAscending ? recentDays : undefined,
 		viewerId: info?.user.id,
 		like: isAscending ? "asc" : "desc",
 		isWriter: searchList.isWriter,
@@ -156,6 +164,7 @@ export const BuildsClientPage = () => {
 		setSearchList({});
 		setPage(1);
 		setLikedOnly(false);
+		setRecentDays(undefined);
 
 		const params = new URLSearchParams();
 		params.set("page", "1");
@@ -170,7 +179,24 @@ export const BuildsClientPage = () => {
 		});
 	};
 
-	const handleLike = (asc?: boolean) => setIsAscending(!!asc);
+	const handleLike = (asc?: boolean) => {
+		const nextIsAscending = !!asc;
+		setIsAscending(nextIsAscending);
+		if (!nextIsAscending) {
+			setRecentDays(undefined);
+		}
+	};
+
+	const handleRecentDaysChange = (value: string) => {
+		if (value === "7" || value === "30") {
+			setRecentDays(Number(value) as 7 | 30);
+			setPage(1);
+			return;
+		}
+
+		setRecentDays(undefined);
+		setPage(1);
+	};
 
 	useSyncBuildQueryState({
 		resetRef,
@@ -182,6 +208,8 @@ export const BuildsClientPage = () => {
 		setIsLatestVersion,
 		likedOnly,
 		setLikedOnly,
+		recentDays,
+		setRecentDays,
 		searchList,
 		setSearchList,
 	});
@@ -237,7 +265,9 @@ export const BuildsClientPage = () => {
 								actionText={loginActionText}
 							/>
 						</Row>
-						{(Object.keys(searchList).length !== 0 || likedOnly) && (
+						{(Object.keys(searchList).length !== 0 ||
+							likedOnly ||
+							recentDays) && (
 							<Row className="w-full justify-end">
 								<Button
 									className="w-max"
@@ -301,7 +331,47 @@ export const BuildsClientPage = () => {
 								<Typography variant="body2">좋아요한 빌드 보기</Typography>
 							</Label>
 						</Row>
-						<Row className="h-full w-full justify-end items-center sm:w-auto">
+						<Row className="h-full w-full flex-wrap justify-end items-center gap-y-1 sm:w-auto">
+							{isAscending && (
+								<Row className="items-center gap-1">
+									<Select
+										value={recentDays ? String(recentDays) : "all"}
+										onValueChange={handleRecentDaysChange}
+									>
+										<SelectTrigger
+											size="sm"
+											className="h-8 min-w-0 justify-end border-0 bg-transparent px-2 shadow-none"
+										>
+											<SelectValue placeholder="기간" />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectItem value="all">전체</SelectItem>
+											<SelectItem value="7">7일이내</SelectItem>
+											<SelectItem value="30">30일이내</SelectItem>
+										</SelectContent>
+									</Select>
+									<Tooltip>
+										<TooltipTrigger asChild>
+											<Button
+												type="button"
+												size="icon"
+												variant="ghost"
+												className="size-4 text-muted-foreground"
+												aria-label="작성일 기준 안내"
+											>
+												<CircleHelpIcon className="size-4" />
+											</Button>
+										</TooltipTrigger>
+										<TooltipContent sideOffset={10}>
+											<Row className="bg-accent border-2 dark:text-white text-black p-2 justify-center items-center text-center">
+												<Typography variant="caption">
+													수정일이 아닌 작성일 기준으로 표시됩니다.
+												</Typography>
+											</Row>
+										</TooltipContent>
+									</Tooltip>
+								</Row>
+							)}
 							<Button
 								size="sm"
 								variant="ghost"

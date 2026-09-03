@@ -6,6 +6,7 @@ export type GetBuildsParams = {
 	like: "asc" | "desc";
 	isLatestVersion?: boolean;
 	isWriter?: boolean;
+	recentDays?: 7 | 30;
 	writerUuid?: string;
 	likedOnly?: boolean;
 	likedByUserId?: string;

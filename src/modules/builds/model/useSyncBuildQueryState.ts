@@ -13,6 +13,8 @@ interface UseSyncBuildQueryStateProps {
 	setIsLatestVersion: (v: boolean) => void;
 	likedOnly: boolean;
 	setLikedOnly: (v: boolean) => void;
+	recentDays?: 7 | 30;
+	setRecentDays: (v?: 7 | 30) => void;
 	searchList: BuildSearchState["searchList"];
 	setSearchList: (v: BuildSearchState["searchList"]) => void;
 	resetRef: RefObject<boolean>;
@@ -28,6 +30,8 @@ export const useSyncBuildQueryState = ({
 	setIsLatestVersion,
 	likedOnly,
 	setLikedOnly,
+	recentDays,
+	setRecentDays,
 	searchList,
 	setSearchList,
 }: UseSyncBuildQueryStateProps) => {
@@ -43,6 +47,11 @@ export const useSyncBuildQueryState = ({
 		const urlAsc = searchParams.get("like") === "asc";
 		const urlLatest = searchParams.get("latest") === "true";
 		const urlLikedOnly = searchParams.get("liked") === "true";
+		const urlRecentDaysParam = Number(searchParams.get("recentDays"));
+		const urlRecentDays =
+			urlAsc && (urlRecentDaysParam === 7 || urlRecentDaysParam === 30)
+				? urlRecentDaysParam
+				: undefined;
 
 		const urlSearchList: Record<string, string | boolean | string[]> = {};
 		["title", "writerUuid", "costume", "weapon", "miracle", "combo"].forEach(
@@ -64,6 +73,7 @@ export const useSyncBuildQueryState = ({
 		setIsAscending(urlAsc);
 		setIsLatestVersion(urlLatest);
 		setLikedOnly(urlLikedOnly);
+		setRecentDays(urlRecentDays);
 		setSearchList(urlSearchList);
 	}, []);
 
@@ -80,6 +90,7 @@ export const useSyncBuildQueryState = ({
 		params.set("like", isAscending ? "asc" : "desc");
 		params.set("latest", isLatestVersion ? "true" : "false");
 		params.set("liked", likedOnly ? "true" : "false");
+		if (isAscending && recentDays) params.set("recentDays", String(recentDays));
 
 		Object.entries(searchList).forEach(([key, value]) => {
 			if (Array.isArray(value)) {
@@ -93,11 +104,12 @@ export const useSyncBuildQueryState = ({
 		router.replace(`${pathname}?${params.toString()}`);
 		if (
 			params.get("latest") !== searchParams.get("latest") ||
-			params.get("liked") !== searchParams.get("liked")
+			params.get("liked") !== searchParams.get("liked") ||
+			params.get("recentDays") !== searchParams.get("recentDays")
 		) {
 			setPage(1);
 		}
-	}, [isAscending, isLatestVersion, likedOnly, searchList]);
+	}, [isAscending, isLatestVersion, likedOnly, recentDays, searchList]);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: intentionally run once on mount
 	useEffect(() => {
@@ -116,6 +128,8 @@ export const useSyncBuildQueryState = ({
 		params.set("like", isAscending ? "asc" : "desc");
 		params.set("latest", isLatestVersion ? "true" : "false");
 		params.set("liked", likedOnly ? "true" : "false");
+		if (isAscending && recentDays) params.set("recentDays", String(recentDays));
+		else params.delete("recentDays");
 
 		Object.entries(searchList).forEach(([key, value]) => {
 			if (Array.isArray(value)) {

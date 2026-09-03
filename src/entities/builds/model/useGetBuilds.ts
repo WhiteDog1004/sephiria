@@ -9,6 +9,7 @@ export const useGetBuilds = ({
 	like,
 	isWriter,
 	likedOnly,
+	recentDays,
 	...req
 }: GetBuildsParams): UseQueryResult<GetBuildsResponse> => {
 	return useQuery({
@@ -20,6 +21,7 @@ export const useGetBuilds = ({
 			isLatestVersion,
 			isWriter,
 			likedOnly,
+			recentDays,
 			JSON.stringify(req),
 		],
 		queryFn: () =>
@@ -30,6 +32,7 @@ export const useGetBuilds = ({
 				like,
 				isWriter,
 				likedOnly,
+				recentDays,
 				...req,
 			}),
 		retry: 1,
