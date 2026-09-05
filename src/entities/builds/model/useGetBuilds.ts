@@ -9,6 +9,7 @@ export const useGetBuilds = ({
 	like,
 	isWriter,
 	likedOnly,
+	presetCodeOnly,
 	recentDays,
 	...req
 }: GetBuildsParams): UseQueryResult<GetBuildsResponse> => {
@@ -21,6 +22,7 @@ export const useGetBuilds = ({
 			isLatestVersion,
 			isWriter,
 			likedOnly,
+			presetCodeOnly,
 			recentDays,
 			JSON.stringify(req),
 		],
@@ -32,6 +34,7 @@ export const useGetBuilds = ({
 				like,
 				isWriter,
 				likedOnly,
+				presetCodeOnly,
 				recentDays,
 				...req,
 			}),

@@ -131,6 +131,8 @@ export const BuildsClientPage = () => {
 		setIsLatestVersion,
 		likedOnly,
 		setLikedOnly,
+		presetCodeOnly,
+		setPresetCodeOnly,
 		recentDays,
 		setRecentDays,
 		isAscending,
@@ -145,6 +147,7 @@ export const BuildsClientPage = () => {
 		limit: PAGE_SIZE,
 		isLatestVersion,
 		likedOnly,
+		presetCodeOnly,
 		recentDays: isAscending ? recentDays : undefined,
 		viewerId: info?.user.id,
 		like: isAscending ? "asc" : "desc",
@@ -164,6 +167,7 @@ export const BuildsClientPage = () => {
 		setSearchList({});
 		setPage(1);
 		setLikedOnly(false);
+		setPresetCodeOnly(false);
 		setRecentDays(undefined);
 
 		const params = new URLSearchParams();
@@ -171,6 +175,7 @@ export const BuildsClientPage = () => {
 		params.set("like", isAscending ? "asc" : "desc");
 		params.set("latest", String(isLatestVersion));
 		params.set("liked", "false");
+		params.set("preset", "false");
 
 		router.replace(`${pathname}?${params.toString()}`);
 
@@ -208,6 +213,8 @@ export const BuildsClientPage = () => {
 		setIsLatestVersion,
 		likedOnly,
 		setLikedOnly,
+		presetCodeOnly,
+		setPresetCodeOnly,
 		recentDays,
 		setRecentDays,
 		searchList,
@@ -267,6 +274,7 @@ export const BuildsClientPage = () => {
 						</Row>
 						{(Object.keys(searchList).length !== 0 ||
 							likedOnly ||
+							presetCodeOnly ||
 							recentDays) && (
 							<Row className="w-full justify-end">
 								<Button
@@ -285,7 +293,7 @@ export const BuildsClientPage = () => {
 					<Separator />
 					<AdSenseHorizontal className="py-0" />
 					<Row className="w-full flex-col items-start gap-2 sm:flex-row sm:justify-between sm:items-center">
-						<Row className="flex-wrap items-center gap-x-4 gap-y-2">
+						<Row className="flex-wrap items-center gap-x-1 gap-y-2">
 							<Row className="shrink-0 items-center gap-1">
 								<Label className="w-max h-10 p-2 pr-0 hover:bg-accent/50 flex items-center gap-2 rounded-lg">
 									<Checkbox
@@ -330,6 +338,16 @@ export const BuildsClientPage = () => {
 								/>
 								<Typography variant="body2">좋아요한 빌드 보기</Typography>
 							</Label>
+							<Label className="w-max h-10 p-2 hover:bg-accent/50 flex items-center gap-2 rounded-lg">
+								<Checkbox
+									checked={presetCodeOnly}
+									onCheckedChange={(checked: boolean) =>
+										setPresetCodeOnly(checked)
+									}
+									className="size-5 data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
+								/>
+								<Typography variant="body2">프리셋 코드 포함</Typography>
+							</Label>
 						</Row>
 						<Row className="h-full w-full flex-wrap justify-end items-center gap-y-1 sm:w-auto">
 							{isAscending && (
@@ -372,34 +390,35 @@ export const BuildsClientPage = () => {
 									</Tooltip>
 								</Row>
 							)}
-							<Button
-								size="sm"
-								variant="ghost"
-								onClick={() => handleLike(true)}
-							>
-								<Typography
-									className={isAscending ? "text-blue-500" : ""}
-									variant={isAscending ? "body2" : "caption"}
+							<Row className="shrink-0 flex-nowrap items-center">
+								<Button
+									size="sm"
+									variant="ghost"
+									className="shrink-0"
+									onClick={() => handleLike(true)}
 								>
-									인기 순
-								</Typography>
-							</Button>
-							<Separator
-								className="max-h-1/3 bg-gray-700"
-								orientation="vertical"
-							/>
-							<Button
-								size="sm"
-								variant="ghost"
-								onClick={() => handleLike(false)}
-							>
-								<Typography
-									className={!isAscending ? "text-blue-500" : ""}
-									variant={!isAscending ? "body2" : "caption"}
+									<Typography
+										className={`whitespace-nowrap ${isAscending ? "text-blue-500" : ""}`}
+										variant={isAscending ? "body2" : "caption"}
+									>
+										인기 순
+									</Typography>
+								</Button>
+								<div className="h-4 w-px shrink-0 bg-gray-700" />
+								<Button
+									size="sm"
+									variant="ghost"
+									className="shrink-0"
+									onClick={() => handleLike(false)}
 								>
-									최신 순
-								</Typography>
-							</Button>
+									<Typography
+										className={`whitespace-nowrap ${!isAscending ? "text-blue-500" : ""}`}
+										variant={!isAscending ? "body2" : "caption"}
+									>
+										최신 순
+									</Typography>
+								</Button>
+							</Row>
 						</Row>
 					</Row>
 					{isBuildListLoading ? (

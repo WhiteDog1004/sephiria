@@ -41,6 +41,7 @@ type NormalizedBuildsParams = {
 	combo: string;
 	artifacts: string[];
 	likedOnly: boolean;
+	presetCodeOnly: boolean;
 	likedByUserId: string;
 };
 
@@ -75,6 +76,12 @@ const applyBuildsFilters = <T>(query: T, params: NormalizedBuildsParams): T => {
 		eq: (column: string, value: string) => typeof filteredQuery;
 		gte: (column: string, value: string) => typeof filteredQuery;
 		in: (column: string, values: string[]) => typeof filteredQuery;
+		neq: (column: string, value: string) => typeof filteredQuery;
+		not: (
+			column: string,
+			operator: string,
+			value: string | null,
+		) => typeof filteredQuery;
 		contains: (column: string, value: string[]) => typeof filteredQuery;
 	};
 
@@ -88,6 +95,12 @@ const applyBuildsFilters = <T>(query: T, params: NormalizedBuildsParams): T => {
 		const createdAfter = new Date();
 		createdAfter.setDate(createdAfter.getDate() - params.recentDays);
 		filteredQuery = filteredQuery.gte("created_at", createdAfter.toISOString());
+	}
+
+	if (params.presetCodeOnly) {
+		filteredQuery = filteredQuery
+			.not("preset_code", "is", null)
+			.neq("preset_code", "");
 	}
 
 	if (params.writerUuid) {
@@ -152,6 +165,7 @@ export const normalizeBuildsParams = (
 			.filter(Boolean)
 			.slice(0, 5),
 		likedOnly: Boolean(params.likedOnly),
+		presetCodeOnly: Boolean(params.presetCodeOnly),
 		likedByUserId: params.likedByUserId?.trim() ?? "",
 	};
 };
@@ -299,7 +313,7 @@ const getBuildsFromDb = async (
 
 const getBuildsCachedFn = unstable_cache(
 	async (params: NormalizedBuildsParams) => getBuildsFromDb(params),
-	["builds:list:v7"],
+	["builds:list:v8"],
 	{
 		tags: [BUILDS_LIST_TAG],
 		revalidate: LIST_REVALIDATE_SECONDS,

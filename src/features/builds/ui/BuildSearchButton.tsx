@@ -22,12 +22,14 @@ import {
 	type Rarity,
 } from "@/src/features/simulator/lib/getRarityOrder";
 import { ArtifactTooltip } from "@/src/features/simulator/ui/ArtifactTooltip";
+import { useSession } from "@/src/modules/header/model/useUserInfo";
 import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
 	Button,
+	Checkbox,
 	COSTUMES,
 	Column,
 	Drawer,
@@ -41,9 +43,11 @@ import {
 	FormLabel,
 	ImageWithFallback,
 	Input,
+	Label,
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
+	RequireLoginDialog,
 	Row,
 	Select,
 	SelectContent,
@@ -122,6 +126,9 @@ type BuildSearchFormValues = {
 	miracle: string;
 	combo: string;
 	artifacts: string[];
+	isLatestVersion: boolean;
+	likedOnly: boolean;
+	presetCodeOnly: boolean;
 };
 
 const MAX_ARTIFACT_SEARCH_COUNT = 5;
@@ -322,13 +329,23 @@ export const BuildSearchButton = ({
 	open: boolean;
 	setOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
-	const { setSearchList } = useBuildSearchStore();
+	const {
+		isLatestVersion,
+		setIsLatestVersion,
+		likedOnly,
+		setLikedOnly,
+		presetCodeOnly,
+		setPresetCodeOnly,
+		setSearchList,
+	} = useBuildSearchStore();
+	const { data: info } = useSession();
 	const { data: weapons } = useGetWeapons();
 	const { data: miracles } = useGetMiracles();
 	const { data: artifacts } = useGetArtifacts();
 	const [isTitle, setIsTitle] = useState(false);
 	const [hideFloatingButton, setHideFloatingButton] = useState(false);
 	const [weaponPopoverOpen, setWeaponPopoverOpen] = useState(false);
+	const [openLoginDialog, setOpenLoginDialog] = useState(false);
 
 	const form = useForm<BuildSearchFormValues>({
 		defaultValues: {
@@ -338,11 +355,20 @@ export const BuildSearchButton = ({
 			miracle: "",
 			combo: "",
 			artifacts: [],
+			isLatestVersion,
+			likedOnly,
+			presetCodeOnly,
 		},
 	});
 
 	const onSubmit = (value: BuildSearchFormValues) => {
-		setSearchList({ ...value, isWriter: !isTitle });
+		const { isLatestVersion, likedOnly, presetCodeOnly, ...searchValue } =
+			value;
+
+		setSearchList({ ...searchValue, isWriter: !isTitle });
+		setIsLatestVersion(isLatestVersion);
+		setLikedOnly(likedOnly);
+		setPresetCodeOnly(presetCodeOnly);
 		setOpen(false);
 		setPage(1);
 	};
@@ -351,12 +377,30 @@ export const BuildSearchButton = ({
 		form.reset();
 		setWeaponPopoverOpen(false);
 		setSearchList({});
+		setIsLatestVersion(false);
+		setLikedOnly(false);
+		setPresetCodeOnly(false);
 		setOpen(false);
 		setPage(1);
 	};
 
+	const handleLikedOnlyChange = (checked: boolean) => {
+		if (checked && !info) {
+			setOpenLoginDialog(true);
+			return;
+		}
+
+		form.setValue("likedOnly", checked, {
+			shouldDirty: true,
+			shouldTouch: true,
+		});
+	};
+
 	const selectedWeaponValue = form.watch("weapon");
 	const selectedArtifacts = form.watch("artifacts");
+	const selectedIsLatestVersion = form.watch("isLatestVersion");
+	const selectedLikedOnly = form.watch("likedOnly");
+	const selectedPresetCodeOnly = form.watch("presetCodeOnly");
 
 	const selectedWeapon = useMemo(
 		() => weapons?.find((weapon) => weapon.value === selectedWeaponValue),
@@ -414,6 +458,14 @@ export const BuildSearchButton = ({
 		};
 	}, []);
 
+	useEffect(() => {
+		if (!open) return;
+
+		form.setValue("isLatestVersion", isLatestVersion, { shouldDirty: false });
+		form.setValue("likedOnly", likedOnly, { shouldDirty: false });
+		form.setValue("presetCodeOnly", presetCodeOnly, { shouldDirty: false });
+	}, [form, isLatestVersion, likedOnly, open, presetCodeOnly]);
+
 	return (
 		<Sheet open={open} onOpenChange={setOpen}>
 			<SheetTrigger asChild>
@@ -428,6 +480,11 @@ export const BuildSearchButton = ({
 					<Typography variant="caption">검색</Typography>
 				</Button>
 			</SheetTrigger>
+			<RequireLoginDialog
+				open={openLoginDialog}
+				onOpenChange={setOpenLoginDialog}
+				actionText="좋아요한 빌드를 보시려면"
+			/>
 			<SheetContent>
 				<SheetHeader>
 					<SheetTitle>빌드 검색하기</SheetTitle>
@@ -477,6 +534,35 @@ export const BuildSearchButton = ({
 									</FormItem>
 								)}
 							/>
+
+							<Row className="w-full flex-wrap gap-2">
+								<Label className="h-8 w-max rounded-md border px-2 text-xs hover:bg-accent/50 flex items-center gap-1.5">
+									<Checkbox
+										checked={selectedIsLatestVersion}
+										onCheckedChange={(checked: boolean) => {
+											form.setValue("isLatestVersion", checked, {
+												shouldDirty: true,
+												shouldTouch: true,
+											});
+										}}
+										className="size-4 data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
+									/>
+									최신버전만
+								</Label>
+								<Label className="h-8 w-max rounded-md border px-2 text-xs hover:bg-accent/50 flex items-center gap-1.5">
+									<Checkbox
+										checked={selectedPresetCodeOnly}
+										onCheckedChange={(checked: boolean) => {
+											form.setValue("presetCodeOnly", checked, {
+												shouldDirty: true,
+												shouldTouch: true,
+											});
+										}}
+										className="size-4 data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
+									/>
+									프리셋코드
+								</Label>
+							</Row>
 
 							<FormField
 								control={form.control}

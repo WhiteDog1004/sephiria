@@ -7,6 +7,7 @@ export const getBuilds = async ({
 	like,
 	isWriter,
 	likedOnly,
+	presetCodeOnly,
 	recentDays,
 	viewerId: _viewerId,
 	...req
@@ -18,6 +19,7 @@ export const getBuilds = async ({
 		isLatestVersion: String(isLatestVersion),
 		isWriter: String(Boolean(isWriter)),
 		likedOnly: String(Boolean(likedOnly)),
+		presetCodeOnly: String(Boolean(presetCodeOnly)),
 	});
 	if (recentDays) params.set("recentDays", String(recentDays));
 

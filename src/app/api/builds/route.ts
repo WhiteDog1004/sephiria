@@ -33,6 +33,7 @@ export const GET = async (request: Request) => {
 			isWriter: searchParams.get("isWriter") === "true",
 			recentDays,
 			likedOnly: searchParams.get("likedOnly") === "true",
+			presetCodeOnly: searchParams.get("presetCodeOnly") === "true",
 			title: searchParams.get("title") ?? undefined,
 			writerUuid: searchParams.get("writerUuid") ?? undefined,
 			costume: searchParams.get("costume") ?? undefined,

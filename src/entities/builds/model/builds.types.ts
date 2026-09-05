@@ -9,6 +9,7 @@ export type GetBuildsParams = {
 	recentDays?: 7 | 30;
 	writerUuid?: string;
 	likedOnly?: boolean;
+	presetCodeOnly?: boolean;
 	likedByUserId?: string;
 	viewerId?: string;
 	combo?: string;

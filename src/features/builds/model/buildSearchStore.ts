@@ -14,6 +14,7 @@ export interface BuildSearchState {
 	isAscending: boolean;
 	isLatestVersion: boolean;
 	likedOnly: boolean;
+	presetCodeOnly: boolean;
 	recentDays?: 7 | 30;
 	page: number;
 
@@ -21,6 +22,7 @@ export interface BuildSearchState {
 	setIsAscending: (asc: boolean) => void;
 	setIsLatestVersion: (v: boolean) => void;
 	setLikedOnly: (v: boolean) => void;
+	setPresetCodeOnly: (v: boolean) => void;
 	setRecentDays: (v?: 7 | 30) => void;
 	setPage: (p: number) => void;
 }
@@ -30,6 +32,7 @@ export const useBuildSearchStore = create<BuildSearchState>((set) => ({
 	isAscending: false,
 	isLatestVersion: false,
 	likedOnly: false,
+	presetCodeOnly: false,
 	recentDays: undefined,
 	page: 1,
 
@@ -37,6 +40,7 @@ export const useBuildSearchStore = create<BuildSearchState>((set) => ({
 	setIsAscending: (asc) => set({ isAscending: asc }),
 	setIsLatestVersion: (v) => set({ isLatestVersion: v }),
 	setLikedOnly: (v) => set({ likedOnly: v }),
+	setPresetCodeOnly: (v) => set({ presetCodeOnly: v }),
 	setRecentDays: (v) => set({ recentDays: v }),
 	setPage: (p) => set({ page: p }),
 }));
