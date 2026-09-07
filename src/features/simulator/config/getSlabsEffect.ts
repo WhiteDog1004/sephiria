@@ -823,4 +823,36 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 		];
 		return calculateRotatedEffects(baseOffsets, x, y, effects, item);
 	},
+
+	// ETERNITY
+	// requital 보은
+	requital: (x, y, slotId, item, effects, _, gridConfig) => {
+		if (!gridConfig) return;
+
+		if (item.rotation === 1 || item.rotation === 3) {
+			for (let rowIndex = 0; rowIndex < gridConfig.length; rowIndex++) {
+				if (x < gridConfig[rowIndex].cols) {
+					const targetSlotId = `${rowIndex}-${x}`;
+					if (
+						targetSlotId !== slotId &&
+						typeof effects[targetSlotId] === "number"
+					) {
+						effects[targetSlotId] += 3;
+					}
+				}
+			}
+			return;
+		}
+
+		const colsInRow = gridConfig[y].cols;
+		for (let colIndex = 0; colIndex < colsInRow; colIndex++) {
+			const targetSlotId = `${y}-${colIndex}`;
+			if (
+				targetSlotId !== slotId &&
+				typeof effects[targetSlotId] === "number"
+			) {
+				effects[targetSlotId] += 3;
+			}
+		}
+	},
 };

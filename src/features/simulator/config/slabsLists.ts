@@ -484,4 +484,14 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		image: "/slabs/peace.png",
 		rotate: true,
 	},
+
+	// ETERNITY
+	{
+		value: "requital",
+		tier: "eternity",
+		ko_label: "보은",
+		eng_label: "requital",
+		image: "/slabs/requital.png",
+		rotate: true,
+	},
 ];

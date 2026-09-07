@@ -4,6 +4,7 @@ export const TIER_DATA = [
 	{ value: "advanced", label: "고급" },
 	{ value: "rare", label: "희귀" },
 	{ value: "legend", label: "전설" },
+	{ value: "eternity", label: "영원" },
 	{ value: "solid", label: "결속" },
 ];
 

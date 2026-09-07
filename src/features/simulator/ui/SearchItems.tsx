@@ -91,7 +91,9 @@ export const SearchItems = ({
 						</SelectTrigger>
 						<SelectContent>
 							{TIER_DATA.filter((item) =>
-								type === "slabs" ? item.value !== "solid" : item,
+								type === "slabs"
+									? item.value !== "solid"
+									: item.value !== "eternity",
 							).map((tier) => (
 								<SelectItem key={tier.value} value={tier.value}>
 									{tier.label}
