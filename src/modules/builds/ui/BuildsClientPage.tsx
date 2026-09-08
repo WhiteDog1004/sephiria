@@ -231,7 +231,7 @@ export const BuildsClientPage = () => {
 			/>
 			<Row className="w-full max-w-7xl mx-auto justify-center gap-6">
 				<Column className="w-full justify-center gap-4">
-					<Column className="gap-4">
+					<Column className="gap-4 notranslate" translate="no">
 						<Row className="w-full flex-wrap items-center justify-between gap-2">
 							<Button asChild variant="outline" className="w-max">
 								<Link href={SITEMAP.STATS}>
@@ -292,7 +292,10 @@ export const BuildsClientPage = () => {
 					</Column>
 					<Separator />
 					<AdSenseHorizontal className="py-0" />
-					<Row className="w-full flex-col items-start gap-2 sm:flex-row sm:justify-between sm:items-center">
+					<Row
+						className="w-full flex-col items-start gap-2 sm:flex-row sm:justify-between sm:items-center notranslate"
+						translate="no"
+					>
 						<Row className="flex-wrap items-center gap-x-1 gap-y-2">
 							<Row className="shrink-0 items-center gap-1">
 								<Label className="w-max h-10 p-2 pr-0 hover:bg-accent/50 flex items-center gap-2 rounded-lg">

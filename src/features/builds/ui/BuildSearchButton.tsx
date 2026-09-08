@@ -485,7 +485,7 @@ export const BuildSearchButton = ({
 				onOpenChange={setOpenLoginDialog}
 				actionText="좋아요한 빌드를 보시려면"
 			/>
-			<SheetContent>
+			<SheetContent className="notranslate" translate="no">
 				<SheetHeader>
 					<SheetTitle>빌드 검색하기</SheetTitle>
 					<SheetDescription className="text-xs">
@@ -495,6 +495,7 @@ export const BuildSearchButton = ({
 
 				<Form {...form}>
 					<form
+						translate="no"
 						className="flex min-h-0 flex-1 flex-col overflow-hidden md:gap-4 md:overflow-y-auto md:px-4 md:pb-4"
 						onSubmit={form.handleSubmit(onSubmit)}
 					>
