@@ -49,13 +49,25 @@ const INLINE_ICON_PHRASE_OVERRIDES = [
 	},
 	{
 		icon: "/keywords/FlameGround.png",
-		keywords: ["?붿긽 怨듦꺽 ?띾룄", "?붿긽怨듦꺽?띾룄"],
+		keywords: ["화상 공격 속도", "화상공격속도"],
 		value: "burn_attack_speed",
+	},
+	{
+		icon: "/keywords/ChaosDamage.png",
+		keywords: [
+			"혼돈속성 피해",
+			"혼돈속성피해",
+			"혼돈 속성 피해",
+			"혼돈속성 피해량",
+			"혼돈속성피해량",
+			"혼돈 속성 피해량",
+		],
+		value: "chaos_attribute_damage",
 	},
 ];
 const INLINE_ICON_SUPPRESSED_PHRASES = [
-	"?됱꽦 怨듦꺽 ?띾룄",
-	"?됱꽦怨듦꺽?띾룄",
+	"행성 공격 속도",
+	"행성공격속도",
 ];
 
 interface KeywordIconMatch {

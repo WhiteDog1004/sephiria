@@ -33,6 +33,12 @@ export const ARTIFACT_OPTION_FILTERS: ArtifactOptionFilter[] = [
 		keywords: withSpacingVariants("HP 흡수"),
 	},
 	{
+		value: "damage_taken_recovery",
+		label: "받은 피해 회복",
+		icon: "/keywords/HPRegen.png",
+		keywords: withSpacingVariants("받은 피해 회복"),
+	},
+	{
 		value: "max_mp",
 		label: "최대 MP",
 		icon: "/keywords/MP.png",
@@ -125,7 +131,7 @@ export const ARTIFACT_OPTION_FILTERS: ArtifactOptionFilter[] = [
 		value: "leaf",
 		label: "잎",
 		icon: "/keywords/Leaf.png",
-		keywords: ["잎 획득", "잎 생성"],
+		keywords: ["잎 획득량", "잎획득량", "잎 획득", "잎 생성"],
 	},
 	{
 		value: "bargaining",
@@ -143,7 +149,10 @@ export const ARTIFACT_OPTION_FILTERS: ArtifactOptionFilter[] = [
 		value: "weapon_damage",
 		label: "무기 피해량",
 		icon: "/keywords/FinalWeaponDamage.png",
-		keywords: withSpacingVariants("무기 피해량"),
+		keywords: [
+			withSpacingVariants("무기 피해량"),
+			withSpacingVariants("무기 공격 피해량"),
+		].flat(),
 	},
 	{
 		value: "spell_damage",
@@ -163,6 +172,48 @@ export const ARTIFACT_OPTION_FILTERS: ArtifactOptionFilter[] = [
 			...withNegativeVariants("마법 가속"),
 			...withNegativeVariants("마법서 가속"),
 		],
+	},
+	{
+		value: "crossbow_reload_speed",
+		label: "석궁 재장전 속도",
+		icon: "/keywords/Reload.png",
+		keywords: withSpacingVariants("석궁 재장전 속도"),
+	},
+	{
+		value: "shield_sword_only",
+		label: "검과 방패 전용",
+		icon: "https://img.sephiria.wiki/weapons/shield_sword.png",
+		keywords: withSpacingVariants("검과 방패 전용"),
+	},
+	{
+		value: "great_sword_only",
+		label: "대검 전용",
+		icon: "https://img.sephiria.wiki/weapons/great_sword.png",
+		keywords: withSpacingVariants("대검 전용"),
+	},
+	{
+		value: "dagger_only",
+		label: "단검 전용",
+		icon: "https://img.sephiria.wiki/weapons/dagger.png",
+		keywords: withSpacingVariants("단검 전용"),
+	},
+	{
+		value: "crossbow_only",
+		label: "석궁 전용",
+		icon: "https://img.sephiria.wiki/weapons/crossbow.png",
+		keywords: withSpacingVariants("석궁 전용"),
+	},
+	{
+		value: "katana_only",
+		label: "도 전용",
+		icon: "https://img.sephiria.wiki/weapons/katana.png",
+		keywords: withSpacingVariants("도 전용"),
+	},
+	{
+		value: "staff_only",
+		label: "봉 전용",
+		icon: "https://img.sephiria.wiki/weapons/staff.png",
+		keywords: withSpacingVariants("봉 전용"),
 	},
 	{
 		value: "dash_count",

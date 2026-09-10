@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import Image from "next/image";
 import { Fragment } from "react";
-import { ARTIFACT_OPTION_FILTERS } from "@/src/entities/artifact/model/artifactOptionFilters";
 import { Typography } from "@/src/shared/ui/typography";
+import { getKeywordIconMatches } from "@/src/shared/utils/keywordIcons";
 import { renderWithHighlights } from "./renderWithHighlights";
 
 interface FormattedEffectContentProps {
@@ -10,119 +10,6 @@ interface FormattedEffectContentProps {
 }
 
 const NUMBER_REGEX = /([-+]?\d+(?:\.\d+)?(?:\/[-+]?\d+(?:\.\d+)?)+%?)/g;
-const INLINE_ICON_EXCLUDED_FILTER_VALUES = ["element_damage"];
-const INLINE_ICON_PHRASE_OVERRIDES = [
-	{
-		icon: "/keywords/FlameGround.png",
-		keywords: ["화상 공격 속도", "화상공격속도"],
-		value: "burn_attack_speed",
-	},
-];
-const INLINE_ICON_SUPPRESSED_PHRASES = ["행성 공격 속도", "행성공격속도"];
-
-const getKeywordIconMatches = (text: string) => {
-	const lowerText = text.toLowerCase();
-	const suppressedRanges = INLINE_ICON_SUPPRESSED_PHRASES.flatMap((phrase) => {
-		const ranges: { end: number; index: number }[] = [];
-		const lowerPhrase = phrase.toLowerCase();
-		let index = lowerText.indexOf(lowerPhrase);
-
-		while (index !== -1) {
-			ranges.push({ end: index + phrase.length, index });
-			index = lowerText.indexOf(lowerPhrase, index + phrase.length);
-		}
-
-		return ranges;
-	});
-	const phraseOverrideMatches = INLINE_ICON_PHRASE_OVERRIDES.flatMap(
-		(override) =>
-			override.keywords.flatMap((keyword) => {
-				const matches: {
-					end: number;
-					icon: string;
-					index: number;
-					keyword: string;
-					value: string;
-				}[] = [];
-				const lowerText = text.toLowerCase();
-				const lowerKeyword = keyword.toLowerCase();
-				let index = lowerText.indexOf(lowerKeyword);
-
-				while (index !== -1) {
-					matches.push({
-						end: index + keyword.length,
-						icon: override.icon,
-						index,
-						keyword,
-						value: override.value,
-					});
-					index = lowerText.indexOf(lowerKeyword, index + keyword.length);
-				}
-
-				return matches;
-			}),
-	);
-
-	return [
-		...phraseOverrideMatches,
-		...ARTIFACT_OPTION_FILTERS.filter(
-			(filter) =>
-				filter.icon &&
-				!INLINE_ICON_EXCLUDED_FILTER_VALUES.includes(filter.value),
-		).flatMap((filter) =>
-			filter.keywords.flatMap((keyword) => {
-				const matches: {
-					end: number;
-					icon: string;
-					index: number;
-					keyword: string;
-					value: string;
-				}[] = [];
-				const lowerText = text.toLowerCase();
-				const lowerKeyword = keyword.toLowerCase();
-				let index = lowerText.indexOf(lowerKeyword);
-
-				while (index !== -1) {
-					matches.push({
-						end: index + keyword.length,
-						icon: filter.icon || "",
-						index,
-						keyword,
-						value: filter.value,
-					});
-					index = lowerText.indexOf(lowerKeyword, index + keyword.length);
-				}
-
-				return matches;
-			}),
-		),
-	]
-		.filter(
-			(match) =>
-				!suppressedRanges.some(
-					(range) => match.index >= range.index && match.end <= range.end,
-				),
-		)
-		.sort((a, b) => a.index - b.index || b.keyword.length - a.keyword.length)
-		.reduce<
-			{
-				end: number;
-				icon: string;
-				index: number;
-				keyword: string;
-				value: string;
-			}[]
-		>((matches, match) => {
-			const lastMatch = matches.at(-1);
-
-			if (lastMatch && match.index < lastMatch.end) {
-				return matches;
-			}
-
-			matches.push(match);
-			return matches;
-		}, []);
-};
 
 const renderTextWithKeywordIcons = (text: string, keyPrefix: string) => {
 	const matches = getKeywordIconMatches(text);
