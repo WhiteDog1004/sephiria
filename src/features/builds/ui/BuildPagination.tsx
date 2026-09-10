@@ -25,7 +25,8 @@ export const BuildPagination = ({
 	const isLastPage = page >= totalPage;
 	const jumpPrevPage = page - jumpSize >= 1 ? page - jumpSize : null;
 	const jumpNextPage = page + jumpSize <= totalPage ? page + jumpSize : null;
-	const edgeCount = Number(jumpPrevPage !== null) + Number(jumpNextPage !== null);
+	const edgeCount =
+		Number(jumpPrevPage !== null) + Number(jumpNextPage !== null);
 	const centerCount = Math.max(1, maxVisibleNumbers - edgeCount);
 
 	const visiblePages = useMemo(() => {
@@ -51,8 +52,8 @@ export const BuildPagination = ({
 		jumpNextPage > lastVisible + 1;
 
 	return (
-		<Pagination>
-			<PaginationContent>
+		<Pagination className="notranslate" translate="no">
+			<PaginationContent translate="no">
 				<PaginationItem>
 					<PaginationPrevious
 						href="#"
