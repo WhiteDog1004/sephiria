@@ -4247,7 +4247,7 @@
 		"label_eng": "apprentice_duelist_epaulet",
 		"tier": "common",
 		"effect": {
-			"sets": ["firmness"],
+			"sets": ["precision"],
 			"content": "[고유] 특수 공격: 패리 성공 시 가장 가까운 적에게 검 영혼 발사\n[피해량: 가장 높은 속성 피해의 250% 혼돈 피해]\n특수 공격: 패리 40회 성공 시 결투가의 견장으로 변함\n단검 전용"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/apprentice_duelist_epaulet.png",
@@ -4343,7 +4343,7 @@
 		"label_eng": "marksman_crank",
 		"tier": "legend",
 		"effect": {
-			"sets": ["precision"],
+			"sets": ["firmness"],
 			"content": "[고유] 석궁 재장전 속도 +10/20\n재장전 완료 시 10초 동안 일반 공격 피해 30/40%, 특수 공격 피해 30/40% 증가\n석궁 전용"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/marksman_crank.png",
