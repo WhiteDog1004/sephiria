@@ -135,7 +135,7 @@ export const COSTUMES: CostumeMap = {
 		name: "스켈레톤",
 		unlock: "단일 판에서 잃은 체력 누적 333 달성",
 		story: "...",
-		options: ["시작 아이템 : '저주' 석판", "가하는 피해가 20% 증폭"],
+		options: ["가하는 피해가 20% 증폭", "시작 아이템 : '저주' 석판"],
 	},
 	wings_lost_bat: {
 		name: "날개 잃은 박쥐",

@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import type { ReactNode } from "react";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
 import { SETS_EFFECT_COUNT_LABEL } from "@/src/features/add-build/config/getSetsEffect";
 import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
@@ -38,8 +39,10 @@ const TIER_BADGE_STYLE_MAP: Record<string, string> = {
 
 export const ArtifactDetailDialog = ({
 	item,
+	children,
 }: {
 	item: ArtifactInstance["item"];
+	children?: ReactNode;
 }) => {
 	const { theme } = useTheme();
 	const setKeys = item.effect.sets ?? [];
@@ -47,25 +50,27 @@ export const ArtifactDetailDialog = ({
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<button
-					type="button"
-					className="inline-flex w-19 h-24 p-1 flex-col cursor-pointer touch-manipulation"
-				>
-					<Box className="relative h-full p-0">
-						<Image
-							unoptimized
-							fill
-							src={getCloudflareUrl(item.image || "")}
-							alt={item.label_kor}
-						/>
-					</Box>
-					<Typography
-						className={`py-1 whitespace-nowrap text-center overflow-hidden text-ellipsis ${clsx(getItemsTierColor(item.tier, theme === "light"))}`}
-						variant="caption"
+				{children ?? (
+					<button
+						type="button"
+						className="inline-flex w-19 h-24 p-1 flex-col cursor-pointer touch-manipulation"
 					>
-						{item.label_kor}
-					</Typography>
-				</button>
+						<Box className="relative h-full p-0">
+							<Image
+								unoptimized
+								fill
+								src={getCloudflareUrl(item.image || "")}
+								alt={item.label_kor}
+							/>
+						</Box>
+						<Typography
+							className={`py-1 whitespace-nowrap text-center overflow-hidden text-ellipsis ${clsx(getItemsTierColor(item.tier, theme === "light"))}`}
+							variant="caption"
+						>
+							{item.label_kor}
+						</Typography>
+					</button>
+				)}
 			</DialogTrigger>
 
 			<DialogContent
