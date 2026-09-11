@@ -4247,7 +4247,7 @@
 		"label_eng": "apprentice_duelist_epaulet",
 		"tier": "common",
 		"effect": {
-			"sets": ["precision"],
+			"sets": ["firmness"],
 			"content": "[고유] 특수 공격: 패리 성공 시 가장 가까운 적에게 검 영혼 발사\n[피해량: 가장 높은 속성 피해의 250% 혼돈 피해]\n특수 공격: 패리 40회 성공 시 결투가의 견장으로 변함\n단검 전용"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/apprentice_duelist_epaulet.png",
@@ -4279,7 +4279,7 @@
 		"label_eng": "stiff_crank",
 		"tier": "advanced",
 		"effect": {
-			"sets": ["precision"],
+			"sets": ["firmness"],
 			"content": "[고유] 석궁 재장전 속도 +5/10\n재장전 50회 완료 시 명사수의 크랭크로 변함\n석궁 전용"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/stiff_crank.png",
