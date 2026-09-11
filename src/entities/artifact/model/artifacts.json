@@ -4376,7 +4376,7 @@
 		"tier": "legend",
 		"effect": {
 			"sets": ["firmness"],
-			"content": "[고유] 무기 피해량 +5/10/15\n납도, 발도 무적 판정 시간 0.05/0.15/0.25초 증가\n도 전용"
+			"content": "[고유] 무기 피해량 +5/10/15\n납도, 발도 무적 판정 시간 40/70/120% 증가\n도 전용"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/master_tsuba.png",
 		"description": "천 번의 흘리기가 벼려낸 물건. 이 작은 코등이가 곧 방패다.",
