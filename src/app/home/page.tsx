@@ -9,7 +9,7 @@ const Main = async () => {
 
 	if (typeof window !== "undefined") return;
 	return (
-		<Box className="flex-col gap-8 p-0">
+		<Box className="flex-col gap-4 p-0 md:gap-8">
 			<Congratulation />
 			<ShortcutBox data={data || []} />
 			<Footer />
