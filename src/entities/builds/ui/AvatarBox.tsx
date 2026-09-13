@@ -50,7 +50,7 @@ export const AvatarBox = ({
 }: AvatarBoxProps) => {
 	return (
 		<Row className="w-full min-w-0 items-center gap-2">
-			<DropdownMenu>
+			<DropdownMenu modal={false}>
 				<DropdownMenuTrigger asChild>
 					<Button
 						variant="ghost"
