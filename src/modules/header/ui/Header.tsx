@@ -1,10 +1,11 @@
 "use client";
 
-import { Gamepad2, Menu, UserRound } from "lucide-react";
+import { Gamepad2, Images, Menu, UserRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useAdminStatus } from "@/src/entities/admin/model/useAdminStatus";
 import {
 	Avatar,
 	AvatarImage,
@@ -35,6 +36,7 @@ export const Header = () => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const { data } = useSession();
+	const { data: adminStatus } = useAdminStatus(data?.user.id);
 	const isActive = (path: string) =>
 		pathname === path || pathname.startsWith(`${path}/`);
 
@@ -134,6 +136,14 @@ export const Header = () => {
 											<UserRound className="size-5" />
 											마이페이지
 										</DropdownMenuItem>
+										{adminStatus?.isAdmin && (
+											<DropdownMenuItem
+												onClick={() => router.push(SITEMAP.ADMIN_IMAGES)}
+											>
+												<Images className="size-5" />
+												이미지 관리
+											</DropdownMenuItem>
+										)}
 										<DropdownMenuItem onClick={discordLogoutHandler}>
 											<Image
 												src={"/discord-icon.svg"}

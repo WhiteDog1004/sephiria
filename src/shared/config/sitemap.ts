@@ -12,6 +12,7 @@ export const SITEMAP = {
 	BUILDS: "/builds",
 	STATS: "/stats",
 	ADD_BUILD: "/builds/add",
+	ADMIN_IMAGES: "/admin/images",
 	MY_PAGE: "/my-page",
 	PRIVACY: "/privacy",
 	TERMS: "/terms",

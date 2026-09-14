@@ -32,6 +32,7 @@ Disallow: /
 
 User-agent: *
 Allow: /
+Disallow: /admin/
 Disallow: /builds/add
 Disallow: /builds/modify/
 Disallow: /fonts/
