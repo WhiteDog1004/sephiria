@@ -13,6 +13,7 @@ type ContentItemProps = {
 	title: string;
 	img?: string;
 	imageOverlay?: ReactNode;
+	isRemoved?: boolean;
 	name?: string;
 	className?: string;
 	content?: ReactNode;
@@ -22,6 +23,7 @@ export const ContentItem = ({
 	title,
 	img,
 	imageOverlay,
+	isRemoved = false,
 	name,
 	className,
 	content,
@@ -38,7 +40,10 @@ export const ContentItem = ({
 				{img && (
 					<Box className="relative h-max p-0">
 						<ImageWithFallback
-							className="p-1 w-12 h-12 object-contain"
+							className={clsx(
+								"p-1 w-12 h-12 object-contain",
+								isRemoved && "opacity-40",
+							)}
 							width={32}
 							height={32}
 							src={getCloudflareUrl(img)}
@@ -50,7 +55,10 @@ export const ContentItem = ({
 				)}
 				{content && content}
 				{name && (
-					<Typography className="w-full truncate" variant="caption">
+					<Typography
+						className={clsx("w-full truncate", isRemoved && "line-through")}
+						variant="caption"
+					>
 						{name}
 					</Typography>
 				)}

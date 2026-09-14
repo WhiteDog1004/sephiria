@@ -89,6 +89,7 @@ export const BuildsCard = ({
 								<ContentItem
 									title="무기"
 									img={weapon.image || undefined}
+									isRemoved={weapon.disabled === true}
 									imageOverlay={
 										weapon.disabled ? <RemovedWeaponOverlay /> : undefined
 									}

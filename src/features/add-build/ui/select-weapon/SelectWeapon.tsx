@@ -76,7 +76,10 @@ export const SelectWeapon = (form: UseFormReturn<AddBuildFormType>) => {
 													<Box className="p-2 h-full border rounded-lg">
 														<div className="relative shrink-0">
 															<ImageWithFallback
-																className="min-w-10 max-w-10 min-h-10 max-h-10 object-contain p-0"
+																className={clsx(
+																	"min-w-10 max-w-10 min-h-10 max-h-10 object-contain p-0",
+																	selectedWeapon?.disabled && "opacity-40",
+																)}
 																width={40}
 																height={40}
 																src={getCloudflareUrl(
@@ -91,7 +94,10 @@ export const SelectWeapon = (form: UseFormReturn<AddBuildFormType>) => {
 													</Box>
 													<Typography
 														variant="body2"
-														className="w-full min-w-0 max-w-full text-center truncate"
+														className={clsx(
+															"w-full min-w-0 max-w-full text-center truncate",
+															selectedWeapon?.disabled && "line-through",
+														)}
 													>
 														{selectedWeapon?.value_kor}
 													</Typography>

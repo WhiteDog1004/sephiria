@@ -46,7 +46,10 @@ export const SectionWeapon = ({ weapon }: WeaponReq) => {
 						</Row>
 						<div className="relative shrink-0">
 							<ImageWithFallback
-								className="w-16 h-16 object-contain p-0"
+								className={clsx(
+									"w-16 h-16 object-contain p-0",
+									data.disabled && "opacity-40",
+								)}
 								width={64}
 								height={64}
 								src={getCloudflareUrl(data.image || "/")}
@@ -56,7 +59,12 @@ export const SectionWeapon = ({ weapon }: WeaponReq) => {
 							{data.disabled && <RemovedWeaponOverlay />}
 						</div>
 					</Row>
-					<Typography variant="body2">{data.value_kor}</Typography>
+					<Typography
+						variant="body2"
+						className={clsx(data.disabled && "line-through")}
+					>
+						{data.value_kor}
+					</Typography>
 				</Column>
 				<Separator />
 				<Accordion type="single" collapsible>
