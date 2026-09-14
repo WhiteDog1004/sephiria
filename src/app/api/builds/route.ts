@@ -11,6 +11,10 @@ import { getArtifactValues } from "@/src/entities/builds/lib/getArtifactValues";
 import type { GetBuildsParams } from "@/src/entities/builds/model/builds.types";
 import { sanitizeBuildDescriptionHtml } from "@/src/shared/model/buildDescriptionHtml";
 import {
+	BUILD_IMAGE_MAX_COUNT,
+	extractBuildImageStoragePaths,
+} from "@/src/shared/model/buildImage";
+import {
 	isValidPresetCode,
 	normalizePresetCode,
 } from "@/src/shared/model/presetCode";
@@ -74,10 +78,33 @@ export const POST = async (request: Request) => {
 		const payload = (await request.json()) as CreateBuildType;
 		const supabase = await createServerSupabaseClient();
 		const presetCode = normalizePresetCode(payload.preset_code);
+		const {
+			data: { user },
+		} = await supabase.auth.getUser();
+
+		if (!user) {
+			return NextResponse.json(
+				{ message: "Login is required" },
+				{ status: 401 },
+			);
+		}
 
 		if (presetCode && !isValidPresetCode(presetCode)) {
 			return NextResponse.json(
 				{ message: "Invalid preset code" },
+				{ status: 400 },
+			);
+		}
+
+		const description = sanitizeBuildDescriptionHtml(payload.description, {
+			postUuid: payload.postUuid,
+			userId: user.id,
+		});
+		if (
+			extractBuildImageStoragePaths(description).length > BUILD_IMAGE_MAX_COUNT
+		) {
+			return NextResponse.json(
+				{ message: `Images are limited to ${BUILD_IMAGE_MAX_COUNT}` },
 				{ status: 400 },
 			);
 		}
@@ -87,7 +114,7 @@ export const POST = async (request: Request) => {
 			postUuid: payload.postUuid,
 			youtube_link: payload.youtube_link || null,
 			title: payload.title,
-			description: sanitizeBuildDescriptionHtml(payload.description),
+			description,
 			content: payload.content,
 			artifact_values: getArtifactValues(payload.content),
 			costume: payload.costume,
@@ -97,7 +124,7 @@ export const POST = async (request: Request) => {
 			fruit_skewer: payload.fruit_skewer ?? [],
 			ability: payload.ability,
 			version: payload.version,
-			writer: payload.writer,
+			writer: { ...payload.writer, uuid: user.id },
 		});
 
 		if (error) {

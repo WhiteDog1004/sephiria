@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useCreateBuild } from "@/src/entities/add-build";
 import type { PostBuildType } from "@/src/entities/add-build/model/createBuild.types";
@@ -19,6 +19,7 @@ import {
 	SelectTalent,
 	SelectWeapon,
 } from "@/src/features/add-build";
+import { removeBuildImagesFromStorage } from "@/src/features/add-build/lib/buildImageUpload";
 import { AddDescription } from "@/src/features/add-build/ui/add-description/AddDescription";
 import {
 	Button,
@@ -34,6 +35,7 @@ import {
 	Typography,
 } from "@/src/shared";
 import NotLogin from "@/src/shared/components/NotLogin";
+import { extractBuildImageStoragePaths } from "@/src/shared/model/buildImage";
 import { useSession } from "../../header/model/useUserInfo";
 import { addFormSchema } from "../model/formSchema";
 import { AddItems } from "./AddItems";
@@ -44,8 +46,24 @@ export const AddBuildClientPage = ({ modify }: { modify?: BuildRow }) => {
 	const { mutate, isPending: isCreatePending } = useCreateBuild();
 	const { mutate: update, isPending: isUpdatePending } = useUpdateBuild();
 	const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+	const [isImageUploading, setIsImageUploading] = useState(false);
 	const [isLogin, setIsLogin] = useState(false);
+	const [postUuid, setPostUuid] = useState(modify?.postUuid ?? "");
+	const uploadedImagePathsRef = useRef(new Set<string>());
+	const isBuildSavedRef = useRef(false);
+	const hasRequestedImageCleanupRef = useRef(false);
 	const isMutationPending = isCreatePending || isUpdatePending;
+
+	const finishImageUploads = (description: string) => {
+		const usedPaths = new Set(extractBuildImageStoragePaths(description));
+		const unusedPaths = [...uploadedImagePathsRef.current].filter(
+			(path) => !usedPaths.has(path),
+		);
+
+		void removeBuildImagesFromStorage(unusedPaths);
+		uploadedImagePathsRef.current.clear();
+		isBuildSavedRef.current = true;
+	};
 
 	const form = useForm({
 		resolver: zodResolver(addFormSchema),
@@ -73,13 +91,14 @@ export const AddBuildClientPage = ({ modify }: { modify?: BuildRow }) => {
 	});
 
 	const onSubmit = (value: Omit<PostBuildType, "writer" | "postUuid">) => {
-		if (isMutationPending) return;
+		if (isMutationPending || isImageUploading) return;
+		if (!postUuid) return;
 
 		if (modify) {
 			update(
 				{
 					preset_code: value.preset_code,
-					postUuid: modify.postUuid,
+					postUuid,
 					title: value.title,
 					description: value.description,
 					costume: value.costume,
@@ -101,6 +120,7 @@ export const AddBuildClientPage = ({ modify }: { modify?: BuildRow }) => {
 				},
 				{
 					onSuccess: () => {
+						finishImageUploads(value.description);
 						form.reset();
 						setIsSuccessOpen(true);
 					},
@@ -110,7 +130,7 @@ export const AddBuildClientPage = ({ modify }: { modify?: BuildRow }) => {
 			mutate(
 				{
 					preset_code: value.preset_code,
-					postUuid: crypto.randomUUID(),
+					postUuid,
 					title: value.title,
 					description: value.description,
 					costume: value.costume,
@@ -132,6 +152,7 @@ export const AddBuildClientPage = ({ modify }: { modify?: BuildRow }) => {
 				},
 				{
 					onSuccess: () => {
+						finishImageUploads(value.description);
 						form.reset();
 						setIsSuccessOpen(true);
 					},
@@ -139,6 +160,30 @@ export const AddBuildClientPage = ({ modify }: { modify?: BuildRow }) => {
 			);
 		}
 	};
+
+	useEffect(() => {
+		setPostUuid(modify?.postUuid ?? crypto.randomUUID());
+	}, [modify?.postUuid]);
+
+	useEffect(() => {
+		const cleanupAbandonedImageUploads = () => {
+			if (isBuildSavedRef.current || hasRequestedImageCleanupRef.current)
+				return;
+
+			const paths = [...uploadedImagePathsRef.current];
+			if (paths.length === 0) return;
+
+			hasRequestedImageCleanupRef.current = true;
+			void removeBuildImagesFromStorage(paths);
+		};
+
+		window.addEventListener("pagehide", cleanupAbandonedImageUploads);
+
+		return () => {
+			window.removeEventListener("pagehide", cleanupAbandonedImageUploads);
+			cleanupAbandonedImageUploads();
+		};
+	}, []);
 
 	useEffect(() => {
 		if (modify) {
@@ -224,16 +269,24 @@ export const AddBuildClientPage = ({ modify }: { modify?: BuildRow }) => {
 						<SelectFruitSkewer {...form} />
 						<AddItems {...form} />
 
-						<AddDescription {...form} />
+						<AddDescription
+							form={form}
+							onImageUploaded={(path) =>
+								uploadedImagePathsRef.current.add(path)
+							}
+							onUploadingChange={setIsImageUploading}
+							postUuid={postUuid}
+							userId={info?.user.id ?? ""}
+						/>
 						<AddPresetCode {...form} />
 
 						<Button
 							size="lg"
 							className="w-full mt-12"
 							type="submit"
-							disabled={isMutationPending}
+							disabled={isMutationPending || isImageUploading || !postUuid}
 						>
-							빌드 작성 완료
+							{isImageUploading ? "이미지 업로드 중..." : "빌드 작성 완료"}
 						</Button>
 					</form>
 				</Form>

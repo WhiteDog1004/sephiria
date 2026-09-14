@@ -270,6 +270,32 @@
 	background: #d8dcff;
 }
 
+.build-description-content img[data-build-image="true"] {
+	display: block;
+	height: auto;
+	max-width: 100%;
+	margin-top: 0.75rem;
+	margin-right: auto;
+	margin-bottom: 0.75rem;
+	margin-left: 0;
+	border-radius: 0.375rem;
+}
+
+.build-description-content img[data-build-image="true"][data-align="left"] {
+	margin-right: auto;
+	margin-left: 0;
+}
+
+.build-description-content img[data-build-image="true"][data-align="center"] {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.build-description-content img[data-build-image="true"][data-align="right"] {
+	margin-right: 0;
+	margin-left: auto;
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.coffee-donation-button::before {
 		animation: none;

@@ -13,9 +13,11 @@ import {
 	ChevronLeft,
 	ChevronRight,
 	Code,
+	ImagePlus,
 	Italic,
 	List,
 	ListOrdered,
+	Loader2,
 	PaintBucket,
 	Quote,
 	Redo2,
@@ -38,6 +40,9 @@ import {
 } from "@/src/shared";
 import { buildDescriptionEmoteItems } from "@/src/shared/config/emotes";
 import { sanitizeBuildDescriptionHtml } from "@/src/shared/model/buildDescriptionHtml";
+import { BUILD_IMAGE_MAX_COUNT } from "@/src/shared/model/buildImage";
+import { uploadBuildImage } from "../../lib/buildImageUpload";
+import { BuildImage } from "./BuildImageExtension";
 
 const FontSize = Extension.create({
 	name: "fontSize",
@@ -100,7 +105,11 @@ const EmoteImage = TiptapNode.create({
 
 type BuildDescriptionEditorProps = {
 	value: string;
+	onImageUploaded?: (storagePath: string) => void;
 	onChange: (value: string) => void;
+	onUploadingChange?: (isUploading: boolean) => void;
+	postUuid: string;
+	userId: string;
 };
 
 type ToolbarButtonProps = {
@@ -353,16 +362,26 @@ const EmotePopover = ({
 
 export const BuildDescriptionEditor = ({
 	value,
+	onImageUploaded,
 	onChange,
+	onUploadingChange,
+	postUuid,
+	userId,
 }: BuildDescriptionEditorProps) => {
 	const lastEmittedHtmlRef = useRef(value);
+	const imageInputRef = useRef<HTMLInputElement>(null);
+	const uploadFilesRef = useRef<(files: File[]) => void>(() => undefined);
+	const uploadInProgressRef = useRef(false);
 	const [selectedFontSize, setSelectedFontSize] = useState("14px");
+	const [imageError, setImageError] = useState("");
+	const [isUploadingImage, setIsUploadingImage] = useState(false);
 	const editor = useEditor({
 		extensions: [
 			StarterKit,
 			TextStyle,
 			FontSize,
 			EmoteImage,
+			BuildImage,
 			Color,
 			Highlight.configure({ multicolor: true }),
 			Underline,
@@ -375,11 +394,23 @@ export const BuildDescriptionEditor = ({
 			},
 			handlePaste: (_view, event) => {
 				const items = [...(event.clipboardData?.items ?? [])];
-				return items.some((item) => item.type.startsWith("image/"));
+				const files = items
+					.filter((item) => item.type.startsWith("image/"))
+					.map((item) => item.getAsFile())
+					.filter((file): file is File => Boolean(file));
+
+				if (files.length === 0) return false;
+				uploadFilesRef.current(files);
+				return true;
 			},
 			handleDrop: (_view, event) => {
-				const files = [...(event.dataTransfer?.files ?? [])];
-				return files.some((file) => file.type.startsWith("image/"));
+				const files = [...(event.dataTransfer?.files ?? [])].filter((file) =>
+					file.type.startsWith("image/"),
+				);
+
+				if (files.length === 0) return false;
+				uploadFilesRef.current(files);
+				return true;
 			},
 		},
 		immediatelyRender: false,
@@ -389,6 +420,72 @@ export const BuildDescriptionEditor = ({
 			onChange(html);
 		},
 	});
+
+	const uploadFiles = async (files: File[]) => {
+		if (!editor || uploadInProgressRef.current) return;
+		if (!postUuid || !userId) {
+			setImageError("로그인 정보를 확인한 뒤 다시 시도해 주세요.");
+			return;
+		}
+
+		let currentImageCount = 0;
+		editor.state.doc.descendants((node) => {
+			if (node.type.name === "buildImage") currentImageCount += 1;
+		});
+
+		const availableCount = BUILD_IMAGE_MAX_COUNT - currentImageCount;
+		if (availableCount <= 0) {
+			setImageError(
+				`이미지는 최대 ${BUILD_IMAGE_MAX_COUNT}장까지 첨부할 수 있습니다.`,
+			);
+			return;
+		}
+
+		const imageFiles = files.slice(0, availableCount);
+		setImageError(
+			files.length > availableCount
+				? `최대 ${BUILD_IMAGE_MAX_COUNT}장까지만 첨부했습니다.`
+				: "",
+		);
+		uploadInProgressRef.current = true;
+		setIsUploadingImage(true);
+		onUploadingChange?.(true);
+
+		try {
+			for (const file of imageFiles) {
+				const image = await uploadBuildImage({ file, postUuid, userId });
+				onImageUploaded?.(image.storagePath);
+				editor
+					.chain()
+					.focus()
+					.insertContent({
+						type: "buildImage",
+						attrs: {
+							align: "left",
+							alt: image.alt,
+							src: image.src,
+							storagePath: image.storagePath,
+							width: Math.min(image.width, 720),
+						},
+					})
+					.run();
+			}
+		} catch (error) {
+			setImageError(
+				error instanceof Error
+					? error.message
+					: "이미지 업로드 중 오류가 발생했습니다.",
+			);
+		} finally {
+			uploadInProgressRef.current = false;
+			setIsUploadingImage(false);
+			onUploadingChange?.(false);
+		}
+	};
+
+	uploadFilesRef.current = (files) => {
+		void uploadFiles(files);
+	};
 
 	useEffect(() => {
 		if (!editor) return;
@@ -421,6 +518,17 @@ export const BuildDescriptionEditor = ({
 
 	return (
 		<div className="w-full">
+			<input
+				ref={imageInputRef}
+				type="file"
+				accept="image/jpeg,image/png,image/webp"
+				multiple
+				className="hidden"
+				onChange={(event) => {
+					void uploadFiles([...(event.target.files ?? [])]);
+					event.target.value = "";
+				}}
+			/>
 			<Row className="w-full items-center gap-0 overflow-x-auto rounded-t-lg border bg-secondary/50 p-1.5">
 				<FontSizePopover
 					value={selectedFontSize}
@@ -496,6 +604,17 @@ export const BuildDescriptionEditor = ({
 							.run()
 					}
 				/>
+				<ToolbarButton
+					disabled={isUploadingImage || !postUuid || !userId}
+					onClick={() => imageInputRef.current?.click()}
+					title="이미지 첨부"
+				>
+					{isUploadingImage ? (
+						<Loader2 className="animate-spin" />
+					) : (
+						<ImagePlus />
+					)}
+				</ToolbarButton>
 				<ToolbarDivider />
 				<ToolbarButton
 					active={editor.isActive("bulletList")}
@@ -542,6 +661,11 @@ export const BuildDescriptionEditor = ({
 				</ToolbarButton>
 			</Row>
 			<EditorContent editor={editor} />
+			{imageError && (
+				<p className="mt-1 text-xs text-destructive" role="alert">
+					{imageError}
+				</p>
+			)}
 		</div>
 	);
 };
