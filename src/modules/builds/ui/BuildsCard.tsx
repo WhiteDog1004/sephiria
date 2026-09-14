@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AvatarBox, Title, VersionBox } from "@/src/entities/builds";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
+import { RemovedWeaponOverlay } from "@/src/entities/weapon/ui/RemovedWeaponOverlay";
 import { ContentItem, CostumeItem } from "@/src/features/builds";
 import { useBuildSearchStore } from "@/src/features/builds/model/buildSearchStore";
 import type { BuildsOptions } from "@/src/features/builds/model/builds.types";
@@ -38,7 +39,11 @@ export const BuildsCard = ({
 	hideArtifactSummary = false,
 }: {
 	data: BuildsOptions;
-	weapon?: { image: string | null; value_kor: string };
+	weapon?: {
+		image: string | null;
+		value_kor: string;
+		disabled?: boolean | null;
+	};
 	miracle?: { image: string | null; value_kor: string };
 	artifact?: ArtifactInstance["item"][];
 	hideArtifactSummary?: boolean;
@@ -84,6 +89,9 @@ export const BuildsCard = ({
 								<ContentItem
 									title="무기"
 									img={weapon.image || undefined}
+									imageOverlay={
+										weapon.disabled ? <RemovedWeaponOverlay /> : undefined
+									}
 									name={weapon.value_kor}
 								/>
 							) : (

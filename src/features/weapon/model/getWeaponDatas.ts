@@ -1,18 +1,12 @@
-import type { WeaponRow } from "@/src/entities/weapon/model/types";
-import weaponsJson from "@/src/entities/weapon/model/wepons.json";
+import {
+	getWeaponRows,
+	type WeaponListOptions,
+} from "@/src/entities/weapon/model/weaponCatalog";
 
-type WeaponStaticRow = WeaponRow & { disabled?: boolean | null };
-
-const getWeaponRows = () => {
-	return weaponsJson as WeaponStaticRow[];
+export const getWeaponLists = async (options: WeaponListOptions = {}) => {
+	return getWeaponRows(options);
 };
 
-export const getWeaponLists = async () => {
-	return getWeaponRows()
-		.filter((weapon) => weapon.disabled !== true)
-		.sort((a, b) => a.id - b.id);
-};
-
-export const getClientWeaponLists = async () => {
-	return getWeaponLists();
+export const getClientWeaponLists = async (options: WeaponListOptions = {}) => {
+	return getWeaponLists(options);
 };

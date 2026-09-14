@@ -154,7 +154,7 @@ export const BuildsClientPage = () => {
 		isWriter: searchList.isWriter,
 		...searchList,
 	});
-	const { data: weapons } = useGetWeapons();
+	const { data: weapons } = useGetWeapons({ includeDisabled: true });
 	const { data: miracles } = useGetMiracles();
 	const { data: artifacts } = useGetArtifacts();
 

@@ -202,7 +202,7 @@ const MyBuildsSection = ({
 		writerUuid: type === "written" ? userId : undefined,
 		likedOnly: type === "liked",
 	});
-	const { data: weapons } = useGetWeapons();
+	const { data: weapons } = useGetWeapons({ includeDisabled: true });
 	const { data: miracles } = useGetMiracles();
 	const isBuildListLoading = isLoading || (isFetching && !data);
 	const totalPage = data?.count ? Math.ceil(data.count / PAGE_SIZE) : 0;

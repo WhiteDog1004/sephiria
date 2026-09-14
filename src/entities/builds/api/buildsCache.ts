@@ -3,8 +3,7 @@ import "server-only";
 import type { PostgrestError } from "@supabase/supabase-js";
 import { unstable_cache } from "next/cache";
 import { createServerSupabaseAdminClient } from "@/lib/supabase/server";
-import type { WeaponRow } from "@/src/entities/weapon/model/types";
-import weaponsJson from "@/src/entities/weapon/model/wepons.json";
+import { getRelatedWeaponValues } from "@/src/entities/weapon/model/weaponCatalog";
 import type {
 	BuildRow,
 	BuildWithLikeStatus,
@@ -19,12 +18,6 @@ export const getBuildDetailTag = (postUuid: string) =>
 
 const LIST_REVALIDATE_SECONDS = 60 * 60 * 24;
 const DETAIL_REVALIDATE_SECONDS = 60 * 60 * 24;
-
-type WeaponStaticRow = WeaponRow & { disabled?: boolean | null };
-
-const WEAPONS = (weaponsJson as WeaponStaticRow[]).filter(
-	(weapon) => weapon.disabled !== true,
-);
 
 type NormalizedBuildsParams = {
 	page: number;
@@ -49,25 +42,6 @@ const handleError = (error: PostgrestError | null) => {
 	if (error) {
 		throw error;
 	}
-};
-
-const getRelatedWeaponValues = (weaponValue: string) => {
-	const selectedWeapon = WEAPONS.find((weapon) => weapon.value === weaponValue);
-	if (!selectedWeapon) return [weaponValue];
-
-	const values = new Set([selectedWeapon.value]);
-	const addChildren = (parentValue: string) => {
-		WEAPONS.filter((weapon) => weapon.parent === parentValue).forEach(
-			(weapon) => {
-				values.add(weapon.value);
-				addChildren(weapon.value);
-			},
-		);
-	};
-
-	addChildren(selectedWeapon.value);
-
-	return [...values];
 };
 
 const applyBuildsFilters = <T>(query: T, params: NormalizedBuildsParams): T => {
@@ -313,7 +287,7 @@ const getBuildsFromDb = async (
 
 const getBuildsCachedFn = unstable_cache(
 	async (params: NormalizedBuildsParams) => getBuildsFromDb(params),
-	["builds:list:v8"],
+	["builds:list:v9"],
 	{
 		tags: [BUILDS_LIST_TAG],
 		revalidate: LIST_REVALIDATE_SECONDS,

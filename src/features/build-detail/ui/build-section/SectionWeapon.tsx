@@ -4,6 +4,7 @@ import { useTheme } from "next-themes";
 import { SubWeaponBox } from "@/src/entities/build-detail";
 import { useGetWeapons } from "@/src/entities/builds";
 import { useGetWeapon, type WeaponReq } from "@/src/entities/weapon";
+import { RemovedWeaponOverlay } from "@/src/entities/weapon/ui/RemovedWeaponOverlay";
 import {
 	Accordion,
 	AccordionContent,
@@ -20,7 +21,7 @@ import { parseColoredString } from "@/src/shared/utils/parseColoredString";
 
 export const SectionWeapon = ({ weapon }: WeaponReq) => {
 	const { theme } = useTheme();
-	const { data: weapons } = useGetWeapons();
+	const { data: weapons } = useGetWeapons({ includeDisabled: true });
 	const { data } = useGetWeapon({ weapon });
 
 	const tier2Weapon = weapons?.find((item) => data?.parent === item.value);
@@ -43,14 +44,17 @@ export const SectionWeapon = ({ weapon }: WeaponReq) => {
 							<SubWeaponBox weapon={tier2Weapon} />
 							<ArrowRight className="size-4 opacity-50" />
 						</Row>
-						<ImageWithFallback
-							className="w-16 h-16 object-contain p-0"
-							width={64}
-							height={64}
-							src={getCloudflareUrl(data.image || "/")}
-							alt={data.value}
-							unoptimized
-						/>
+						<div className="relative shrink-0">
+							<ImageWithFallback
+								className="w-16 h-16 object-contain p-0"
+								width={64}
+								height={64}
+								src={getCloudflareUrl(data.image || "/")}
+								alt={data.value}
+								unoptimized
+							/>
+							{data.disabled && <RemovedWeaponOverlay />}
+						</div>
 					</Row>
 					<Typography variant="body2">{data.value_kor}</Typography>
 				</Column>

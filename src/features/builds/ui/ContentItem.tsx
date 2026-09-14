@@ -12,6 +12,7 @@ import { getCloudflareUrl } from "@/src/shared/utils/image";
 type ContentItemProps = {
 	title: string;
 	img?: string;
+	imageOverlay?: ReactNode;
 	name?: string;
 	className?: string;
 	content?: ReactNode;
@@ -20,6 +21,7 @@ type ContentItemProps = {
 export const ContentItem = ({
 	title,
 	img,
+	imageOverlay,
 	name,
 	className,
 	content,
@@ -34,7 +36,7 @@ export const ContentItem = ({
 			<Separator />
 			<Column className="justify-center items-center w-full h-full p-2 gap-1">
 				{img && (
-					<Box className="h-max p-0">
+					<Box className="relative h-max p-0">
 						<ImageWithFallback
 							className="p-1 w-12 h-12 object-contain"
 							width={32}
@@ -43,6 +45,7 @@ export const ContentItem = ({
 							alt={"dry_wind"}
 							unoptimized
 						/>
+						{imageOverlay}
 					</Box>
 				)}
 				{content && content}

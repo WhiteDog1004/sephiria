@@ -24,4 +24,6 @@ export type WeaponReq = {
 	weapon: string;
 };
 
-export type WeaponRow = Database["public"]["Tables"]["weapons"]["Row"];
+export type WeaponRow = Database["public"]["Tables"]["weapons"]["Row"] & {
+	disabled?: boolean | null;
+};

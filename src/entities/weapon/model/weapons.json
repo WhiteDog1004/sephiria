@@ -69,9 +69,7 @@
 		"parent": "shield_sword",
 		"image": "https://img.sephiria.wiki/weapons/magic_wand.png",
 		"effects": {
-			"reward": [
-				"$s무기 공격$이 매직 미사일을 사용하는 형태로 변경됩니다."
-			]
+			"reward": ["$s무기 공격$이 매직 미사일을 사용하는 형태로 변경됩니다."]
 		},
 		"disabled": null
 	},
@@ -101,9 +99,7 @@
 		"parent": "shield_sword",
 		"image": "https://img.sephiria.wiki/weapons/protection.png",
 		"effects": {
-			"reward": [
-				"$s가드$ 성공 시 $s가드$에 소모되는 $iMP$가 50% 감소합니다."
-			]
+			"reward": ["$s가드$ 성공 시 $s가드$에 소모되는 $iMP$가 50% 감소합니다."]
 		},
 		"disabled": null
 	},
@@ -245,6 +241,57 @@
 			]
 		},
 		"disabled": null
+	},
+	{
+		"created_at": "2025-08-30T08:52:39.449345+00:00",
+		"uuid": "4bb83f3c-2a27-4d30-b927-62e750f6fc12",
+		"id": 19,
+		"value": "flame",
+		"value_kor": "화염의 시선",
+		"tier": 3,
+		"parent": "magic_wand",
+		"image": "https://img.sephiria.wiki/weapons/flame.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$이 매직 미사일을 사용하는 형태로 변경됩니다.",
+				"공격이 $b화염$ 속성 기반으로 변경됩니다.\n$s일반 공격$의 피해량이 20% 증가합니다."
+			]
+		},
+		"disabled": true
+	},
+	{
+		"created_at": "2025-08-30T08:54:36.969941+00:00",
+		"uuid": "769854c4-9548-48f9-9d3c-bd328aac7e47",
+		"id": 20,
+		"value": "breath_of_ice",
+		"value_kor": "얼음의 숨결",
+		"tier": 3,
+		"parent": "magic_wand",
+		"image": "https://img.sephiria.wiki/weapons/breath_of_ice.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$이 매직 미사일을 사용하는 형태로 변경됩니다.",
+				"공격이 $i얼음$ 속성 기반으로 변경됩니다.\n$s대시 공격$의 피해량이 40% 증가합니다."
+			]
+		},
+		"disabled": true
+	},
+	{
+		"created_at": "2025-08-30T08:56:33.795305+00:00",
+		"uuid": "bdd3cf56-323e-45df-ac0a-bcb92f9eb897",
+		"id": 21,
+		"value": "lightning_wings",
+		"value_kor": "번개의 날개짓",
+		"tier": 3,
+		"parent": "magic_wand",
+		"image": "https://img.sephiria.wiki/weapons/lightning_wings.png",
+		"effects": {
+			"reward": [
+				"$s무기 공격$이 매직 미사일을 사용하는 형태로 변경됩니다.",
+				"공격이 $l번개$ 속성 기반으로 변경됩니다.\n$s특수 공격$의 피해량이 20% 증가합니다."
+			]
+		},
+		"disabled": true
 	},
 	{
 		"created_at": "2025-08-30T09:01:23.599311+00:00",
@@ -831,9 +878,7 @@
 		"parent": "dagger",
 		"image": "https://img.sephiria.wiki/weapons/cotton_leg.png",
 		"effects": {
-			"reward": [
-				"$s무기 공격$이 수리검 투척을 사용하는 형태로 변경됩니다."
-			]
+			"reward": ["$s무기 공격$이 수리검 투척을 사용하는 형태로 변경됩니다."]
 		},
 		"disabled": null
 	},
@@ -2263,9 +2308,7 @@
 		"parent": "katana",
 		"image": "https://img.sephiria.wiki/weapons/broken_armor_blade.png",
 		"effects": {
-			"reward": [
-				"$s일반 공격$이 $a방어력$ 수치 2당 피해량이 1% 증가합니다."
-			]
+			"reward": ["$s일반 공격$이 $a방어력$ 수치 2당 피해량이 1% 증가합니다."]
 		},
 		"disabled": null
 	},

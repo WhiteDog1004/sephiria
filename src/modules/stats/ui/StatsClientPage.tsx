@@ -11,7 +11,7 @@ import type { MiracleRow } from "@/src/entities/miracle/model/types";
 import type { BuildItemUsageStat, StatItemType } from "@/src/entities/stats";
 import { useGetBuildItemUsageStats } from "@/src/entities/stats";
 import type { WeaponRow } from "@/src/entities/weapon/model/types";
-import weaponsJson from "@/src/entities/weapon/model/wepons.json";
+import weaponsJson from "@/src/entities/weapon/model/weapons.json";
 import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
 import {
 	Badge,
@@ -137,15 +137,13 @@ const createItemMetaMap = (itemType: StatItemType) => {
 	}
 
 	if (itemType === "weapon") {
-		(weaponsJson as (WeaponRow & { disabled?: boolean | null })[])
-			.filter((item) => item.disabled !== true)
-			.forEach((item) => {
-				map.set(item.value, {
-					effectLines: getEffectLines(item.effects as Effects),
-					label: item.value_kor || formatItemValue(item.value),
-					image: item.image,
-				});
+		(weaponsJson as WeaponRow[]).forEach((item) => {
+			map.set(item.value, {
+				effectLines: getEffectLines(item.effects as Effects),
+				label: `${item.value_kor || formatItemValue(item.value)}${item.disabled ? " (삭제된 무기)" : ""}`,
+				image: item.image,
 			});
+		});
 	}
 
 	if (itemType === "miracle") {

@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import type { UseFormReturn } from "react-hook-form";
 import { useGetWeapons } from "@/src/entities/builds";
+import { RemovedWeaponOverlay } from "@/src/entities/weapon/ui/RemovedWeaponOverlay";
 import type { AddBuildFormType } from "@/src/modules/add-build/model/formSchema";
 import {
 	Box,
@@ -37,7 +38,10 @@ export const SelectWeapon = (form: UseFormReturn<AddBuildFormType>) => {
 		setOpenPopover(open);
 		setSearchKeyword("");
 	};
-	const { data: weapons } = useGetWeapons();
+	const { data: weapons } = useGetWeapons({ includeDisabled: true });
+	const selectableWeapons = weapons?.filter(
+		(weapon) => weapon.disabled !== true,
+	);
 	const normalizedSearchKeyword = searchKeyword.trim().toLowerCase();
 	const matchesSearchKeyword = (value: string, label?: string | null) => {
 		if (!normalizedSearchKeyword) return true;
@@ -70,7 +74,7 @@ export const SelectWeapon = (form: UseFormReturn<AddBuildFormType>) => {
 											{field.value ? (
 												<>
 													<Box className="p-2 h-full border rounded-lg">
-														{
+														<div className="relative shrink-0">
 															<ImageWithFallback
 																className="min-w-10 max-w-10 min-h-10 max-h-10 object-contain p-0"
 																width={40}
@@ -80,7 +84,10 @@ export const SelectWeapon = (form: UseFormReturn<AddBuildFormType>) => {
 																)}
 																alt={field.value}
 															/>
-														}
+															{selectedWeapon?.disabled && (
+																<RemovedWeaponOverlay />
+															)}
+														</div>
 													</Box>
 													<Typography
 														variant="body2"
@@ -109,17 +116,17 @@ export const SelectWeapon = (form: UseFormReturn<AddBuildFormType>) => {
 										/>
 										<Row className="relative grid grid-cols-3 gap-2 max-h-60 overflow-x-hidden overflow-y-auto">
 											<AnimatePresence mode="popLayout">
-												{weapons
+												{selectableWeapons
 													?.filter((weapon) => weapon.tier === 1)
 													.map((tier1) => {
-														const tier3Weapons = weapons.filter(
+														const tier3Weapons = selectableWeapons.filter(
 															(tier3) =>
 																tier3.tier === 3 &&
 																matchesSearchKeyword(
 																	tier3.value,
 																	tier3.value_kor,
 																) &&
-																weapons.find(
+																selectableWeapons.find(
 																	(tier2) =>
 																		tier2.tier === 2 &&
 																		tier2.value === tier3.parent &&
