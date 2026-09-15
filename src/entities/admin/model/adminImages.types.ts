@@ -10,7 +10,7 @@ export type AdminImageBuild = {
 	images: AdminBuildImage[];
 	postUuid: string;
 	title: string;
-	updatedAt: string;
+	updatedAt: string | null;
 	writer: BuildRow["writer"];
 };
 

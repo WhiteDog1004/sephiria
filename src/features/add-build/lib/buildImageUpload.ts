@@ -1,12 +1,11 @@
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 import {
 	BUILD_IMAGE_BUCKET,
+	BUILD_IMAGE_MAX_FILE_SIZE,
 	BUILD_IMAGE_MAX_WIDTH,
 } from "@/src/shared/model/buildImage";
 
-const MAX_INPUT_BYTES = 2 * 1024 * 1024;
 const TARGET_OUTPUT_BYTES = 500 * 1024;
-const MAX_OUTPUT_BYTES = 1024 * 1024;
 const ALLOWED_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 
 export type UploadedBuildImage = {
@@ -22,6 +21,52 @@ type LoadedImage = {
 	height: number;
 	source: CanvasImageSource;
 	width: number;
+};
+
+const getFourCC = (bytes: Uint8Array, offset: number) =>
+	String.fromCharCode(
+		bytes[offset],
+		bytes[offset + 1],
+		bytes[offset + 2],
+		bytes[offset + 3],
+	);
+
+const isAnimatedWebp = async (file: File) => {
+	if (file.type !== "image/webp") return false;
+
+	const bytes = new Uint8Array(await file.arrayBuffer());
+	if (
+		bytes.length < 12 ||
+		getFourCC(bytes, 0) !== "RIFF" ||
+		getFourCC(bytes, 8) !== "WEBP"
+	) {
+		return false;
+	}
+
+	const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+	let offset = 12;
+
+	while (offset + 8 <= bytes.length) {
+		const chunkType = getFourCC(bytes, offset);
+		const chunkSize = view.getUint32(offset + 4, true);
+		const payloadOffset = offset + 8;
+
+		if (chunkType === "ANIM" || chunkType === "ANMF") return true;
+		if (
+			chunkType === "VP8X" &&
+			chunkSize > 0 &&
+			payloadOffset < bytes.length &&
+			(bytes[payloadOffset] & 0x02) !== 0
+		) {
+			return true;
+		}
+
+		const nextOffset = payloadOffset + chunkSize + (chunkSize % 2);
+		if (nextOffset <= offset || nextOffset > bytes.length) break;
+		offset = nextOffset;
+	}
+
+	return false;
 };
 
 const loadImage = async (file: File): Promise<LoadedImage> => {
@@ -95,13 +140,22 @@ const compressBuildImage = async (file: File) => {
 		throw new Error("JPG, PNG, WebP 이미지만 첨부할 수 있습니다.");
 	}
 
-	if (file.size > MAX_INPUT_BYTES) {
-		throw new Error("원본 이미지는 2MB 이하여야 합니다.");
+	if (file.size > BUILD_IMAGE_MAX_FILE_SIZE) {
+		throw new Error("이미지는 4MB 이하여야 합니다.");
 	}
 
+	const animatedWebp = await isAnimatedWebp(file);
 	const image = await loadImage(file);
 
 	try {
+		if (animatedWebp) {
+			return {
+				blob: file,
+				height: image.height,
+				width: image.width,
+			};
+		}
+
 		const initialScale = Math.min(
 			1,
 			BUILD_IMAGE_MAX_WIDTH / Math.max(image.width, image.height),
@@ -125,8 +179,8 @@ const compressBuildImage = async (file: File) => {
 			compressed = await canvasToWebp(image.source, width, height, quality);
 		}
 
-		if (compressed.size > MAX_OUTPUT_BYTES) {
-			throw new Error("압축 후 이미지가 1MB를 초과합니다.");
+		if (compressed.size > BUILD_IMAGE_MAX_FILE_SIZE) {
+			throw new Error("압축 후 이미지가 4MB를 초과합니다.");
 		}
 
 		return { blob: compressed, height, width };

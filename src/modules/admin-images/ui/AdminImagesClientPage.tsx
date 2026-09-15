@@ -186,19 +186,20 @@ export const AdminImagesClientPage = () => {
 									</span>
 								)}
 							</button>
-							<Column className="gap-1 pt-2">
+							<Column className="w-full min-w-0 gap-1 pt-2">
 								<Link
 									href={`${SITEMAP.BUILDS}/${build.postUuid}`}
-									className="truncate text-sm font-semibold hover:text-blue-500 hover:underline"
+									className="block w-full truncate text-sm font-semibold hover:text-blue-500 hover:underline"
+									title={build.title}
 								>
 									{build.title}
 								</Link>
-								<Row className="items-center justify-between gap-2 text-xs text-muted-foreground">
-									<span className="truncate">
+								<Row className="w-full min-w-0 items-center justify-between gap-2 text-xs text-muted-foreground">
+									<span className="min-w-0 truncate">
 										{build.writer.nickname || "알 수 없음"}
 									</span>
 									<span className="shrink-0">
-										{formatDate(build.updatedAt)}
+										{formatDate(build.updatedAt || build.createdAt)}
 									</span>
 								</Row>
 							</Column>

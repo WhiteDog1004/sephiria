@@ -57,7 +57,7 @@ export const AddDescription = <TFieldValues extends DescriptionFormValues>({
 									variant="caption"
 									className="flex-1 text-muted-foreground"
 								>
-									이미지는 JPG, PNG, WebP · 원본 2MB 이하 · 최대{" "}
+									이미지는 JPG, PNG, WebP · 파일당 4MB 이하 · 최대{" "}
 									{BUILD_IMAGE_MAX_COUNT}장까지 첨부 가능
 								</Typography>
 								<Typography variant="caption" className="shrink-0">

@@ -1,5 +1,6 @@
 export const BUILD_IMAGE_BUCKET = "build-images";
 export const BUILD_IMAGE_MAX_COUNT = 5;
+export const BUILD_IMAGE_MAX_FILE_SIZE = 4 * 1024 * 1024;
 export const BUILD_IMAGE_MIN_WIDTH = 160;
 export const BUILD_IMAGE_MAX_WIDTH = 1920;
 

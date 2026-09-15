@@ -279,6 +279,17 @@
 	margin-bottom: 0.75rem;
 	margin-left: 0;
 	border-radius: 0.375rem;
+	cursor: zoom-in;
+	transition: filter 160ms ease;
+}
+
+.build-description-content img[data-build-image="true"]:hover {
+	filter: brightness(0.9);
+}
+
+.build-description-content img[data-build-image="true"]:focus-visible {
+	outline: 2px solid var(--ring);
+	outline-offset: 3px;
 }
 
 .build-description-content img[data-build-image="true"][data-align="left"] {
@@ -297,6 +308,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+	.build-description-content img[data-build-image="true"] {
+		transition: none;
+	}
+
 	.coffee-donation-button::before {
 		animation: none;
 	}
