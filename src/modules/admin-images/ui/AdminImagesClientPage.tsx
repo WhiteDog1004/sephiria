@@ -106,7 +106,7 @@ export const AdminImagesClientPage = () => {
 	const totalPages = data ? Math.ceil(data.count / data.pageSize) : 0;
 
 	return (
-		<Column className="mx-auto w-full max-w-7xl gap-6 px-3 py-6 md:px-6 md:py-10">
+		<Column className="mx-auto flex w-full max-w-7xl gap-6 px-3 py-6 md:px-6 md:py-10">
 			<Row className="items-center justify-between gap-4">
 				<Column className="gap-1">
 					<Row className="items-center gap-2">
