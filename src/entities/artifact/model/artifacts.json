@@ -4215,7 +4215,7 @@
 		"label_eng": "faded_shield_emblem",
 		"tier": "advanced",
 		"effect": {
-			"sets": ["guardian"],
+			"sets": ["firmness"],
 			"content": "[고유] 무기 피해량 +5/10/15\n퍼펙트 가드 50회 성공 시 철벽의 문장으로 변함\n검과 방패 전용"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/faded_shield_emblem.png",
@@ -4391,7 +4391,7 @@
 		"label_eng": "ironwall_emblem",
 		"tier": "legend",
 		"effect": {
-			"sets": ["guardian"],
+			"sets": ["firmness"],
 			"content": "[고유] 무기 피해량 +15/20/25\n가드 비용 20/30/40% 감소\n가드 범위 30/40/60% 증가\n검과 방패 전용"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/ironwall_emblem.png",

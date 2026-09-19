@@ -43,6 +43,7 @@ yarn-error.log*
 /supabase/config.toml
 /supabase/migrations/202609140001_create_build_images_bucket.sql
 /supabase/migrations/202609140002_create_build_image_cleanup_query.sql
+/supabase/migrations/202609150001_update_build_image_size_limit.sql
 
 # typescript
 *.tsbuildinfo
