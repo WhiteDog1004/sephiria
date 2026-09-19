@@ -23,6 +23,7 @@ type NormalizedBuildsParams = {
 	page: number;
 	limit: number;
 	isLatestVersion: boolean;
+	currentGameVersion: string;
 	like: "asc" | "desc";
 	isWriter: boolean;
 	recentDays: 7 | 30 | null;
@@ -60,9 +61,7 @@ const applyBuildsFilters = <T>(query: T, params: NormalizedBuildsParams): T => {
 	};
 
 	if (params.isLatestVersion) {
-		const currentVersion = process.env.NEXT_PUBLIC_GAME_VERSION ?? "0.0.0";
-		const currentMajorMinor = currentVersion.split(".").slice(0, 2).join(".");
-		filteredQuery = filteredQuery.ilike("version", `${currentMajorMinor}.%`);
+		filteredQuery = filteredQuery.eq("version", params.currentGameVersion);
 	}
 
 	if (params.recentDays) {
@@ -121,6 +120,8 @@ export const normalizeBuildsParams = (
 		page,
 		limit,
 		isLatestVersion: Boolean(params.isLatestVersion),
+		currentGameVersion:
+			process.env.NEXT_PUBLIC_GAME_VERSION?.trim() || "0.0.0",
 		like: params.like === "asc" ? "asc" : "desc",
 		isWriter: Boolean(params.isWriter),
 		recentDays:
@@ -287,7 +288,7 @@ const getBuildsFromDb = async (
 
 const getBuildsCachedFn = unstable_cache(
 	async (params: NormalizedBuildsParams) => getBuildsFromDb(params),
-	["builds:list:v9"],
+	["builds:list:v10"],
 	{
 		tags: [BUILDS_LIST_TAG],
 		revalidate: LIST_REVALIDATE_SECONDS,

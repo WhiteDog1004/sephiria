@@ -315,10 +315,7 @@ export const BuildsClientPage = () => {
 									<TooltipContent sideOffset={16}>
 										<Row className="gap-1 bg-accent border-2 dark:text-white text-black p-2 justify-center items-center text-center">
 											<Typography variant="caption" className="text-blue-500">
-												{process.env.NEXT_PUBLIC_GAME_VERSION?.split(".")
-													.slice(0, 2)
-													.join(".")}
-												.*
+												{process.env.NEXT_PUBLIC_GAME_VERSION ?? "0.0.0"}
 											</Typography>
 											<Typography variant="caption">버전만 검색</Typography>
 										</Row>

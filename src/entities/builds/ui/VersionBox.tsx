@@ -9,11 +9,9 @@ export const VersionBox = ({
 	version: string;
 	hasPresetCode?: boolean;
 }) => {
-	const currentVersion = process.env.NEXT_PUBLIC_GAME_VERSION ?? "0.0.0";
-	const currentMajorMinor = currentVersion.split(".").slice(0, 2).join(".");
-	const targetMajorMinor = version.split(".").slice(0, 2).join(".");
-
-	const isSameVersion = currentMajorMinor === targetMajorMinor;
+	const currentVersion =
+		process.env.NEXT_PUBLIC_GAME_VERSION?.trim() || "0.0.0";
+	const isSameVersion = currentVersion === version;
 
 	return (
 		<Column className="items-end w-max gap-0.5">
