@@ -1,14 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-	Avatar,
-	AvatarImage,
-	Button,
-	Column,
-	Row,
-	SITEMAP,
-} from "@/src/shared";
+import { Column, Row, SITEMAP } from "@/src/shared";
 import { Typography } from "@/src/shared/ui/typography";
+import { DeveloperContactDialog } from "./DeveloperContactDialog";
 import { SupportersDialogButton } from "./SupportersDialogButton";
 
 export const Footer = () => {
@@ -32,20 +26,7 @@ export const Footer = () => {
 						<Typography variant="body2">세피리아 디스코드</Typography>
 					</Row>
 				</Link>
-				<Link
-					target="_blank"
-					href={"https://discord.com/users/313963147432034306"}
-					className="w-full"
-				>
-					<Button className="w-full h-10">
-						<Row className="items-center gap-2">
-							<Avatar className="w-6 h-6">
-								<AvatarImage src="https://cdn.discordapp.com/avatars/313963147432034306/a_6aa450a5db03c7b0d19c0e76ed0f76bf.gif" />
-							</Avatar>
-							<Typography variant="body2">개발자 문의하기</Typography>
-						</Row>
-					</Button>
-				</Link>
+				<DeveloperContactDialog />
 				<SupportersDialogButton />
 			</Row>
 

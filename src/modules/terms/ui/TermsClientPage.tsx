@@ -78,7 +78,7 @@ export const TermsClientPage = () => {
 
 				<PolicySection title="8. 문의처">
 					- 운영자: WolfDog (개발자)
-					<br />- 문의: #whitedog (디스코드 DM)
+					<br />- 문의: whitedog (디스코드 사용자명)
 				</PolicySection>
 
 				<PolicySection title="9. 약관의 변경">

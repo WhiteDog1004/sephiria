@@ -186,7 +186,7 @@ export const PrivacyClientPage = () => {
 				<PolicySection title="12. 개인정보 보호 책임자">
 					- 이름: WolfDog (개발자)
 					<br />- 이메일: baek_dog@naver.com
-					<br />- 디스코드: #whitedog (DM)
+					<br />- 디스코드: whitedog (사용자명)
 				</PolicySection>
 
 				<PolicySection title="13. 개인정보 침해 신고 및 상담">
