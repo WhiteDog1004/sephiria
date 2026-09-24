@@ -117,15 +117,17 @@ export const BuildsCard = ({
 									content={
 										<Box className="items-center h-full p-0">
 											{artifact?.slice(0, 2).map((item) => (
-												<ImageWithFallback
-													key={item.value}
-													className="p-0"
-													width={40}
-													height={40}
-													src={getCloudflareUrl(item.image)}
-													alt={item.value}
-													unoptimized
-												/>
+												<div key={item.value} className="relative shrink-0">
+													<ImageWithFallback
+														className={clsx("p-0", item.disabled && "opacity-40")}
+														width={40}
+														height={40}
+														src={getCloudflareUrl(item.image)}
+														alt={item.value}
+														unoptimized
+													/>
+													{item.disabled && <RemovedWeaponOverlay />}
+												</div>
 											))}
 										</Box>
 									}

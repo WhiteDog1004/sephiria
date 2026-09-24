@@ -13,7 +13,7 @@ import { Button, Column, Separator, Typography } from "@/src/shared";
 import type { AddBuildFormType } from "../model/formSchema";
 
 export const AddItems = (form: UseFormReturn<AddBuildFormType>) => {
-	const { data: artifacts } = useGetArtifacts();
+	const { data: artifacts } = useGetArtifacts({ includeDisabled: true });
 	const { fields, append, remove } = useFieldArray({
 		control: form.control,
 		name: "lists",

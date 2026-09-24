@@ -5,6 +5,7 @@ import { useGetArtifacts } from "@/src/entities/builds";
 import type { BuildRow } from "@/src/entities/builds/model/builds.types";
 import { highlightNumbers } from "@/src/entities/miracle";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
+import { RemovedWeaponOverlay as RemovedItemOverlay } from "@/src/entities/weapon/ui/RemovedWeaponOverlay";
 import { SETS_EFFECT_COUNT_LABEL } from "@/src/features/add-build/config/getSetsEffect";
 import { getSetEffectTiers } from "@/src/features/add-build/lib/getSetEffectTiers";
 import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
@@ -29,7 +30,7 @@ export const BuildArtifact = ({
 }: {
 	artifacts: BuildRow["content"];
 }) => {
-	const { data } = useGetArtifacts();
+	const { data } = useGetArtifacts({ includeDisabled: true });
 	const [isOpenTooltip, setIsOpenTooltip] = useState<string | undefined>(
 		undefined,
 	);
@@ -119,19 +120,23 @@ export const BuildArtifact = ({
 											>
 												<TooltipTrigger asChild>
 													<Box
-														className="w-max p-2 border rounded-lg"
+														className="relative w-max p-2 border rounded-lg"
 														onClick={() => {
 															setIsOpenTooltip(item.value + index + idx);
 														}}
 													>
 														<ImageWithFallback
-															className="w-12 h-12 object-contain p-0"
+															className={clsx(
+																"w-12 h-12 object-contain p-0",
+																findItem.disabled && "opacity-40",
+															)}
 															width={64}
 															height={64}
 															src={getCloudflareUrl(findItem.image || "/")}
 															alt={findItem.value}
 															unoptimized
 														/>
+														{findItem.disabled && <RemovedItemOverlay />}
 														{item.img}
 													</Box>
 												</TooltipTrigger>

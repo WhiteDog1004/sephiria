@@ -6,6 +6,7 @@ import { type UseFormReturn, useFieldArray } from "react-hook-form";
 import { toast } from "sonner";
 import type { ListItemType } from "@/src/entities/add-build/model/createBuild.types";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
+import { RemovedWeaponOverlay as RemovedItemOverlay } from "@/src/entities/weapon/ui/RemovedWeaponOverlay";
 import {
 	ARTIFACT_COMBO_FILTERS,
 	matchesArtifactCombo,
@@ -75,9 +76,13 @@ export const ItemsAddItems = ({
 
 	const deferredSearchKeyword = useDeferredValue(searchKeyword);
 	const normalizedSearchKeyword = deferredSearchKeyword.trim().toLowerCase();
+	const selectableArtifacts = useMemo(
+		() => artifacts.filter((item) => item.disabled !== true),
+		[artifacts],
+	);
 	const filteredItems = useMemo(
 		() =>
-			[...(artifacts ?? [])]
+			[...selectableArtifacts]
 				.sort(
 					(a, b) =>
 						getRarityValue(a.tier as Rarity) - getRarityValue(b.tier as Rarity),
@@ -94,7 +99,7 @@ export const ItemsAddItems = ({
 
 					return matchesSearch && matchesSets;
 				}),
-		[artifacts, normalizedSearchKeyword, selectedSets],
+		[normalizedSearchKeyword, selectableArtifacts, selectedSets],
 	);
 	const shouldAnimateResults =
 		normalizedSearchKeyword.length > 0 &&
@@ -162,8 +167,13 @@ export const ItemsAddItems = ({
 						<Column className="w-full gap-2">
 							<Drawer open={isOpen} onOpenChange={handleOpenChange}>
 								<Row className="grid grid-cols-[repeat(auto-fill,minmax(64px,1fr))] gap-2 items-center">
-									{fieldValue.map((list: ListItemType, index: number) => (
-										<Row key={list.id} className="relative w-max group">
+									{fieldValue.map((list: ListItemType, index: number) => {
+										const selectedArtifact = artifacts.find(
+											(item) => item.value === list.value,
+										);
+
+										return (
+											<Row key={list.id} className="relative w-max group">
 											<Button
 												onClick={() => {
 													setIsOpen(true);
@@ -172,17 +182,19 @@ export const ItemsAddItems = ({
 												type="button"
 												className={`w-16 h-16`}
 											>
-												<ImageWithFallback
-													className="min-w-12 max-w-12 max-h-12 p-0"
-													width={48}
-													height={48}
-													src={getCloudflareUrl(
-														artifacts?.find(
-															(item) => item.value === fieldValue[index].value,
-														)?.image || "/",
-													)}
-													alt={fieldValue[index].value}
-												/>
+												<div className="relative shrink-0">
+													<ImageWithFallback
+														className={clsx(
+															"min-w-12 max-w-12 max-h-12 p-0",
+															selectedArtifact?.disabled && "opacity-40",
+														)}
+														width={48}
+														height={48}
+														src={getCloudflareUrl(selectedArtifact?.image || "/")}
+														alt={list.value}
+													/>
+													{selectedArtifact?.disabled && <RemovedItemOverlay />}
+												</div>
 											</Button>
 											<Button
 												type="button"
@@ -194,8 +206,9 @@ export const ItemsAddItems = ({
 											>
 												<X className="text-red-500" />
 											</Button>
-										</Row>
-									))}
+											</Row>
+										);
+									})}
 									{fieldValue.length < 20 && (
 										<Button
 											onClick={() => {

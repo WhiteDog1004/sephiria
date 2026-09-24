@@ -156,7 +156,7 @@ export const BuildsClientPage = () => {
 	});
 	const { data: weapons } = useGetWeapons({ includeDisabled: true });
 	const { data: miracles } = useGetMiracles();
-	const { data: artifacts } = useGetArtifacts();
+	const { data: artifacts } = useGetArtifacts({ includeDisabled: true });
 
 	const totalPage = data?.count ? Math.ceil(data.count / PAGE_SIZE) : 0;
 	const isBuildListLoading = isLoading || (isFetching && !data);

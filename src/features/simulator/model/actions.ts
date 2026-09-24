@@ -1,5 +1,5 @@
-import type { Database } from "@/types_db";
 import artifactsJson from "@/src/entities/artifact/model/artifacts.json";
+import type { Database } from "@/types_db";
 
 type ArtifactRow = Database["public"]["Tables"]["artifacts"]["Row"];
 type ArtifactStaticRow = Omit<ArtifactRow, "disabled"> & {
@@ -13,12 +13,16 @@ const getArtifactRows = () => {
 	}));
 };
 
-export const getArtifactLists = async () => {
+export const getArtifactLists = async (
+	{ includeDisabled = false }: { includeDisabled?: boolean } = {},
+) => {
 	return getArtifactRows()
-		.filter((artifact) => artifact.disabled !== true)
+		.filter((artifact) => includeDisabled || artifact.disabled !== true)
 		.sort((a, b) => a.id - b.id);
 };
 
-export const getClientArtifactLists = async () => {
-	return getArtifactLists();
+export const getClientArtifactLists = async (
+	options: { includeDisabled?: boolean } = {},
+) => {
+	return getArtifactLists(options);
 };
