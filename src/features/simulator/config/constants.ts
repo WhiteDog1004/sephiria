@@ -41,3 +41,21 @@ export const EFFECT_LABELS: Record<string, string> = {
 	element: "원소",
 	alchemy: "연금술",
 };
+
+export const NO_COMBO_FILTER_VALUE = "none";
+
+export const ARTIFACT_COMBO_FILTERS = [
+	{ value: "all", label: "콤보 전체" },
+	{ value: NO_COMBO_FILTER_VALUE, label: "콤보없음" },
+	...Object.entries(EFFECT_LABELS).map(([value, label]) => ({ value, label })),
+];
+
+export const matchesArtifactCombo = (
+	sets: string[] | undefined,
+	selectedCombo: string,
+) => {
+	if (selectedCombo === "all") return true;
+	if (selectedCombo === NO_COMBO_FILTER_VALUE) return !sets?.length;
+
+	return sets?.includes(selectedCombo) ?? false;
+};

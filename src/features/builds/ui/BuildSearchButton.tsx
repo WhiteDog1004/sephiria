@@ -16,7 +16,11 @@ import {
 } from "@/src/entities/builds";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
 import type { WeaponRow } from "@/src/entities/weapon/model/types";
-import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
+import {
+	ARTIFACT_COMBO_FILTERS,
+	EFFECT_LABELS,
+	matchesArtifactCombo,
+} from "@/src/features/simulator/config/constants";
 import {
 	getRarityValue,
 	type Rarity,
@@ -149,13 +153,7 @@ const ArtifactSearchPicker = ({
 	const [selectIndex, setSelectIndex] = useState(0);
 
 	const effectData = useMemo(
-		() => [
-			{ value: "all", label: "콤보 전체" },
-			...Object.entries(EFFECT_LABELS).map(([value, label]) => ({
-				value,
-				label,
-			})),
-		],
+		() => ARTIFACT_COMBO_FILTERS,
 		[],
 	);
 
@@ -178,8 +176,10 @@ const ArtifactSearchPicker = ({
 					const matchesSearch = item.label_kor
 						.toLowerCase()
 						.includes(searchInput.toLowerCase());
-					const matchesSets =
-						selectedSets === "all" || item.effect.sets?.includes(selectedSets);
+					const matchesSets = matchesArtifactCombo(
+						item.effect.sets,
+						selectedSets,
+					);
 					return matchesSearch && matchesSets;
 				}),
 		[artifacts, searchInput, selectedSets],

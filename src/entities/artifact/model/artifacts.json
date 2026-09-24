@@ -369,7 +369,6 @@
 		"label_eng": "calges",
 		"tier": "advanced",
 		"effect": {
-			"sets": ["magic_engineering"],
 			"content": "[고유] 위치한 가로줄에 따라 견고, 잉걸불, 빙하, 마법공학 중 하나의 콤보가 부여됨\n부여된 콤보와 관련된 속성 피해 +2/4/6/8"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/calges_2.png",
@@ -837,22 +836,6 @@
 		"disabled": null
 	},
 	{
-		"id": 55,
-		"value": "ignition",
-		"label_kor": "발화 기름",
-		"label_eng": "ignition",
-		"tier": "advanced",
-		"effect": {
-			"sets": ["yinggalbul"],
-			"content": "[고유] 대검 소용돌이 시전 시 2.5타일 반경 내 불길 생성\n화염 속성 피해 +3/6/9/12\n얼음 속성 피해 -2/2/4/4\n대검 전용"
-		},
-		"image": "https://img.sephiria.wiki/artifacts/ignition.png",
-		"description": "발화 기름이 들어있는 통.",
-		"level": 3,
-		"created_at": "2025-08-06T10:05:55.437941+00:00",
-		"disabled": null
-	},
-	{
 		"id": 56,
 		"value": "shield_earring",
 		"label_kor": "방패 귀고리",
@@ -1293,7 +1276,7 @@
 		"tier": "advanced",
 		"effect": {
 			"sets": ["extrium"],
-			"content": "일반 공격, 대시 공격 적중 시 16.5/28.9/45.4/66% 확률로 먹구름을 즉시 1 소모 (재사용 대기시간: 1.2/0.9/0.8/0.6초)\n먹구름의 추가 피해량 +2/2/3/4%"
+			"content": "일반 공격, 대시 공격 적중 시 20/35/55/80% 확률로 먹구름을 즉시 1 소모 (재사용 대기시간: 1.2/0.9/0.8/0.6초)\n먹구름의 추가 피해량 +2/2/3/4%"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/leafy_leather.png",
 		"description": "알 수 없는 생명체의 가죽.\n특이한 문양이 그려져 있다.",
@@ -1378,22 +1361,6 @@
 		"disabled": null
 	},
 	{
-		"id": 92,
-		"value": "chakram",
-		"label_kor": "차크람",
-		"label_eng": "chakram",
-		"tier": "advanced",
-		"effect": {
-			"sets": ["precision"],
-			"content": "[고유] 주기적으로 주변을 공격하는 차크람 1/2/2/3/3개 발사(피해량: 15/15/22/22/30)"
-		},
-		"image": "https://img.sephiria.wiki/artifacts/chakram.png",
-		"description": "사탕수수 정도는 베어낼 수 있다.",
-		"level": 4,
-		"created_at": "2025-08-11T10:29:14.909237+00:00",
-		"disabled": null
-	},
-	{
 		"id": 94,
 		"value": "gap",
 		"label_kor": "축사의 검집",
@@ -1417,7 +1384,7 @@
 		"tier": "advanced",
 		"effect": {
 			"sets": ["precision"],
-			"content": "[고유] 일반 공격 시 16.5/20.6/24.8% 확률로 쿠나이를 발사\n[피해량: 10 (10+치명타 피해 20/25/30%)]"
+			"content": "[고유] 일반 공격 시 20/25/30% 확률로 쿠나이를 발사\n[피해량: 10 (10+치명타 피해 20/25/30%)]"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/kunai.png",
 		"description": "원예용으로 쓰기 참 좋지.\n-켄-",
@@ -1465,27 +1432,12 @@
 		"tier": "advanced",
 		"effect": {
 			"sets": ["spring_song"],
-			"content": "[고유] 일반 공격 시 12% 확률로 카드를 발사\n행운 1마다 발사 확률 0/0.6/1.2/1.8/2.4% 증가\n[피해량: 24]"
+			"content": "[고유] 일반 공격 시 10% 확률로 카드를 발사\n행운 1마다 발사 확률 0/0.5/1/1.5/2% 증가\n[피해량: 24]"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/palas_card.png",
 		"description": "어떻게 섞어도 스페이드가 맨 위로 올라온다.",
 		"level": 4,
 		"created_at": "2025-08-11T10:40:21.816323+00:00",
-		"disabled": null
-	},
-	{
-		"id": 99,
-		"value": "blue_pearl",
-		"label_kor": "푸른 진주",
-		"label_eng": "blue_pearl",
-		"tier": "advanced",
-		"effect": {
-			"content": "[고유] MP 흡수 +1/2/3/4\n3타일 밖의 피해를 준 적에게 침식 부여"
-		},
-		"image": "https://img.sephiria.wiki/artifacts/blue_pearl.png",
-		"description": "과거에 짠물이 가득하던 장소가 있었다.",
-		"level": 3,
-		"created_at": "2025-08-11T10:41:39.167614+00:00",
 		"disabled": null
 	},
 	{
@@ -1601,35 +1553,6 @@
 		"disabled": null
 	},
 	{
-		"id": 107,
-		"value": "flame_sword",
-		"label_kor": "화염 이극검",
-		"label_eng": "flame_sword",
-		"tier": "advanced",
-		"effect": {
-			"sets": ["yinggalbul"],
-			"content": "화상 상태의 적이 죽을 때 폭발하여 주변 3타일 범위에 7/14/21/28/35/42 피해"
-		},
-		"image": "https://img.sephiria.wiki/artifacts/flame_sword.png",
-		"description": "정령의 환심을 사기 위해 비효율적으로 제작되었습니다.",
-		"level": 5,
-		"created_at": "2025-08-11T10:51:38.401914+00:00",
-		"disabled": null
-	},
-	{
-		"id": 108,
-		"value": "waters",
-		"label_kor": "회복의 물줄기",
-		"label_eng": "waters",
-		"tier": "advanced",
-		"effect": { "content": "[고유] 회복의 물줄기 획득" },
-		"image": "https://img.sephiria.wiki/artifacts/waters.png",
-		"description": "회복의 물줄기 마법이 적혀있는 책.",
-		"level": 0,
-		"created_at": "2025-08-11T10:52:38.353117+00:00",
-		"disabled": null
-	},
-	{
 		"id": 109,
 		"value": "sword_earring",
 		"label_kor": "검 귀고리",
@@ -1675,19 +1598,6 @@
 		"description": "우리는 이렇게나 강하다.",
 		"level": 2,
 		"created_at": "2025-08-11T10:57:29.467478+00:00",
-		"disabled": null
-	},
-	{
-		"id": 112,
-		"value": "warning",
-		"label_kor": "경고 문서",
-		"label_eng": "warning",
-		"tier": "rare",
-		"effect": { "content": "[고유] 이동 속도 +4/8%" },
-		"image": "https://img.sephiria.wiki/artifacts/warning.webp",
-		"description": "상인연합 긴급 공문: 최근 동료가 의문의 동물에게 죽임을 당한 끔찍한 일이 일어났음. [닉네임]라는 이름의 동물을 조심하기를 바람.",
-		"level": 1,
-		"created_at": "2025-08-11T11:00:53.075501+00:00",
 		"disabled": null
 	},
 	{
@@ -1872,7 +1782,10 @@
 		"label_kor": "마법의 안경",
 		"label_eng": "magic_glasses",
 		"tier": "rare",
-		"effect": { "content": "[고유] 최대 MP +7/14/22/30\n회피 +3/6/9/12" },
+		"effect": {
+			"sets": ["shadow"],
+			"content": "[고유] 최대 MP +7/14/22/30\n회피 +3/6/9/12"
+		},
 		"image": "https://img.sephiria.wiki/artifacts/magic_glasses.png",
 		"description": "안경을 쓰면 현자 강아지가 보이게 됩니다.\n도움이 되지는 않습니다.",
 		"level": 3,
@@ -4000,7 +3913,7 @@
 		"value": "alchemist_flask",
 		"label_kor": "연금술사의 플라스크",
 		"label_eng": "alchemist_flask",
-		"tier": "rare",
+		"tier": "advanced",
 		"effect": {
 			"sets": ["alchemy"],
 			"content": "[고유] 포션을 마시면 15초 동안 모든 피해 증폭 +5/10/15 증가 버프 획득"
@@ -4247,7 +4160,7 @@
 		"label_eng": "apprentice_duelist_epaulet",
 		"tier": "common",
 		"effect": {
-			"sets": ["precision"],
+			"sets": ["firmness"],
 			"content": "[고유] 특수 공격: 패리 성공 시 가장 가까운 적에게 검 영혼 발사\n[피해량: 가장 높은 속성 피해의 250% 혼돈 피해]\n특수 공격: 패리 40회 성공 시 결투가의 견장으로 변함\n단검 전용"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/apprentice_duelist_epaulet.png",
@@ -4264,7 +4177,7 @@
 		"tier": "advanced",
 		"effect": {
 			"sets": ["element"],
-			"content": "[고유] 가장 높은 속성 피해 +2/4/6/8\n이동 속도가 140% 이상이 되면 공명석으로 변함\n공명석: 가장 높은 속성 피해 +8/10/12/14"
+			"content": "[고유] 가장 높은 속성 피해 +2/4/6/8\n이동 속도가 140% 이상이 되면 공명석으로 변함"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/dull_resonance_stone.png",
 		"description": "아직 울림이 무디다. 질주하는 심장 박동에 공명해 깨어난다고 한다.",
@@ -4359,7 +4272,7 @@
 		"label_eng": "duelist_epaulet",
 		"tier": "advanced",
 		"effect": {
-			"sets": ["precision"],
+			"sets": ["firmness"],
 			"content": "[고유] 다음 상황에서 가장 가까운 적에게 검 영혼 발사\n- 특수 공격: 패리 성공\n- 특수 공격: 퓨리 적중\n- 일반 공격 마지막 연격 적중\n[피해량: 가장 높은 속성 피해의 350% 혼돈 피해]\n단검 전용"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/duelist_epaulet.png",
@@ -4398,6 +4311,38 @@
 		"description": "완벽한 방어를 증명한 자에게만 빛나는 문장.",
 		"level": 2,
 		"created_at": "2026-09-11T00:00:00+00:00",
+		"disabled": null
+	},
+	{
+		"id": 286,
+		"value": "counterattack_bracelet",
+		"label_kor": "반격의 팔찌",
+		"label_eng": "counterattack_bracelet",
+		"tier": "advanced",
+		"effect": {
+			"sets": ["firmness"],
+			"content": "[고유] 퍼펙트 가드 시 7초간 모든 피해 증폭 +4/8/12% 증가\n봉 전용"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/counterattack_bracelet.png",
+		"description": "늘 긴장의 끈을 놓지 말 것.",
+		"level": 2,
+		"created_at": "2026-09-24T00:00:00+00:00",
+		"disabled": null
+	},
+	{
+		"id": 287,
+		"value": "resonance_stone",
+		"label_kor": "공명석",
+		"label_eng": "resonance_stone",
+		"tier": "legend",
+		"effect": {
+			"sets": ["element"],
+			"content": "[고유] 가장 높은 속성 피해 +8/10/12/14"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/resonance_stone.png",
+		"description": null,
+		"level": 3,
+		"created_at": "2026-09-24T00:00:00+00:00",
 		"disabled": null
 	}
 ]

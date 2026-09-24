@@ -6,6 +6,7 @@ import {
 	matchesArtifactOptionFilter,
 } from "@/src/entities/artifact/model/artifactOptionFilters";
 import { ArtifactList } from "@/src/features/artifact/ui/ArtifactList";
+import { matchesArtifactCombo } from "@/src/features/simulator/config/constants";
 import { SearchItems } from "@/src/features/simulator/ui/SearchItems";
 import { AdSenseHorizontal } from "@/src/shared";
 import { SectionHeader } from "@/src/shared/components/section-header";
@@ -39,8 +40,10 @@ export const ArtifactLists = ({ data }: ArtifactProps) => {
 					item.value.toLowerCase().includes(normalizedSearchInput);
 				const matchesTier =
 					selectedTier === "all" || item.tier === selectedTier;
-				const matchesSets =
-					selectedSets === "all" || item.effect.sets?.includes(selectedSets);
+				const matchesSets = matchesArtifactCombo(
+					item.effect.sets,
+					selectedSets,
+				);
 				const matchesOptions =
 					selectedArtifactOptions.length === 0 ||
 					selectedArtifactOptions.every((selectedOption) => {

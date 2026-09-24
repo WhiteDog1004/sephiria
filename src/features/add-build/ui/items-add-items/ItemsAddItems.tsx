@@ -6,7 +6,10 @@ import { type UseFormReturn, useFieldArray } from "react-hook-form";
 import { toast } from "sonner";
 import type { ListItemType } from "@/src/entities/add-build/model/createBuild.types";
 import type { ArtifactInstance } from "@/src/entities/simulator/types";
-import { EFFECT_LABELS } from "@/src/features/simulator/config/constants";
+import {
+	ARTIFACT_COMBO_FILTERS,
+	matchesArtifactCombo,
+} from "@/src/features/simulator/config/constants";
 import {
 	getRarityValue,
 	type Rarity,
@@ -68,16 +71,7 @@ export const ItemsAddItems = ({
 		name: `lists.${index}.items`,
 	});
 
-	const effectOptions = useMemo(
-		() => [
-			{ value: "all", label: "콤보 전체" },
-			...Object.entries(EFFECT_LABELS).map(([value, label]) => ({
-				value,
-				label,
-			})),
-		],
-		[],
-	);
+	const effectOptions = useMemo(() => ARTIFACT_COMBO_FILTERS, []);
 
 	const deferredSearchKeyword = useDeferredValue(searchKeyword);
 	const normalizedSearchKeyword = deferredSearchKeyword.trim().toLowerCase();
@@ -93,8 +87,10 @@ export const ItemsAddItems = ({
 						!normalizedSearchKeyword ||
 						item.label_kor.toLowerCase().includes(normalizedSearchKeyword) ||
 						item.value.toLowerCase().includes(normalizedSearchKeyword);
-					const matchesSets =
-						selectedSets === "all" || item.effect.sets?.includes(selectedSets);
+					const matchesSets = matchesArtifactCombo(
+						item.effect.sets,
+						selectedSets,
+					);
 
 					return matchesSearch && matchesSets;
 				}),

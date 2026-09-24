@@ -20,7 +20,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/src/shared/ui/select";
-import { EFFECT_LABELS, TIER_DATA } from "../config/constants";
+import { ARTIFACT_COMBO_FILTERS, TIER_DATA } from "../config/constants";
 
 interface SearchItemsProps {
 	type: "slabs" | "artifact";
@@ -56,13 +56,6 @@ export const SearchItems = ({
 		[setSearchInput],
 	);
 
-	const EFFECT_DATA = [
-		{ value: "all", label: "콤보 전체" },
-		...Object.entries(EFFECT_LABELS).map(([value, label]) => ({
-			value,
-			label,
-		})),
-	];
 	const selectedArtifactOptionFilters = artifactOptionFilters?.filter(
 		(option) => selectedArtifactOptions.includes(option.value),
 	);
@@ -77,7 +70,7 @@ export const SearchItems = ({
 								<SelectValue placeholder="콤보 선택" />
 							</SelectTrigger>
 							<SelectContent>
-								{EFFECT_DATA.map((sets) => (
+								{ARTIFACT_COMBO_FILTERS.map((sets) => (
 									<SelectItem key={sets.value} value={sets.value}>
 										{sets.label}
 									</SelectItem>

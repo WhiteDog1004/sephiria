@@ -26,7 +26,10 @@ import type {
 	SlabsOptions,
 	SlotId,
 } from "@/src/entities/simulator/types";
-import { TABS_LIST } from "@/src/features/simulator/config/constants";
+import {
+	matchesArtifactCombo,
+	TABS_LIST,
+} from "@/src/features/simulator/config/constants";
 import { ITEM_SLABS_DATA } from "@/src/features/simulator/config/slabsLists";
 import {
 	getRarityValue,
@@ -278,8 +281,10 @@ const Inventory = ({ data }: InventoryProps) => {
 				.toLowerCase()
 				.includes(searchInput.toLowerCase());
 			const matchesTier = selectedTier === "all" || item.tier === selectedTier;
-			const matchesSets =
-				selectedSets === "all" || item.effect.sets?.includes(selectedSets);
+			const matchesSets = matchesArtifactCombo(
+				item.effect.sets,
+				selectedSets,
+			);
 			return matchesSearch && matchesTier && matchesSets;
 		});
 
