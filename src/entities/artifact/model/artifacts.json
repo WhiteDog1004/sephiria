@@ -55,7 +55,7 @@
 		"tier": "common",
 		"effect": {
 			"sets": ["magic_engineering"],
-			"content": "[고유] 라이트닝 볼트 획득"
+			"content": "[고유] 스킬 라이트닝 볼트 획득"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/lightning_bolt.png",
 		"description": "라이트닝 볼트 마법이 적혀있는 책.",
@@ -159,7 +159,7 @@
 		"label_kor": "보호막",
 		"label_eng": "shield",
 		"tier": "common",
-		"effect": { "sets": ["guardian"], "content": "[고유] 보호막 획득" },
+		"effect": { "sets": ["guardian"], "content": "[고유] 스킬 보호막 획득" },
 		"image": "https://img.sephiria.wiki/artifacts/shield.webp",
 		"description": "보호막 마법이 적혀있는 책.",
 		"level": 1,
@@ -188,7 +188,7 @@
 		"label_kor": "아이스 볼트",
 		"label_eng": "ice_bolt",
 		"tier": "common",
-		"effect": { "sets": ["glacier"], "content": "[고유] 아이스 볼트 획득" },
+		"effect": { "sets": ["glacier"], "content": "[고유] 스킬 아이스 볼트 획득" },
 		"image": "https://img.sephiria.wiki/artifacts/ice_bolt.png",
 		"description": "아이스 볼트 마법이 적혀있는 책.",
 		"level": 1,
@@ -233,7 +233,7 @@
 		"label_kor": "연막",
 		"label_eng": "smoke_screen",
 		"tier": "common",
-		"effect": { "sets": ["shadow"], "content": "[고유] 연막 획득" },
+		"effect": { "sets": ["shadow"], "content": "[고유] 스킬 연막 획득" },
 		"image": "https://img.sephiria.wiki/artifacts/smoke_screen.png",
 		"description": "연막 마법이 적혀있는 책.",
 		"level": 0,
@@ -355,7 +355,7 @@
 		"label_kor": "축복",
 		"label_eng": "blessing",
 		"tier": "common",
-		"effect": { "content": "[고유] 축복 획득" },
+		"effect": { "content": "[고유] 스킬 축복 획득" },
 		"image": "https://img.sephiria.wiki/artifacts/blessing.png",
 		"description": "축복 마법이 적혀있는 책.",
 		"level": 2,
@@ -398,7 +398,7 @@
 		"tier": "common",
 		"effect": {
 			"sets": ["yinggalbul"],
-			"content": "[고유] 파이어 볼트 획득"
+			"content": "[고유] 스킬 파이어 볼트 획득"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/fire_bolt.png",
 		"description": "파이어 볼트 마법이 적혀있는 책.",
@@ -652,7 +652,7 @@
 		"label_kor": "대축복",
 		"label_eng": "great_blessing",
 		"tier": "advanced",
-		"effect": { "sets": ["mystery"], "content": "[고유] 대축복 획득" },
+		"effect": { "sets": ["mystery"], "content": "[고유] 스킬 대축복 획득" },
 		"image": "https://img.sephiria.wiki/artifacts/great_blessing.png",
 		"description": "대축복 마법이 적혀있는 책.",
 		"level": 2,
@@ -891,7 +891,7 @@
 		"tier": "advanced",
 		"effect": {
 			"sets": ["magic_engineering"],
-			"content": "[고유] 번개 부메랑 획득"
+			"content": "[고유] 스킬 번개 부메랑 획득"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/lightningboomerang.png",
 		"description": "번개 부메랑 마법이 적혀있는 책.",
@@ -1065,7 +1065,7 @@
 		"label_kor": "샤프 아이",
 		"label_eng": "sharp_eye",
 		"tier": "advanced",
-		"effect": { "sets": ["precision"], "content": "[고유] 샤프 아이 획득" },
+		"effect": { "sets": ["precision"], "content": "[고유] 스킬 샤프 아이 획득" },
 		"image": "https://img.sephiria.wiki/artifacts/sharp_eye.png",
 		"description": "샤프 아이 마법이 적혀있는 책.",
 		"level": 2,
@@ -1078,7 +1078,7 @@
 		"label_kor": "서리 단검",
 		"label_eng": "frost_dagger",
 		"tier": "advanced",
-		"effect": { "sets": ["glacier"], "content": "[고유] 서리 단검 획득" },
+		"effect": { "sets": ["glacier"], "content": "[고유] 스킬 서리 단검 획득" },
 		"image": "https://img.sephiria.wiki/artifacts/frost_dagger.png",
 		"description": "서리 단검 마법이 적혀있는 책.",
 		"level": 4,
@@ -1448,7 +1448,7 @@
 		"tier": "advanced",
 		"effect": {
 			"sets": ["yinggalbul"],
-			"content": "[고유] 파이어 애로우 획득"
+			"content": "[고유] 스킬 파이어 애로우 획득"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/fire_arrow.png",
 		"description": "파이어 애로우 마법이 적혀있는 책.",
@@ -1527,7 +1527,7 @@
 		"tier": "advanced",
 		"effect": {
 			"sets": ["spring_song"],
-			"content": "[고유] 헤이스트 획득"
+			"content": "[고유] 스킬 헤이스트 획득"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/haste.png",
 		"description": "헤이스트 마법이 적혀있는 책.",
@@ -2017,7 +2017,7 @@
 		"tier": "rare",
 		"effect": {
 			"sets": ["yinggalbul"],
-			"content": "[고유] 불 서커스 획득"
+			"content": "[고유] 스킬 불 서커스 획득"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/fire_circus.png",
 		"description": "불 서커스 마법이 적혀있는 책.",
@@ -2159,7 +2159,7 @@
 		"label_kor": "애로우 레인",
 		"label_eng": "arrow_lane",
 		"tier": "rare",
-		"effect": { "sets": ["glacier"], "content": "[고유] 애로우 레인 획득" },
+		"effect": { "sets": ["glacier"], "content": "[고유] 스킬 애로우 레인 획득" },
 		"image": "https://img.sephiria.wiki/artifacts/arrow_lane.png",
 		"description": "애로우 레인 마법이 적혀있는 책.",
 		"level": 3,
@@ -2318,7 +2318,7 @@
 		"tier": "rare",
 		"effect": {
 			"sets": ["magic_engineering"],
-			"content": "[고유] 천둥 갑옷 획득"
+			"content": "[고유] 스킬 천둥 갑옷 획득"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/thunder.png",
 		"description": "천둥 갑옷 마법이 적혀있는 책.",
@@ -2621,7 +2621,7 @@
 		"tier": "legend",
 		"effect": {
 			"sets": ["yinggalbul"],
-			"content": "[고유] 메테오 샤워 획득"
+			"content": "[고유] 스킬 메테오 샤워 획득"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/meteor_shower.png",
 		"description": "메테오 샤워 마법이 적혀있는 책.",

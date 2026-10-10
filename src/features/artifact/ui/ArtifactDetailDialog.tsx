@@ -19,6 +19,7 @@ import {
 	Typography,
 } from "@/src/shared";
 import { getCloudflareUrl } from "@/src/shared/utils/image";
+import { GrantedSkillPreview } from "./GrantedSkillPreview";
 
 const TIER_LABEL_MAP: Record<string, string> = {
 	common: "일반",
@@ -78,7 +79,7 @@ export const ArtifactDetailDialog = ({
 				className="w-[calc(100%-1rem)] max-w-4xl p-0 border-slate-700 bg-slate-900 text-slate-100"
 			>
 				<div className="max-h-[85vh] overflow-y-auto">
-					<Column className="p-4 md:p-6 gap-6">
+					<Column className="w-full min-w-0 p-4 md:p-6 gap-6">
 						<DialogTitle className="sr-only">{item.label_kor}</DialogTitle>
 						<Row className="items-start gap-4 md:gap-6 flex-col md:flex-row">
 							<Box className="relative p-0 w-24 h-24 md:w-32 md:h-32 rounded-xl border border-slate-700 bg-slate-800 shrink-0 overflow-hidden">
@@ -145,16 +146,19 @@ export const ArtifactDetailDialog = ({
 							</Column>
 						</Row>
 
-						<Column className="items-start p-0 gap-2">
+						<Column className="w-full items-start p-0 gap-2">
 							<Typography variant="body" className="font-semibold text-sky-300">
 								아이템 효과
 							</Typography>
 							<Box className="w-full p-4 rounded-xl border border-slate-700 bg-slate-800/70 justify-start">
-								<FormattedEffectContent content={item.effect.content} />
+								<div className="w-full min-w-0">
+									<FormattedEffectContent content={item.effect.content} />
+									<GrantedSkillPreview artifact={item} />
+								</div>
 							</Box>
 						</Column>
 
-						<Column className="items-start p-0 gap-2">
+						<Column className="w-full items-start p-0 gap-2">
 							<Typography variant="body" className="font-semibold text-sky-300">
 								콤보 효과
 							</Typography>
