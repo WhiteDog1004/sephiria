@@ -660,6 +660,31 @@ export const getSlabsEffectHandlers: Record<string, EffectHandler> = {
 		}
 	},
 
+	// growth 생장
+	growth: (_, y, __, ___, effects, _____, gridConfig) => {
+		if (!gridConfig) return;
+
+		const lastRowConfig = gridConfig[gridConfig.length - 1];
+		if (y !== lastRowConfig.rows) return;
+
+		const topRowConfig = gridConfig[0];
+		for (let colIndex = 0; colIndex < topRowConfig.cols; colIndex++) {
+			const targetSlotId = `${topRowConfig.rows}-${colIndex}`;
+			if (typeof effects[targetSlotId] === "number") {
+				effects[targetSlotId] += 1;
+			}
+		}
+	},
+
+	// echo 반향
+	echo: (x, y, _, __, effects) => {
+		const baseOffsets = [
+			{ dx: 0, dy: 1 },
+			{ dx: 0, dy: 2, value: 3 },
+		];
+		return calculateRotatedEffects(baseOffsets, x, y, effects);
+	},
+
 	// LEGEND
 	// thorn 가시
 	thorn: (x, y, __, item, effects) => {

@@ -23,6 +23,7 @@ export const SlabEffectTooltip = ({ slab }: SlabEffectTooltipProps) => {
 	const calculatedEffects = useMemo(() => {
 		const SIMULATION_POSITIONS: Record<string, { x: number; y: number }> = {
 			linear: { x: 2, y: 4 },
+			growth: { x: 2, y: 4 },
 			shade: { x: 2, y: 0 },
 			justice: { x: 0, y: 2 },
 			compression: { x: 2, y: 3 },

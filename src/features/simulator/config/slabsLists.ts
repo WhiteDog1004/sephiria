@@ -159,6 +159,7 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		ko_label: "분배",
 		eng_label: "distribution",
 		image: "/slabs/distribution.png",
+		rotate: true,
 	},
 	{
 		value: "triceps",
@@ -397,6 +398,21 @@ export const ITEM_SLABS_DATA: SlabsData[] = [
 		ko_label: "차양",
 		eng_label: "shade",
 		image: "/slabs/shade.png",
+	},
+	{
+		value: "growth",
+		tier: "rare",
+		ko_label: "생장",
+		eng_label: "growth",
+		image: "/slabs/growth.png",
+		activationCondition: "[위치] 최하단",
+	},
+	{
+		value: "echo",
+		tier: "rare",
+		ko_label: "반향",
+		eng_label: "echo",
+		image: "/slabs/echo.png",
 	},
 	{
 		value: "wedge",

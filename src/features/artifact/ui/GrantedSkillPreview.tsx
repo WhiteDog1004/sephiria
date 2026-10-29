@@ -509,6 +509,25 @@ const GRANTED_SKILLS: Partial<Record<string, GrantedSkill>> = {
 			],
 		})),
 	},
+	ice_storm: {
+		name: "얼음 폭풍",
+		stages: (
+			[
+				[28, 70],
+				[31, 85],
+				[34, 100],
+				[37, 115],
+				[37, 130],
+			] as const
+		).map(([mpCost, iceDamage]) => ({
+			description: "적을 쫓으며 주위를 계속 공격하는 얼음 폭풍을 6초 동안 소환",
+			iconValue: 22,
+			mpCost,
+			statLabel: "피해량",
+			statValue: 5,
+			statAccent: `얼음속성 피해 ${iceDamage}%`,
+		})),
+	},
 	lightning_boomerang: {
 		name: "번개 부메랑",
 		stages: [

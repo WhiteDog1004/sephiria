@@ -109,11 +109,19 @@ export const ArtifactDetailDialog = ({
 											</Typography>
 										</Row>
 									))}
+									{setKeys.length === 0 && (
+										<Typography
+											variant="caption"
+											className="px-2 py-1 rounded-md bg-indigo-500/20 text-indigo-200 border border-indigo-300/30"
+										>
+											콤보 없음
+										</Typography>
+									)}
 									<Typography
 										variant="caption"
 										className="px-2 py-1 rounded-md bg-slate-700 text-amber-200"
 									>
-										{renderStar(item.level || 0)}
+										{renderStar(item.level || 0) || "레벨 없음"}
 									</Typography>
 								</Row>
 								<Row className="items-center gap-2 p-0 flex-wrap">
@@ -222,7 +230,7 @@ export const ArtifactDetailDialog = ({
 							) : (
 								<Box className="w-full p-4 rounded-xl border border-slate-700 bg-slate-800/70 justify-start">
 									<Typography variant="body2" className="text-slate-400">
-										연결된 콤보 세트가 없습니다.
+										콤보 없음
 									</Typography>
 								</Box>
 							)}

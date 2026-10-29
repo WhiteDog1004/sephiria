@@ -683,7 +683,7 @@
 		"tier": "advanced",
 		"effect": {
 			"sets": ["firmness"],
-			"content": "[고유] 카운터: 가드 시 전방으로 짧은 근접 공격 생성함 (물리 피해의 100/200/310/440/580/720%)\n봉 전용"
+			"content": "[고유] 카운터: 가드 시 전방으로 짧은 근접 공격 생성함 (물리 피해의 50/100/170/260/380/550%)\n봉 전용"
 		},
 		"image": "https://img.sephiria.wiki/artifacts/lip_stick.png",
 		"description": "소유자의 움직임을 방해하지 않는 정교한 봉 파편.",
@@ -4432,6 +4432,53 @@
 		"description": null,
 		"level": 3,
 		"created_at": "2026-09-24T00:00:00+00:00",
+		"disabled": null
+	},
+	{
+		"id": 288,
+		"value": "ice_storm",
+		"label_kor": "얼음 폭풍",
+		"label_eng": "ice_storm",
+		"tier": "legend",
+		"effect": {
+			"sets": ["glacier"],
+			"content": "[고유] 스킬 얼음 폭풍 획득"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/ice_storm.png",
+		"description": "얼음 폭풍 마법이 적혀 있는 책.",
+		"level": 4,
+		"created_at": "2026-10-30T00:00:00+00:00",
+		"disabled": null
+	},
+	{
+		"id": 289,
+		"value": "wagners_glass_bottle",
+		"label_kor": "바그너의 유리병",
+		"label_eng": "wagners_glass_bottle",
+		"tier": "rare",
+		"effect": {
+			"sets": ["alchemy"],
+			"content": "[고유] 소지한 포션 하나당 모든 피해 증폭 +1/1/1/2% 증가"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/wagners_glass_bottle.png",
+		"description": "육체를 갈망하는 영혼이 들어 있습니다",
+		"level": 3,
+		"created_at": "2026-10-30T00:00:00+00:00",
+		"disabled": null
+	},
+	{
+		"id": 290,
+		"value": "breakthrough_compass",
+		"label_kor": "돌파의 나침반",
+		"label_eng": "breakthrough_compass",
+		"tier": "legend",
+		"effect": {
+			"content": "- 아래에 이어진 침의 효과를 등급 조건 없이 윗 칸에 전달\n- 직접 피해를 주는 아티팩트에만 적용\n- 소원 분수에서 선택 불가"
+		},
+		"image": "https://img.sephiria.wiki/artifacts/breakthrough_compass.png?v=20261030",
+		"description": "격을 가리지 않고 북쪽을 꿰뚫는 침을 품은 나침반.",
+		"level": 0,
+		"created_at": "2026-10-30T00:00:00+00:00",
 		"disabled": null
 	}
 ]
