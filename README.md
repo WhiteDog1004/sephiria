@@ -9,10 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://sephiria.wiki">서비스 바로가기</a> ·
-  <a href="https://sephiria.wiki/builds">빌드 공유</a> ·
-  <a href="https://sephiria.wiki/simulator">인벤토리 시뮬레이터</a> ·
-  <a href="https://sephiria.wiki/stats">빌드 통계</a>
+  <a href="https://sephiria.wiki">서비스 바로가기</a>
 </p>
 
 <p align="center">
@@ -54,8 +51,6 @@
 
 ### 1. 인벤토리 시뮬레이터
 
-**[직접 체험하기](https://sephiria.wiki/simulator)**
-
 게임의 인벤토리 메커니즘을 웹에서 실험할 수 있는 인터랙티브 시뮬레이터입니다.
 
 - `@dnd-kit/core`를 이용해 석판과 아티팩트의 **배치, 이동, 교환, 삭제**를 지원합니다.
@@ -64,11 +59,7 @@
 - 석판 배치에 따른 **아티팩트 최종 레벨과 효과 설명**을 실시간으로 반영합니다.
 - 슬롯 수 조절, 아이템 검색·필터, **인벤토리 이미지 저장** 기능을 제공합니다.
 
-**관련 코드:** [인벤토리 UI](./src/modules/simulator/ui/Inventory.tsx) · [효과 계산 훅](./src/features/simulator/model/useSlabsEffects.tsx) · [석판별 효과 핸들러](./src/features/simulator/config/getSlabsEffect.ts)
-
 ### 2. 빌드 공유 및 검색
-
-**[직접 체험하기](https://sephiria.wiki/builds)**
 
 이용자가 자신의 플레이 구성을 기록하고, 다른 사람의 빌드를 검색·비교할 수 있는 사용자 생성 콘텐츠(UGC) 기능입니다.
 
@@ -79,22 +70,14 @@
 - **React Hook Form + Zod**로 빌드 입력값과 재능 포인트 검증
 - **Tiptap** 기반 서식 편집, 이미지 첨부, 게임 내 프리셋 코드 저장 및 열람
 
-**관련 코드:** [빌드 목록](./src/modules/builds/ui/BuildsClientPage.tsx) · [URL 상태 동기화](./src/modules/builds/model/useSyncBuildQueryState.ts) · [입력 스키마](./src/modules/add-build/model/formSchema.ts)
-
 ### 3. 빌드 통계
 
-**[직접 체험하기](https://sephiria.wiki/stats)**
-
 공유된 빌드 데이터를 기반으로 캐릭터·무기·기적·아티팩트·재능·콤보의 **사용 빈도 및 비율**을 시각화합니다. 통계 항목을 선택하면 해당 조건의 빌드 검색으로 이어지도록 연결했습니다.
-
-**관련 코드:** [통계 화면](./src/modules/stats/ui/StatsClientPage.tsx) · [통계 조회](./src/entities/stats/api/getBuildItemUsageStats.ts)
 
 ### 4. 석판 퍼즐과 게임 데이터 도감
 
 - **[석판 퍼즐](https://sephiria.wiki/slab-puzzle):** 시뮬레이터의 석판 효과 로직을 재사용해 **3단계 제한 시간 퍼즐**과 로그인 사용자 랭킹을 구현했습니다.
 - **게임 정보 도감:** 캐릭터(코스튬), 무기, 기적, 아티팩트, 석판, 재능, 콤보 정보를 탐색할 수 있는 화면을 제공합니다.
-
-**관련 코드:** [퍼즐 게임](./src/modules/slab-puzzle/ui/SlabPuzzleGame.tsx) · [랭킹 API](./src/app/api/slab-puzzle/rankings/route.ts)
 
 ---
 
@@ -111,8 +94,6 @@
 
 **결과:** 사용자 인터랙션과 게임 규칙 계산을 분리해, 석판 종류가 늘어나더라도 효과 로직을 개별적으로 관리할 수 있는 구조를 만들었습니다.
 
-**코드:** [좌표 회전·효과 계산](./src/features/simulator/lib/calculateEffects.ts) · [상태와 파생 값 계산](./src/features/simulator/model/useSlabsEffects.tsx)
-
 ### 02. 검색 경험과 데이터 조회 비용을 함께 고려
 
 **문제:** 빌드 검색 조건이 늘어나면 화면 상태와 URL이 어긋나기 쉽고, 여러 사용자가 동일한 목록을 조회하면서 데이터베이스 요청이 반복될 수 있습니다.
@@ -124,8 +105,6 @@
 - 빌드 등록·수정·삭제·좋아요 변경 시 **`revalidateTag`**로 관련 목록 및 상세 데이터 캐시를 무효화했습니다.
 
 **결과:** 여러 필터 조합을 공유 가능한 URL로 유지하면서, 캐시 재사용과 변경 데이터 반영을 함께 고려한 조회 구조를 구현했습니다.
-
-**코드:** [검색 상태 동기화](./src/modules/builds/model/useSyncBuildQueryState.ts) · [쿼리 및 캐시](./src/entities/builds/api/buildsCache.ts) · [빌드 API](./src/app/api/builds/route.ts)
 
 ### 03. 이용자 작성 콘텐츠의 안전성과 이미지 관리
 
@@ -139,16 +118,12 @@
 
 **결과:** 작성 경험을 확장하면서도 서버 측 권한 검증과 저장소 정리 흐름을 유지했습니다.
 
-**코드:** [게시글 수정·삭제 API](./src/app/api/builds/%5Bid%5D/route.ts) · [HTML 정제](./src/shared/model/buildDescriptionHtml.ts) · [이미지 업로드](./src/features/add-build/lib/buildImageUpload.ts)
-
 ### 04. 서비스 운영을 고려한 정적 리소스와 검색 노출
 
 - 게임 이미지의 제공 경로를 **Cloudflare R2 기반 에셋 도메인**으로 분리하고, 기존 이미지 URL도 대응하도록 변환 유틸리티를 구성했습니다.
 - 정적 파일에 **장기 브라우저 캐시 헤더**를 적용했습니다.
 - 빌드 상세 페이지별 **메타데이터·Open Graph·canonical URL**, 게시글을 포함하는 **동적 sitemap.xml**을 제공했습니다.
 - **Vercel** 배포 환경에서 서비스를 운영하고, Google Analytics와 AdSense를 연동했습니다.
-
-**코드:** [이미지 URL 처리](./src/shared/utils/image.ts) · [캐시 헤더](./next.config.ts) · [동적 사이트맵](./src/app/sitemap.xml/route.ts) · [메타데이터](./src/app/builds/%5Bid%5D/page.tsx)
 
 ---
 
@@ -180,30 +155,6 @@ src/
 lib/supabase/   # 브라우저·서버 Supabase 클라이언트
 supabase/       # Supabase Edge Functions
 ```
-
-## 로컬 실행
-
-```bash
-git clone https://github.com/WhiteDog1004/sephiria.git
-cd sephiria
-npm install
-```
-
-프로젝트 루트에 `.env.local`을 만들고 **개발용 Supabase 프로젝트**의 설정을 입력합니다.
-
-```dotenv
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-NEXT_SUPABASE_SERVICE_ROLE=
-NEXT_PUBLIC_GAME_VERSION=0.0.0
-NEXT_PUBLIC_ASSET_BASE_URL=https://img.sephiria.wiki
-```
-
-```bash
-npm run dev
-```
-
-> DB 테이블, Storage 버킷, 인증 제공자 등 Supabase 리소스의 별도 구성이 필요합니다. 서비스 역할 키(`NEXT_SUPABASE_SERVICE_ROLE`)는 **서버 전용 비밀값**이며 저장소나 클라이언트 코드에 노출해서는 안 됩니다.
 
 ---
 
