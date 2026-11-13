@@ -19,7 +19,7 @@ import {
 } from "@/src/shared";
 import { SectionHeader } from "@/src/shared/components/section-header";
 import { getCloudflareUrl } from "@/src/shared/utils/image";
-import { parseColoredString } from "../../../shared/utils/parseColoredString";
+import { WeaponEffectText } from "@/src/entities/weapon/ui/WeaponEffectText";
 
 const getWeaponBuildSearchHref = (weapon: string) => {
 	const params = new URLSearchParams({
@@ -202,7 +202,7 @@ export const WeaponList = ({ data }: { data: WeaponOptions[] }) => {
 												variant="body2"
 												className="text-start whitespace-pre-line ml-2"
 											>
-												{parseColoredString(reward)}
+												<WeaponEffectText text={reward} />
 											</Typography>
 										</li>
 									))

@@ -237,7 +237,7 @@
 		"effects": {
 			"reward": [
 				"$d대시 공격$이 비활성화되고, $s일반 공격$이 $d대시 공격$ 판정으로 변경됩니다. $f공격 속도$가 10% 증가합니다.",
-				"찌르기 범위가 더 길어집니다. $f공격 속도$가 20% 증가합니다."
+				"찌르기 범위가 더 길어집니다. 찌르기에 $n일반 공격 피해$ 보너스도 적용됩니다."
 			]
 		},
 		"disabled": null
@@ -2680,6 +2680,57 @@
 			"reward": [
 				"$s특수 공격: 소용돌이$ 충전 시간이 100% 증가하지만,\n$n일반 공격 피해$가 20% 증가합니다.",
 				"공격마다 $s연참$을 1스택 획득합니다.\n$s일반 공격$ 2타 중 $s특수 공격$ 사용 시 '$s연속 베기$'를 사용합니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-11-14T00:00:00+00:00",
+		"uuid": "a4f0e815-3f42-4a69-a4ca-ecb2152d6d61",
+		"id": 183,
+		"value": "insight_rapier",
+		"value_kor": "간파의 레이피어",
+		"tier": 3,
+		"parent": "rapier",
+		"image": "https://img.sephiria.wiki/weapons/insight_rapier.png",
+		"effects": {
+			"reward": [
+				"$d대시 공격$이 비활성화되고, $s일반 공격$이 $d대시 공격$ 판정으로 변경됩니다. $f공격 속도$가 10% 증가합니다.",
+				"디버프 피해를 제외한 피해를 가할 때 60% 확률로 $p템포 상실$을 부여합니다.\n\n## 템포 상실 (디버프)\n- 4중첩 시 $p무방비$로 바뀝니다. (5초 지속)\n\n## 무방비 (디버프)\n- 8초간 네 방향에 약점이 드러납니다.\n- 무기 공격으로 약점이 있는 방향을 공격하면 약점이 터집니다.\n- 가장 높은 속성 피해 수치의 270%만큼 혼돈 피해를 입힙니다.\n- 이 피해는 대시 공격 피해의 영향을 받습니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-11-14T00:00:00+00:00",
+		"uuid": "cb3533da-a246-47ab-bdfb-27cf220a6e73",
+		"id": 184,
+		"value": "fierce_humming",
+		"value_kor": "사나운 콧노래",
+		"tier": 3,
+		"parent": "jade",
+		"image": "https://img.sephiria.wiki/weapons/fierce_humming.png",
+		"effects": {
+			"reward": [
+				"더 이상 $s특수 공격: 패리$를 사용할 수 없지만, 2.8초마다 $s몰입$을 획득합니다. ($e회피$ 1당 충전 속도 1% 증가, 최대 33%)",
+				"$s특수 공격: 퓨리$ 적중 시 조준 방향으로 아티팩트 $s녹색 도복$을 발동시킵니다. 녹색 도복이 회피 성공 시 세 방향으로 발동됩니다."
+			]
+		},
+		"disabled": null
+	},
+	{
+		"created_at": "2026-11-14T00:00:00+00:00",
+		"uuid": "8c63ce22-fb69-4505-8645-bca59c8712d4",
+		"id": 185,
+		"value": "large_crossbow_halo_device",
+		"value_kor": "대형 석궁: 특수 볼트 강화",
+		"tier": 3,
+		"parent": "large_crossbow_special_bolt_enhancement",
+		"image": "https://img.sephiria.wiki/weapons/large_crossbow_halo_device.png",
+		"effects": {
+			"reward": [
+				"$s특수 공격: 강화 화살$의 공격 범위가 더 넓어지고, 피해량이 30% 증가합니다.",
+				"$s일반 공격$ 시 $l빛의 화살$을 충전합니다. $s특수 공격$이 $s특수 공격: 만개$로 변경됩니다.\n\n## 빛의 화살\n- 일반 공격 시 1개씩 충전됩니다.\n- 보유 한도: 최대 MP 30당 1개 (최대 10개)\n- 추가 충전: MP 재생 20당 1개\n\n## 특수 공격: 만개\n- 10 MP를 소모하여 강화된 화살과 빛의 화살을 전부 발사합니다.\n- 화살을 소모하지 않습니다."
 			]
 		},
 		"disabled": null

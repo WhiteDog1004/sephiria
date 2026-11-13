@@ -17,7 +17,7 @@ import {
 	Typography,
 } from "@/src/shared";
 import { getCloudflareUrl } from "@/src/shared/utils/image";
-import { parseColoredString } from "@/src/shared/utils/parseColoredString";
+import { WeaponEffectText } from "@/src/entities/weapon/ui/WeaponEffectText";
 
 export const SectionWeapon = ({ weapon }: WeaponReq) => {
 	const { theme } = useTheme();
@@ -82,7 +82,7 @@ export const SectionWeapon = ({ weapon }: WeaponReq) => {
 											variant="body2"
 											className="text-start whitespace-pre-line ml-2"
 										>
-											{parseColoredString(reward)}
+											<WeaponEffectText text={reward} />
 										</Typography>
 									</li>
 								))}

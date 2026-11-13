@@ -27,7 +27,7 @@ import {
 	Typography,
 } from "@/src/shared";
 import { getCloudflareUrl } from "@/src/shared/utils/image";
-import { parseColoredString } from "@/src/shared/utils/parseColoredString";
+import { WeaponEffectText } from "@/src/entities/weapon/ui/WeaponEffectText";
 
 const optionTransition = { duration: 0.18, ease: "easeOut" } as const;
 
@@ -218,7 +218,7 @@ export const SelectWeapon = (form: UseFormReturn<AddBuildFormType>) => {
 																								variant="body2"
 																								className="max-w-64 text-gray-900 dark:text-gray-300 text-center whitespace-pre-line mt-2"
 																							>
-																								{parseColoredString(reward)}
+													<WeaponEffectText text={reward} />
 																							</Typography>
 																						),
 																					)}
